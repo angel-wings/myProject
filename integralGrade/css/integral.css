@@ -1,0 +1,185 @@
+
+.headbar {
+    width: 20rem;
+    height: 4.266667rem;
+    padding: .64rem 1.5rem 0;
+    box-sizing: border-box;
+    background-image: url(../images/integralbg.png);
+    background-size: 100% 100%;
+}
+
+.title {
+    font-size: 1.6rem;
+}
+
+.headdes {
+    font-size: 14px;
+}
+
+.pointdes {
+    float: right;
+    padding: 0 .81rem .48rem;
+}
+
+/*  */
+
+.tabbar {
+    padding: .48rem .8rem;
+    margin-bottom: .48rem;
+    background-color: #fff;
+    font-size: 0;
+}
+
+.tab-left {
+    float: left;
+    width: 9rem;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.tab-right {
+    display: inline-block;
+    width: 9rem;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.tab-icon {
+    float: left;
+    height: 3.2rem;
+    width: 2.88rem;
+    font-size: 24px;
+    line-height: 3.2rem;
+    text-align: center;
+    color: #b2b2b2;
+}
+
+.tab-icon img {
+    width: 1.8rem;
+    min-width: 33px;
+    height: 1.8rem;
+    min-height: 33px;
+    margin-top: .7rem;
+}
+
+.tab-text {
+    width: 5.7rem;
+    float: right;
+    margin-top: .64rem;
+}
+
+.tab-border {
+    border-right: 1px solid #ddd;
+}
+
+.tab-title {
+    font-size: 14px;
+    display: block;
+    margin-bottom: .16rem
+}
+
+.tab-des {
+    font-size: 12px;
+    color: #707070;
+}
+
+/*  */
+
+.footbar {
+    background-color: #fff;
+    padding-top: .8rem;
+    font-size: 14px;
+    color: #707070;
+}
+
+.btn-sign {
+    display: block;
+    width: 15.68rem;
+    height: 1.706667rem;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.706667rem;
+    background-image: linear-gradient(-180deg, #FFD24E 0%, #FAAE25 100%);
+    border-radius: 4px;
+}
+
+.btn-signall {
+    display: none;
+    width: 15.68rem;
+    height: 1.706667rem;
+    margin: 0 auto;
+    color: #33C4C2;
+    font-size: 14px;
+    line-height: 1.706667rem;
+}
+
+.btn-signall img {
+    width: .8rem;
+    height: .64rem;
+    margin-left: .48rem;
+}
+
+.sign-des {
+    display: block;
+    width: 15.68rem;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 36px;
+}
+
+.sign-days {
+    width: 15.68rem;
+    margin: 0 auto;
+    font-size: 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.sign-item {
+    float: left;
+    width: 3.6rem;
+    height: 3.6rem;
+    margin-right: .32rem;
+    font-size: 14px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #DDDDDD;
+    overflow: hidden;
+    padding-top: .48rem;
+    border-radius: 4px;
+}
+
+.sign-item:last-child {
+    margin: 0;
+}
+
+.sign-score {
+    display: block;
+    color: #202020;
+    font-size: 1.28rem;
+}
+
+.signed {
+    color: #fff;
+    background: #33C4C2;
+    border: 1px solid #33C4C2;
+}
+
+.sign-tip {
+    width: 15.68rem;
+    margin: 0 auto;
+    line-height: 2rem;
+}
+
+/* 签到规则 */
+
+.rule-text {
+    padding: 0 .8rem 1rem;
+}
+
+.rule-text>span {
+    display: block;
+    line-height: 20px;
+}

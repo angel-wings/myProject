@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>测试场次</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/detail.css">
+    <script type="application/javascript" src="./js/fastclick.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/alertPopShow.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div class="item" data-id="1" data-isAppointed="1">
+        <div class="line_head">
+            <img src="./images/time.png" class="title-icon">
+            <span class="test-time">测试时间</span>
+            <span class="address"></span>
+        </div>
+        <div class="line_body">
+            <div>教师姓名：
+                <span class="line-text name"></span>
+            </div>
+            <div>测试年级：
+                <span class="line-text grade"></span>
+            </div>
+            <div>测试性别：
+                <span class="line-text sex"></span>
+            </div>
+            <div>预约人数：
+                <span class="line-text current"></span> /
+                <span class="total"></span>
+            </div>
+            <div>备注：
+                <span class="line-text des"></span>
+            </div>
+        </div>
+    </div>
+    <div class="btnBox">
+        <button>加入测试</button>
+    </div>
+    <div class="toast"></div>
+</body>
+<script src="./js/public.js"></script>
+<script src="./js/detail.js"></script>
+
+</html>

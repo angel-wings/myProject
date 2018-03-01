@@ -1,0 +1,104 @@
+body{
+    padding-top: .48rem;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.head{
+    background-color: #fff;
+    color: #fff;
+}
+.head-banner{
+    height: 3.2rem;
+    line-height: 3.2rem;
+    display: none;
+}
+.head-banner img{
+    float: left;
+    width: 1.92rem;
+    height: 1.92rem;
+    margin-top: .64rem;
+    margin-left: 6.72rem;
+    margin-right: .8rem;
+}
+.finished{
+    background-color: #9CC05A;
+    /* display: none; */
+}
+.nowait{
+    background-color: #9F9F9F;
+    /* display: none; */
+}
+.nobegin{
+   background-color: #0398FF;
+   /* display: none; */
+}
+.waiting{
+    background-color: #FCC744;
+    /* display: none; */
+}
+
+.banner-des{
+    height: 7.52rem;
+    padding: .8rem;
+    margin-bottom: .48rem;
+    background-color: #fff;
+    
+    text-align: center;
+}
+.ban-reason,.ban-status{
+    display: block;
+    line-height: 36px;
+}
+.ban-status{
+    font-size: 12px;
+    color: #707070;
+}
+.btn{
+    display: inline-block;
+    width: 3.2rem;
+    margin-top: .64rem;
+    background-image: linear-gradient(-179deg, #59C1B3 0%, #3CADD9 100%);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 27px;
+}
+.reset,.lookscore{
+    display: none;
+}
+.nowait-des{
+    display: none;
+    line-height: 1.2rem;
+    margin-top: 1.76rem;
+}
+.nowait-des span{
+    display: block;
+}
+.item{
+    padding: 0 1.12rem;
+    background-color: #fff;
+}
+.line_head{
+    height: 2.56rem;
+    line-height: 2.56rem;
+    background-color: #fff;
+    border-bottom: 1px solid #F6F6F6;
+}
+.title-icon{
+    width: .96rem;
+    height: .96rem;
+    vertical-align: middle;
+}
+.test-time{
+    color: #33C4C2;
+    margin-right: .64rem;
+}
+.line_body{
+    padding: .48rem 0;
+    background-color: #fff;
+    color: #707070;
+    line-height: 1.28rem;
+}
+.line-text{
+    color: #202020;
+}

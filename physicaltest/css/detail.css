@@ -1,0 +1,51 @@
+body{
+    padding-top: .48rem;
+}
+.item{
+    padding: 0 1.12rem;
+    background-color: #fff;
+    font-size: 14px;
+}
+.line_head{
+    height: 2.56rem;
+    line-height: 2.56rem;
+    background-color: #fff;
+    border-bottom: 1px solid #F6F6F6;
+}
+.title-icon{
+    width: .96rem;
+    height: .96rem;
+    vertical-align: middle;
+}
+.test-time{
+    color: #33C4C2;
+    margin-right: .64rem;
+}
+.line_body{
+    padding: .48rem 0;
+    background-color: #fff;
+    color: #707070;
+    line-height: 1.28rem;
+}
+.line-text{
+    color: #202020;
+}
+.btnBox{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 20rem;
+    height: 4.32rem;
+    background: #FFFFFF;
+    box-shadow: 0 -2px 8px 0 rgba(0,0,0,0.08);
+    text-align: center;
+    padding-top: .96rem;
+}
+
+.btnBox button{
+    width: 16.96rem;
+    height: 2.4rem;
+    background-image: linear-gradient(-179deg, #59C1B3 0%, #3CADD9 100%);
+    border-radius: 6px;
+    color: #fff;
+}

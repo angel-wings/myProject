@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <title>测试场次</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/rank.css">
+    <script type="application/javascript" src="./js/fastclick.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/alertPopShow.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div class="head">
+        <div class="head-banner finished">
+            <img src="./images/end.png">
+            <span>已完成</span>
+        </div>
+        <div class="head-banner nowait">
+            <img src="./images/noinfo.png">
+            <span>无排队信息</span>
+        </div>
+        <div class="head-banner nobegin">
+            <img src="./images/start.png">
+            <span>未开始</span>
+        </div>
+        <div class="head-banner waiting">
+            <img src="./images/waiting.png">
+            <span>正在排队中</span>
+        </div>
+    </div>
+    <div class="banner-des">
+        <span class="ban-reason"></span>
+        <span class="btn reset">刷新</span>
+        <span class="btn lookscore">查看成绩</span>
+        <span class="ban-status"></span>
+        <div class="nowait-des">
+            <span>若未按时进行测试，</span>
+            <span>可直接向老师出示二维码进行测试</span>
+        </div>
+    </div>
+    <div class="item" data-id="1" data-isAppointed="1">
+        <div class="line_head">
+            <img src="./images/time.png" class="title-icon">
+            <span class="test-time">测试时间</span>
+            <span class="address"></span>
+        </div>
+        <div class="line_body">
+            <div>教师姓名：
+                <span class="line-text name"></span>
+            </div>
+            <div>测试年级：
+                <span class="line-text grade"></span>
+            </div>
+            <div>测试性别：
+                <span class="line-text sex"></span>
+            </div>
+            <div>预约人数：
+                <span class="line-text current"></span> /
+                <span class="total"></span>
+            </div>
+            <div>备注：
+                <span class="line-text des"></span>
+            </div>
+        </div>
+    </div>
+    <div class="toast"></div>
+</body>
+<script src="./js/public.js"></script>
+<script src="./js/rank.js"></script>
+
+</html>

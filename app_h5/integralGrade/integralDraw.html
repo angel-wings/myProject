@@ -1,0 +1,599 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>积分抽奖</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/integralDraw.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/fastclick.js"></script>
+    <script src="./js/public.js"></script>
+    <script src="./js/prefixfree.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div class="isloading">
+        <div class="loadimg">
+            <img src="./images/loading.gif">
+            <div>加载中...</div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="headinfo">
+
+            <span class="my-prize">我的奖励</span>
+            <div class="points-title">
+                <span>我的积分：</span>
+                <span class="my-points">0</span>
+            </div>
+            <div class="prize-info">
+                <span>每日抽奖次数：
+                    <span class="prize-times">0</span>
+                </span>
+                <span class="prize-le">
+                    <span>奖励抽奖次数：
+                        <span class="prize-levels">0</span>
+                    </span>
+                    <span class="prize-rule">奖励规则</span>
+                </span>
+            </div>
+        </div>
+
+        <div id="lottery">
+            <!--奖品展示的九宫格元素 -->
+            <div class="table-box">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <!-- tr标签展示的是行 -->
+                    <tr class="adborder">
+                        <!-- td标签展示的是列 -->
+                        <td class="lottery-unit lottery-unit-1">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                        <td class="lottery-unit lottery-unit-2">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                        <td class="lottery-unit lottery-unit-3">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lottery-unit lottery-unit-8">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                        <td>
+                            <!-- 九宫格中间的抽奖按钮 -->
+                            <span id="draw-btn"></span>
+                        </td>
+                        <td class="lottery-unit lottery-unit-4">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lottery-unit lottery-unit-7">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                        <td class="lottery-unit lottery-unit-6">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                        <td class="lottery-unit lottery-unit-5">
+                            <img src="./images/pre-prize.png">
+                            <div class="p-mask"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="tab-dis"></div>
+            <!-- <span class="dot"></span> -->
+        </div>
+
+        <div class="foot-des">
+            <p class="foot-title">抽奖规则</p>
+            <p>1、每个普通用户每日拥有 3 次抽奖机会；</p>
+            <p>2、每次抽奖将消耗 10 积分；</p>
+            <p>3、奖品兑换疑问请联系【私信】—【小秘书】；</p>
+            <p>4、本抽奖活动的最终解释权归运动世界校园所有；</p>
+        </div>
+    </div>
+
+    <!-- 奖励规则 -->
+    <div class="prule">
+        <div class="mask"></div>
+        <div class="bom-con">
+            <div class="bom-head">奖励规则
+                <img class="bom-ing" src="./images/close.png">
+            </div>
+            <div class="bom-body">
+                <p>5级，名震校园，奖励1次</p>
+                <p>6级，终为跑霸，奖励2次</p>
+                <p>7级，笑傲操场，奖励3次</p>
+                <p>8级，跑林盟主，奖励5次</p>
+                <p>9级，独孤求跑，奖励7次</p>
+                <p>10级，停不下来，奖励9次</p>
+                <p>11级，至尊跑者，奖励10次</p>
+                <p>12级，飘然归隐，奖励12次</p>
+            </div>
+            <div class="bom-btn">
+                知道了
+            </div>
+        </div>
+    </div>
+
+    <!-- 奖品结果弹框 -->
+    <div class="presult">
+        <div class="presult-mask"></div>
+        <div class="bom-con">
+            <div class="bom-head">抽奖结果
+                <img class="bom-close" src="./images/close.png">
+            </div>
+            <div class="bom-body-result">
+                <img class="re-img" src="./images/pre-prize.png">
+                <p class="re-good">恭喜您</p>
+                <p class="re-des"></p>
+                <p class="re-time"></p>
+            </div>
+            <div class="error12006">
+                <p>奖品兑换可能延迟，可联系小秘书处理。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 奖品非最新弹框 -->
+    <div class="preload">
+        <div class="preload-mask"></div>
+        <div class="bom-con">
+            <div class="bom-head">抽奖结果
+                <img class="reload-close" src="./images/close.png">
+            </div>
+            <div class="bom-body-reload">
+                <p>奖品已更新，重新抽奖</p>
+            </div>
+            <div class="newReload">
+                知道了
+            </div>
+        </div>
+    </div>
+
+    <div class="toast"></div>
+</body>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+        var obj = { eventId: "jfcj_Prize", value: "exposure" };
+
+        connectWebViewJavascriptBridge(function (bridge) {
+            bridge.registerHandler("returnBackHandler", function (data, responseCallback) {
+                var responseData = { "isFirstPage": true };
+                responseCallback(responseData);
+            });
+
+            setJfcjPrize(function (res) {
+                // 页面访问的打点
+            }, obj);
+
+            getPrizeInfo();
+            getUserPointsInfo();
+        })
+
+        function setJfcjPrize(callback, abject) {
+
+            window.WebViewJavascriptBridge.callHandler(
+                'uMengMobClickAgent',
+                abject,
+                function (responseData) {
+                    var respon;
+                    if (typeof (responseData) == 'string') {
+                        respon = JSON.parse(responseData);
+                    } else {
+                        respon = responseData;
+                    }
+                    callback(respon);
+                })
+        }
+
+        // 抽奖过程的数据定义及初始化
+        var lottery = {
+            index: 1,     //当前转动到哪个位置，起点位置
+            count: 8,     //总共有多少个位置
+            timer: 0,     //setTimeout的ID，用clearTimeout清除
+            speed: 300,   //初始转动速度
+            times: 0,     //转动次数
+            cycle: 27,    //转动基本次数：即至少需要转动多少次再进入抽奖环节
+            prize: 0,     //中奖位置
+            init: function (id) {
+                if ($("#" + id).find(".lottery-unit").length > 0) {
+                    $lottery = $("#" + id);
+                    $units = $lottery.find(".lottery-unit");
+                    this.obj = $lottery;
+                    this.count = $units.length;
+                    this.times = 0;
+                    $lottery.find(".lottery-unit-" + this.index).addClass("active");
+                    $lottery.find('#draw-btn').addClass('active');
+                };
+            },
+            roll: function () {
+                var index = this.index;
+                var count = this.count;
+                var lottery = this.obj;
+                $(lottery).find(".lottery-unit-" + index).removeClass("active");
+                index += 1;
+                if (index > count) {
+                    index = 1;
+                };
+                $(lottery).find(".lottery-unit-" + index).addClass("active");
+                this.index = index;
+            },
+            stop: function (index) {
+                var lottery = this.obj;
+                this.prize = index;
+                $(lottery).find(".lottery-unit").removeClass("active");
+                $('#draw-btn').removeClass('active');
+            }
+        };
+
+        // 计时器函数，记录发送请求等待的时间，达到3秒，则停止动画，并弹框提示
+        var myTimer = null;
+        var prizeTrue = true;
+
+        // 抽奖状态：点击一次和正在抽奖中不能再次点击
+        var click = false;
+
+        var prizeList = [];
+        var dayTimes = 0;
+        var levelTimes = 0;
+        var points = 0;
+
+        var prize_data = {};
+
+
+        // 点击抽奖~
+        $("#lottery #draw-btn").click(function () {
+
+            if (prizeList.length < 8) {
+                toast('奖品未加载~');
+                return;
+            }
+
+            // click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
+            if (click) {
+                return;
+            } else {
+                // 判断用户积分和抽奖次数
+                if (points < 10) {
+                    toast('积分不足~');
+                    return;
+                }
+                if (dayTimes < 1 && levelTimes < 1) {
+                    toast('抽奖次数不足~');
+                    return;
+                }
+
+                myTimer = setTimeout(function () {
+                    prizeTrue = false;
+                    // 重置抽奖状态
+                    errorHandles();
+
+                    clearTimeout(myTimer);
+                }, 3000);
+
+                lottery.init('lottery');
+                click = true;  // 一次抽奖点击后，设置click为true，避免连续点击抽奖
+                lottery.speed = 300;
+                prizeRoll();   // 抽奖，请求抽奖结果信息
+                getWinPrize(); // 抽奖结果信息
+            }
+
+        });
+
+        // 获取用户积分，抽奖次数等信息
+        function getUserPointsInfo() {
+
+            // 将用户积分和抽奖次数信息渲染到页面上
+            ajaxSubmit(
+                'GET',
+                '/api/v27/h5/rounddisk/userInfo',
+                null,
+                function (data) {
+                    if (data.error == 10000) {
+                        // 请求成功,数据渲染到页面
+                        dayTimes = data.data.everydayFreeLeftCount;
+                        levelTimes = data.data.userLevelLeftCount;
+                        points = data.data.userPoint;
+                        $('.prize-times').text(data.data.everydayFreeLeftCount);
+                        $('.prize-levels').text(data.data.userLevelLeftCount);
+                        $('.my-points').text(data.data.userPoint);
+                    } else {
+                        // 请求失败，弱提示错误信息
+                        toast(data.message)
+                    }
+                }, function (data) {
+                    // 请求失败
+                    toast('服务器开小差');
+                })
+        }
+
+        // 获取奖品列表信息
+        function getPrizeInfo() {
+
+            // 拿到奖品列表数据并转化存储，并讲奖品信息渲染到页面上面
+            ajaxSubmit(
+                'GET',
+                '/api/v27/h5/rounddisk/getPrize',
+                null,
+                function (data) {
+                    $('.isloading').css({ display: "none" });
+                    if (data.error == 10000) {
+                        // 请求成功,数据渲染到页面
+                        var dlist = data.data || [];
+                        if (dlist.length) {
+                            dlist.forEach(function (item) {
+                                if (item.logUrl) {
+                                    $('.lottery-unit-' + item.position + ' img').attr('src', item.logUrl);
+                                }
+                                $('.lottery-unit-' + item.position + ' img').attr('data-id', item.id);
+                                prizeList.push(item.id);
+                            });
+                        }
+                    } else {
+                        // 请求失败，弱提示错误信息
+                        toast(data.message);
+                    }
+                    $('.main').css({ display: "block" });
+                }, function (data) {
+                    $('.isloading').css({ display: "none" });
+                    $('.main').css({ display: "block" });
+                    // 请求失败
+                    toast('服务器开小差');
+                })
+        }
+
+        // 抽奖转圈效果实现
+        function prizeRoll() {
+            lottery.times += 1;
+            lottery.roll(); // 转动过程调用的是lottery的roll方法，这里是第一次调用初始化
+
+            if (lottery.times > lottery.cycle + 3 && lottery.prize == lottery.index) {
+                // 停止动画，选中奖品
+
+                clearTimeout(lottery.timer);
+                $('#draw-btn').removeClass('active');
+
+                setTimeout(function () {
+                    if (prizeTrue) {
+                        changeTBox('presult', true);
+                    }
+
+                    prizeTrue = true;
+                    click = false;
+                }, 100)
+            } else {
+                if (lottery.times < lottery.cycle) {
+                    lottery.speed -= 50;
+                } else if (lottery.times == lottery.cycle) {
+                    // 抽奖位置
+                    lottery.prize = prize_data.pnum;
+                } else {
+                    lottery.speed += 50;
+                }
+
+                if (lottery.speed < 100) {
+                    lottery.speed = 100;
+                };
+                lottery.timer = setTimeout(prizeRoll, lottery.speed); //循环调用
+            }
+        }
+
+        // 随机生成uuid
+        function randomUuid() {
+            var str = "zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+            var length = Math.ceil(Math.random() * 10) % 5;
+            var randomStr = '';
+
+            for (var i = 0; i < (length + 6); i++) {
+                var num = Math.ceil(Math.random() * 100) % (str.length);
+                randomStr += str[num]
+            }
+            return randomStr;
+        }
+
+        // 点击抽奖，向后台请求抽奖结果信息
+        function getWinPrize() {
+
+            var uuid = randomUuid(); // 随机生成一个uuid
+
+            setJfcjPrize(function (res) {
+                // 抽奖的打点
+            }, { eventId: "jfcj_Prize", value: "click" });
+
+            // 发送请求获取抽奖结果
+            ajaxSubmit(
+                'POST',
+                '/api/v27/h5/rounddisk/draw',
+                {
+                    uuid: uuid,
+                    ids: prizeList
+                },
+                function (data) {
+                    clearTimeout(myTimer);
+                    if (data.error == 10000) {
+                        if (!data.data || data.data.position < 1 || data.data.position > 8) {
+                            // 兑奖失败，或者奖品不存在
+                            clearTimeout(lottery.timer);
+                            lottery.stop();
+                            click = false;
+                            $('.bom-body-result').css({ display: 'none' });
+                            $('.error12006').css({ display: 'block' });
+                            changeTBox('presult', true);
+                        } else {
+                            // 是最新奖品，并返回抽奖结果
+                            lottery.prize = data.data.position; // 记录中奖位置
+                            prize_data = {
+                                pname: data.data.prizeName,
+                                pnum: data.data.position,
+                                pid: data.data.id,
+                                pimgurl: data.data.logURL,
+                                startTime: data.data.startTime,
+                                endTime: data.data.endTime
+                            };
+                            var sta = new Date(data.data.startTime).format('yyyy.MM.dd');
+                            var end = new Date(data.data.endTime).format('yyyy.MM.dd');
+
+                            $('.re-img').attr('src', data.data.logURL);
+                            $('.re-des').text('抽中了' + data.data.prizeName);
+                            $('.re-time').text('兑换日期：' + sta + ' - ' + end);
+                        }
+                        getUserPointsInfo();
+
+                    } else if (data.error == 11017) {
+                        // 当前展示奖品不是最新奖品，则提示刷新，
+                        clearTimeout(lottery.timer);
+                        lottery.stop();
+                        changeTBox('preload', true);
+                    } else if (data.error == 12006) {
+                        // 抽奖成功，但是兑奖失败
+                        clearTimeout(lottery.timer);
+                        lottery.stop();
+                        click = false;
+                        getUserPointsInfo();
+                        $('.bom-body-result').css({ display: 'none' });
+                        $('.error12006').css({ display: 'block' });
+                        changeTBox('presult', true);
+                    } else {
+                        errorHandles();
+                    }
+                }, function (data) {
+                    // 请求失败
+                    clearTimeout(myTimer);
+                    errorHandles();
+                }
+            )
+        }
+
+        // 异常处理
+        function errorHandles() {
+            clearTimeout(lottery.timer);
+            lottery.stop();
+            // 重置抽奖状态
+            click = false;
+            lottery.index = 1;
+            lottery.init('lottery');
+            changeTBox('preload', true);
+            $('.preload').find('.bom-body-reload').text('抽奖人数较多，请再重试');
+            $('#draw-btn').removeClass('active');
+        }
+
+        setDotPosition()
+        // 边框远点的分布
+        function setDotPosition() {
+            // 添加上横点
+            var widthLen = ($('#lottery').width() - 22) / 7;
+            var heightLen = ($('#lottery').height() - 35) / 6;
+
+            for (var i = 0; i < 8; i++) {
+                var html = '<span class="dot dot-top ' + (i % 2 == 1 ? '' : 'dot-active') + '" style="left: ' + (5 + i * widthLen) + 'px;"></span>';
+                $('#lottery').append(html);
+            }
+
+            // 添加下横点
+            for (var i = 0; i < 8; i++) {
+                var html = '<span class="dot dot-bottom ' + (i % 2 == 1 ? '' : 'dot-active') + '" style="left: ' + (5 + i * widthLen) + 'px;"></span>';
+                $('#lottery').append(html);
+            }
+
+            // 左竖点
+            for (var i = 0; i < 5; i++) {
+                var html = '<span class="dot dot-left ' + (i % 2 == 0 ? '' : 'dot-active') + '" style="top: ' + (50 + i * heightLen) + 'px;"></span>';
+                $('#lottery').append(html);
+            }
+
+            // 右竖点
+            for (var i = 0; i < 5; i++) {
+                var html = '<span class="dot dot-right ' + (i % 2 == 1 ? '' : 'dot-active') + '" style="top: ' + (50 + i * heightLen) + 'px;"></span>';
+                $('#lottery').append(html);
+            }
+        }
+
+
+        setInterval(function () {
+            for (var i = 0; i < $('.dot').length; i++) {
+                if ($($('.dot')[i]).hasClass('dot-active')) {
+                    $($('.dot')[i]).removeClass('dot-active')
+                } else {
+                    $($('.dot')[i]).addClass('dot-active')
+                }
+            }
+        }, 200);
+
+        function changeTBox(element, isShow) {
+            if (isShow) {  // 显示弹框
+                $('.' + element).css({ display: 'block' });
+                $('body').css({ overflow: 'hidden' });
+            } else {     // 关闭弹框
+                $('.' + element).css({ display: 'none' });
+                $('body').css({ 'overflow-y': 'scroll' });
+            }
+        }
+
+        // 我的奖励
+        $('.my-prize').click(function () {
+            location.href = 'zjwh://runPrize';
+        })
+
+        /////////////// 点击奖励规则按钮，显示弹框
+        $(".prize-rule").click(function () {
+            changeTBox('prule', true);
+        })
+        $('.bom-ing').click(function () {
+            changeTBox('prule', false);
+        })
+        $('.mask').click(function () {
+            changeTBox('prule', false);
+        })
+        $('.bom-btn').click(function () {
+            changeTBox('prule', false);
+        })
+
+        ///////////// 奖励结果弹框
+
+        $('.presult-mask').click(function () {
+            $('.bom-body-result').css({ display: 'block' });
+            $('.error12006').css({ display: 'none' });
+            changeTBox('presult', false);
+        })
+        $('.bom-close').click(function () {
+            $('.bom-body-result').css({ display: 'block' });
+            $('.error12006').css({ display: 'none' });
+            changeTBox('presult', false);
+        })
+
+        //////////////// 奖品更新或异常的弹框提示
+        $('.newReload').click(function () {
+            changeTBox('preload', false);
+            location.reload();
+        })
+
+        $('.preload-mask').click(function () {
+            changeTBox('preload', false);
+            location.reload();
+        })
+
+        $('.reload-close').click(function () {
+            changeTBox('preload', false);
+            location.reload();
+        })
+
+    })
+</script>
+
+</html>

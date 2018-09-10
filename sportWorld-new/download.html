@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./images/logo.png" rel="external nofollow" />
+    <title>运动世界 - 下载</title>
+    <style>
+        .download-con {
+            width: 70%;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 120px 60px;
+        }
+
+        .download-stu>img {
+            width: 300px;
+        }
+
+        .dl-app {
+            line-height: 30px;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 84px;
+        }
+
+        .dl-app span {
+            display: block;
+            color: rgba(0, 0, 0, 0.40);
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .download-teach {
+            margin-top: 100px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <nav></nav>
+
+    <div class="download-con">
+        <div class="download-stu">
+            <img src="./images/campus.png" alt="">
+            <div class="dl-app f-right">
+                <p>运动世界校园</p>
+                <span>用奔跑 释青春</span>
+                <img src="./images/s-qcode.png" alt="">
+            </div>
+        </div>
+        <div class="download-teach">
+            <div class="dl-app f-left">
+                <p>运动世界教师</p>
+                <span>用奔跑 释青春</span>
+                <img src="./images/t-qcode.png" alt="">
+            </div>
+            <img src="./images/teacher.png" alt="">
+        </div>
+    </div>
+
+    <footer id="footer"></footer>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/prefixfree.js"></script>
+<script src="./js/footer.js"></script>
+<script src="./js/nav.js"></script>
+<script>
+    $(function () {
+        $('nav').setNav('下载');
+        $('footer').footbar();
+    })
+</script>
+
+</html>

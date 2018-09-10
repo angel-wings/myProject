@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>规则与帮助</title>
+	<style>
+		
+	</style>
+	<script>
+		var ua = navigator.userAgent.toLowerCase();
+		if (/ip(hone|od|ad)/.test(ua)) {
+			var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/),
+				version = parseInt(v[1], 10);
+			if (version >= 8) {
+				document.documentElement.classList.add('hairlines');
+				var link = document.createElement('link');
+				link.setAttribute("rel", "stylesheet");
+				link.setAttribute("type", "text/css");
+				link.setAttribute("href", "iphone-line.css");
+				document.getElementsByTagName('head')[0].appendChild(link);
+			} else {
+				var link = document.createElement('link');
+				link.setAttribute("rel", "stylesheet");
+				link.setAttribute("type", "text/css");
+				link.setAttribute("href", "normal.css");
+				document.getElementsByTagName('head')[0].appendChild(link);
+			}
+		} else if (/android/.test(ua)) {
+			var link = document.createElement('link');
+			link.setAttribute("rel", "stylesheet");
+			link.setAttribute("type", "text/css");
+			link.setAttribute("href", "andriod-line.css");
+			document.getElementsByTagName('head')[0].appendChild(link);
+		} else {
+			var link = document.createElement('link');
+			link.setAttribute("rel", "stylesheet");
+			link.setAttribute("type", "text/css");
+			link.setAttribute("href", "normal.css");
+			document.getElementsByTagName('head')[0].appendChild(link);
+		}
+	</script>
+
+</head>
+
+<body>
+	<div class="issue-header regular-issues">
+		常见问题
+	</div>
+	<div class="issue-content regular-issue-content">
+		<div class="issues regular-issue">
+			<a href="issue-跑步无法开始.html">跑步无法开始，显示“正在努力定位中”</a>
+		</div>
+		<div class="issues regular-issue">
+			<a href="issue-跑步完成条件.html">跑步完成条件是什么？</a>
+		</div>
+		<div class="issues regular-issue">
+			<a href="issue-成绩异常.html">跑步成绩异常？</a>
+		</div>
+		<div class="issues regular-issue">
+			<a href="issue-画红线.html">跑步画红线？</a>
+		</div>
+		<div class="issues regular-issue">
+			<a href="issue-个人信息修改.html">个人信息如何修改？</a>
+		</div>
+		<div class="issues regular-issue">
+			<a href="issue-自动结束跑步.html">跑步过程中自动结束运动？</a>
+		</div>
+	</div>
+
+	<div class="issue-header issue-classify">
+		问题分类
+	</div>
+	<div class="issue-content issue-classes">
+
+		<div class="issue-class fold">
+			<div class="issue-class-header">关于跑步规则解析</div>
+
+			<div class="issue-class-content">
+				<div class="issue">
+					<a href="issue-跑步完成条件.html">跑步完成条件是什么？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-什么是点位.html">什么是点位？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-配速.html">什么是配速？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-跑步里程.html">什么是跑步里程、目标里程？</a>
+				</div>
+				<div class="issue">
+					<a id="goal" href="issueGoal.html">什么是学期目标、每日上限？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-约跑.html">无法发起约跑？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-什么是自由跑.html">什么是自由跑？</a>
+				</div>
+				<!-- <div class="issue"><a href="issue-解锁自由跑.html">自由跑解锁方式是什么？</a></div> -->
+			</div>
+		</div>
+
+		<div class="issue-class fold">
+			<div class="issue-class-header">关于跑步异常问题</div>
+
+			<div class="issue-class-content">
+				<div class="issue">
+					<a href="issue-跑步无法开始.html">跑步无法开始，显示“正在努力定位中”</a>
+				</div>
+				<div class="issue">
+					<a href="issue-未画线.html">跑步未画线？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-画红线.html">跑步画红线？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-没有点位.html">地图上没有点位？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-无法感应点位.html">跑步过程中，无法感应到点位？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-无法纪录里程.html">进入后台或锁屏状态，无法记录跑步里程？</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="issue-class fold">
+			<div class="issue-class-header">关于跑步成绩问题</div>
+
+			<div class="issue-class-content">
+				<div class="issue">
+					<a href="issue-成绩异常.html">跑步成绩异常？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-成绩上传.html">关于成绩上传</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="issue-class fold">
+			<div class="issue-class-header">关于话题板块规则</div>
+
+			<div class="issue-class-content">
+				<div class="issue">
+					<a href="issue-约法三章.html">约法三章</a>
+				</div>
+				<div class="issue">
+					<a href="issue-处罚细则.html">处罚细则</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="issue-class fold">
+			<div class="issue-class-header">其它问题</div>
+
+			<div class="issue-class-content">
+				<div class="issue">
+					<a href="issue-个人信息修改.html">个人信息如何修改？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-开启gps.html">如何开启GPS？</a>
+				</div>
+				<div class="issue">
+					<a href="issue-定位权限.html">如何分配定位服务权限？</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="zepto.js"></script>
+	<script>
+		function toggleDisplayIssue() {
+
+			if ($(this).parent().hasClass('fold')) {
+				$(this).parent().removeClass('fold');
+				$(this).parent().addClass('unfold');
+			} else {
+				$(this).parent().removeClass('unfold');
+				$(this).parent().addClass('fold');
+			}
+		}
+
+		$('.issue-class-header').tap(function () {
+			toggleDisplayIssue.call($(this));
+		})
+	</script>
+	<script>
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r != null) return unescape(r[2]); return null; //返回参数值
+		}
+
+		var semGoal = document.getElementById('semGoal'),
+			dayGoal = document.getElementById('dayGoal');
+
+		var a = getUrlParam('sem');
+		var b = getUrlParam('day');
+
+
+		var url = $('#goal').attr('href');
+		url = url + '?sem=' + a + '&day=' + b;
+		$('#goal').attr('href', url);
+	</script>
+</body>
+
+</html>

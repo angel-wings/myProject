@@ -1,0 +1,225 @@
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        }
+        a:hover, a:visited, a:link, a:active {
+            text-decoration: none;
+        }
+        .regular-issue a:hover, .regular-issue a:visited, .regular-issue a:link, .regular-issue a:active{
+            color: #333;
+        }
+        .issue a:hover, .issue a:visited, .issue a:link, .issue a:active{
+            color: #b2b2b2;
+        }
+        .issue-header, .issue-content{
+            width: 100%;
+            font-family: "PingFang";
+            font-size:  12px;
+        }
+        .issue-header{
+            height: 30px;
+            text-indent: 15px;
+            background-color: #f6f6f6;
+            color: #b2b2b2;
+            line-height: 30px;
+        }
+        .issues{
+            margin-left: 15px;
+            height: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+        .issues + .issues{
+            border-top: 1px solid #ddd;
+
+        }
+        .regular-issue{
+            position: relative;
+        }
+        .regular-issue::after{
+            display: block;
+            content: '';
+            background-image: url(arrow.png);
+            background-size: 6px 10px;
+            width: 6px;
+            height: 10px;
+            position: absolute;
+            top: 17.5px;
+            right: 15px;
+        }
+        .issue-class{
+            position: relative;
+            margin-left: 15px;
+        }
+        .issue-class + .issue-class{
+            border-top: 1px solid #ddd;
+        }
+
+        /*
+        修改展开后下划线问题
+        */
+        .issue-class.unfold + .issue-class{
+            border: none;
+        }
+        .issue-class.unfold .issue:last-child{
+            border-bottom: 1px solid #ddd;
+        }
+
+        .issue-class.unfold:last-child, .issue-class.fold:last-child{
+            margin-bottom: 50px;
+            
+        }
+        .issue-class.fold:last-child{
+            border-bottom: 1px solid #ddd;
+        }
+
+        .issue-class.fold .issue-class-header::after{
+            display: block;
+            content: '';
+            background-image: url(arrow-down.png);
+            background-size: 10px 6px;
+            width: 10px;
+            height: 6px;
+            position: absolute;
+            top: 19.5px;
+            right: 15px;
+        }
+        .issue-class.unfold .issue-class-header::after{
+            display: block;
+            content: '';
+            background-image: url(arrow.png);
+            background-size: 6px 10px;
+            width: 6px;
+            height: 10px;
+            position: absolute;
+            top: 17.5px;
+            right: 15px;
+            
+        }
+        .issue-class-header{
+            height: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+        .issue-class-content{
+            font-size: 12px;
+            color: #b2b2b2;
+        }
+        .issue-class.fold .issue-class-content{
+            display: none;
+        }
+        .issue-class.unfold .issue-class-content{
+            display: block;
+        }
+        
+        .issue-class-content .issue{
+            height: 40px;
+            margin-left: 15px;
+            line-height: 40px;
+        }
+        .issue{
+            border-top: 1px solid #ddd;
+        }
+    
+
+        /*retina 1px hairlines*/
+        /*.hairlines .issues + .issues{
+            border-top: .5px solid #f6f6f6;
+        }
+        .hairlines .issue-class + .issue-class{
+            border-top: .5px solid #f6f6f6;
+        }
+        .hairlines .issue-class.unfold + .issue-class{
+            border: none;
+        }
+        .hairlines .issue-class.unfold .issue:last-child{
+            border-bottom: .5px solid #f6f6f6;
+        }
+        .hairlines .issue-class.fold:last-child{
+            border-bottom: .5px solid #f6f6f6;
+        }
+        .hairlines .issue{
+            border-top: .5px solid #f6f6f6;
+        }*/
+        /*hairlines*/
+
+/*
+        @media (-webkit-min-device-pixel-ratio: 2) {
+            .issues + .issues{
+                border: none;
+            }
+            .issues + .issues:before{
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 0;
+                height: 1px;
+                background-color: #c8c7cc;
+                -webkit-transform: scaleY(0.5);
+                transform: scaleY(0.5);
+            }
+            .issue-class{
+                border: none;
+            }
+            .issue-class + .issue-class{
+                border: none;
+            }
+            .issue-class.fold::after{
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                background-color: #c8c7cc;
+                -webkit-transform: scaleY(0.5);
+                transform: scaleY(0.5);
+            }
+            .issue-class.fold:last-child{
+                border: none;
+            }
+            .issue{
+                position: relative;
+                border: none;
+            }
+            .issue:before{
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 0;
+                height: 1px;
+                background-color: #c8c7cc;
+                -webkit-transform: scaleY(0.5);
+                transform: scaleY(0.5);
+            }
+            .issue-class.unfold .issue:last-child{
+                border: none;
+            }
+            .issue-class.unfold .issue:last-child:after{
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                background-color: #c8c7cc;
+                -webkit-transform: scaleY(0.5);
+                transform: scaleY(0.5);
+            }
+        } */

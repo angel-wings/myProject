@@ -1,0 +1,181 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>等级详情</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/rank.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/fastclick.js"></script>
+    <script src="./js/public.js"></script>
+    <script src="./js/prefixfree.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div class="isloading">
+        <div class="loadimg">
+            <img src="./images/loading.gif">
+            <div>加载中...</div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="header">
+            <img src="./images/photo.png" class="header-img">
+            <span class="rule">规则</span>
+            <span class="level"></span>
+            <div class="percent">
+                <div class="percentage"></div>
+            </div>
+            <div class="des">
+                <span class="runLength"></span>
+                <span class="float-right"></span>
+            </div>
+        </div>
+        <div class="content">
+            <!-- 等级列表 -->
+        </div>
+    </div>
+
+    <div class="bomb">
+        <div class="mask"></div>
+        <div class="bom-con">
+            <div class="bom-head">跑步等级说明
+                <img class="bom-ing" src="./images/close.png">
+            </div>
+            <div class="bom-body">
+                <div class="bom-bodytext">
+                    1.每日计入等级的里程上限为“8公里”。
+                </div>
+                <div class="bom-bodytext">
+                    2.通常情况下，等级只增不减。如果跑步成绩发现作弊行为，该里程会被清零，且当天所产生的里程均不计入等级。
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast"></div>
+</body>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        var mainWidth = 16.5;
+        var levelList = [
+            { level: 0, name: '初进校园', nextGoal: 1, des: '0=<跑步总里程<1公里' },
+            { level: 1, name: '呀呀学步', nextGoal: 10, des: '跑步总里程>=1公里' },
+            { level: 2, name: '快步健儿', nextGoal: 30, des: '跑步总里程>=10公里' },
+            { level: 3, name: '奔跑小将', nextGoal: 60, des: '跑步总里程>=30公里' },
+            { level: 4, name: '跑林高手', nextGoal: 100, des: '跑步总里程>=60公里' },
+            { level: 5, name: '名震校园', nextGoal: 150, des: '跑步总里程>=100公里' },
+            { level: 6, name: '终为跑霸', nextGoal: 200, des: '跑步总里程>=150公里' },
+            { level: 7, name: '笑傲操场', nextGoal: 300, des: '跑步总里程>=200公里' },
+            { level: 8, name: '跑林盟主', nextGoal: 400, des: '跑步总里程>=300公里' },
+            { level: 9, name: '独孤求跑', nextGoal: 600, des: '跑步总里程>=400公里' },
+            { level: 10, name: '停不下来', nextGoal: 900, des: '跑步总里程>=600公里' },
+            { level: 11, name: '至尊跑者', nextGoal: 1200, des: '跑步总里程>=900公里' },
+            { level: 12, name: '飘然归隐', nextGoal: 1200, des: '跑步总里程>=1200公里' },
+        ];
+
+        // $('.isloading').css({ display: "none" });
+        // $('.main').css({ display: "block" });
+        // addLevelList(6);
+        // addRankInfo(6, 100)
+
+        connectWebViewJavascriptBridge(function (bridge) {
+            bridge.registerHandler("returnBackHandler", function (data, responseCallback) {
+                var responseData = { "isFirstPage": true };
+                responseCallback(responseData);
+            });
+
+            setTimeout(function () {
+                getUsersLevel();
+            }, 0);
+        })
+
+        function addRankInfo(nowlevel, nowlength) {
+            $('.header-img').attr('src', './images/level' + nowlevel + '-2.png');
+
+            $('.runLength').html('已跑了' + nowlength + '公里');
+
+            levelList.forEach(function (item) {
+                var nextlevel = '';
+                var percent = 0;
+
+                // 进度条计算
+                if (item.level == nowlevel) {
+                    nextlevel = item.level < 12 ? (item.level + 1) : item.level;
+                    percent = nowlength < item.nextGoal ? nowlength / item.nextGoal : 1;
+                    percent = percent < 0.995 ? percent : 0.995;
+
+                    $('.level').html('L' + nowlevel + ' ' + item.name);
+                    $('.percentage').css({ width: percent * mainWidth + 'rem' });
+                    $('.float-right').html('L' + nextlevel + '/' + item.nextGoal + '公里')
+                }
+            })
+        }
+
+        function addLevelList(nowlevel) {
+            var html = '<div class="verline"></div>';
+
+            for (var i = 0; i < levelList.length; i++) {
+                if (i <= nowlevel) {
+                    html += '<div class="conitem"><span class="level-index"><img src="./images/level' + levelList[i].level + '-1.png"></span>';
+                    if (i < nowlevel) {
+                        html += '<div class="level-text"><span class="level-title">' + levelList[i].name + '</span>';
+                    } else {
+                        html += '<div class="level-text conimg"><span class="level-title">' + levelList[i].name + '</span>';
+                    }
+                } else {
+                    html += '<div class="conitem"><span class="level-index"><img src="./images/level' + levelList[i].level + '-3.png"></span>';
+                    html += '<div class="level-text"><span class="level-title" style="color: #707070;">' + levelList[i].name + '</span>';
+                }
+                html += '<small class="level-des">' + levelList[i].des + '</small></div></div>';
+            }
+            $('.content').html(html);
+        }
+
+        // 显示弹框
+        $(".rule").click(function () {
+            $('.bomb').css({ display: 'block' });
+            $('body').css({ overflow: 'hidden' });
+        })
+        // 隐藏弹框
+        $('.bom-ing').click(function () {
+            $('.bomb').css({ display: 'none' })
+            $('body').css({ 'overflow-y': 'scroll' })
+        })
+        $('.mask').click(function () {
+            $('.bomb').css({ display: 'none' })
+            $('body').css({ 'overflow-y': 'scroll' })
+        })
+
+        // 获取用户等级
+        function getUsersLevel() {
+
+            ajaxSubmit(
+                'POST',
+                '/api/v23/h5/userinfo/rank/index',
+                {},
+                function (data) {
+                    $('.isloading').css({ display: "none" });
+                    if (data.error == 10000) {
+                        //请求成功
+                        var rank = data.data.rank;
+                        var length = data.data.runningKilometers / 1000;
+                        addLevelList(rank);
+                        addRankInfo(rank, length);
+
+                        $('.main').css({ display: "block" });
+                    } else {
+                        toast(data.message)
+                    }
+                }, function (data) {
+                    $('.isloading').css({ display: "none" });
+                    toast('服务器开小差')
+                })
+        }
+    })
+</script>
+
+</html>

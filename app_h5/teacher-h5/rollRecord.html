@@ -1,0 +1,280 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>学生点名记录</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'PingFangSC-Regular';
+            font-size: 14px;
+            color: #707070;
+            background-color: #f6f6f6;
+        }
+
+        .roll-info {
+            display: none;
+            padding: 15px;
+            background-color: #ffffff;
+        }
+
+        .imginf {
+            margin-bottom: 10px;
+            overflow: hidden;
+            line-height: 30px;
+        }
+
+        .imginf img {
+            float: left;
+            width: 60px;
+            height: 60px;
+            margin-right: 0.24rem;
+            border-radius: 50%;
+        }
+
+        .imginf span {
+            margin-right: .15rem;
+        }
+
+        .name {
+            display: inline-block;
+            font-size: 16px;
+            color: #202020;
+        }
+
+        .className {
+            color: #001400;
+        }
+
+        /* 课程记录列表 */
+
+        .roll-record {
+            display: none;
+            background-color: #ffffff;
+        }
+
+        .roll-record .rr-title {
+            height: 44px;
+            padding: 0 15px;
+            font-size: 12px;
+            line-height: 44px;
+            background-color: #f6f6f6;
+        }
+
+        .rr-redes {
+            position: relative;
+            box-sizing: border-box;
+            height: 44px;
+            margin: 0 0 0 15px;
+            line-height: 44px;
+            border-bottom: 1px solid #ddd;
+            color: #202020;
+        }
+
+        .rr-item .rr-redes:last-child {
+            border: none;
+        }
+
+        .rr-right-type {
+            position: absolute;
+            right: 55px;
+            top: 11px;
+            padding: 0 5px;
+            height: 22px;
+            line-height: 22px;
+            font-size: 12px;
+            color: #ffffff;
+            background-color: #0398FF;
+            border-radius: 4px;
+        }
+
+        .rr-right-blue {
+            position: absolute;
+            right: 15px;
+            color: #0398FF;
+
+        }
+
+        .rr-right-red {
+            position: absolute;
+            right: 15px;
+            color: #FF5151;
+
+        }
+
+        .rr-right-yellow {
+            position: absolute;
+            right: 15px;
+            color: #FFCE53;
+
+        }
+
+        .no-record {
+            padding-top: 80px;
+            text-align: center;
+            color: #73C6FF;
+            font-size: 12px;
+        }
+
+        .no-record img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .no-record-des {
+            display: block;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="roll-info">
+        <div class="imginf">
+            <img src="./images/female.png">
+            <span class="name"></span>
+            <br>
+            <span class="gender"></span>
+            <span class="stu-no"></span>
+        </div>
+        <span>当前课程：
+            <span class="className">暂无</span>
+        </span>
+    </div>
+    <div class="roll-record">
+
+    </div>
+    <div class="no-record">
+        <img src="http://swapp-images.oss-cn-hangzhou.aliyuncs.com/aticle-img/20180619/bc2a938375c4376e8bde4a9fe8fca2f9.png">
+        <span class="no-record-des">暂无点名记录</span>
+    </div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/public.js"></script>
+<script>
+    $(function () {
+
+        var uid = getUrlParam('uid') || '';
+
+        getRollRecord();
+
+        function getRollRecord() {
+            $.ajax({
+                url: domain + '/managerapi/v8/rollcall/sturecord',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({
+                    uid: uid * 1,
+                }),
+                success: function (res) {
+
+                    // 基础信息
+                    if (res.error == 10000) {
+                        if (res.data.icon) {
+                            $('.imginf img').attr('src', res.data.icon);
+                        } else {
+                            if (res.data.gender == 1) {
+                                $('.imginf img').attr('src', './images/male.png');
+                            }
+                        }
+                        $('.name').text(res.data.name);
+                        $('.gender').text(res.data.gender == 0 ? '女' : '男');
+                        $('.stu-no').text(res.data.campusId);
+                        if (res.data.className) {
+                            $('.className').text(res.data.className);
+                        }
+                        $('.roll-info').css('display', 'block');
+
+                        // 点名记录
+                        if (res.data.classList && res.data.classList.length) {
+                            $('.roll-record').css('display', 'block');
+                            $('.no-record').css('display', 'none')
+                            setHtmlItem(res.data.classList);
+                        }
+                    }
+                },
+                error: function (data) {
+                    //
+                }
+            })
+        }
+
+        function setHtmlItem(arrData) {
+            var html = '';
+            for (var i = 0; i < arrData.length; i++) {
+                html += '<div class="rr-item"><div class="rr-title">' + arrData[i].className + '</div>';
+
+                var recordList = arrData[i].rollCallRecordList;
+
+                for (var j = 0; j < recordList.length; j++) {
+                    html += '<div class="rr-redes"><span class="rr-left">' + calcWeek(new Date(recordList[j].rollCallTime)) + '</span>';
+                    if (recordList[j].type == 1) {
+                        html += '<span class="rr-right-type">智能点名</span>';
+                    }
+                    switch (recordList[j].status) {
+                        case 1:
+                            html += '<span class="rr-right-blue">出勤</span></div>';
+                            break;
+                        case 2:
+                            html += '<span class="rr-right-red">缺勤</span></div>';
+                            break;
+                        case 3:
+                            html += '<span class="rr-right-yellow">请假</span></div>';
+                            break;
+                    }
+                };
+                html += '</div>'
+            }
+            $('.roll-record').html(html);
+        }
+
+        function calcWeek(date) {
+            var nowDate = new Date().format('yyyy/MM/dd');
+            var mid = new Date(nowDate + ' 12:00:00').getTime();
+            var pre = new Date(nowDate + ' ' + new Date(date).format('hh:mm:ss')).getTime();
+            var daytime = '上午';
+            var day = new Date(date).getDay();
+            var time = new Date(date).format('hh:mm');
+            var date = new Date(date).format('MM/dd');
+
+            if (pre > mid) {
+                daytime = '下午';
+            }
+            switch (day) {
+                case 1:
+                    day = date + ' 周一 ' + daytime + time;
+                    break;
+                case 2:
+                    day = date + ' 周二 ' + daytime + time;
+                    break;
+                case 3:
+                    day = date + ' 周三 ' + daytime + time;
+                    break;
+                case 4:
+                    day = date + ' 周四 ' + daytime + time;
+                    break;
+                case 5:
+                    day = date + ' 周五 ' + daytime + time;
+                    break;
+                case 6:
+                    day = date + ' 周六 ' + daytime + time;
+                    break;
+                case 0:
+                    day = date + ' 周日 ' + daytime + time;
+                    break;
+            }
+            return day;
+        }
+
+        for (var i = 0; i < $('body>div').length; i++) {
+            if ($($('body>div')[i]).attr('class') && $($('body>div')[i]).attr('id')) {
+                $($('body>div')[i]).css("display", "none");
+            }
+        }
+    })
+</script>
+
+</html>

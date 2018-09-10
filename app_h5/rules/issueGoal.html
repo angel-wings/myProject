@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>问题详情</title>
+	<script src="userAgent.js"></script>
+</head>
+<body onload="javascript:goal.setGoal()">
+	<header>
+		<p>什么是学期目标、每日上限？</p>
+	</header>
+
+	<section>
+		<p>学期目标：<span id="semGoal">XX</span>公里（本学期需要完成的公里数）</p>
+		<p>每日上限：<span id="dayGoal">X</span>公里（每日计入学期成绩的上限公里数）</p>
+		<p>注：超过每日上限的公里数仍然会计入每日排行榜</p>
+	</section>
+
+	<script type="text/javascript">
+		function setGoal(json){
+			var semGoal = document.getElementById('semGoal'),
+				dayGoal = document.getElementById('dayGoal');
+
+			data = JSON.parse(json);
+			semGoal.innerHTML = data.semGoal;
+			dayGoal.innerHTML = data.dayGoal;
+		}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+body {
+    height: 100%;
+    background-image: url(../images/pbg.png);
+    background-size: 100% 100%;
+    
+}
+
+/* 头信息 */
+.headinfo {
+    padding: 7.64rem 24px .5rem;
+    font-size: 12px;
+    color: #FFCF11;
+    line-height: 26px;
+}
+
+.prize-info {
+    position: relative;
+}
+
+.my-prize {
+    position: absolute;
+    top: 1.28rem;
+    right: 0;
+    padding-left: 6px;
+    padding-right: 5px;
+    line-height: 20px;
+    color: #fff;
+    background-color: #ff5151;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.prize-le{
+    float: right;
+}
+
+.prize-rule {
+    margin-left: 15px;
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* 抽奖区 */
+#lottery {
+    position: relative;
+    width: 17.72rem;
+    height: 16.44rem;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #638dff;
+}
+
+#lottery .table-box{
+    background-color: #7b9dff;
+    width: 17.72rem;
+    height: 15.24rem;
+    padding-top: .7rem;
+    padding-right: .7rem;
+    padding-bottom: .7rem;
+    padding-left: .7rem;
+    margin: 0 auto;
+    /* border: .7rem solid #7b9dff; */
+    border-radius: 12px;
+}
+
+#lottery table {
+    /* background-color: #638dff;
+    width: 17.91rem;
+    height: 15.04rem;
+    
+    margin: 0 auto;
+    border: .7rem solid #7b9dff;
+    border-radius: 12px;
+    border-collapse: unset; */
+
+    width: 16.32rem;;
+    height: 13.44rem;
+    background-color: #638dff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tab-dis {
+    height: .3rem;
+    width: 16.4rem;
+    margin-left: .8rem;
+    margin-top: .4rem;
+    background-color: #7b9dff;
+    border-radius: 5px;
+}
+
+.dot {
+    box-sizing: border-box;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.dot-top {
+    top: .15rem;
+}
+
+.dot-bottom {
+    bottom: 1.43rem;
+}
+
+.dot-left {
+    left: .18rem;
+}
+
+.dot-right {
+    right: .18rem;
+}
+
+.dot-active {
+    background-color: #F8E71C;
+}
+
+#lottery table td {
+    box-sizing: border-box;
+    position: relative;
+    width: 5.44rem;
+    height: 4.48rem;
+    text-align: center;
+    color: #333;
+    border-bottom: .1rem solid #638dff;
+    border-right: .1rem solid #638dff;
+}
+
+#lottery table td.lottery-unit{
+    background-image: url(../images/white-bg.png);
+    background-size: 100% 100%;
+}
+
+#lottery table .adborder td{
+    border-top: .1rem solid #638dff;
+}
+
+#lottery table td.lottery-unit-0,
+#lottery table td.lottery-unit-7,
+#lottery table td.lottery-unit-6{
+    border-left: .1rem solid #638dff;
+}
+
+
+#lottery table td img {
+    /* display: inline-block; */
+    width: 4.32rem;
+    height: 3.36rem;
+}
+
+#lottery table td span {
+    width: 5.44rem;
+    height: 4.48rem;
+    display: block;
+    text-decoration: none;
+    background-image: url(../images/click.png);
+    background-size: 100% 100%;
+}
+
+#lottery table td span.active {
+    background-image: url(../images/click-ing.png);
+}
+
+#lottery table td.active .p-mask {
+    display: block;
+}
+
+.p-mask {
+    display: none;
+    width: 5.44rem;
+    height: 4.48rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #a4a4a4;
+    opacity: 0.7;
+    z-index: 11;
+}
+
+/* jifen */
+.points-title{
+    width: 9.6rem;
+    margin: 0 auto .96rem;
+    font-size: 14px;
+    /* height: 32px; */
+    line-height: 32px;
+    background: rgba(54,40,169,0.50);
+    border-radius: 20px;
+    color: #FFCF11;
+    text-align: center;
+}
+
+/* 底部抽奖规则 */
+.foot-des {
+    padding: .96rem 1.28rem;
+    font-size: .746667rem;
+    line-height: 18px;
+    color: #fff;
+    background-color: #6c54cf;
+}
+
+.foot-title{
+    line-height: 1.92rem;
+}
+
+/* 弹框 */
+.prule,
+.presult,
+.preload {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 20rem;
+    display: none;
+    z-index: 1000;
+}
+
+.preload-mask,
+.presult-mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 999;
+}
+
+.bom-con {
+    position: relative;
+    width: 18rem;
+    margin: 6rem auto;
+    padding-bottom: 15px;
+    font-size: 14px;
+    border-radius: 12px;
+    background-color: #fff;
+    z-index: 10000
+}
+
+.bom-head {
+    position: relative;
+    height: 3.6rem;
+    line-height: 3.6rem;
+    font-size: 24px;
+    background-color: #FFC73E;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.bom-ing,
+.bom-close,
+.reload-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2.24rem;
+    height: 2.24rem;
+    padding: .64rem;
+    padding: .64rem;
+}
+
+.bom-body {
+    padding: .8rem .96rem;
+}
+/* 抽奖成功 */
+.bom-body-result {
+    text-align: center;
+}
+/* 抽奖失败 */
+.error12006{
+    display: none;
+    height: 150px;
+    padding-top: 70px;
+    text-align: center;
+}
+
+.re-des{
+    font-size: 14px;
+}
+
+.bom-bodytext {
+    padding: .64rem .96rem;
+}
+
+.bom-btn,
+.newReload {
+    width: 4.64rem;
+    height: 2.4rem;
+    margin: 0 auto;
+    background-image: linear-gradient(-180deg, #FF9800 0%, #FF5E00 100%);
+    border-radius: 44px;
+    text-align: center;
+    line-height: 2.4rem;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+/* 奖励结果 */
+.bom-body-result{
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.bom-body-result .re-img{
+    width: 9.6rem;
+    height: 8rem;
+    margin: 20px 0;
+}
+
+.re-good{
+    color: #FF5151 ;
+}
+
+.re-time{
+    font-family: 'PingFangSC-Thin';
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.bom-body-reload{
+    height: 150px;
+    padding-top: 70px;
+    text-align: center;
+}

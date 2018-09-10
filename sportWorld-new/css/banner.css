@@ -1,0 +1,55 @@
+.banner-box {
+    width: 100%;
+    height: 320px;
+    position: relative;
+    padding: 70px 0 75px;
+    box-sizing: content-box;
+}
+
+.banner-list {
+    width: 100%;
+    height: 320px;
+    position: absolute;
+}
+
+.banner-box li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    height: 290px;
+}
+
+li.banner-p1 {
+    transform: translate3d(-224px, 0, 0);
+}
+
+li.banner-p2 {
+    transform: translate3d(0px, 0, 0);
+    transform-origin: 0 50%;
+    opacity: 0.8;
+    z-index: 2;
+}
+
+li.banner-p3 {
+    transform: translate3d(224px, 0, 0) scale(1.12);
+    z-index: 3;
+    opacity: 1;
+}
+
+li.banner-p4 {
+    transform: translate3d(449px, 0, 0);
+    transform-origin: 100% 50%;
+    opacity: 0.8;
+    z-index: 2;
+}
+
+li.banner-p5 {
+    transform: translate3d(672px, 0, 0);
+}
+
+li.banner-p6 {
+    transform: translate3d(896px, 0, 0);
+}

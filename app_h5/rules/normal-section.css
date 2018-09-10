@@ -1,0 +1,37 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+header{
+	height: 45px;
+	padding-left: 15px;
+	font-family: 'PingFang';
+	font-size: 14px;
+	color: #333;
+	line-height: 45px;
+}
+header p{
+	border-bottom: 1px solid #ddd;
+}
+section{
+	padding-left: 15px;
+	padding-right: 15px;
+	font-family: 'PingFang';
+	font-size: 14px;
+	color: #808080;
+}
+section p{
+	margin-top: 20px;
+	line-height: 24px;
+}
+section p:last-child{
+	margin-bottom: 50px;
+}
+p span{
+	padding-right: 7px;
+}
+
+/*retina 1px hairlines*/
+/*.hairlines header p{
+	border-bottom: .5px solid #f6f6f6;
+}*/

@@ -1,0 +1,210 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    border: 0;
+    vertical-align: middle
+}
+
+body {
+    display: none;
+    background-color: #f6f6f6;
+    font-size: 14px;
+    color: #707070;
+    font-family: "PingFangSC-Regular";
+}
+
+/* 头信息 */
+
+.headinfo {
+    display: none;
+    padding: 0.3rem;
+    background-color: #fff;
+}
+
+.imginf {
+    margin-bottom: 20px;
+    overflow: hidden;
+    line-height: 30px;
+}
+
+.imginf img {
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin-right: 0.24rem;
+    border-radius: 50%;
+}
+
+.imginf span {
+    margin-right: .15rem;
+}
+
+.name {
+    display: inline-block;
+    font-size: 16px;
+    color: #202020;
+}
+
+.headinfo p {
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+
+.info {
+    color: #001400;
+}
+
+.title {
+    font-size: 12px;
+}
+
+/*  */
+
+.run,
+.attendance,
+.roll-call {
+    padding: 0.3rem;
+    margin-top: 10px;
+    background-color: #fff;
+    display: none;
+}
+
+.run-content,
+.atten-content,
+.roll-call-content,
+.test-content {
+    width: 130px;
+    height: 130px;
+    display: inline-block;
+}
+
+.atten-content {
+    padding-top: 20px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.test-content {
+    padding-top: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+.test-content .level-img{
+    width: 110px;
+    height: 120px;
+}
+
+.con-box{
+    position: relative;
+}
+
+.roll-call .con-box{
+    padding: 10px 0; 
+}
+
+.run .con-box{
+    padding-top: 10px;
+}
+
+.common-des {
+    position: absolute;
+    top: 52px;
+    left: 50%;
+}
+
+.roll-des {
+    top: 40px;
+}
+
+.common-martop {
+    margin-bottom: .15rem;
+}
+
+.circle-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    line-height: 30px;
+}
+
+.red {
+    background-color: #FF7D7D;
+}
+
+.blue {
+    background-color: #0398FF;
+}
+
+.yellow {
+    background-color: #FFC73E;
+}
+
+.common-foot {
+    display: none;
+    height: 44px;
+    padding: 0 .3rem;
+    line-height: 44px;
+    border-top: 1px solid #f1f1f1;
+    background-color: #fff;
+    color: #202020;
+}
+
+.common-foot img {
+    float: right;
+    width: 9px;
+    height: 14px;
+    margin-top: 15px;
+}
+
+.title-des {
+    float: right;
+    line-height: 19px;
+
+}
+
+.atten-img {
+    display: inline-block;
+    width: 80px;
+    height: 60px;
+    line-height: 80px;
+    background-image: url(../images/date.png);
+    background-size: 100% 100%;
+    color: #202020;
+    vertical-align: middle;
+}
+
+.atten-img img {
+    display: none;
+    widows: .48rem;
+    height: .42rem;
+    margin-left: .05rem;
+    position: relative;
+    top: -.05rem;
+}
+
+.test {
+    display: none;
+    margin-top: 10px;
+    background-color: #fff;
+}
+
+.test-box {
+    width: 7.5rem;
+    padding: 0.3rem;
+}
+
+.test-box .common-des {
+    top: 50px;
+}
+
+.test-name {
+    padding-left: .3rem;
+    line-height: 60px;
+}

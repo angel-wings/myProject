@@ -1,0 +1,419 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <meta name="format-detection" content="telephone=no">
+    <title>确认订单</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="https://cdn.bootcss.com/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <style>
+        span {
+            display: inline-block;
+        }
+
+        body {
+            background: #f6f6f6;
+            margin: 0;
+            height: 100%;
+            padding-top: 12px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        div.totalPrice {
+            font-size: 14px;
+            color: #707070;
+            padding: 0 1rem;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        div.orderText {
+            padding: 1.25rem 0 .5rem 0;
+        }
+
+        div.price-total {
+            font-size: 24px;
+            color: #33C4C2;
+            padding-bottom: 1rem;
+            border-bottom: solid 1px #ddd;
+        }
+
+        #orderInfo {
+            color: #707070;
+            background: #ffffff;
+            padding: 1rem 1rem 0 1rem;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .venueInfo {
+            padding-bottom: .5rem;
+        }
+
+        #timeBox {
+            clear: left;
+            height: 45px;
+            line-height: 45px;
+            font-size: 14px;
+            color: #707070;
+            background: #ffffff;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        #time {
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            font-size: 12px;
+            color: #b2b2b2;
+        }
+
+        .timer {
+            color: #333333;
+            margin-left: 10px;
+        }
+
+
+        .venueInfo .rightInfo {
+            color: #202020;
+            font-size: 14px;
+            float: right;
+        }
+
+        .item .rightInfo {
+            font-size: 14px;
+            float: right;
+            margin-left: .75rem;
+        }
+
+        #sec_1 {
+            width: 7.1875rem;
+            float: left;
+            margin-bottom: .5rem;
+        }
+
+        #sec_2 {
+            float: right;
+        }
+
+        #footer {
+            height: 5rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: #ffffff;
+            box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.08);
+            padding-top: 1.25rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn {
+            width: 20rem;
+            height: 2.75rem;
+            line-height: 2.75rem;
+            background: linear-gradient(-179deg, #59C1B3 0%, #3CADD9 100%);
+            border-radius: .375rem;
+            color: #ffffff;
+            text-align: center;
+            font-size: 14px;
+            margin-left: 1.75rem;
+        }
+
+        .item {
+            color: #202020;
+            font-size: 14px;
+            padding-bottom: .5rem;
+        }
+
+        .last_item {
+            border: none;
+            padding-bottom: 1rem;
+        }
+
+        div.payType {
+            margin-top: .5rem;
+            background: #ffffff;
+        }
+
+        div.payType section {
+            height: 2.75rem;
+            line-height: 2.75rem;
+            color: #202020;
+            font-size: 14px;
+            padding: 0 1rem;
+            display: none;
+        }
+
+        img.logo {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: .5rem;
+            margin-top: .625rem;
+        }
+
+        div.cir {
+            width: 16px;
+            height: 16px;
+            float: right;
+            margin-right: 1rem;
+            margin-top: .875rem;
+            border-radius: 50%;
+            border: solid 1px #b2b2b2;
+        }
+
+        div.active {
+            border: solid 1px #33C4C2;
+        }
+
+        span.cir {
+            background: #33C4C2;
+            width: 10px;
+            height: 10px;
+            margin: 2px 2px;
+            border-radius: 50%;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="totalPrice">
+            <div class="orderText">订单金额</div>
+            <div class="price-total">￥ 120.00</div>
+        </div>
+
+        <div id="orderInfo">
+            <div class="venueInfo">场馆信息：
+                <span class="rightInfo" id="venueName"></span>
+            </div>
+            <div class="venueInfo">预约时间：
+                <span class="rightInfo" id="appointmentTime"></span>
+            </div>
+            <div class="venueInfo">预约项目：
+                <span class="rightInfo" id="sportItem"></span>
+            </div>
+            <div style="overflow:hidden;border-bottom:solid 1px #ddd;">
+                <section id="sec_1">场地信息：</section>
+                <section id="sec_2">
+                </section>
+            </div>
+        </div>
+    </div>
+    <div id="timeBox">剩余支付时间：
+        <div id="time">
+            <span class="timer"></span>
+        </div>
+    </div>
+
+    <div class="payType">
+        <div class="type">
+            <section class="weixin">
+                <img src="../image/weixin.png" class="logo">
+                <span>微信支付</span>
+                <div class="cir">
+                    <span class="cir"></span>
+                </div>
+            </section>
+            <section class="zhifubao">
+                <img src="../image/zhifubao.png" class="logo">
+                <span>支付宝支付</span>
+                <div class="cir">
+                    <span class="cir"></span>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="btn">确认付款</div>
+    </div>
+
+    <div class="toast"></div>
+</body>
+<script type="application/javascript" src="../js/fastclick.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/rem.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        var timer = '';
+        var secs = '';
+        var payType;
+        var stuInfo = getStuInfo();
+        var orderId = getUrlParam('orderId');
+
+        $("div.payType").find("section").on("click", function () {
+            payType = $(this).attr("id") * 1;
+            var isActive = $(this).find("div.cir").hasClass("active");
+            if (!isActive) {
+                $("div.payType section").find("div.cir").removeClass("active");
+                $("div.payType section").find("span.cir").css("display", "none");
+                $(this).find("div.cir").addClass("active");
+                $(this).find("span.cir").css("display", "inline-block");
+            }
+        });
+
+        $('.btn').click(orderPayment);
+
+        function addItem(list) {
+            var html = '';
+            if (list.length == 1) {
+                html = '<div class="item last_item">' + list[0].sheetName + ' ' + list[0].startHour + '-' + list[0].endHour + '<span class="rightInfo">' + list[0].price + '元</span></div>';
+            } else {
+                for (var i = 0; i < list.length; i++) {
+                    if (i == list.length - 1) {
+                        html += '<div class="item last_item">' + list[i].sheetName + ' ' + list[i].startHour + '-' + list[i].endHour + '<span class="rightInfo">' + list[i].price + '元</span></div>';
+                    } else {
+                        html += '<div class="item">' + list[i].sheetName + ' ' + list[i].startHour + '-' + list[i].endHour + '<span class="rightInfo">' + list[i].price + '元</span></div>';
+                    }
+                }
+            }
+            $('#sec_2').append(html);
+        }
+
+        getPaymentList();
+        //获取该高校的支付列表
+        function getPaymentList() {
+            var url = domain + "/erp/api/v20/order/payment/list";
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                data: JSON.stringify({
+                    unid: stuInfo.unid
+                }),
+                success: function (data) {
+                    if (data.error = 10000) {
+                        var list = data.data;
+
+                        if (list && list.length) {
+                            list.forEach(function (item) {
+                                if (item.name == "微信") {
+                                    $("section.weixin").attr("id", item.id).css("display", "block");
+                                } else if (item.name == "支付宝") {
+                                    $("section.zhifubao").attr("id", item.id).css("display", "block");
+                                }
+                            });
+                        }
+                    }
+                }
+            })
+        }
+
+        getOrderDetail();
+        function getOrderDetail() {
+            var url = domain + '/erp/api/v20/order/detail';
+            var orderId = getUrlParam('orderId');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                data: JSON.stringify({
+                    orderId: orderId
+                }),
+                success: function (data) {
+                    if (data.error == 10000) {
+                        $('#venueName').text(data.data.venueName);
+                        $('#appointmentTime').text(data.data.date.replace(/-/g, '.') + ' ' + calcWeek(data.data.date));
+                        $('#sportItem').text(data.data.sportsItem);
+                        $("div.price-total").text('￥ ' + data.data.receivableFee);
+
+                        var createTime = data.data.createTime;
+                        var now = new Date().getTime();
+                        var timelong = parseInt((now * 1 - createTime * 1) / 1000);
+                        if (timelong >= 60 * 15) {
+                            location.href = './orderDetail.html?orderId=' + orderId;
+                        } else {
+                            var sec = (60 * 15 - timelong) % 60;
+                            var min = parseInt((60 * 15 - timelong) / 60);
+                            timer = (min > 9 ? min : '0' + min) + ':' + (sec > 9 ? sec : '0' + sec);
+                        }
+
+                        $('.timer').text(timer);
+                        timeInterval();
+
+                        var list = data.data.orderItemDetailList;
+                        if (list && list.length) {
+                            addItem(list);
+                        }
+                    }
+                }
+            })
+        }
+
+        function timeInterval() {
+            var time = timer;
+            var min = time.split(':')[0] * 1;
+            var sec = time.split(':')[1] * 1;
+            secs = 60 * min + sec;
+            var myTimer = setInterval(function () {
+                if (secs == 0) {
+                    clearInterval(myTimer);
+                    location.href = './orderDetail.html?orderId=' + orderId;
+                } else {
+                    secs = secs - 1;
+                    var min_1 = Math.floor(secs / 60);
+                    var sec_1 = secs - min_1 * 60;
+                    if (min_1 < 10) {
+                        min_1 = '0' + min_1;
+                    }
+                    if (sec_1 < 10) {
+                        sec_1 = '0' + sec_1;
+                    }
+                    $('.timer').text(min_1 + ':' + sec_1);
+                }
+            }, 1000)
+        }
+
+        function orderPayment() {
+            var url = domain + '/erp/api/v20/order/prepay/info';
+            if (!payType) {
+                toast("请选择支付方式");
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: url,
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                data: JSON.stringify({
+                    payType: 'mweb',
+                    orderId: orderId,
+                    unid: stuInfo.unid,
+                    payment: payType
+                }),
+                success: function (data) {
+                    if (data.error == 10000) {
+                        //跳转微信支付；
+                        var redirect_url = "&redirect_url=" + encodeURIComponent("http://h5.gxapp.iydsj.com/venue/prod/html/orderDetail.html?orderId=" + orderId + "&isPay=1");
+                        var mweb_url = data.data.mwebUrl + redirect_url;
+                        location.href = mweb_url;
+                    } else {
+                        toast(data.message, 200);
+                    }
+
+                },
+                error: function (data) {
+                    toast('下单失败');
+                }
+            })
+        }
+
+    })
+
+</script>
+
+</html>

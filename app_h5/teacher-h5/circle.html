@@ -1,0 +1,401 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <link rel="stylesheet" href="./css/common.css">
+    <title>学生详情</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="headinfo">
+        <div class="imginf">
+            <img src="./images/female.png">
+            <span class="name"></span>
+            <br>
+            <span class="gender"></span>
+            <span class="stu-no"></span>
+            <span class="enter-year"></span>
+        </div>
+        <p>学校：
+            <span class="info school"></span>
+        </p>
+        <p>院系：
+            <span class="info depart"></span>
+        </p>
+        <p>班级：
+            <span class="info stu-class"></span>
+        </p>
+    </div>
+
+    <div class="run">
+        <div>健康跑步
+            <span class="title com-semes"> 2018第一学期</span>
+            <span class="title title-des">数据统计截止到前一天</span>
+        </div>
+        <div class="con-box">
+            <div class="run-content"></div>
+            <div class="common-des">
+                <div class="common-martop">
+                    <span>学期目标：</span>
+                    <span class="info term-goal"></span>
+                </div>
+                <div>达标天数：
+                    <span class="info finish-days"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="common-foot run-record">
+        <span>跑步记录</span>
+        <img src="./images/path.png" alt=">">
+    </div>
+
+    <div class="attendance">
+        <p>考勤签到
+            <span class="title com-semes"></span>
+        </p>
+        <div class="con-box">
+            <div class="atten-content">
+                <p>考勤目标</p>
+                <div class="atten-img">
+                    <span></span>
+                    <img src="./images/finish.png" alt="">
+                </div>
+            </div>
+            <div class="common-des">
+                <div class="common-martop">
+                    <span>有效考勤：</span>
+                    <span class="info valid-atten"></span>
+                </div>
+                <div>
+                    无效考勤：
+                    <span class="info invalid-atten"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="common-foot atten-record">
+        <span>考勤记录</span>
+        <img src="./images/path.png" alt=">">
+    </div>
+
+    <div class="roll-call">
+        <p>课堂点名
+            <span class="title com-semes"></span>
+        </p>
+        <div class="con-box">
+            <div class="roll-call-content"></div>
+            <div class="common-des roll-des">
+                <div class="common-martop">
+                    <span class="circle-dot blue"></span>
+                    <span>正常：</span>
+                    <span class="info normal-times"></span>
+                </div>
+                <div class="common-martop">
+                    <span class="circle-dot yellow"></span>
+                    请假：
+                    <span class="info leave-times"></span>
+                </div>
+                <div>
+                    <span class="circle-dot red"></span>
+                    缺勤：
+                    <span class="info absence-times"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="test">
+        <p class="test-name">体测成绩
+            <span class="title test-title"></span>
+        </p>
+        <div class="test-box con-box">
+            <div class="test-content">
+                <img class="level-img" src="./images/point1.png">
+            </div>
+            <div class="common-des">
+                <div class="common-martop">
+                    <span>总得分：</span>
+                    <span class="info test-point"></span>
+                </div>
+                <div class="common-martop">
+                    <span>等 级：</span>
+                    <span class="info test-level"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="common-foot test-record">
+        <span>体测记录</span>
+        <img src="./images/path.png" alt=">">
+    </div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/highcharts.js"></script>
+<script src="./js/public.js"></script>
+<script>
+    $(function () {
+        $("#ruiHidesWrap").css("display", "none");
+
+        document.body.style.display = 'block';
+        var uid = getUrlParam('uid') || '';
+        var sid = getUrlParam('sid') || '';
+        var cid = getUrlParam('cid') || '';
+        var runData = {
+            element: '.run-content',
+            colors: ['#0398FF', '#f6f6f6'],
+            titleText: '计入成绩',
+            titleSunText: '',
+            goalData: []
+        };
+        var rollCallData = {
+            element: '.roll-call-content',
+            colors: ['#0398FF', '#FFC73E', '#FF7D7D', '#f6f6f6'],
+            titleText: '已出勤',
+            titleSunText: '',
+            goalData: []
+        };
+
+        getStudentDetail();
+        getStudentInfo();
+
+        function getStudentInfo() {
+            $.ajax({
+                url: domain + '/managerapi/h5/public/userinfo',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({
+                    uid: uid * 1
+                }),
+                success: function (data) {
+                    if (data.error == 10000) {
+                        if (data.data.headImg) {
+                            $('.imginf img').attr('src', data.data.headImg);
+                        } else {
+                            if (data.data.gender == 1) {
+                                $('.imginf img').attr('src', './images/male.png');
+                            }
+                        }
+                        $('.name').text(data.data.name);
+                        $('.gender').text(data.data.gender == 0 ? '女' : '男');
+                        $('.stu-no').text(data.data.campusId);
+                        $('.enter-year').text(data.data.enrollmentYear + '年入学');
+                        $('.school').text(data.data.schoolName);
+                        $('.depart').text(data.data.departName);
+                        $('.stu-class').text(data.data.className || '无');
+                        $('.headinfo ').css('display', 'block');
+                    }
+                },
+                error: function (data) {
+
+                }
+            })
+        }
+
+        function getStudentDetail() {
+            $.ajax({
+                url: domain + '/managerapi/student/detail',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({
+                    uid: uid * 1,
+                    sid: sid * 1,
+                    cid: cid * 1
+                }),
+                success: function (res) {
+                    if (res.error == 10000) {
+                        $('.com-semes').text(res.data.semesterName);
+                        if (res.data.runInfo) {
+                            setRunHtml(res.data.runInfo);  // 跑步
+                        }
+                        if (res.data.attenceInfo && res.data.attenceInfo.totalTimes) {
+                            setAttenHtml(res.data.attenceInfo);  // 考勤
+                        }
+                        if (res.data.testInfo) {
+                            setTestHtml(res.data.testInfo);  // 体测
+                        }
+                        if (res.data.rollCallInfo) {
+                            setRollHtml(res.data.rollCallInfo);  // 点名
+                        }
+                    }
+                },
+                error: function (data) {
+
+                }
+            }
+            )
+        }
+
+        function drewCircle(paramsData) {
+            $(paramsData.element).highcharts({
+                colors: paramsData.colors,
+                title: {
+                    floating: true,
+                    text: paramsData.titleText,
+                    y: 50,
+                    style: {
+                        fontSize: '14px',
+                        color: '#B2B2B2'
+                    }
+                },
+                subtitle: {
+                    floating: true,
+                    text: paramsData.titleSunText,
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 20,
+                    style: {
+                        fontSize: '14px',
+                        color: '#202020'
+                    }
+                },
+                chart: { margin: 0 },
+                credits: {
+                    enabled: false,
+                },
+                tooltip: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: false
+                        }
+                    },
+                    series: {
+                        states: {
+                            hover: {
+                                enabled: false
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    innerSize: '90%',
+                    data: paramsData.goalData
+                }]
+            });
+        }
+
+        // $('.run').css('display', 'block');
+        // drewCircle(runData);
+        // $('.run-record').css('display', 'block').click(function () {
+        //     window.location.href = 'zjwh://runHistory?uid=' + uid + '&sid=' + sid;
+        // })
+
+        // // 考勤
+        // $('.attendance').css('display', 'block');
+        // $('.atten-record').css('display', 'block').click(function () {
+        //     window.location.href = 'zjwh://attendanceList?uid=' + uid + '&sid=' + sid;
+        // })
+        // // $('.atten-img img').css('display', 'inline-block');
+
+        // // 点名
+        // $('.roll-call').css('display', 'block');
+        // drewCircle(rollCallData);
+
+
+        // $('.test').css('display', 'block');
+        // $('.test-record').css('display', 'block').click(function () {
+        //     window.location.href = testUrl + '?uid=' + uid;
+        // });
+
+        function setRunHtml(runObj) {
+            // 跑步
+            var goalLen = 0, validLen = 0;
+            goalLen = (runObj.semesterGoal / 1000).toFixed(2);
+            validLen = (runObj.validLength / 1000).toFixed(2);
+            runData.titleSunText = validLen + '公里';
+            runData.goalData = [validLen * 100, (goalLen - validLen) * 100];
+
+            $('.run').css('display', 'block');
+            drewCircle(runData);
+            $('.term-goal').text(goalLen + '公里');
+            $('.finish-days').text(runObj.validDays + '天');
+            $('.run-record').css('display', 'block').click(function () {
+                window.location.href = 'zjwh://runHistory?uid=' + uid + '&sid=' + sid;
+            })
+        }
+
+        function setAttenHtml(attenObj) {
+            // 考勤
+            $('.attendance').css('display', 'block');
+            $('.atten-img span').text(attenObj.totalTimes + '次');
+            $('.valid-atten').text(attenObj.volidTimes + '次');
+            $('.invalid-atten').text(attenObj.involidTime + '次');
+
+            $('.atten-record').css('display', 'block').click(function () {
+                window.location.href = 'zjwh://attendanceList?uid=' + uid + '&sid=' + sid;
+            })
+
+            if (attenObj.volidTimes && attenObj.volidTimes >= attenObj.totalTimes) {
+                $('.atten-img img').css('display', 'inline-block');
+            }
+        }
+
+        function setTestHtml(testObj) {
+            // 体测
+            var level = '';
+            var imgurl = '';
+
+            $('.test').css('display', 'block');
+            $('.test-title').text(testObj.testName)
+
+            switch (testObj.level) {
+                case 1:
+                    level = '优秀';
+                    imgurl = './images/point1.png';
+                    break;
+                case 2:
+                    level = '良好';
+                    imgurl = './images/point2.png';
+                    break;
+                case 3:
+                    level = '及格';
+                    imgurl = './images/point3.png';
+                    break;
+                case 4:
+                    level = '不及格';
+                    imgurl = './images/point4.png';
+                    break;
+                default:
+                    level = '无';
+                    imgurl = './images/point5.png';
+            }
+            $('.level-img').attr('src', imgurl);
+            $('.test-level').text(level);
+            $('.test-point').text((testObj.totalScore).toFixed(2) + '分');
+            if (testObj.totalScore == -99999) {
+                $('.test-point').text('未完成');
+            }
+            $('.test-record').css('display', 'block').click(function () {
+                window.location.href = testUrl + '?uid=' + uid;
+            });
+        }
+
+        function setRollHtml(rollObj) {
+            // 点名
+            $('.roll-call').css('display', 'block');
+            rollCallData.titleSunText = rollObj.attendanceNum + '次';
+            rollCallData.goalData = [rollObj.attendanceNum * 1, rollObj.leaveNum * 1, rollObj.absenceNum * 1];
+            if (rollObj.attendanceNum == 0 && rollObj.leaveNum == 0 && rollObj.absenceNum == 0) {
+                rollCallData.goalData = [0, 0, 0, 1]
+            }
+            drewCircle(rollCallData);
+            $('.normal-times').text(rollObj.attendanceNum + '次');
+            $('.leave-times').text(rollObj.leaveNum + '次');
+            $('.absence-times').text(rollObj.absenceNum + '次');
+        }
+    })
+</script>
+
+</html>

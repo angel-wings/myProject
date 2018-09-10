@@ -1,0 +1,51 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+header{
+	height: 45px;
+	padding-left: 15px;
+	font-family: 'PingFang';
+	font-size: 14px;
+	color: #333;
+	line-height: 45px;
+}
+header p{
+	border-bottom: 1px solid #ddd;
+}
+section{
+	padding-left: 15px;
+	padding-right: 15px;
+	font-family: 'PingFang';
+	font-size: 14px;
+	color: #808080;
+}
+section p{
+	margin-top: 20px;
+	line-height: 24px;
+}
+section p:last-child{
+	margin-bottom: 50px;
+}
+p span{
+	padding-right: 7px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2){
+	header p{
+		position: relative;
+		border: none;
+	}
+	header p:after{
+		content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: #c8c7cc;
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+	}
+} 

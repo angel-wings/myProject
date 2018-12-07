@@ -1,0 +1,313 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+*{box-sizing: border-box;}
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
+img{display:inline-block;overflow:hidden;
+    /* vertical-align:top; */
+}
+button,input[type="button"]{cursor:pointer;border:0 none;}
+textarea{word-wrap:break-word;resize:none;}  /* word-wrap for opera, resize for webkit */
+body{-webkit-user-select:none;-webkit-text-size-adjust:100%!important;font-family:'PingFang','PingFangSC-Regular';font-size: 14px;}
+input[type="number"]{-webkit-user-select:text;}
+a,button,input,img{-webkit-touch-callout:none;}/* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
+input,select,textarea{outline:none;}
+/* 去除android4.0以下 a/button/input标签被点击时产生的边框 因为边框引起了不少bug */
+a,button,input,label{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
+@media all and (-webkit-transform-3d){
+    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+    a,button,input,label{-webkit-tap-highlight-color:rgba(130,130,130,.52);outline: none;}
+}
+html,body{height:100%;margin: 0 auto;max-width: 640px;background-color: #f6f6f6;}
+a{text-decoration:none;}
+.hide{display: none!important;}
+
+.toast {
+    background: rgba(0, 0, 0, .9);
+    color: red;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    margin-left: -60px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 20px;
+    display: none;
+    z-index: 10000;
+}
+
+/* 头 */
+
+.headbar img{
+    width: 100%;
+}
+
+/* 商品 */
+
+.goods-con{
+    padding: .32rem 0 1rem;
+    background-color: #019c84;
+}
+
+.goods-one{
+    margin-right: .46rem;
+    padding-top: .9rem;
+    margin-bottom: .4rem;
+    height: 3.2rem;
+    background-image: url('../images/bor_1.png');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.goods-two{
+    margin-left: .46rem;
+    padding-top: .9rem;
+    margin-bottom: .4rem;
+    height: 3.7rem;
+    background-image: url('../images/bor_2.png');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.goods-three{
+    margin-right: .46rem;
+    margin-bottom: .6rem;
+    padding-top: .9rem;
+    height: 3.7rem;
+    background-image: url('../images/bor_3.png');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.goods-left,.goods-right{
+    float: left;
+}
+
+.goods-left img{
+    padding-left: .78rem;
+    width: 3.6rem;
+    height: 1.8rem;
+}
+
+.goods-two .goods-left img{
+    padding-left: .24rem;
+    padding-right: .5rem;
+    margin-top: .3rem;
+}
+
+.goods-three .goods-left img{
+    margin-top: .3rem;
+}
+
+.goods-right{
+    margin-left: .32rem;
+}
+
+.goods-two .goods-right{
+    margin-left: 0;
+}
+
+.goods-title{
+    font-size: .24rem;
+    color: #693406;
+}
+
+.good1-count{
+    margin-bottom: .32rem;
+    font-size: .28rem;
+    color: #693406;
+    font-weight: bold;
+}
+
+#good1-btn,
+#two-btn,
+#three-btn{
+    width: 2rem;
+}
+
+.two-title{
+    font-size: .28rem;
+    color: #693406;
+    font-weight: bold;
+}
+.two-count,.three-count{
+    font-size: .24rem;
+    color: #000;
+    margin: .12rem 0 .08rem;
+}
+
+.tip{
+    width: 1.4rem;
+    margin-top: .1rem;
+}
+
+/* 倒计时 */
+
+.time1,.time2{
+    margin-bottom: .16rem;
+    font-weight: bold;
+    color: #fbcd7a;
+    font-size: 16px;
+    text-align: center;
+    text-shadow:#937a3b 2px 0 1px;
+}
+
+.time1:before,.time2:before{
+    content: attr(text);
+    position: absolute;
+    z-index: 10;
+    color: #fff9c2;
+    -webkit-mask: linear-gradient(to bottom, #fbcd7a, transparent );
+    mask: linear-gradient(to bottom, #fbcd7a, transparent );
+}
+
+/* 规则 */
+
+.rules{
+    margin: 0 .55rem;
+    padding: .4rem .24rem .6rem;
+    border: #36b296 2px solid;
+    border-radius: 4px;
+    color: #693406;
+    line-height: 20px;
+    font-size: .24rem;
+    background-color: #fdebbc;
+    -webkit-box-shadow:0px 2px 2px #999 inset;
+    -moz-box-shadow:0px 2px 2px #999 inset;
+    box-shadow:0px 2px 2px #999 inset;
+}
+
+.rule-tit{
+    font-size: .28rem;
+    
+    font-weight: bold;
+}
+
+.rule-des{
+    font-size: .24rem;
+}
+
+.red{
+    color: #ff0000;
+}
+/* 弹框 */
+
+.user-info{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+}
+
+.mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 999;
+}
+
+.user-con{
+    box-sizing: border-box;
+    position: relative;
+    top: 2.4rem;
+    left: .5rem;
+    width: 6.5rem;
+    padding: .5rem;
+    background-image: url('../images/tan_back.png');
+    background-size: 100% 100%;
+    z-index: 2000;
+}
+
+.con-head{
+    text-align: right;
+    height: 40px;
+}
+
+.con-head span{
+    line-height: 40px;
+    padding: 10px;
+}
+
+.user-form{
+    margin-bottom: .42rem;
+    font-size: 13px;
+}
+
+.user-form span{
+    display: inline-block;
+    width: 1.6rem;
+}
+
+.user-form input,.user-form textarea{
+    width: 3.6rem;
+    padding: 5px 10px ;
+    font-size: 13px;
+    line-height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+
+.user-form textarea{
+    line-height: 20px;
+}
+
+.name-wh{
+    text-align: right;
+    padding-right: .12rem;
+    font-size: .32rem;
+    color: #fff;
+}
+
+.user-name,.user-phone{
+    margin-bottom: .48rem;
+    height: .6rem;
+    line-height: .6rem;
+}
+
+.user-addr{
+    padding-top: .1rem;
+    padding-bottom: .2rem;
+    font-size: .12rem;
+}
+
+.user-addr span{
+    vertical-align: top;
+}
+
+.des{
+    color: #fff;
+}
+
+.user-btn{
+    width: 3.6rem;
+    height: .64rem;
+    margin: 0 auto;
+    line-height: .64rem;
+    font-size: .3rem;
+    border-radius: 5px;
+    color: #1d997d;
+    text-align: center;
+    background-color: #fdebbc;
+}
+
+.close{
+    position: absolute;
+    bottom: -1.6rem;
+    left: 2.75rem;
+    z-index: 1000;
+}
+
+.close img{
+    width: 1rem;
+    height: 1rem;
+}

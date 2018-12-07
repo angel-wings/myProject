@@ -1,12 +1,14 @@
 //public.js  获取公共参数
 
-var domain = 'http://test.gxapp.iydsj.com'; 
-
+// var domain = 'http://winter.gxapp.iydsj.com'; //线上
+// var domain = 'http://test.winter.gxapp.iydsj.com'; //185
+var domain = 'http://pre.winter.gxapp.iydsj.com'; //187
 
 /**
  * 获取个人信息基础方法
 */
 function getUserInfo(callback, array) {
+
     window.WebViewJavascriptBridge.callHandler(
         'userInfo'
         , array
@@ -20,7 +22,7 @@ function getUserInfo(callback, array) {
  * 获取请求头
 */
 function getHeaders(callback) {
-    var arr = ["uid", "token", "appVersion", "DeviceId", "CustomDeviceId", "osType", "timeStamp", "tokenSign", "osVersion", "deviceName"];
+    var arr = ["uid", "token", "timeStamp", "tokenSign"];
     getUserInfo(callback, arr);
 }
 
@@ -40,43 +42,36 @@ function isThirdPartyPage() {
             //do nothing;
         })
 }
+function changeTitle(title) {
+    window.WebViewJavascriptBridge.callHandler(
+        'changeTitle'
+        , { "title": title }
+        , function (responseData) {
+            //do nothing;
+        })
+}
 
 /**
  * ajax请求公告方法
 */
 function ajaxSubmit(type, action, obj, success, error) {
     getHeaders(function (params) {
-        if (obj == null) {
-            $.ajax({
-                type: type,
-                url: domain + action,
-                headers: params,
-                contentType: 'application/json;charset=UTF-8',
-                datatype: "json",
-                success: function (data) {
-                    success(data);
-                },
-                error: function (data) {
-                    error(data);
-                }
-            })
-        }else{
-            $.ajax({
-                type: type,
-                url: domain + action,
-                headers: params,
-                data: JSON.stringify(obj),
-                contentType: 'application/json;charset=UTF-8',
-                datatype: "json",
-                success: function (data) {
-                    success(data);
-                },
-                error: function (data) {
-                    error(data);
-                }
-            })
-        }
+        $.ajax({
+            type: type,
+            url: domain + action,
+            headers: params,
+            data: JSON.stringify(obj),
+            contentType: 'application/json;charset=UTF-8',
+            datatype: "json",
+            success: function (data) {
+                success(data);
+            },
+            error: function (data) {
+                error(data);
+            }
+        })
     });
+
 }
 
 /**
@@ -86,6 +81,7 @@ function connectWebViewJavascriptBridge(callback) {
     var u = navigator.userAgent;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
     if (window.WebViewJavascriptBridge) {
         callback(WebViewJavascriptBridge)
     } else {
@@ -164,49 +160,46 @@ function getUrlParam(name) {
     return null; //返回参数值
 }
 
-function toast(message, width) {
-    var width = width || '120';
+function toast(message, width, time) {
+    var width = width || '200';
+    var time = time || 2000;
     $('.toast').text(message);
     $('.toast').css('display', 'block');
     $('.toast').css('margin-left', '-' + (width / 2) + 'px');
     $('.toast').width(width);
-    $('.toast').fadeOut(3000);
+    $('.toast').fadeOut(time);
 }
 
-(function () {
-    var win = window;
-    var setFontSize = win.setFontSize = function (_width) {
+(function (_D) {
+    var _self = {};
+    _self.resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+    _self.Html = _D.getElementsByTagName("html")[0];
+    _self.widthProportion = function () {
+        var p = Number((_D.body && _D.body.clientWidth || _self.Html.offsetWidth) / 750).toFixed(3);
+        return p > 1.024 ? 1.024 : p < 0.427 ? 0.427 : p;
+    };
+    _self.changePage = function () {
+        _self.Html.setAttribute("style", "font-size:" + _self.widthProportion() * 100 + "px");
+        _self.correctPx();
+    };
+
+    _self.correctPx = function () {
         var docEl = document.documentElement;
-        // 获取当前窗口的宽度
-        var width = _width || docEl.clientWidth; // docEl.getBoundingClientRect().width;
-        // 大于 1080px 按 1080
-        if (width > 1080) {
-            width = 1080;
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth || clientWidth > 768) return;
+        var div = document.createElement('div');
+        div.style.width = '1.4rem';
+        div.style.height = '0';
+        document.body.appendChild(div);
+        var ideal = 140 * clientWidth / 750;
+        var rmd = (div.clientWidth / ideal);
+        if (rmd > 1.2 || rmd < 0.8) {
+            docEl.style.fontSize = 100 * (clientWidth / 750) / rmd + 'px';
+            document.body.removeChild(div);
         }
-        var rem = width / 20;
-        docEl.style.fontSize = rem + 'px';
-        // 部分机型上的误差、兼容性处理
-        var actualSize = win.getComputedStyle && parseFloat(win.getComputedStyle(docEl)["font-size"]);
-        if (actualSize !== rem && actualSize > 0 && Math.abs(actualSize - rem) > 1) {
-            var remScaled = rem * rem / actualSize;
-            docEl.style.fontSize = remScaled + 'px';
-        }
-    }
-
-    var timer;
-    //函数节流
-    function dbcRefresh() {
-        clearTimeout(timer);
-        timer = setTimeout(setFontSize, 100);
-    }
-
-    //窗口更新动态改变 font-size
-    win.addEventListener('resize', dbcRefresh, false);
-    //页面显示时计算一次
-    win.addEventListener('pageshow', function (e) {
-        if (e.persisted) {
-            dbcRefresh()
-        }
-    }, false);
-    setFontSize();
-})(window)
+    };
+    _self.changePage();
+    if (!document.addEventListener) return;
+    window.addEventListener(_self.resizeEvt, _self.changePage, false);
+    document.addEventListener('DOMContentLoaded', _self.changePage, false);
+})(document);

@@ -1,0 +1,93 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./images/logo.png" rel="external nofollow" />
+    <title>运动世界 - 关于我们</title>
+    <style>
+        .banner {
+            background-image: url(./images/about-top.png);
+            background-size: 100% 100%;
+        }
+
+        main {
+            width: 76%;
+            min-height: calc(100vh - 420px);
+            margin: 0 auto;
+            min-width: 720px;
+            max-width: 1000px;
+            padding: 60px 0;
+        }
+
+        .main-title {
+            margin-bottom: 65px;
+            font-size: 18px;
+            color: #2D3243;
+        }
+
+        .main-con {
+            position: relative;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        .main-des {
+            float: left;
+            width: 60%;
+            font-size: 14px;
+            color: #2D3243;
+            line-height: 26px;
+        }
+
+        .main-des p {
+            margin-bottom: 30px;
+        }
+
+        .main-img {
+            float: right;
+        }
+
+        /* footer{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        } */
+    </style>
+</head>
+
+<body>
+    <nav></nav>
+    <div class="banner">
+        <span>关于我们</span>
+    </div>
+    <main>
+
+        <div class="main-con">
+            <div class="main-des">
+                <p class="main-title">体育板块上市公司，国家高新企业认证，拥有多项自主知识产权</p>
+                <p>莱茵体育旗下浙江万航信息科技有限公司，是一家专注于“互联网+体育产业”理念，并致力于提供体育互联网平台服务的科技公司。基于大数据的分析与整理，可视化智能数据平台搭建，实时监控与风险预测，结合学校特色，万航科技研发推出SaaS云端架构技术的高校体育信息化管理系统“运动世界校园”已经应用于全国26个省市近500所大学校区，无需部署开通即使用，深受师生好评及各省级教委的重视。</p>
+                <p>莱茵体育，深交所上市综合类体育公司（股票代码：000558），2016年被国家体育总局评为“国家体育产业示范单位”。公司结合政府体育事业和体育产业的发展及建设健康中国大战略，构筑以体育服务为核心的商业新格局。</p>
+            </div>
+            <img class="main-img" src="./images/about.png">
+        </div>
+    </main>
+    <footer id="footer"></footer>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/prefixfree.js"></script>
+<script src="./js/footer.js"></script>
+<script>
+    $(function () {
+        $('nav').setNav('');
+        $('footer').footbar();
+
+        var now = new Date().getTime();
+        var long = 100 * 24 * 60 * 60 * 1000;
+        console.log(new Date(now + long))
+    })
+</script>
+
+</html>

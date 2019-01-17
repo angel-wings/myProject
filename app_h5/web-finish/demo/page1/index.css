@@ -1,0 +1,607 @@
+.clear-float{
+    overflow: hidden;
+}
+
+.f-left{
+    float: left;
+}
+
+.f-right{
+    float: right;
+}
+
+.sub-white-28{
+    font-size: 28px;
+    color: #fff;
+}
+
+.sub-white-14{
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.5;
+}
+
+/* left-top --办学规模 */
+.left-subject,
+.campus-table,
+.edu-scale{
+    margin-left: 54px;
+    margin-bottom: 44px;
+}
+.sub-item{
+    display: inline-block;
+    width: calc(33% - 18px);
+}
+.sub-menu{
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: #fff;
+    font-size: 16px;
+    opacity: 0.5;
+}
+
+.sub-num{
+    font-size: 32px;
+    color: #0084FF;
+}
+
+.sub-num small,
+.edu-scale-center small{
+    font-size: 14px;
+}
+/* camp-item */
+.campus-left{
+    display: inline-block;
+    margin-right: 48px;
+}
+.camp-item{
+    margin-bottom: 35px;
+}
+.camp-item:last-child{
+    margin-bottom: 0;
+}
+.camp-item .sub-num{
+    color: #E5CD6E;
+}
+hr{
+    margin-left: 53px;
+    margin-right: 53px;
+}
+
+/*  */
+.green{
+    color: #41BEFF;
+}
+
+.edu-scale-left,
+.edu-scale-center,
+.edu-scale-right{
+    float: left;
+    margin-right: 14px;
+}
+
+.edu-scale-center{
+    margin-right: 50px;
+}
+
+.ring-box{
+    
+    width: 147px;
+    height: 145px;
+    padding-top: 32px;
+    text-align: center;
+    vertical-align: middle;
+    background-image: url('./images/ring.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.edu-scale-center{
+    padding-top: 64px;
+}
+
+.edu-scale-center .sub-white-28{
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.edu-scale-center i{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.b-green{
+    background-color: #10D892;
+}
+.b-blue{
+    background-color: #0084FF;
+}
+
+.edu-scale-box{
+    width: 148px;
+    height: 148px;
+    padding-top: 20px;
+    text-align: center;
+    vertical-align: middle;
+    background-image: url('./images/arr126.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.edu-scale-box .sub-menu{
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+.edu-scale-box .sub-num{
+    font-size: 24px;
+}
+
+.edu-sca-top{
+    margin-bottom: 24px;
+}
+
+/* **********left-bottom---师资规模 */
+
+.stu-teach-box{
+    position: relative;
+    height: 526px;
+    text-align: center;
+}
+
+.stu-teach-box .stu-teach-img{
+    width: 210px;
+    position: absolute;
+    bottom: 50px;
+    left: 170px;
+}
+
+.stu-teach-num{
+    font-size:20px;
+    font-family:DINPro-Medium;
+    line-height: 60px;
+    font-weight:500;
+    color:rgba(26,225,255,1);
+}
+
+.stu-teach-msg{
+    position: relative;
+    display: inline-block;
+    left: -15px;
+    top: 5px;
+    width:90px;
+    font-size:14px;
+    text-align: center;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    line-height:24px;
+    opacity:0.5;
+}
+
+.circleProgress_wrapper {
+    /* display: inline-block; */
+    position: absolute;
+    box-sizing: border-box;
+    width: 60px;
+    height: 60px;
+    /* margin: 50px auto; */
+    border-radius: 50%;
+    border: 1px solid #1746bb;
+}
+
+.wrapper {
+    box-sizing: border-box;
+    width: 30px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+}
+
+.w-right {
+    right: 0;
+}
+
+.w-left {
+    left: 0;
+}
+
+.circleProgress {
+    box-sizing: border-box;
+    width: 60px;
+    height: 60px;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+}
+
+.rightcircle {
+    border-top: 4px solid #1AE1FF;
+    border-right: 4px solid #1AE1FF;
+    right: 0;
+    
+}
+
+.leftcircle{   
+    /* border-bottom: 4px solid #1AE1FF;
+    border-left: 4px solid #1AE1FF;   */
+    left: 0;   
+    /* transform: rotate(-100deg); */
+}
+
+.wrapper-350-1{
+    left: 40px;
+    bottom: 157px;
+}
+.wrapper-350-2{
+    left: 46px;
+    bottom: 263px;
+}
+.wrapper-350-3{
+    left: 82px;
+    bottom: 369px;
+}
+
+.wrapper-800 .rightcircle{
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg); 
+    -moz-transform:rotate(45deg); 
+    -webkit-transform:rotate(45deg); 
+    -o-transform:rotate(45deg); 
+}
+
+.wrapper-800 .leftcircle{
+    border-bottom: 4px solid #1AE1FF;
+    border-left: 4px solid #1AE1FF; 
+    transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg); 
+    -moz-transform:rotate(-90deg); 
+    -webkit-transform:rotate(-90deg); 
+    -o-transform:rotate(-90deg);  
+}
+
+.wrapper-58 .circleProgress,
+.wrapper-180-1 .circleProgress,
+.wrapper-180-2 .circleProgress,
+.wrapper-180-3 .circleProgress{
+    transform:rotate(-20deg);
+    -ms-transform:rotate(-20deg); 
+    -moz-transform:rotate(-20deg); 
+    -webkit-transform:rotate(-20deg); 
+    -o-transform:rotate(-20deg); 
+}
+
+.wrapper-58{
+    left: 184px;
+    bottom: 425px;
+}
+.wrapper-180-1{
+    left: 300px;
+    bottom: 425px;
+}
+.wrapper-180-2{
+    left: 402px;
+    bottom: 369px;
+}
+.wrapper-800{
+    left: 438px;
+    bottom: 263px;
+}
+.wrapper-180-3{
+    left: 444px;
+    bottom: 157px;
+}
+
+/* center */
+
+.center-top-img{
+    width: 1250px;
+    height: 624px;
+}
+
+.five-img-box{
+    padding-top: 38px;
+    margin-bottom: 70px;
+}
+
+.five-img-box div{
+    float: left;
+    width: 242px;
+    margin-right: 7px;
+}
+
+.five-img-box div:last-child{
+    margin: 0;
+}
+
+.center-bottom-title{
+    color: #fff;
+}
+
+.online-people{
+    font-size:24px;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    line-height:24px;
+}
+
+.online-time{
+    float: right;
+    padding: 5px 15px;
+    border: 1px solid rgba(42,56,164,1);
+    color: rgba(42,56,164,1);
+}
+
+.time-today{
+    background-color: #056bc4;
+    color: #fff;
+}
+
+.online-img img{
+    width: 100%;
+    padding-top: 100px;
+}
+
+ /* ***************right---本期招生数据 */
+
+.enroll-stu{
+    font-size: 32px;
+    color: #fff;
+    padding-right: 10px;
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    font-weight: normal;
+}
+
+.enroll-data{
+    padding-left: 30px;
+    margin-bottom: 30px;
+}
+
+.enroll-data-left{
+    float: left;
+    padding-right: 8px;
+    border-right: 1px solid #48485e;
+}
+
+.enroll-data-right{
+    float: right;
+    /* padding-left: 10px; */
+    padding-right: 20px;
+}
+
+.enroll-dl-item{
+    display: inline-block;
+    color: #04a2ff;
+    text-align: center;
+}
+
+.enroll-data-right .enroll-dl-item{
+    color: #4fe7d7;
+}
+
+.enroll-dl-item p{
+margin: 5px;
+}
+
+.enroll-blue-peoples,
+.enroll-green-peoples{
+    display: inline-block;
+    width: 170px;
+    position: relative;
+    top: -20px;
+}
+
+.enroll-major{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.enroll-major .icon-c-lt{
+    top: 6px;
+}
+
+.enroll-major-title{
+    padding-left: 38px;
+    font-size:14px;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(65,190,255,1);
+    line-height:30px;
+}
+
+.online-study{
+    float: right;
+    padding-right: 50px;
+    color: #ddd;
+}
+
+.ranking{
+    padding-bottom: 30px;
+    padding-left: 30px;
+    line-height: 30px;
+    color: #fff;
+}
+
+.ranking-item{
+    margin-bottom: 12px;
+}
+
+.ranking-item span:last-child{
+    color: #00E4FF;
+    font-size:16px;
+    font-family:DINPro-Medium;
+    font-weight:500;
+}
+
+.now-class-data .ranking-item span:last-child{
+    color: #FFC548
+}
+
+.ranking-item img{
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.rank-level{
+    margin-right: 12px;
+    font-size:20px;
+    font-family:FuturaLT;
+    font-weight:400;
+    color:rgba(90,105,205,1);
+    line-height:24px;
+}
+
+.rank-item-name{
+    display: inline-block;
+    width: 200px;
+    opacity:0.5;
+}
+/* 2 */
+
+
+
+/* 本期教学数据 */
+
+.teach-data{
+    padding-left: 30px;
+    margin-bottom: 50px;
+}
+
+/* 彩色进度条 */
+
+div.bor-box {
+    display: inline-block;
+    width: 207px;
+    height: 5px;
+    border-radius: 2px;
+    border: 1px solid #111552;
+}
+
+div.back-box {
+    height: 5px;
+    background:linear-gradient(90deg,rgba(0,100,255,1) 0%,rgba(0,240,255,1) 100%);
+    border-radius: 2px;
+    position: relative;
+}
+
+.now-class-data div.back-box{
+    background: linear-gradient(-90deg, rgba(15, 214, 146, 1) 0%, rgba(255, 220, 112, 1) 100%);
+}
+
+.white-box {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    display: inline-block;
+    background-color: #010955;
+    width: 207px;
+    height: 3px;
+}
+
+.len-199{
+    width: 199px;
+}
+.len-171{
+    width: 171px;
+}
+.len-49{
+    width: 49px;
+}
+.len-111{
+    width: 111px;
+}
+.len-81{
+    width: 81px;
+}
+
+.teach-data span{
+    opacity: 0.5;
+}
+
+.teach-data-msg{
+    display: inline-block;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+}
+
+.teach-data-msg p{
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-size:28px;
+    font-family:DINPro-Medium;
+    font-weight:500;
+    color:rgba(233,181,76,1);
+}
+
+.teach-data-left{
+    margin-right: 78px;
+}
+
+/* 教务数据 */
+
+.educational-data{
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    font-size: 16px;
+    font-family:PingFang-SC-Medium;
+}
+
+.educational-data span{
+    opacity: 0.5;
+}
+
+.educational-data p{
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.edu-total-online{
+    font-size:28px;
+    font-family:DINPro-Medium;
+    font-weight:500;
+}
+
+.edu-blue{
+    color:#0376e0;
+    font-family:DINPro-Medium;
+    font-weight:500;
+}
+
+.edu-orange{
+    color: #e25f0f;
+}
+
+.edu-yellow{
+    color: #c8ac6c;
+}
+
+.educational-data-left{
+    padding-right: 25px;
+    border-right: 1px solid #1c1d6a;
+}
+
+.educational-data-right{
+    padding-left: 25px;
+}
+
+.edu-right-msgbox,
+.edu-left-msgbox{
+    padding-right: 5px;
+}
+
+.edu-right-imgbox img,
+.edu-left-imgbox img{
+    height: 213px;
+}

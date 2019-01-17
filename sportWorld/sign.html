@@ -1,0 +1,169 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <title title="运动世界 - 用奔跑 · 释青春">运动世界 - 产品</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./images/logo.png" rel="external nofollow" />
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        div.banner {
+            width: 100%;
+            height: 100px;
+            font-size: 0;
+            line-height: 100px;
+            background-size: 100% 100%;
+            position: relative;
+            background-image: url(./images/sign3.png);
+        }
+
+        div.box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 625px;
+            transform: translate(-50%, -50%);
+        }
+
+        span.item {
+            margin-right: 75px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        span.item:last-child {
+            margin-right: 0;
+        }
+
+        span.item a {
+            width: 100px;
+            height: 35px;
+            font-size: 14px;
+            color: #B2B2B2;
+            text-align: center;
+            line-height: 35px;
+            display: inline-block;
+        }
+
+        span.item.active a {
+            border-radius: 44px;
+            color: #FFFFFF;
+            background: rgba(0, 0, 0, 0.40);
+        }
+
+        section {
+            font-size: 0;
+            overflow: hidden;
+            padding: 100px 15%;
+        }
+
+        div.left {
+            width: 47%;
+            font-size: 12px;
+            float: left;
+            font-family: "PingFangSC-Medium";
+
+        }
+
+        div.right {
+            width: 47%;
+            font-size: 12px;
+            margin-left: 6%;
+            float: left;
+            font-family: "PingFangSC-Medium";
+        }
+
+        div.title {
+            font-size: 16px;
+            color: #2D3243;
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: 52px;
+        }
+
+        p.blue {
+            color: #0398FF;
+            margin-bottom: 40px;
+            font-family: 'PingFangSC-Medium';
+        }
+
+        p.black {
+            color: #2D3243;
+            margin-bottom: 10px;
+            font-family: 'PingFangSC-Medium';
+        }
+
+        p {
+            color: #707070;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav></nav>
+
+    <div class="banner">
+        <div class="box">
+            <span class="item">
+                <a href="./sport.html">阳光跑步</a>
+            </span>
+            <span class="item active">
+                <a href="##">考勤签到</a>
+            </span>
+            <span class="item">
+                <a href="./test.html">体测</a>
+            </span>
+            <span class="item">
+                <a href="./venue.html">智能场馆</a>
+            </span>
+        </div>
+    </div>
+
+    <div class="title">
+        智能硬件助力考勤签到系统，考勤云时代从现在开始
+    </div>
+
+    <section id="s1">
+        <div class="left">
+            <p class="blue">智能考勤硬件助力考勤签到</p>
+            <p class="black">智能硬件监控</p>
+            <p>智能硬件24小时监控学生考勤状况，解放教师们的监督时间，实现考勤云管理</p>
+            <p class="black">灵活调整考勤范围</p>
+            <p>合理划分校园考勤区域，便携式智能考勤硬件灵活调整考勤区域，优化学生活动范围</p>
+            <p class="black">监督升级 </p>
+            <p>扩展升级全程监督功能，支持考勤区域全程实时监督，室内室外都能完美支持</p>
+        </div>
+        <div class="right" style="text-align:center">
+            <img src="./images/sign1.png" style="max-width:500px;width: 100%;">
+        </div>
+    </section>
+
+    <section id="s2" style="background: #FBFBFB;">
+        <div class="left">
+            <img src="./images/sign2.png" style="max-width:480px;width: 100%;">
+        </div>
+        <div class="right">
+            <p class="blue">考勤签到应用于各种教学场景</p>
+            <p class="black">榜上有名</p>
+            <p>智能考勤硬件可监督学生早操考勤状况，早操场地布置智能考勤硬件，考勤数据实时查看</p>
+            <p class="black">看得见的进步</p>
+            <p>室内外课程签到，查看学生签到时间、签到次数，学期总结可导出数据</p>
+            <p class="black">签到一目了然</p>
+            <p>临时的校园活动，调整考勤区域后，活动签到信息一目了然</p>
+        </div>
+    </section>
+
+    <footer id="footer"></footer>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/prefixfree.js"></script>
+<script src="./js/footer.js"></script>
+<script>
+    $(function () {
+        $('nav').setNav('产品');
+        $('footer').footbar();
+    })
+</script>
+</html>

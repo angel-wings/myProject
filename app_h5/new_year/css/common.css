@@ -1,0 +1,362 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+*{box-sizing: border-box;}
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
+img{display:inline-block;overflow:hidden;
+    /* vertical-align:top; */
+}
+button,input[type="button"]{cursor:pointer;border:0 none;}
+textarea{word-wrap:break-word;resize:none;}  /* word-wrap for opera, resize for webkit */
+body{-webkit-user-select:none;-webkit-text-size-adjust:100%!important;font-family:'PingFang','PingFangSC-Regular';font-size: 14px;}
+input[type="number"]{-webkit-user-select:text;}
+a,button,input,img{-webkit-touch-callout:none;}/* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
+input,select,textarea{outline:none;}
+/* 去除android4.0以下 a/button/input标签被点击时产生的边框 因为边框引起了不少bug */
+a,button,input,label{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
+@media all and (-webkit-transform-3d){
+    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+    a,button,input,label{-webkit-tap-highlight-color:rgba(130,130,130,.52);outline: none;}
+}
+html,body{height:100%;margin: 0 auto;max-width: 640px;background-color: #f6f6f6;}
+a{text-decoration:none;}
+.hide{display: none!important;}
+
+.toast {
+    background: rgba(0, 0, 0, .9);
+    color: #fff;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    margin-left: -60px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 20px;
+    display: none;
+    z-index: 10000;
+}
+body{
+    height: 13.34rem;
+    background-image: url('../images/back.png');
+    background-size: 100% 100%;
+}
+
+/* 签到 */
+.sign-btn{
+    position: absolute;
+    top: 4.36rem;
+    left: .6rem;
+    width: 1.54rem;
+    height: 1.47rem;
+    z-index: 100;
+}
+.sign-btn img{
+    height: 100%;
+    width: 100%;
+}
+
+/*  */
+.sign-info{
+    width: 7.5rem;
+    position: absolute;
+    top: 4.6rem;
+    left: 0;
+    margin-bottom: .3rem;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+}
+.sign-info img{
+    width: 2rem;
+    height: .62rem;
+    margin-bottom: .2rem;
+}
+.day-red{
+    color: #ec4745;
+    text-decoration: #ec4745 underline;
+}
+
+.name-red{
+    color: #ec4745;
+    text-decoration: #ec4745 underline;
+}
+
+.red{
+    color: #ec4745;
+}
+
+/*  */
+.content-box{
+    width: 6.9rem;
+    margin: 0 .3rem;
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    overflow: hidden;
+}
+
+.content-head{
+    width: 100%;
+    padding: .2rem .3rem;
+    background-color: #ec4745;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border-radius: 10px; */
+}
+.content-head span{
+    display: inline-block;
+    width: 1.8rem;
+    height: .6rem;
+    line-height: .6rem;
+    font-size: .32rem;
+    color: #fff;
+    border-radius: .3rem;
+}
+.content-head .con-selected{
+    background-color: #fff;
+    color: #ec4745;
+}
+.content-head span:nth-child(2){
+    margin: 0 12px;
+}
+.content-main{
+    padding: .12rem .24rem;
+    height: 5.8rem;
+    font-size: 12px;
+    color: #333;
+    line-height: 18px;
+    display: none;
+    background-color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.conmain-select{
+    display: block;
+}
+
+ /* 日历 */
+
+.calendar {
+    margin: 0;
+    padding: 0;
+    background-image: url('./images/calendar.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+ul {
+    width: 100%;
+    text-align: center;
+    list-style-type: none;
+    overflow: hidden;
+}
+ul li {
+    float: left;
+    width: 14%;
+    background-color: #fff;
+    color: #595757;
+    height: .64rem;
+    font-size: .24rem;
+    line-height: 0.82rem;
+}
+ul li:last-child {
+    color: #eb4841;
+}
+ul li:first-child {
+    color: #eb4841;
+}
+.calendar .prizeimg{
+    background-image: url('../images/prize.png');
+    background-size: 92% 100%;
+    color: #fff;
+}
+.no-sign{
+    background-image: url('../images/no_sign.png');
+    background-size: 40% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+}
+.sign-in{
+    background-image: url('../images/sign_in.png');
+    background-size: 40% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+}
+
+.calendar .sign-pass{
+    background-image: url('../images/sign_pass.png');
+    background-size: 92% 100%;
+    color: #fff;
+}
+
+/* 我的奖励 */
+
+.content-main3-prize{
+    height: 4.1rem;
+    text-align: center;
+    display: none;
+}
+.content-main3-noprize{
+    height: 4.1rem;
+    text-align: center;
+}
+
+.prize-tit1{
+    line-height: 14px;
+    margin-top: .02rem;
+}
+.prize-tit2{
+    line-height: 14px;
+    margin-bottom: .02rem;
+}
+
+.prize-item{
+    width: 3.32rem;
+    height: .87rem;
+    margin: 0 auto .16rem;
+    background-image: url('../images/decorate.png');
+    background-size: 100% 100%;
+    text-align: center;
+    line-height: 1rem;
+}
+
+.no-prize-history{
+    line-height: 4rem;
+}
+
+
+/* 弹框 */
+
+.lottery-draw{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    background-color: rgba(0,0,0,0.8);
+    display: none;
+    
+}
+
+.lottery-box{
+    position: relative;
+    width: 5.6rem;
+    height: 10rem;
+    margin: 1.5rem auto;
+    background-image: url('../images/sign_back.png');
+    background-size: 100% 100%;
+    z-index: 2000;
+    text-align: center;
+}
+
+.lottery-draw-sign{
+    position: relative;
+    width: 4rem;
+    height: 6rem;
+    top: 1rem;
+    padding-top: .4rem;
+    margin: 0 auto .6rem;
+    background-color: #fef1e0;
+}
+.draw-sign-box{
+    box-sizing: content-box;
+    position: relative;
+    width: 3.2rem;
+    height: 5.2rem;
+    margin: 0 auto;
+    border: 2px solid #cc9e63;
+    
+}
+
+.draw-sign-center{
+    position: absolute;
+    left: .8rem;
+    bottom: .52rem;
+    width: 1.6rem;
+    height: 4.2rem;
+    line-height: 1.6rem;
+    font-size: .56rem;
+    border: 1px solid #cc9e63;
+    writing-mode: vertical-lr;
+    text-align: center;
+    color: #ec4745;
+}
+.draw-sign-left,
+.draw-sign-right{
+    position: absolute;
+    bottom: 0;
+    width: .8rem;
+    height: .52rem;
+    line-height: .52rem;
+    background-color: #cc9e63;
+    text-align: center;
+    color: #ec4745;
+}
+.draw-sign-left{
+    left: 0;
+}
+.draw-sign-right{
+    right: 0;
+}
+
+.sign-left-text,
+.sign-right-text{
+    position: absolute;
+    bottom: .52rem;
+    width: .8rem;
+    height: 4.2rem;
+    line-height: .8rem;
+    writing-mode: vertical-lr;
+    text-align: center;
+    color: #ec4745;
+}
+
+.sign-left-text{
+    left: 0;
+}
+.sign-right-text{
+    right: 0;
+}
+/*  */
+
+.lottery-draw-text{
+    /* text-align: left; */
+    margin-bottom: .55rem;
+    position: relative;
+    top: 1rem;
+    font-size: .24rem;
+    line-height: .4rem;
+    color: #fff1e0;
+    display: inline-block;
+}
+.text-left{
+    text-align: left;
+}
+.lottery-draw-btn{
+    position: absolute;
+    bottom: .6rem;
+    left: .8rem;
+    width: 4rem;
+    height: .6rem;
+    margin: 0 auto;
+    line-height: .6rem;
+    font-size: .24rem;
+    background-color: #fef1e0;
+    text-align: center;
+    color: #ec4745;
+}
+
+.close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .24rem;
+    z-index: 2000;
+    color: #fef1e0;
+}

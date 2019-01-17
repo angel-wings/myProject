@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.bor-box {
+            display: inline-block;
+            width: 207px;
+            height: 5px;
+            border-radius: 2px;
+            border: 1px solid #ddd;
+        }
+
+        div.back-box {
+            height: 5px;
+            background: linear-gradient(-90deg, rgba(15, 214, 146, 1) 0%, rgba(255, 220, 112, 1) 100%);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .white-box {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            display: inline-block;
+            background-color: #fff;
+            width: 197px;
+            height: 3px;
+        }
+
+        div.back1 {
+            width: 150px;
+        }
+
+        div.back2 {
+            width: 180px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bor-box">
+        <div class="back-box len-199">
+            <span class="white-box"></span>
+        </div>
+    </div>
+    <br>
+    <div>
+        1111
+    </div>
+    <div class="bor-box">
+        <div class="back2 back-box">
+            <span class="white-box"></span>
+        </div>
+    </div>
+</body>
+
+</html>

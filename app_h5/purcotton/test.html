@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title></title>
+    <style>
+        .test {
+            height: 200px;
+            width: 200px;
+            border: 1px solid #333;
+        }
+
+        .ttt2{
+            height: 100px;
+            width: 100px;
+            border: 4px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test">
+
+    </div>
+    <div class="ttt2">
+
+    </div>
+</body>
+<script>
+    var scale = 1;
+    if (window.devicePixelRatio == 2) {
+        scale = 0.5;
+    } else if (window.devicePixelRatio == 3) {
+        scale = 1 / 3;
+    }
+
+    var metaEl = document.createElement('meta');
+
+    metaEl.setAttribute('name', 'viewport');
+    metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+    
+    if (document.documentElement.firstElementChild) {
+        document.documentElement.firstElementChild.appendChild(metaEl);
+    } else {
+        var wrap = doc.createElement('div');
+        wrap.appendChild(metaEl);
+        documen.write(wrap.innerHTML);
+    }
+
+    console.log(Element.prototype)
+
+</script>
+
+</html>

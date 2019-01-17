@@ -1,0 +1,23 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+*{box-sizing: border-box;}
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
+img{display:inline-block;overflow:hidden;
+    /* vertical-align:top; */
+}
+button,input[type="button"]{cursor:pointer;border:0 none;}
+textarea{word-wrap:break-word;resize:none;}  /* word-wrap for opera, resize for webkit */
+body{-webkit-user-select:none;-webkit-text-size-adjust:100%!important;font-family:'PingFang','PingFangSC-Regular';font-size: 12px;}
+input[type="number"]{-webkit-user-select:text;}
+a,button,input,img{-webkit-touch-callout:none;}/* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
+input,select,textarea{outline:none;}
+/* 去除android4.0以下 a/button/input标签被点击时产生的边框 因为边框引起了不少bug */
+a,button,input,label{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
+@media all and (-webkit-transform-3d){
+    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+    a,button,input,label{-webkit-tap-highlight-color:rgba(130,130,130,.52);outline: none;}
+}
+html,body{height:100%;margin: 0 auto;max-width: 640px;background-color: #f6f6f6;}
+a{text-decoration:none;}

@@ -1,9 +1,5 @@
-//public.js  获取公共参数
-
-// var domain = 'http://winter.gxapp.iydsj.com'; //线上
-// var domain = 'http://test.winter.gxapp.iydsj.com'; //185
-var domain = 'http://pre.winter.gxapp.iydsj.com'; //187
-// var domain = 'http://192.168.0.95:18099';
+//public.js  
+var domain = 'http://winter.gxapp.iydsj.com'; //线上
 
 /**
  * 获取个人信息基础方法

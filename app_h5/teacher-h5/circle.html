@@ -373,7 +373,7 @@
             }
             $('.level-img').attr('src', imgurl);
             $('.test-level').text(level);
-            $('.test-point').text((testObj.totalScore).toFixed(2) + '分');
+            $('.test-point').text((testObj.totalScore / 100).toFixed(2) + '分');
             if (testObj.totalScore == -99999) {
                 $('.test-point').text('未完成');
             }

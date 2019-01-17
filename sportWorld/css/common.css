@@ -1,0 +1,160 @@
+*{
+    box-sizing: border-box;
+}
+html,body,p,img {
+    margin: 0;
+    padding: 0;
+    font-family: "PingFangSC-Regular";
+}  
+body{
+    min-width: 920px;
+}   
+a,a:hover,a:active,a:visited,a:link{
+    color: #202020;
+    text-decoration: none;
+} 
+img {
+    border:0;
+}
+.f-right{
+    float: right;
+}
+.f-left{
+    float: left;
+}
+.banner {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 18px;
+    font-family: 'PingFangSC-Medium';
+    color: #FFFFFF;
+}
+
+/* 头部 */
+nav {
+    height: 60px;
+    font-family: "PingFangSC-Medium";
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.08);
+}
+
+.navbar ul {
+    height: 60px;
+    margin: 0;
+    line-height: 60px;
+    display: inline-block;
+}
+
+.navbar li {
+    height: 60px;
+    margin: 0;
+    margin-right: 32px;
+    line-height: 60px;
+    list-style: none;
+    font-size: 12px;
+    color: #202020;
+    display: inline-block;
+}
+
+.navbar li.active a{
+    color: #0398FF;
+}
+
+div.brand {
+    height: 60px;
+    line-height: 60px;
+    margin-left: 15%;
+    font-size: 12px;
+    color: #202020;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img.logo {
+    width: 140px;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.brand-name {
+    font-size: 36px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 33px;
+}
+
+
+div.navbar {
+    height: 60px;
+    line-height: 60px;
+    float: right;
+    margin-right: 10%;
+}
+
+a.navbar-btn {
+    display: inline-block;
+    background: #0398FF;
+    border-radius: 24px;
+    width: 90px;
+    height: 24px;
+    line-height: 24px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* 底部 */
+#footer {
+    width: 100%;
+    height: 260px;
+    background-color: #2D2D45;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+#footer a{
+    color: #ffffff;
+}
+
+.footer-contain {
+    width: 80%;
+    min-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    line-height: 40px;
+    padding-top: 30px;
+    font-size: 0;
+    overflow: hidden;
+}
+
+.footer-item {
+    float: left;
+    width: 33%;
+    font-size: 12px;
+}
+
+.footer-item3,
+.footer-cen {
+    text-align: right;
+}
+
+.footer-item>img {
+    width: 80px;
+    height: 80px;
+}
+
+.footer-cen {
+    height: 35px;
+    line-height: 35px;
+}
+
+.footer-bottom {
+    box-sizing: border-box;
+    border-top: 1px solid #FFFFFF;
+    text-align: center;
+    line-height: 90px;
+}

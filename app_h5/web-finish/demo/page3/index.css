@@ -1,0 +1,131 @@
+.clear-float{
+    overflow: hidden;
+}
+
+.f-left{
+    float: left;
+}
+
+.f-right{
+    float: right;
+}
+
+.word-white-14{
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.5;
+}
+
+.enroll-major{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.enroll-major .icon-c-lt{
+    top: 6px;
+}
+.enroll-major-title{
+    padding-left: 38px;
+    font-size:14px;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(65,190,255,1);
+    line-height:30px;
+}
+
+.online-study{
+    float: right;
+    padding-right: 50px;
+    color: #ddd;
+}
+/*  */
+
+.ranking{
+    padding-bottom: 30px;
+    padding-left: 30px;
+    line-height: 30px;
+    color: #fff;
+}
+
+.ranking-item{
+    margin-bottom: 12px;
+}
+
+.ranking-item span:last-child{
+    color: #00E4FF;
+    font-size:16px;
+    font-family:DINPro-Medium;
+    font-weight:500;
+}
+
+.now-class-data .ranking-item span:last-child{
+    color: #FFC548
+}
+
+.ranking-item img{
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.rank-level{
+    margin-right: 12px;
+    font-size:20px;
+    font-family:FuturaLT;
+    font-weight:400;
+    color:rgba(90,105,205,1);
+    line-height:24px;
+}
+
+.rank-item-name{
+    display: inline-block;
+    width: 200px;
+    opacity:0.5;
+}
+
+/* 彩色进度条 */
+
+div.bor-box {
+    display: inline-block;
+    width: 207px;
+    height: 5px;
+    border-radius: 2px;
+    border: 1px solid #111552;
+}
+
+div.back-box {
+    height: 5px;
+    background:linear-gradient(90deg,rgba(0,100,255,1) 0%,rgba(0,240,255,1) 100%);
+    border-radius: 2px;
+    position: relative;
+}
+
+.now-class-data div.back-box{
+    background: linear-gradient(-90deg, rgba(15, 214, 146, 1) 0%, rgba(255, 220, 112, 1) 100%);
+}
+
+.white-box {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    display: inline-block;
+    background-color: #010955;
+    width: 207px;
+    height: 3px;
+}
+
+.len-199{
+    width: 199px;
+}
+.len-171{
+    width: 171px;
+}
+.len-49{
+    width: 49px;
+}
+.len-111{
+    width: 111px;
+}
+.len-81{
+    width: 81px;
+}

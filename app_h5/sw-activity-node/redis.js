@@ -20,8 +20,8 @@ let redis = require("redis"),
     RDS_OPS = { auth_pass: "RT75678jhgJKKPK" };
 
 module.exports = () => {
-    // client1 = redis.createClient(RDS_PROT, RDS_HOST, RDS_OPS);
-    // return { client1 };
+    // client4 = redis.createClient(RDS_PROT, RDS_HOST, RDS_OPS);
+    // return { client4 };
 
     client1 = redis.createClient(RDS_PROT, RDS_HOST1, RDS_OPS);
     client2 = redis.createClient(RDS_PROT, RDS_HOST2, RDS_OPS);

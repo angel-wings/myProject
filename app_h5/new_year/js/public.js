@@ -1,6 +1,6 @@
 //public.js 
-var domain = 'http://192.168.0.130:18098'; // 本机
-// var domain = 'http://test.activity.node.iydsj.com/'; // 185
+// var domain = 'http://192.168.0.130:18098'; // 本机
+var domain = 'http://activity.node.iydsj.com/'; // 185
 
 /**
  * 获取个人信息基础方法

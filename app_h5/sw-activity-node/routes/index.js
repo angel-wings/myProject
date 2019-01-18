@@ -10,6 +10,10 @@ function random(ran) {
     return Math.floor(Math.random() * ran);
 }
 
+let nowTime = new Date().getTime();
+let endTime = new Date('2019-2-17 23:59:59').getTime();
+let startTime = new Date('2019-1-21 00:00:00').getTime();
+
 //用户抽奖
 //prizeType,7:代表7天奖品；15:15天奖品；21:21天奖品
 function draw(prizeType, num) {
@@ -112,9 +116,9 @@ function getSignHistory(uid) {
         }).then(function (result) {
             let signHistory = [];
             result.forEach(ele => {
-                 signHistory.push({
-                     signTime: new Date(ele.signTime).format('yyyy/MM/dd hh:mm:ss')
-                 })
+                signHistory.push({
+                    signTime: new Date(ele.signTime).format('yyyy/MM/dd hh:mm:ss')
+                })
             })
             resolve(signHistory);
         }).catch(function (err) {
@@ -144,7 +148,24 @@ module.exports = (app) => {
         let uid = req.headers.uid || req.query.uid;
         redis().client4.on("connect", () => {
             redis().client4.hgetall("uid_" + uid, (err, response) => {
-                //redis不存在用户签到信息，存入最新信息
+                //redis不存在用户签到信息，存入最新信息 
+
+                //校验活动时间
+                if (nowTime > endTime) {
+                    return res.json({
+                        data: null,
+                        message: "活动已结束",
+                        error: -10000
+                    })
+                }
+                if (nowTime < startTime) {
+                    return res.json({
+                        data: null,
+                        message: "活动未开始",
+                        error: -10000
+                    })
+                }
+
                 if (!response) {
                     redis().client4.hmset("uid_" + uid, {
                         sign_time: new Date().getTime(),
@@ -224,12 +245,13 @@ module.exports = (app) => {
             let lastedDays = await getLastedDays(uid);
             let signHistory = await getSignHistory(uid);
             let prizeList = await getPrizeList(uid);
-
+            let todayTime = new Date().format('yyyy/MM/dd hh:mm:ss');
             return res.json({
                 data: {
                     lastedDays,
                     signHistory,
-                    prizeList
+                    prizeList,
+                    todayTime
                 },
                 message: "请求成功",
                 error: 10000

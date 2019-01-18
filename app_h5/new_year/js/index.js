@@ -1,31 +1,17 @@
 $(function () {
     FastClick.attach(document.body);
-    var now = new Date().getDate();
+    var todayTime = '';
     var isNowSign = false;
-
     var index = 0;  // 日历表的索引重置
-    // if (now > 27) {
-    //     index = now - 27;
-    // } else {
-    //     index = now + 4;
-    // }
 
-
-    // ////////// 重置日历表------（修改）  ////////////
-
-    if (now > 13) {
-        index = now - 13;
-    } else {
-        index = now * 1 + 18;
-    }
-
+    // 日历表测试用
     caldateFormat();
     function caldateFormat() {
         var len = $('.caldate-ul li').length;
         for (var i = 0; i < len; i++) {
             var lidate = $('.caldate-ul li').eq(i).text();
             if (lidate) {
-                var danum = lidate * 1 + 17 > 31 ? (lidate * 1 + 17 - 31) : (lidate * 1 + 17);
+                var danum = lidate * 1 + 24 > 31 ? (lidate * 1 + 24 - 31) : (lidate * 1 + 24);
                 $('.caldate-ul li').eq(i).text(danum)
             }
         }
@@ -34,7 +20,7 @@ $(function () {
     connectWebViewJavascriptBridge(function () {
         getUserInfo(function (arr) {
             $('.name-red').text(arr.name)
-        }, ['name', 'uid'])
+        }, ['name'])
 
         setJfcjPrize(function (res) {
             // 页面访问的打点
@@ -62,7 +48,7 @@ $(function () {
 
     // 切换
     $('.content-head span').click(function () {
-        let spanInde = $(this).index();
+        var spanInde = $(this).index();
         $(this).addClass('con-selected').siblings().removeClass('con-selected');
 
         $('.content-main').eq(spanInde).addClass('conmain-select').siblings().removeClass('conmain-select');
@@ -78,20 +64,21 @@ $(function () {
         }
 
         // 对签到时间列表数据整理
-        let prod = [];
+        var prod = [];
         if (signInfo.signHistory && signInfo.signHistory.length) {
 
             signInfo.signHistory.forEach(function (item) {
-                if (new Date(item.signTime).getDate() * 1 == now) {
+                if (new Date(item.signTime).getDate() * 1 == new Date(todayTime).getDate() * 1) {
                     // 今日已签到
                     isNowSign = true;
+                    $('.caldate-ul li').eq(index).removeClass().addClass('sign-in');
                 }
                 prod.push(new Date(new Date(item.signTime).format('yyyy/MM/dd')).getDate() * 1);
             })
         }
         // 渲染未签到日期
         for (var i = 0; i < index; i++) {
-            let nosignDays = $('.caldate-ul li').eq(i);
+            var nosignDays = $('.caldate-ul li').eq(i);
             if (nosignDays.text() * 1 && prod.indexOf(nosignDays.text() * 1) < 0) {
                 nosignDays.removeClass().addClass('no-sign')
             }
@@ -99,7 +86,7 @@ $(function () {
 
         // 渲染签到的日期
         for (var j = 0; j < index + 1; j++) {
-            let signDays = $('.caldate-ul li').eq(j);
+            var signDays = $('.caldate-ul li').eq(j);
             if (signDays.text() * 1 && prod.indexOf(signDays.text() * 1) >= 0) {
                 signDays.removeClass().addClass('sign-in')
             }
@@ -111,7 +98,7 @@ $(function () {
             lastedDays = lastedDays * 1 + 1;
         }
         // 奖励最后一天的索引------（修改）
-        var lastIndex = 25;
+        var lastIndex = 22;
         if (lastedDays < 8) {
             if (index + 7 - lastedDays < lastIndex) {
                 $('.caldate-ul li').eq(index + 7 - lastedDays).removeClass().addClass('prizeimg');
@@ -148,13 +135,13 @@ $(function () {
                 // }
 
                 ////////////////////////// 重置------（修改）
-                if (ddd > 13) {
-                    ddd = ddd - 13;
+                if (ddd > 20) {
+                    ddd = ddd - 20;
                 } else {
-                    ddd = ddd + 18;
+                    ddd = ddd + 11;
                 }
                 // 开始计算签到时间的重置------（修改）
-                if (ddd > 3) {
+                if (ddd > 0) {
                     $('.caldate-ul li').eq(ddd).removeClass().addClass('sign-pass');
                 }
 
@@ -183,11 +170,36 @@ $(function () {
             'GET',
             '/h5/activity/getSignInfo',
             function (data) {
+
                 if (data.error == 10000) {
-                    // 
                     if (data.data) {
-                        SignDateFormat(data.data);
+
                         $('.day-red').text(data.data.lastedDays);
+
+                        todayTime = data.data.todayTime;
+                        // ////////// 重置日历表------（修改）  ////////////
+                        // // if (Date(todayTime).getDate() * 1 > 27) {
+                        //     index = Date(todayTime).getDate() * 1 - 27;
+                        // } else {
+                        //     index = Date(todayTime).getDate() * 1 + 4;
+                        // }
+
+                        if (new Date(todayTime).getDate() * 1 > 20) {
+                            index = new Date(todayTime).getDate() * 1 - 20;
+                        } else {
+                            index = new Date(todayTime).getDate() * 1 + 11;
+                        }
+
+                        index = index > 21 ? 21 : index;
+
+                        // 重置昨天的日历更新今天的日历-----修改
+                        if (index - 1 > 0) {
+                            $('.caldate-ul li').eq(index - 1).text(new Date(todayTime).getDate() * 1 - 1);
+                        }
+
+                        $('.caldate-ul li').eq(index).text('今');
+                        SignDateFormat(data.data);
+
                         // 我的奖品列表
                         var myPrize = data.data.prizeList;
                         var myValuablePrize = [];
@@ -214,7 +226,7 @@ $(function () {
                     }
 
                 } else {
-                    toast('网络异常');
+                    toast(data.message);
                 }
             },
             function (err) {
@@ -248,7 +260,7 @@ $(function () {
                             if (item.index == index) {
                                 var html = '<p>宜：' + item.good + '</p><p>忌：' + item.bad + '</p>'
                                 $('.lottery-draw-text').html(html).addClass('text-left');
-                                $('.lottery-draw-btn').text(new Date().format('yyyy年MM月dd日') + '（' + item.lunarDate + '）');
+                                $('.lottery-draw-btn').text(new Date(todayTime).format('yyyy年MM月dd日') + '（' + item.lunarDate + '）');
                             }
                         })
                     } else {
@@ -265,7 +277,7 @@ $(function () {
                                 $('.lottery-draw-text').html(html);
                             }
                         })
-                        $('.lottery-draw-btn').text(new Date().format('yyyy年MM月dd日'));
+                        $('.lottery-draw-btn').text(new Date(todayTime).format('yyyy年MM月dd日'));
                     }
                     getinventory();
                     // 显示弹框

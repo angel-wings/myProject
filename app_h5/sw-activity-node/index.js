@@ -51,10 +51,6 @@ app.all("*", function (req, res, next) {
 
     let uid = req.headers.uid;
     let token = req.headers.token;
-    let nowTime = new Date().getTime();
-    let endTime = new Date('2019-2-17 23:59:59').getTime();
-    let startTime = new Date('2019-1-16 00:00:00').getTime();
-    //校验token
 
     let getToken = function (cli) {
         return new Promise(resolve => {
@@ -74,22 +70,6 @@ app.all("*", function (req, res, next) {
     }
     volidToken().then(result => {
         if (result) {
-            // 有token 校验活动时间
-            if (nowTime > endTime) {
-                return res.json({
-                    data: null,
-                    message: "活动已结束",
-                    error: -10000
-                })
-            }
-            if (nowTime < startTime) {
-                return res.json({
-                    data: null,
-                    message: "活动未开始",
-                    error: -10000
-                })
-            }
-
             next();
         } else {
             return res.json({
@@ -112,7 +92,7 @@ app.use(function (req, res, next) {
 });
 
 
-app.listen(18098, () => {
+app.listen(18888, () => {
     console.log("service is running...");
 })
 

@@ -1,4 +1,5 @@
-let signData = [
+
+var signData = [
     {
         index: "1",
         lunarDate: "腊月二十三",

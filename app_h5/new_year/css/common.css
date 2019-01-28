@@ -276,14 +276,17 @@ ul li:first-child {
 
 .draw-sign-center{
     position: absolute;
-    left: .8rem;
+    left: .76rem;
     bottom: .52rem;
     width: 1.6rem;
     height: 4.2rem;
     line-height: 1.6rem;
     font-size: .56rem;
     border: 1px solid #cc9e63;
-    writing-mode: vertical-lr;
+    /* writing-mode: tb-rl; */
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    *writing-mode: tb-rl;
     text-align: center;
     color: #ec4745;
 }
@@ -312,7 +315,10 @@ ul li:first-child {
     width: .8rem;
     height: 4.2rem;
     line-height: .8rem;
-    writing-mode: vertical-lr;
+    /* writing-mode: tb-rl; */
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    *writing-mode: tb-rl;
     text-align: center;
     color: #ec4745;
 }

@@ -4,19 +4,6 @@ $(function () {
     var isNowSign = false;
     var index = 0;  // 日历表的索引重置
 
-    // 日历表测试用
-    caldateFormat();
-    function caldateFormat() {
-        var len = $('.caldate-ul li').length;
-        for (var i = 0; i < len; i++) {
-            var lidate = $('.caldate-ul li').eq(i).text();
-            if (lidate) {
-                var danum = lidate * 1 + 24 > 31 ? (lidate * 1 + 24 - 31) : (lidate * 1 + 24);
-                $('.caldate-ul li').eq(i).text(danum)
-            }
-        }
-    }
-
     connectWebViewJavascriptBridge(function () {
         getUserInfo(function (arr) {
             $('.name-red').text(arr.name)
@@ -126,19 +113,19 @@ $(function () {
         // 已领取奖品展示
         var prizeList = signInfo.prizeList || [];
         if (prizeList && prizeList.length) {
-            prizeList.forEach(function (item) {
-                var ddd = new Date(item.getPrizeTime).getDate() * 1;
-                // if (ddd > 27) {
-                //     ddd = ddd - 27;
-                // } else {
-                //     ddd = ddd + 4;
-                // }
 
-                ////////////////////////// 重置------（修改）
-                if (ddd > 20) {
-                    ddd = ddd - 20;
+            prizeList.forEach(function (item) {
+                var fortime = '';
+                if (item.getPrizeTime.indexOf('-') > -1) {
+                    fortime = item.getPrizeTime.replace(/-/g, "/");
                 } else {
-                    ddd = ddd + 11;
+                    fortime = item.getPrizeTime;
+                }
+                var ddd = new Date(fortime).getDate() * 1;
+                if (ddd > 27) {
+                    ddd = ddd - 27;
+                } else {
+                    ddd = ddd + 4;
                 }
                 // 开始计算签到时间的重置------（修改）
                 if (ddd > 0) {
@@ -175,19 +162,12 @@ $(function () {
                     if (data.data) {
 
                         $('.day-red').text(data.data.lastedDays);
-
                         todayTime = data.data.todayTime;
                         // ////////// 重置日历表------（修改）  ////////////
-                        // // if (Date(todayTime).getDate() * 1 > 27) {
-                        //     index = Date(todayTime).getDate() * 1 - 27;
-                        // } else {
-                        //     index = Date(todayTime).getDate() * 1 + 4;
-                        // }
-
-                        if (new Date(todayTime).getDate() * 1 > 20) {
-                            index = new Date(todayTime).getDate() * 1 - 20;
+                        if (new Date(todayTime).getDate() * 1 > 27) {
+                            index = new Date(todayTime).getDate() * 1 - 27;
                         } else {
-                            index = new Date(todayTime).getDate() * 1 + 11;
+                            index = new Date(todayTime).getDate() * 1 + 4;
                         }
 
                         index = index > 21 ? 21 : index;

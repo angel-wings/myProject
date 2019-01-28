@@ -46,25 +46,47 @@ app.all("*", function (req, res, next) {
     //跨域允许的请求方式 
     res.header("Access-Control-Allow-Methods", "DELETE,PUT,POST,GET,OPTIONS");
     if (req.method.toLowerCase() == 'options') {
-        return res.send(200);  //让options尝试请求快速结束
+        return res.sendStatus(200);  //让options尝试请求快速结束
     }
 
     let uid = req.headers.uid;
     let token = req.headers.token;
 
     let getToken = function (cli) {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
+            if (!redis()[cli]) reject("redis连接错误");
             redis()[cli].get("swc_user_token_" + uid, (err, response) => {
-                resolve(response)
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(response)
+                }
             })
         })
     }
 
     let volidToken = async function () {
-        let token1 = await getToken("client1");
-        let token2 = await getToken("client2");
-        let token3 = await getToken("client3");
-        let token4 = await getToken("client4");
+        let token1, token2, token3, token4;
+        // await getToken("client4").then((response) => {
+        //     token1 = response;
+        // }).catch((err) => { 
+        //     console.log(err)
+        // });
+        // await getToken("client4").then((response) => {
+        //     token2 = response;
+        // }).catch((err) => { 
+        //     console.log(err)
+        // });
+        // await getToken("client4").then((response) => {
+        //     token3 = response;
+        // }).catch((err) => { 
+        //     console.log(err)
+        // });
+        await getToken("client4").then((response) => {
+            token4 = response;
+        }).catch((err) => { 
+            console.log(err)
+        });
         let tokens = [token1, token2, token3, token4];
         return tokens.includes(token);
     }

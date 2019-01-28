@@ -10,14 +10,13 @@ function random(ran) {
     return Math.floor(Math.random() * ran);
 }
 
-let nowTime = new Date().getTime();
 let endTime = new Date('2019-2-17 23:59:59').getTime();
-let startTime = new Date('2019-1-21 00:00:00').getTime();
+let startTime = new Date('2019-1-28 00:00:00').getTime();
 
 //用户抽奖
 //prizeType,7:代表7天奖品；15:15天奖品；21:21天奖品
 function draw(prizeType, num) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         let prizeText = {
             $7: ["百病不侵", "走桃花运", "新开发财", "和和美美", "心想事成"],
             $15: ["2019锦鲤附体", "2019万事如意"],
@@ -25,8 +24,7 @@ function draw(prizeType, num) {
             p7: ["爱奇艺月度会员"],
             p15: ["50 元话费", "Vivo 耳机"],
             p21: ["天猫魔盒"]
-        }
-
+        };
         redis().client4.get("prize_" + prizeType, (err, prizeNum) => {
             let prizeObj;
 
@@ -72,8 +70,12 @@ function draw(prizeType, num) {
                             redis().client4.set("prize_" + prizeType, prizeNum * 1 + 1)
                         }
                     })
-                    .exec(() => {
-                        resolve(prizeObj);
+                    .exec((err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(prizeObj);
+                        }
                     });
             }
         })
@@ -98,13 +100,15 @@ function getLastedDays(uid) {
     return new Promise((resolve, reject) => {
         redis().client4.on("connect", () => {
             redis().client4.hgetall("uid_" + uid, (err, response) => {
-                let lastedDays = response ? response.lastedDays : 0;
-                resolve(lastedDays);
+                if (err) {
+                    reject(err)
+                } else {
+                    let lastedDays = response ? response.lastedDays : 0;
+                    resolve(lastedDays);
+                }
             })
         });
-
     })
-
 }
 
 //获取签到记录
@@ -123,6 +127,7 @@ function getSignHistory(uid) {
             resolve(signHistory);
         }).catch(function (err) {
             console.log("发生错误：" + err);
+            reject(err)
         });
     })
 }
@@ -138,6 +143,7 @@ function getPrizeList(uid) {
             resolve(prizeList);
         }).catch(function (err) {
             console.log("发生错误：" + err);
+            reject(err)
         });
     })
 }
@@ -149,18 +155,18 @@ module.exports = (app) => {
         redis().client4.on("connect", () => {
             redis().client4.hgetall("uid_" + uid, (err, response) => {
                 //redis不存在用户签到信息，存入最新信息 
-
+                let nowTime = new Date().getTime();
                 //校验活动时间
-                if (nowTime > endTime) {
+                if (nowTime * 1 > endTime * 1) {
                     return res.json({
                         data: null,
                         message: "活动已结束",
                         error: -10000
                     })
                 }
-                if (nowTime < startTime) {
+                if (nowTime * 1 < startTime * 1) {
                     return res.json({
-                        data: null,
+                        data: { nowTime, startTime, endTime },
                         message: "活动未开始",
                         error: -10000
                     })
@@ -240,12 +246,24 @@ module.exports = (app) => {
     //获取用户签到信息
     app.get("/h5/activity/getSignInfo", (req, res) => {
         let uid = req.headers.uid || req.query.uid;
-
         let getSignInfo = async function () {
-            let lastedDays = await getLastedDays(uid);
-            let signHistory = await getSignHistory(uid);
-            let prizeList = await getPrizeList(uid);
+            let lastedDays, signHistory, prizeList = [];
             let todayTime = new Date().format('yyyy/MM/dd hh:mm:ss');
+
+            await getLastedDays(uid).then(result => {
+                lastedDays = result;
+            }).catch(() => { });
+            await getSignHistory(uid).then(result => {
+                signHistory = result;
+            }).catch(() => { });
+            await getPrizeList(uid).then(result => {
+                result.forEach(ele => {
+                    let fortime = new Date(ele.getPrizeTime).format('yyyy/MM/dd hh:mm:ss');
+                    ele.getPrizeTime = fortime;
+                    prizeList.push(ele);
+                })
+            }).catch(() => { });
+
             return res.json({
                 data: {
                     lastedDays,

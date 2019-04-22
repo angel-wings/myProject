@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    border: 0;
+    vertical-align: middle
+}
+
+body {
+    display: none;
+    font-size: .875rem;
+    color: #707070;
+    padding-bottom: .875rem;
+    background-color: #f6f6f6;
+    font-family: "PingFangSC-Regular";
+}
+
+#header{
+    height: 10.125rem;
+    width: 100%;
+    color: #fff;
+    background-size: 100%;
+}
+
+.excellent{
+    background-image: url(../images/excellent.png);
+}
+
+.good{
+    background-image: url(../images/good.png);
+}
+
+.pass{
+    background-image: url(../images/pass.png);
+}
+
+.nopass{
+    background-image: url(../images/nopass.png);
+}
+
+.fail{
+    background-image: url(../images/fail.png);
+}
+
+.scoreBox,
+.levelBox{
+    font-size: .875rem;    
+}
+
+.testName{
+    position: absolute;
+    left: 1rem;
+    top: 1.25rem;
+    font-size: .875rem;
+    color: #FFFFFF;
+    line-height: 1rem;
+}
+
+.tot{
+    position: absolute;
+    left: 1rem;
+    top: 4.5rem;
+}
+
+.totalScore{
+    position: absolute;
+    left:  4.625rem;
+    top: 3.25rem;
+    font-size: 2.25rem;
+}
+
+.scoreText{
+    position: absolute;
+    left: 7rem;
+    top: 4.6rem;
+}
+
+.scoreTextBig{
+    left: 8.2rem;
+}
+
+.totalLevel{
+    position: absolute;
+    left: 1rem;
+    top: 6.25rem;
+}
+
+.testScore{
+    position: absolute;
+    left: 1rem;
+    top: 7.75rem;
+}
+
+.extraScore{
+    position: absolute;
+    left: 9.15625rem;
+    top: 7.75rem;
+}
+
+.title{
+    color: #b2b2b2;
+    font-size: .875rem;
+    display: inline-block;
+}
+
+.headinfo {
+    padding: .75rem 1rem;
+    background-color: #fff;
+}
+
+.imginf {
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    line-height: 1.875rem;
+}
+
+.imginf img {
+    float: left;
+    width: 3.75rem;
+    height: 3.75rem;
+    margin-right: .75rem;
+    border-radius: 50%;
+}
+
+.name {
+    display: inline-block;
+    font-size: 1rem;
+    color: #202020;
+}
+
+.mr{
+    margin-right: 1.25rem;
+}
+
+.headinfo p {
+    line-height: 1.25rem;
+    margin-bottom: .3125rem;
+}
+
+.info {
+    color: #001400;
+}
+
+div#content {
+    background: #fff;
+    height: 23.125rem;
+    margin-top: .75rem;
+    padding: 0 .5rem;
+}
+
+.noFinish{
+    background: #F6F6F6;
+}
+
+div#content section {
+    height: 2.8125rem;
+    line-height: 2.8125rem;
+    padding: 0 .5rem;
+    z-index: 100;
+    box-sizing: border-box;
+    color: #202020;   
+    font-size: .875rem;     
+}
+
+span.type {
+    width: 25%;
+    display: inline-block;
+    z-index: 10;
+}
+
+span.value {
+    width: 30%;
+    display: inline-block;
+    z-index: 10;
+}
+
+span.point {
+    display: inline-block;
+    width: 25%;
+    z-index: 10;
+}
+
+img.icon {
+    width: .5rem;
+    margin-left: .3125rem;
+}
+
+#BMI{
+    position: relative;
+}
+
+div#detail {
+    box-sizing: border-box;
+    width: 8.25rem;
+    height: 5.5rem;
+    position: absolute;
+    left: 25%;
+    top: 2.3rem;
+    background: #ffffff;
+    z-index: 1000;
+    font-size: .875rem;
+    color: #333333;
+    border-radius: .25rem;
+    background-image: url(../images/det.png);
+    background-size: 100% 100%;
+}
+
+div#detail>div {
+    display: inline-block;
+    width: 100%;
+    height: 2.75rem;
+    line-height: 2.75rem;
+    z-index: 1000;
+    padding-left: .75rem;
+}
+
+div.more{
+    height: 2.75rem;
+    line-height: 2.75rem;
+    background: #FFFFFF;
+    text-align: center;
+    border-top: solid 1px #ddd;
+}
+
+div.more img{
+    width: .75rem;
+    height: .75rem;
+}
+
+.toast {
+    background: rgba(0, 0, 20, .8);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 7.5rem;
+    height: 2.5rem;
+    font-size: .875rem;
+    margin-left: -3.75rem;
+    text-align: center;
+    line-height: 2.5rem;
+    border-radius: 1.25rem;
+    display: none;
+}

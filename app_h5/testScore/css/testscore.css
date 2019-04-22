@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    background: #f6f6f6;
+    padding: .5625rem .75rem;
+    font-family: arial,'PingFang';
+    display: none;
+    border-top: 1px solid #DDDDDD;
+}
+
+section {
+    height: 4.1875rem;
+    background: #ffffff;
+    font-size: .75rem;
+    color: #202020;
+    position: relative;
+    border-radius: .5rem;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.10), 0 0 8px 0 rgba(0,0,0,0.08);
+    margin-bottom: .5rem;
+}
+
+span.testName {
+    font-size: .875rem;
+    position: absolute;
+    top: .8125rem;
+    left: 1rem;
+}
+
+span.level {
+    position: absolute;
+    top: .8125rem;
+    right: 1rem;
+    text-align: right;
+}
+
+span.score{
+    position: absolute;
+    bottom: .84375rem;
+    right: 1rem;
+    color: #707070;
+    text-align: right;
+}
+
+span.time {
+    position: absolute;
+    bottom: .84375rem;
+    left: 1rem;
+    color: #707070;
+    width: 11.25rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;/*禁止自动换行*/
+    overflow: hidden;
+}
+
+.nofinish{
+    color: #707070;    
+}
+
+.nopass{
+    color: #ff5151;
+}
+
+.pass{
+    color: #ff9220;
+}
+
+.good{
+    color: #73c6ff;
+}
+
+.excellent{
+    color: #33c4c2;
+}
+
+div#noInfo {
+    text-align: center;
+    padding-top: 5rem;
+}
+
+img.testIcon {
+    height: 1.875rem;
+}
+
+span.tips {
+    display: inline-block;
+    font-size: .75rem;
+    color: #73C6FF;
+    margin-top: .75rem;
+}
+
+.toast {
+    background: rgba(0, 0, 20, .8);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 7.5rem;
+    height: 2.5rem;
+    font-size: .875rem;
+    margin-left: -3.75rem;
+    text-align: center;
+    line-height: 2.5rem;
+    border-radius: 1.25rem;
+    display: none;
+}

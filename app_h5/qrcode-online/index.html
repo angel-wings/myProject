@@ -1,0 +1,265 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="beibei">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>生成二维码</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+        }
+
+        .inputBox {
+            padding: 10px;
+            font-size: 14px;
+            color: #707070;
+            text-align: center;
+        }
+
+        #box {
+            width: 960px;
+            height: 820px;
+            margin: 0 auto;
+            /* padding-top: 20px;
+            padding-bottom: 20px; */
+            background: #fff;
+        }
+
+        #qrcode0,
+        #qrcode1,
+        #qrcode2,
+        #qrcode3,
+        #qrcode4,
+        #qrcode5 {
+            width: 256px;
+            height: 320px;
+            text-align: center;
+            position: relative;
+            background: #fff;
+            margin: 30px;
+            display: inline-block;
+        }
+
+        .name {
+            position: absolute;
+            width: 90px;
+            height: 40px;
+            line-height: 40px;
+            background: #fff;
+            font-weight: bold;
+            color: #000;
+            font-size: 20px;
+            text-align: center;
+            left: 83px;
+            top: 108px;
+        }
+
+        .school {
+            color: #000;
+            font-size: 14px;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            bottom: 30px;
+            width: 256px;
+            height: 30px;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        .className {
+            color: #000;
+            font-size: 14px;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+            width: 256px;
+            height: 30px;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        input {
+            cursor: pointer;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 4px;
+        }
+
+        span.btn {
+            display: inline-block;
+            margin-left: 10px;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4px;
+            color: #fff;
+            background: #409eff;
+            border-color: #409eff;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="inputBox">
+        <input type="text" name="schoolId" placeholder="请输入学校id"><br>
+        <input type="text" name="classId" placeholder="请输入班级id" style="margin-top:15px;margin-bottom: 15px;"><br>
+        <span class="btn">搜索并生成二维码</span>
+    </div>
+    <div id="box">
+        <div id="qrcode0">
+            <div class="name"></div>
+            <div class="school"></div>
+            <div class="className"></div>
+        </div>
+        <div id="qrcode1">
+            <div class="name"></div>
+            <div class="school"></div>
+            <div class="className"></div>
+        </div>
+        <div id="qrcode2">
+            <div class="name"></div>
+            <div class="school"></div>
+            <div class="className"></div>
+        </div>
+        <div id="qrcode3">
+            <div class="name"></div>
+            <div class="school"></div>
+            <div class="className"></div>
+        </div>
+        <div id="qrcode4">
+            <div class="name"></div>
+            <div class="school"></div>
+            <div class="className"></div>
+        </div>
+        <div id="qrcode5">
+            <div class="name"></div>
+            <div class="school"></div>
+            <div class="className"></div>
+        </div>
+    </div>
+
+</body>
+<script src="./jquery.min.js"></script>
+<script src="./qrcode.js"></script>
+<script src="./html2canvas.js"></script>
+<script>
+    $(function () {
+        let stu = [];
+        // let domain = "http://127.0.0.1:18076";
+        let domain = "http://admin.jlp.iydsj.com/nd";
+        function getAllStu(schoolId, classId) {
+            if (!classId) classId = "";
+            $.ajax({
+                type: "GET",
+                url: domain + "/jlp/admin/node/getAllStu?schoolId=" + schoolId + "&classId=" + classId,
+                success: function (data) {
+                    if (data.error == 10000) {
+                        if (data.data.length) {
+                            stu = data.data;
+                            let newArr = [];
+                            let arr = [];
+                            stu.forEach((item, index) => {
+                                if (index % 6 == 0 && index != 0) {
+                                    newArr.push(arr);
+                                    arr = [item];
+                                } else {
+                                    arr.push(item);
+                                }
+
+                                if (index == stu.length - 1) {
+                                    newArr.push(arr);
+                                }
+
+                            });
+                            getQrcode(newArr);
+                        }
+                    }
+                },
+                error: function (data) {
+
+                }
+            })
+        }
+
+        $("span.btn").click(function () {
+            let schoolId = $("input[name='schoolId']").val();
+            let classId = $("input[name='classId']").val();
+            if (!schoolId) return;
+
+            getAllStu(schoolId, classId);
+        })
+
+        async function getQrcode(stu) {
+            if (!stu.length) return;
+            for (let item of stu) {
+                let name = item[0].schoolName + " " + item[0].className;
+                item.forEach((option, index) => {
+                    $(".name").eq(index).text(option.name);
+                    $(".school").eq(index).text(option.schoolName + " " + option.className);
+                    $(".className").eq(index).text(option.code);
+                    getCode(option.code, "qrcode" + index);
+                })
+                await toImg("box", name);
+                $(".name").text("");
+                $(".school").text("");
+                $(".className").text("");
+            }
+
+        }
+
+        function getCode(url, id) {
+            // 设置参数方式
+            var qrcode = new QRCode(id, {
+                text: url,
+                width: 256,
+                height: 256,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+        }
+
+        function toImg(id, name) {
+            return new Promise(resolve => {
+                html2canvas(document.getElementById(id), {
+                    onrendered: function (canvas) {
+                        $("canvas").remove();
+                        $("img").remove();
+                        download(canvas.toDataURL("image/png"), name).then(() => {
+                            resolve();
+                        })
+                    },
+                    width: $("#" + id).width(),
+                    height: $("#" + id).height()
+                });
+
+            })
+        }
+
+        function download(src, name) {
+            return new Promise(resolve => {
+                var $a = document.createElement('a');
+                $a.setAttribute("href", src);
+                $a.setAttribute("download", name);
+                var evObj = document.createEvent('MouseEvents');
+                evObj.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, true, false, 0, null);
+                $a.dispatchEvent(evObj);
+                resolve();
+            })
+
+        }
+    })
+</script>
+
+</html>

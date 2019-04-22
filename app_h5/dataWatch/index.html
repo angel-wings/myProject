@@ -1,0 +1,137 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="beibei">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>手环数据-查看</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        #app {
+            font-size: 14px;
+        }
+
+        .el-input {
+            width: 250px;
+        }
+
+        .el-table__empty-block{
+            height: 60px;
+        }
+
+        .mr20{
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="select">
+            设备号：<el-input v-model="deviceNum" class="mr20"></el-input>
+            数据上传时间：<el-date-picker v-model="date" type="date" placeholder="选择日期">
+            </el-date-picker>
+            <el-button type="primary" @click="getList">搜索</el-button>
+        </div>
+        <div style="margin-top:20px;">
+            <el-table :data="list" style="width: 100%" border stripe>
+                <el-table-column prop="deviceNum" label="设备号" width="180">
+                </el-table-column>
+                <el-table-column prop="date" label="数据捕获日期" width="140">
+                </el-table-column>
+                <el-table-column prop="hour" label="整点时间">
+                </el-table-column>
+                <el-table-column prop="heartRate" label="心率">
+                </el-table-column>
+                <el-table-column prop="steps" label="计步">
+                </el-table-column>
+                <el-table-column prop="shallowSleep" label="浅度睡眠">
+                </el-table-column>
+                <el-table-column prop="depthSleep" label="深度睡眠">
+                </el-table-column>
+                <el-table-column prop="totalSleep" label="睡眠总和">
+                </el-table-column>
+                <el-table-column prop="voltage" label="整点电压">
+                </el-table-column>
+                <el-table-column prop="uploadTime" label="数据上传时间" width="180">
+                </el-table-column>
+            </el-table>
+        </div>
+    </div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/prefixfree.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+
+    Date.prototype.format = function (format) {
+        var date = {
+            "M+": this.getMonth() + 1,
+            "d+": this.getDate(),
+            "h+": this.getHours(),
+            "m+": this.getMinutes(),
+            "s+": this.getSeconds(),
+            "q+": Math.floor((this.getMonth() + 3) / 3),
+            "S+": this.getMilliseconds()
+        };
+        if (/(y+)/i.test(format)) {
+            format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+        }
+        for (var k in date) {
+            if (new RegExp("(" + k + ")").test(format)) {
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1
+                    ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+            }
+        }
+        return format;
+    }
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            deviceNum: "",
+            date: new Date(),
+            list: [],
+            domain: "http://band.iydsj.com",
+        },
+        mounted: function () {
+
+        },
+        methods: {
+            getList: function () {
+                if (!this.deviceNum || !this.date) return this.$notify({ title: "", message: "请填写设备号和数据捕获日期", duration: 2000 });
+
+                var that = this;
+                var url = that.domain + "/health/information/upload/result";
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    data: {
+                        deviceNum: that.deviceNum,
+                        uploadDate: new Date(that.date).getTime()
+                    },
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (data) {
+                        if (data.code == 10000) {
+                            that.list = [];
+                            data.data.forEach(function (item) {
+                                item.uploadTime = new Date(item.uploadTime).format("yyyy-MM-dd hh:mm");
+
+                                item.totalSleep = ((item.depthSleep + item.shallowSleep) / 60).toFixed(2) + "min";
+                                item.depthSleep = (item.depthSleep / 60).toFixed(2) + "min";
+                                item.shallowSleep = (item.shallowSleep / 60).toFixed(2) + "min";
+                                that.list.push(item)
+                            });
+                        }
+                    },
+                    error: function (data) {
+
+                    }
+                })
+            }
+        }
+    })
+</script>
+
+</html>

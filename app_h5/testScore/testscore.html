@@ -1,0 +1,142 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <title>体测记录</title>
+    <link rel="stylesheet" href="./css/testscore.css">
+    <script src="./js/public.js"></script>
+    <script src="./js/rem.js"></script>
+    <script src="./js/fastclick.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div id="noInfo" v-if="noData">
+            <img src="./images/nodata.png" alt="" class="testIcon">
+            <br>
+            <span class="tips">暂无体测数据</span>
+        </div>
+
+        <section v-for="item in list" @click="myClick(item)">
+            <div>
+                <span class="testName">{{item.physicalName}}</span>
+                <span :class="item.class">{{item.level}}</span>
+                <span class="score">{{item.score}}</span>
+            </div>
+            <div>
+                <span class="time">{{item.startTime}}-{{item.endTime}}</span>
+            </div>
+        </section>
+
+        <div class="toast"></div>
+    </div>
+</body>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+        var vm = new Vue({
+            el: "#main",
+            data: {
+                list: [],
+                noData: false,
+                uid: getUrlParam("uid") * 1
+            },
+            mounted: function () {
+                this.getSemesterList();
+            },
+            methods: {
+                //请求体测列表
+                getSemesterList: function () {
+                    var that = this;
+                    var url = domain + "/managerapi/physical/myphysical";
+
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        datatype: "json",
+                        data: JSON.stringify({
+                            uid: that.uid
+                        }),
+                        contentType: 'application/json;charset=UTF-8',
+                        success: function (data) {
+                            if (data.error == 10000) {
+                                var list = data.data;
+
+                                if (list && list.length) {
+                                    that.handleData(list);
+                                } else {
+                                    that.noData = true;
+                                }
+
+                                document.body.style.display = "block";
+                            } else {
+                                document.body.style.display = "block";
+                                toast(data.message, 200);
+                            }
+                        },
+                        error: function (data) {
+                            document.body.style.display = "block";
+                            toast('请求失败', 100);
+                        }
+                    })
+                },
+                //转换等级
+                levelFormat: function (level) {
+                    var levelText, classType;
+
+                    if (level < 60) {
+                        levelText = "不及格";
+                        classType = "nopass";
+                    } else if (level < 80) {
+                        levelText = "及格";
+                        classType = "pass";
+                    } else if (level < 90) {
+                        levelText = "良好";
+                        classType = "good";
+                    } else {
+                        levelText = "优秀";
+                        classType = "excellent";
+                    }
+
+                    return {
+                        levelText: levelText,
+                        classType: classType
+                    };
+                },
+                //数据处理
+                handleData: function (list) {
+                    var that = this;
+
+                    list.forEach(function (item) {
+                        if (item.isFinish === 0) {
+                            item.score = "无";
+                            item.level = "未完成";
+                            item.class = "level noFinish";
+                        } else {
+                            var obj = that.levelFormat((item.total / 100).toFixed(2));
+                            item.level = obj.levelText;
+                            item.class = "level " + obj.classType;
+                            item.score = (item.total / 100).toFixed(2) + "分";
+                        }
+
+                        item.startTime = new Date(item.startTime * 1).format('yyyy.MM.dd');
+                        item.endTime = new Date(item.endTime * 1).format('MM.dd');
+                    });
+
+                    that.list = list;
+                },
+                myClick: function (item) {
+                    location.href = './scoreDetail.html?id=' + item.physicalId + "&uid=" + this.uid;
+                }
+            }
+        })
+
+    })
+</script>
+
+</html>

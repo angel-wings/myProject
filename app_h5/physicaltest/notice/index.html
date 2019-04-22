@@ -1,0 +1,109 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>关于作弊数据的通知</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <script src="./js/jquery.min.js"></script>
+    <script type="application/javascript" src="./js/fastclick.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        body {
+            -webkit-user-select: none;
+            -webkit-text-size-adjust: 100% !important;
+            font-family: 'PingFang', 'PingFangSC-Regular';
+            font-size: 14px;
+        }
+
+        html,
+        body {
+            margin: 0 auto;
+            max-width: 640px;
+            background-color: #f6f6f6;
+        }
+
+        .notice-box {
+            padding: .3rem;
+        }
+
+        .notice-title {
+            margin-bottom: .3rem;
+            font-size: .36rem;
+            font-family: 'PingFangSC-Semibold';
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .notice-con {
+            margin-bottom: .1rem;
+            text-indent: 2em;
+            font-size: .30rem;
+            line-height: .42rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="notice-box">
+        <p class="notice-title">关于作弊数据判定及处理的通知</p>
+        <p class="notice-con">
+            为了给广大学生提供良好的运动氛围、消除投机行为造成的负面影响，系统近期在持续清理作弊数据。其中一台设备登录三个及以上账号、一个账号登录三个及以上设备将判为作弊数据，账号异常及操作轨迹异常数据将被判定为疑似作弊行为，平台将重点跟进此部分账号的跑步数据，一旦查实，将联合校方严厉惩处！
+        </p>
+    </div>
+</body>
+<script>
+    (function (_D) {
+        var _self = {};
+        _self.resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+        _self.Html = _D.getElementsByTagName("html")[0];
+        _self.widthProportion = function () {
+            var p = Number((_D.body && _D.body.clientWidth || _self.Html.offsetWidth) / 750).toFixed(3);
+            return p > 1.024 ? 1.024 : p < 0.427 ? 0.427 : p;
+        };
+        _self.changePage = function () {
+            _self.Html.setAttribute("style", "font-size:" + _self.widthProportion() * 100 + "px");
+            _self.correctPx();
+        };
+        _self.correctPx = function () {
+            var docEl = document.documentElement;
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth || clientWidth > 768) return;
+            var div = document.createElement('div');
+            div.style.width = '1.4rem';
+            div.style.height = '0';
+            document.body.appendChild(div);
+            var ideal = 140 * clientWidth / 750;
+            var rmd = (div.clientWidth / ideal);
+            if (rmd > 1.2 || rmd < 0.8) {
+                docEl.style.fontSize = 100 * (clientWidth / 750) / rmd + 'px';
+                document.body.removeChild(div);
+            }
+        };
+        _self.changePage();
+        if (!document.addEventListener) return;
+        window.addEventListener(_self.resizeEvt, _self.changePage, false);
+        document.addEventListener('DOMContentLoaded', _self.changePage, false);
+    })(document);
+</script>
+
+</html>

@@ -1,0 +1,191 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+*{box-sizing: border-box;}
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
+img{display:inline-block;overflow:hidden;
+    /* vertical-align:top; */
+}
+button,input[type="button"]{cursor:pointer;border:0 none;}
+textarea{word-wrap:break-word;resize:none;}  /* word-wrap for opera, resize for webkit */
+body{-webkit-user-select:none;-webkit-text-size-adjust:100%!important;font-family:'PingFang','PingFangSC-Regular';font-size: 14px;}
+input[type="number"]{-webkit-user-select:text;}
+a,button,input,img{-webkit-touch-callout:none;}/* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
+input,select,textarea{outline:none;}
+/* 去除android4.0以下 a/button/input标签被点击时产生的边框 因为边框引起了不少bug */
+a,button,input,label{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
+@media all and (-webkit-transform-3d){
+    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+    a,button,input,label{-webkit-tap-highlight-color:rgba(130,130,130,.52);outline: none;}
+}
+html,body{margin: 0 auto;max-width: 640px;background-color: #f6f6f6;}
+a{text-decoration:none;}
+.hide{display: none!important;}
+
+.toast {
+    background: rgba(0, 0, 0, .9);
+    color: #fff;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    margin-left: -60px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 20px;
+    display: none;
+    z-index: 10000;
+}
+body{
+    background-color: #2D219D;
+}
+.head-img {
+    position: relative;
+    /* height: 12.88rem; */
+    background-image: url('../images/back.png');
+    background-size: 100% 100%;
+}
+.head-img img{
+    width: 100%;
+}
+.head-title{
+    width: 100%;
+    padding: .1rem 0;
+    text-align: center;
+}
+.head-title img{
+    width: 5rem;
+}
+
+.pro-box{
+    overflow: hidden;
+    position: relative;
+    padding:  0 .26rem;
+}
+
+.pro-box .vs-img{
+    position: absolute;
+    top: 1.5rem;
+    left: 3.1rem;
+    width: 1.48rem;
+    height: 1rem;
+}
+
+.fl{
+    float: left;
+    width: 3.33rem;
+    padding: .16rem 0;
+    text-align: center;
+    color: #fff;
+    border-radius: .12rem;
+    background-color: #2f6cff;
+    font-size: .28rem;
+    font-family: 'PingFangSC-Regular';
+}
+.fl:first-child{
+    margin-right: .3rem;
+}
+.f-img img{
+    width: 2.93rem;
+    height: 2.8rem;
+    border: 2px solid rgba(23, 66, 178, 1);
+    border-radius: .13rem;
+}
+
+.fl p{
+    line-height: .6rem;
+    margin-top: .1rem;
+}
+
+.price{
+    display: inline-block;
+    width: 2.84rem;
+    height: .72rem;
+    line-height: .72rem;
+    background: rgba(234,91,135,1);
+    border-radius: 6px;
+}
+.price span{
+    display: inline-block;
+    vertical-align: text-top;
+    line-height: .72rem;
+}
+.price-big{
+    font-size: .6rem;
+    font-family: Impact;
+}
+.arrow {
+    position: relative;
+    top: -.16rem;
+    padding-left: 50%;
+}
+.arrow img{
+    width: 1rem;
+}
+/*  */
+.text-box{
+    position: relative;
+    width: 6.92rem;
+    height:4.06rem;
+    margin: 0 auto;  
+    padding-top: .16rem;
+    background:rgba(50,108,255,1);
+    border:2px solid rgba(255, 200, 8, 1);
+    border-radius:6px;
+    text-align: center;
+    color: #fff;
+    font-size: .24rem;
+    font-family:'PingFangSC-Regular';
+    line-height:.48rem;
+}
+.star-big{
+    position: absolute;
+    top: .2rem;
+    left: .1rem;
+    width: .44rem;
+}
+.star-mid{
+    position: absolute;
+    bottom: .2rem;
+    left: .1rem;
+    width: .32rem;
+}
+.star-sma{
+    position: absolute;
+    bottom: .6rem;
+    right: .6rem;
+    width: .25rem
+}
+#btn-img{
+    width: 4.26rem;
+    height: 1.02rem;
+    margin-top: .22rem;
+}
+
+.yellow{
+    color: #FFC808;
+    font-size: .32rem;
+    font-weight: bold;
+    font-family: 'PingFangSC-Semibold';
+}
+/* rules */
+.rules{
+    padding: .3rem;
+    font-size: .24rem;
+    font-family: 'PingFangSC-Regular';
+    color: #EBCA51;
+    line-height: .36rem;
+}
+.rule-title{
+    margin-bottom: .1rem;
+    font-size: .26rem;
+    font-family: 'PingFangSC-Semibold';
+    font-weight: bold;
+    color: #EA5B87;
+}
+.rule-con{
+    margin-bottom: .1rem;
+}

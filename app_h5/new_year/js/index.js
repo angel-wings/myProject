@@ -174,7 +174,11 @@ $(function () {
 
                         // 重置昨天的日历更新今天的日历-----修改
                         if (index - 1 > 0) {
-                            $('.caldate-ul li').eq(index - 1).text(new Date(todayTime).getDate() * 1 - 1);
+                            var todays = new Date(todayTime).getDate() * 1 - 1;
+                            if (todays == 0) {
+                                todays = 31;
+                            }
+                            $('.caldate-ul li').eq(index - 1).text(todays);
                         }
 
                         $('.caldate-ul li').eq(index).text('今');

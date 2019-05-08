@@ -438,7 +438,12 @@ p.common-text{
 .yestime-legend  .common-legend-item{
   line-height: 34px;
 }
-
+.dau-users-num,
+.mau-users-num {
+  margin-left: 60px;
+  font-family: Impact;
+  font-weight: 400;
+}
 /* 中国地图 */
 #china-schools{
   height: 590px;

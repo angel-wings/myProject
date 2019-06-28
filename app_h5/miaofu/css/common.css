@@ -1,0 +1,309 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+* {
+    box-sizing: border-box;
+}
+
+body, p, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, fieldset, legend, input, select, textarea, button, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    display: inline-block;
+    overflow: hidden;
+    /* vertical-align:top; */
+}
+
+button, input[type="button"] {
+    cursor: pointer;
+    border: 0 none;
+}
+
+textarea {
+    word-wrap: break-word;
+    resize: none;
+}
+
+/* word-wrap for opera, resize for webkit */
+body {
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: 100% !important;
+    font-family: 'PingFang', 'PingFangSC-Regular';
+    font-size: 14px;
+}
+
+input[type="number"] {
+    -webkit-user-select: text;
+}
+
+a, button, input, img {
+    -webkit-touch-callout: none;
+}
+
+/* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
+input, select, textarea {
+    outline: none;
+}
+
+/* 去除android4.0以下 a/button/input标签被点击时产生的边框 因为边框引起了不少bug */
+a, button, input, label {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
+@media all and (-webkit-transform-3d) {
+    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+    a, button, input, label {
+        -webkit-tap-highlight-color: rgba(130, 130, 130, .52);
+        outline: none;
+    }
+}
+
+html, body {
+    margin: 0 auto;
+    max-width: 640px;
+    background-color: #f6f6f6;
+}
+
+a {
+    text-decoration: none;
+}
+
+.hide {
+    display: none !important;
+}
+
+body {
+    background-color: #F9C9A1;
+}
+
+.head-img {
+    position: relative;
+    background-size: 100% 100%;
+}
+
+.head-img img {
+    width: 100%;
+}
+
+.high-tip {
+    text-align: center;
+    margin-top: .28rem;
+}
+
+.high-tip .text-lable {
+    font-size: .48rem;
+    font-family: 'PingFangSC-Medium';
+    color: #DD2E15;
+}
+
+.high-tip img {
+    position: relative;
+    top: .05rem;
+    width: .52rem;
+    height: .45rem;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+}
+
+.body-text {
+    background: #FFF7F1;
+    margin-left: .27rem;
+    margin-right: .27rem;
+    margin-top: .25rem;
+    text-align: center;
+    padding-top: .25rem;
+    padding-bottom: .41rem;
+}
+.body-text-big {
+    font-size: .36rem;
+    font-family: 'PingFangSC-Semibold';
+    font-weight: bold;
+    color: rgba(202, 70, 39, 1);
+    line-height: .41rem;
+}
+
+.body-text-logo {
+    margin-top: .30rem;
+    margin-bottom: .20rem;
+}
+
+.body-text-logo-miaofu {
+    width: 1.69rem;
+    height: .95rem;
+}
+
+.body-text-logo-x {
+    font-size: .34rem;
+    font-family: 'PingFangSC-Light';
+    color: #894010;
+    margin-left: .35rem;
+    margin-right: .38rem;
+    position: relative;
+    top: -0.35rem;
+}
+
+.body-text-logo-sport {
+    width: .79rem;
+    height: .79rem;
+    position: relative;
+    top: -0.08rem;
+}
+
+.body-text-small {
+    font-size: .24rem;
+    font-family: 'PingFangSC-Regular';
+    color: rgba(215, 92, 38, 1);
+    line-height: .31rem;
+}
+
+.paper {
+    width: 1.84rem;
+    height: 1.30rem;
+    margin-top: -0.8rem;
+}
+
+.activity {
+    margin-bottom: .2rem;
+}
+
+.activity-title {
+    height: .80rem;
+    margin-left: .48rem;
+    margin-right: .48rem;
+    /* background: linear-gradient(270deg, rgba(244, 186, 25, 1) 0%, rgba(244, 138, 25, 1) 100%); */
+    background: -moz-linear-gradient(right, rgba(244, 186, 25, 1) 0%, rgba(244, 138, 25, 1) 100%); 
+
+    /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bccfe3), color-stop(100%,#d2dded));  */
+
+    background: -webkit-linear-gradient(right, rgba(244, 186, 25, 1) 0%, rgba(244, 138, 25, 1) 100%); 
+    background: -o-linear-gradient(right, rgba(244, 186, 25, 1) 0%, rgba(244, 138, 25, 1) 100%);  
+    background: -ms-linear-gradient(right, rgba(244, 186, 25, 1) 0%, rgba(244, 138, 25, 1) 100%);
+    background: linear-gradient(right, rgba(244, 186, 25, 1) 0%, rgba(244, 138, 25, 1) 100%);
+    /* background-color: rgba(244, 138, 25, 1); */
+    border-radius: .52rem 0 .52rem 0;
+    text-align: center;
+}
+.activity-title2{
+    border-radius:  0 .52rem 0 .52rem;
+}
+
+.activity-title img{
+    width: 5.2rem;
+    position: relative;
+    top: .2rem;
+}
+
+.activity-title  .activity-title-img{
+    width: 5.4rem;
+    top: .21rem;
+    left: -0.14rem;
+}
+
+.activity-title-text {
+    font-size: .32rem;
+    line-height: .8rem;
+    font-family: 'PingFangSC-Semibold';
+    font-weight: bold;
+    font-style: italic;
+    color: rgba(221, 46, 21, 1);
+    -webkit-text-stroke: 1px white;
+}
+
+.activity-logo {
+    width: .77rem;
+    height: .78rem;
+    float: right;
+    margin-top: -0.55rem;
+    margin-right: .25rem;
+}
+.activity-logo2{
+    width: 1.07rem;
+    height: 1.12rem;
+    float: right;
+    margin-top: -1rem;
+    margin-right: .06rem;
+}
+
+.activity-body-text {
+    font-size: .24rem;
+    font-family: 'PingFangSC-Regular';
+    color: rgba(215, 92, 38, 1);
+    line-height: .40rem;
+    margin-left: .25rem;
+    text-align: left;
+}
+.activity-body-color{
+    color: #fe0d0c;
+}
+
+.activity-screen {
+    margin-left: .24rem;
+    margin-right: .24rem;
+    padding-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+.activity-screen img {
+    width: 100%;
+}
+
+.bottom-text {
+    text-align: center;
+}
+
+.bottom-text img {
+    width: 4.84rem;
+    height: 1.78rem;
+}
+
+.bottom-img {
+    text-align: center;
+    margin-top: -0.60rem;
+}
+
+.bottom-img img {
+    width: 100%;
+    height: 1.54rem;
+}
+
+.bottom-img-text {
+    position: relative;
+    top: 1.3rem;
+    font-size: .24rem;
+    font-family: 'PingFangSC-Regular';
+    font-style: italic;
+    color: rgba(71, 1, 1, 1);
+    line-height: .40rem;
+}
+
+.activity-share{
+    margin-left: .24rem;
+    margin-right: .24rem;
+    margin-bottom: .4rem;
+    padding: .1rem;
+    text-align: left;
+    font-size: .24rem;
+    line-height: .4rem;
+    background:rgba(252,188,135,0.2);
+    border-radius: 4px;
+    color: #D75C26;
+}
+.activity-share-text{
+    font-weight: bold;
+}
+
+.activity-share-text img{
+    width: .42rem;
+    height: .22rem;
+}
+.book{
+    height: .3rem;
+}
+.book img{
+    width: 1.4rem;
+    height: 1.33rem;
+    margin-top: -0.8rem;
+}

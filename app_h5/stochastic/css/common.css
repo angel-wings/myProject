@@ -1,0 +1,79 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+*{box-sizing: border-box;}
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
+img{display:inline-block;overflow:hidden;
+    /* vertical-align:top; */
+}
+button,input[type="button"]{cursor:pointer;border:0 none;}
+textarea{word-wrap:break-word;resize:none;}  /* word-wrap for opera, resize for webkit */
+body{-webkit-user-select:none;-webkit-text-size-adjust:100%!important;font-family:'PingFang','PingFangSC-Regular';font-size: 16px;}
+input[type="number"]{-webkit-user-select:text;}
+a,button,input,img{-webkit-touch-callout:none;}/* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
+input,select,textarea{outline:none;}
+/* 去除android4.0以下 a/button/input标签被点击时产生的边框 因为边框引起了不少bug */
+a,button,input,label{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
+@media all and (-webkit-transform-3d){
+    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+    a,button,input,label{-webkit-tap-highlight-color:rgba(130,130,130,.52);outline: none;}
+}
+html,body{height:100%;margin: 0 auto;max-width: 640px;background-color: #ffffff;}
+a{text-decoration:none;}
+.hide{display: none!important;}
+
+.head-box{
+    padding: .4rem;
+    text-align: center;
+    color: #b2b2b2;
+    font-size: .24rem;
+}
+
+/*  */
+.con-box{
+    position: relative;
+}
+.btn-left{
+    position: absolute;
+    left: .1rem;
+    top: 50%;
+    padding: .2rem;
+    transform: translateY(-50%);
+}
+.btn-right{
+    position: absolute;
+    right: .1rem;
+    top: 50%;
+    padding: .2rem;
+    transform: translateY(-50%);
+}
+.img-box{
+    position: relative;
+    width: 5.2rem;
+    height: 8.6rem;
+    margin: 0 auto;
+    padding: .3rem .6rem;
+    border-radius: 3px;
+    box-shadow: 0px -1px 0px 1px #eee,-1px 0px 0px 1px #eee,1px 0px 0px 1px #eee,0px 1px 0px 1px #eee;
+}
+.img-box .img-sty{
+    width: 4rem;
+    height: 8rem;
+}
+.pages{
+    width: 100%;
+    text-align: center;
+    color: #707070;
+    line-height: .8rem;
+}
+
+/*  */
+.foot-box{
+    width: 5.2rem;
+    margin: 0 auto;
+    text-align: center;
+    font-size: .24rem;
+    line-height: .4rem;
+    color: #707070;
+}

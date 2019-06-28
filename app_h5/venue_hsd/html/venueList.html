@@ -1,0 +1,370 @@
+<!-- 场馆列表 -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <meta name="format-detection" content="telephone=no">
+    <title>杭州师范大学</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <script type="application/javascript" src="../js/fastclick.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/alertPopShow.js"></script>
+    <script src="../js/public.js"></script>
+    <script src="../js/iscroll.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 12px 10px;
+            background: #e6e6e6;
+            margin: 0;
+        }
+
+        #wrapper {
+            position: absolute;
+            z-index: 1;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            overflow: auto;
+            padding: 12px 10px;
+        }
+
+        #scroller {
+            position: absolute;
+            z-index: 1;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            width: calc(100% - 20px);
+            padding: 0;
+        }
+
+        #venueList {
+            width: 100%;
+            padding-bottom: 12px;
+        }
+
+        section {
+            margin-bottom: 12px;
+            width: 100%;
+            height: 110px;
+            box-shadow: 0 0 2px rgba(51, 51, 51, 0.8);
+            background: #ffffff;
+            border-radius: 4px;
+            position: relative;
+            padding: 0 15px;
+        }
+
+        .header {
+            height: 65px;
+        }
+
+        .footer {
+            height: 45px;
+            line-height: 45px;
+        }
+
+        .venueName {
+            font-size: 15px;
+            font-weight: bold;
+            color: #333333;
+            margin-top: 10.5px;
+            display: inline-block;
+        }
+
+        .infos {
+            font-size: 12px;
+            color: #b2b2b2;
+            margin-top: 7.5px;
+        }
+
+        .address {
+            margin-left: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 40px;
+            height: 25px;
+            border-radius: 12.5px;
+            background: #333333;
+            color: #ffffff;
+            font-size: 10px;
+            line-height: 25px;
+            text-align: center;
+            position: absolute;
+            right: 15px;
+            top: 20px;
+        }
+
+        hr {
+            width: calc(100% - 30px);
+            border: 0.5px #e6e6e6 dashed;
+            margin: 0;
+            position: absolute;
+            top: 64px;
+            left: 15px;
+        }
+
+        .item {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            padding: 0 7.5px;
+            color: #ffffff;
+            font-size: 10px;
+            margin-right: 5px;
+            margin-top: 12.5px;
+        }
+
+        .point {
+            display: inline-block;
+            color: #e0e0e0;
+        }
+
+        div.myOrder {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            border-radius: 50%;
+            background: #404040;
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            box-shadow: 0 1px 2px rgba(250, 250, 250, .74);
+            z-index: 10;
+        }
+
+        img.orderLogo {
+            margin-top: 20px;
+            width: 20px;
+        }
+
+        /* ************ */
+
+        #pullDown,
+        #pullUp {
+            background-color: #e6e6e6;
+            height: 1px;
+            line-height: 1px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #888;
+            width: 100%;
+        }
+
+        #pullDown .pullDownIcon,
+        #pullUp .pullUpIcon {
+            display: block;
+            float: left;
+            width: 40px;
+            height: 1px;
+            background: url('../image/pull-icon@2x.png') 0 0 no-repeat;
+            -webkit-background-size: 40px 80px;
+            background-size: 40px 80px;
+            -webkit-transition-property: -webkit-transform;
+            -webkit-transition-duration: 250ms;
+        }
+
+        #pullDown .pullDownIcon {
+            -webkit-transform: rotate(0deg) translateZ(0);
+        }
+
+        #pullUp .pullUpIcon {
+            -webkit-transform: rotate(-180deg) translateZ(0);
+        }
+
+        #pullDown.flip .pullDownIcon {
+            -webkit-transform: rotate(-180deg) translateZ(0);
+        }
+
+        #pullUp.flip .pullUpIcon {
+            -webkit-transform: rotate(0deg) translateZ(0);
+        }
+
+        #pullDown.loading .pullDownIcon,
+        #pullUp.loading .pullUpIcon {
+            background-position: 0 100%;
+            -webkit-transform: rotate(0deg) translateZ(0);
+            -webkit-transition-duration: 0ms;
+
+            -webkit-animation-name: loading;
+            -webkit-animation-duration: 2s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+        }
+
+        @-webkit-keyframes loading {
+            from {
+                -webkit-transform: rotate(0deg) translateZ(0);
+            }
+            to {
+                -webkit-transform: rotate(360deg) translateZ(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="scroller">
+            <div id="pullDown">
+                <span class="pullDownIcon"></span>
+                <span class="pullDownLabel"></span>
+            </div>
+            <div id="venueList"></div>
+
+            <div id="pullUp">
+                <span class="pullUpIcon"></span>
+                <span class="pullUpLabel"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="myOrder">
+        <img src="../image/orderLogo.png" class="orderLogo">
+    </div>
+    <div class="toast"></div>
+</body>
+
+<script>
+    FastClick.attach(document.body);
+    var pageSize = 10;
+    var unid = getStore("unid") * 1;
+    var myScroll,
+        pullDownEl, pullDownOffset,
+        pullUpEl, pullUpOffset,
+        generatedCount = 0;
+        
+    checkTimeOut();
+    getVenueList(1);
+    function addItem(list) {
+        var listHtml = '';
+        for (var i = 0; i < list.length; i++) {
+            listHtml += '<section><div class="header"><span class="venueName">' + list[i].name + '</span>';
+            listHtml += '<div class="infos"><span class="campus">' + list[i].unName + '</span></div>';
+            listHtml += '<span class="btn" data-id="' + list[i].id + '">预订</span><hr></div><div class="footer">';
+            if (list[i].venueItemList) {
+                if (list[i].venueItemList.length < 5) {
+                    for (var j = 0; j < list[i].venueItemList.length; j++) {
+                        listHtml += '<span class="item">' + list[i].venueItemList[j].sportItemName + '</span>';
+                    }
+                } else {
+                    for (var j = 0; j < 5; j++) {
+                        listHtml += '<span class="item">' + list[i].venueItemList[j].sportItemName + '</span>';
+                    }
+                    listHtml += '<span class="point">···</span>';
+                }
+            }
+            listHtml += '</div></section>';
+        }
+        $('#venueList').append(listHtml);
+        $('#venueList section').click(function () {
+            var id = $(this).find('span.btn').attr('data-id');
+            location.href = './venueDetail.html?venueId=' + id;
+        })
+    }
+
+    function getVenueList(num) {
+        var url = domain + '/erp/api/v20/venue/app/list';
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: JSON.stringify({
+                rootUnid: unid,
+                page: {
+                    pageNum: num,
+                    pageSize: 10
+                }
+            }),
+            contentType: 'application/json;charset=UTF-8',
+            datatype: "json",
+            success: function (data) {
+                if (data.error == 10000) {
+                    var list = data.data;
+                    if (list) {
+                        if (list.length > 0) {
+                            addItem(list);
+                        }
+                    }
+
+                } else {
+                    toast(data.message);
+                }
+            },
+            error: function (response) {
+                toast('请求失败');
+            }
+        })
+    }
+
+    $("div.myOrder").click(function () {
+        location.href = "./myOrder.html";
+    })
+
+    function pullUpAction() {
+        setTimeout(function () {
+            var pageNum = generatedCount / pageSize + 2;
+            getVenueList(pageNum);
+            generatedCount = generatedCount + pageSize;
+            myScroll.refresh();
+        }, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
+    }
+
+    function loaded() {
+        pullDownEl = document.getElementById('pullDown');
+        pullDownOffset = pullDownEl.offsetHeight;
+        pullUpEl = document.getElementById('pullUp');
+        pullUpOffset = pullUpEl.offsetHeight;
+        myScroll = new iScroll('wrapper', {
+            useTransition: true,
+            topOffset: pullDownOffset,
+            onRefresh: function () {
+
+                if (pullUpEl.className.match('loading')) {
+                    pullUpEl.className = '';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+                }
+            },
+            onScrollMove: function () {
+
+                if (this.y > 5 && !pullDownEl.className.match('flip')) {
+                    this.minScrollY = 0;
+                } else if (this.y < 5 && pullDownEl.className.match('flip')) {
+                    this.minScrollY = -pullDownOffset;
+                } else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+                    pullUpEl.className = 'flip';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+                    this.maxScrollY = this.maxScrollY;
+                } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+                    pullUpEl.className = '';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
+                    this.maxScrollY = pullUpOffset;
+                }
+            },
+            onScrollEnd: function () {
+                if (pullUpEl.className.match('flip')) {
+                    pullUpEl.className = 'loading';
+                    pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading...';
+                    pullUpAction();	// Execute custom function (ajax call?)
+                }
+            }
+        });
+
+        setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+    }
+
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+
+</script>
+
+</html>

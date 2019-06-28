@@ -1,0 +1,279 @@
+这些接口在林强写的新的ERP代码中已经存在
+这些接口不校验token
+
+1、图形验证码  （POSTMAN测试可以使用）
+/erp/api/v20/account/graphCode  
+POST
+入参:
+phone
+
+
+出参
+graphCodeUrl 图形验证码URL
+
+2、发送短信验证码
+/erp/api/v20/account/authCode
+POST
+入参:
+phone
+graphCode  图形验证码
+
+出参
+data:true 发送成功
+
+
+3、登录信息验证病生成UID返回
+/erp/api/v20/account/h5Authentication
+POST
+入参:
+phone
+graphCode  图形验证码
+authCode   短信验证码
+
+出参
+phone
+name
+id 用户ID
+
+
+
+4、获取高校的场馆列表       （POSTMAN测试可以使用）
+/erp/api/v20/venue/app/list
+POST
+入参
+{
+	"rootUnid":"100",
+	
+         "page":   //POSTMAN测试后发现不传page会报错,后端的默认分页参数无效
+               {
+  
+		"pageSize":10,
+		"pageNum":1
+	
+               }
+}
+
+出参
+[{
+   id      场馆ID
+   name    场馆名
+   unid    校区ID
+   unName  校区名称
+   linkName 联系人
+   venueItemList:[
+      sportItemId     运动类型Id
+      sportItemName   运动类型名称
+   ],
+   introduction  场馆介绍,
+   status        场馆状态，0：开放，1：关闭
+   remark        备注
+   startTime     营业开始时间
+   endTime       营业结束时间
+}]
+
+
+5、获取场馆的详情
+/erp/api/v20/venue/detail （POSTMAN测试可以使用）
+POST
+入参
+venueId 场馆ID （POSTMAN测试后发现，不传会报错）
+
+
+出参
+{
+      id      场馆ID
+      name    场馆名
+      unid    校区ID
+      unName  校区名称
+      introduction  场馆介绍
+      status        场馆状态，0：开放，1：关闭
+      startTime     营业开始时间
+      endTime       营业结束时间
+      venueFields:[{ 场地列表
+         id       场地ID
+         unid
+         venueId  场馆ID
+         name     场地名称
+         count    场地数量
+         status   场地状态,0:开放,1:关闭
+         sportPlace  运动地点 0:室内,1:室外
+         chargeType  收费方式,0:半小时,1:一小时
+      }]
+}
+
+
+6、显示高校场地预定导航信息    （POSTMAN测试可以使用）
+/erp/api/v20/venue/field/reserve/banner
+POST
+入参
+fieldId 场地ID
+
+出参
+name      场地名称
+bookDays   可预订天数
+chargeType 收费方式,0:半小时,1:一小时
+startTime  场地开放时间
+endTime   场地结束时间
+
+
+7、场地下单预定数据展示       （POSTMAN测试可以使用）
+/erp/api/v20/venue/field/reserve
+POST
+入参
+date  日期 比如2019-06-20  经POSTMAN测试，不传会返回日期不能为空
+dayType 星期几  比如4 经POSTMAN测试，不传会返回预定星期几不能为空
+fieldId 场地ID
+identityId  经POSTMAN测试 ，不能不传，否则会报错，校外人员传0
+
+出参
+[{
+   id       场地分片ID
+   unid
+   venueId
+   name     场地分片名称
+   fieldNo  场次号
+   fieldId  场地id
+   venueFieldGoods:[{  预定场馆场地商品信息
+      venueId
+      fieldId
+      sheetId  分片Id
+      startHour 开始时间
+      endHour   结束时间
+      prize     分片价格
+      canReverse  能否预定 0:能预定，-1：不能预订
+   }]
+}]
+
+8、二维码校验入场
+/erp/api/v20/venue/checkverifycode  （POSTMAN测试可以使用）
+GET
+入参
+verifyCode  校验码
+
+经POSTMAN测试，头部必须要需要参数rootUnid,否则报错
+
+出参
+canAccess  能否入场
+tipMsg  入场提示
+orderInfo:[{ 订单详情
+  phone 手机号
+  name  姓名
+  identifyName 身份信息
+  orderCode 订单号
+  date 预约日期
+  venueName 预约场馆
+  fieldNmae 预约场地
+  orderItems:[{  订单子项
+      sheetName
+      startHour
+      endHour
+      price
+  }]
+}]
+
+9、校验场馆入场      （POSTMAN测试可以使用）
+/erp/api/v20/venue/checkin  
+POST
+入参
+orderCode  订单号
+phone      手机号
+signature  验签
+
+
+10、取消预订场地订单
+/erp/api/v20/order/cancel  （POSTMAN测试可以使用）
+POST
+入参
+orderId 订单号
+
+
+11、高校场馆场地下单  （POSTMAN测试可以使用）
+/erp/api/v20/order/overbooking
+POST
+入参
+date 订单日期 比如2019-06-20  经POSTMAN测试，不传会返回日期不能为空
+fieldId
+phone  可以不传
+venueId 经POSTMAN测试 ，不能不传，否则会报错
+goodsList:[{1,2,3}]  场地分片ID  经POSTMAN测试，传递不正确的ID有时会报服务器内部错误
+userId  用户ID  经POSTMAN测试 ，不能不传，否则会报错
+identityId  经POSTMAN测试 ，不能不传，否则会报错，校外人员传0
+
+出参
+orderId 订单号
+reserved 是否可预约 true:可预订
+zeroPay 1:0元支付 0:非0元支付
+
+12、用户订单列表         （POSTMAN测试可以使用）
+/erp/api/v20/order/list
+POST
+入参
+state订单状态 经POSTMAN测试 ，不能不传，否则报 订单状态不能为空
+userId  用户ID      经POSTMAN测试 ，不能不传，否则报
+         "page":   //POSTMAN测试后发现不传page会报错,后端的默认分页参数无效
+               {
+  
+		"pageSize":10,
+		"pageNum":1
+	
+               }
+
+出参
+[{
+  orderId
+  orderCode 订单号
+  userId 用户ID
+  fieldName 场地名
+  venueName 场馆名
+  receivableFee 应收费用
+  payment 支付方式
+
+}]
+
+13、获取场地订单详情   
+/erp/api/v20/order/detail   （POSTMAN测试可以使用）
+POST 
+入参
+orderId  经POSTMAN测试 ，不能不传，否则报 订单号不能为空
+
+出参
+userId
+name  用户名称
+orderCode 订单号
+receivableFee 应收费用
+fieldId
+fieldName
+venueId
+date  预定日期
+
+14、使用消费订单信息    
+/erp/api/v20/order/consume/info    （POSTMAN测试可以使用）
+POST
+入参
+orderId   经POSTMAN测试 ，不能不传，否则报 订单号不能为空
+
+出参
+venueName
+fieldName
+verificationCode
+
+
+15、根据学校id来获取支付方式
+/erp/api/v20/order/payment/list  （POSTMAN测试可以使用）
+POST
+入参
+unid  经POSTMAN测试 必须传入否则报 服务器内部错误 杭师大，这个值写死传递100
+
+出参
+[{
+  name  支付名字 比如支付宝
+}]
+
+16、场地下单支付-确认付款
+/erp/api/v20/order/prepay/info
+POST
+入参
+unid   经POSTMAN测试 必须传入否则报 服务器内部错误 杭师大，这个值写死传递100
+orderId  经POSTMAN测试 必须传入否则报 订单号不能为空
+payment  经POSTMAN测试 必须传入否则报 服务器内部错误  这个值是从15号接口返回值中取的
+

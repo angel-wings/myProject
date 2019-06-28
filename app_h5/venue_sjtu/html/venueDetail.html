@@ -1,0 +1,208 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <title>场馆详情</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        span {
+            display: inline-block;
+        }
+
+        body {
+            background: #e6e6e6;
+            margin: 0;
+            height: 100%;
+        }
+
+        #content {
+            background: #ffffff;
+            padding: 22.5px 15px 0;
+            margin-bottom: 12px;
+        }
+
+        .header {
+            height: 65px;
+            position: relative;
+        }
+
+        .footer {
+            padding-top: 13px;
+        }
+
+        .venueName {
+            font-size: 15px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .address {
+            font-size: 10px;
+            color: #b2b2b2;
+            margin-top: 4.5px;
+        }
+
+        .infos {
+            font-size: 10px;
+            color: #b2b2b2;
+            margin-top: 4px;
+        }
+
+        .time {
+            margin-left: 10px;
+        }
+
+        hr {
+            width: 100%;
+            border: 1px #e6e6e6 dashed;
+            border-top: 0;
+            margin: 0;
+            position: absolute;
+            top: 64px;
+            left: 0px;
+        }
+
+        .title {
+            font-size: 12px;
+            color: #333333;
+        }
+
+        .detail {
+            font-size: 10px;
+            color: #b2b2b2;
+            margin-top: 5px;
+            line-height: 15px;
+            margin-bottom: 22.5px;
+        }
+
+        #fieldList {
+            background: #ffffff;
+            width: 100%;
+            padding-left: 15px;
+        }
+
+        section {
+            height: 70px;
+            border-bottom: solid 0.5px #e6e6e6;
+            position: relative;
+        }
+
+        .fieldName {
+            font-size: 15px;
+            color: #333333;
+            margin-top: 11.5px;
+        }
+
+        .fieldAddress {
+            font-size: 12px;
+            color: #b2b2b2;
+            margin-top: 5.5px;
+        }
+
+        .arrow {
+            display: inline-block;
+            position: absolute;
+            top: 30px;
+            right: 15px;
+            width: 5.5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div class="header">
+            <span class="venueName"></span>
+            <br>
+            <span class="address"></span>
+            <br>
+            <div class="infos">
+                <span class="link"></span>
+                <span class="time"></span>
+            </div>
+            <hr>
+        </div>
+        <div class="footer">
+            <span class="title">场馆详情介绍说明</span>
+            <br>
+            <span class="detail"></span>
+        </div>
+    </div>
+    <div id="fieldList">
+    </div>
+</body>
+<script type="application/javascript" src="../js/fastclick.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/alertPopShow.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/iscroll.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        var venueId = getUrlParam('venueId');
+        var unid = getStore("unid") * 1;
+
+        getVenueDetail();
+        function getVenueDetail() {
+            var venueId = getUrlParam('venueId');
+            var url = domain + '/wh/api/v1/venue/detail';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                headers: getTokenAndUnid(),
+                data: JSON.stringify({
+                    venueId: venueId * 1
+                }),
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                success: function (data) {
+                    if (data.error == 10000) {
+                        $('.venueName').text(data.data.name);
+                        $('.address').text(data.data.unName);
+                        $('.link').text(data.data.linkPhone);
+                        $(".time").text(data.data.startTime + '-' + data.data.endTime);
+                        if (data.data.introduction) {
+                            $('.detail').text(data.data.introduction);
+                        } else {
+                            $('.footer').css('display', 'none');
+                            $('hr').css('display', 'none');
+                        }
+
+                        var list = data.data.venueFields;
+                        if (list.length > 0) {
+                            addItem(list, data.data.unName);
+                        }
+                    }
+                },
+                error: function (data) {
+
+                }
+            })
+        }
+
+        function addItem(list, unName) {
+            var html = '';
+            for (var i = 0; i < list.length; i++) {
+                html += '<section><span class="fieldName">' + list[i].name + '</span><br>';
+                html += '<span class="fieldAddress">' + unName + '</span><br>';
+                html += '<img src="../image/arrow_right.png" class="arrow" data-id="' + list[i].id + '"></section>'
+            }
+            $('#fieldList').append(html);
+            $('section').click(function () {
+                var id = $(this).find('.arrow').attr('data-id');
+                var fieldName = $(this).find('.arrow').siblings('span.fieldName').text();
+                fieldName = encodeURI(fieldName);
+                location.href = './fieldAppointList.html?fieldId=' + id + '&fieldName=' + fieldName + '&venueId=' + venueId;
+            })
+        }
+    })
+
+</script>
+
+</html>

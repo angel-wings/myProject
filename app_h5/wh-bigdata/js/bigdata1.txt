@@ -1,0 +1,731 @@
+﻿{
+    "msg": "success",
+    "time": "2019/4/25",
+    "data": {
+        "welfare": {
+            "des": "绂忓埄绀剧浉鍏虫暟鎹�",
+            "welfare_order": "1219",
+            "welfare_commission": "4256",
+            "daily_order": [
+                {
+                    "order_time": "2019/05/23",
+                    "order_count": "1288",
+                    "order_commission": "5256"
+                },
+                {
+                    "order_time": "2019/05/24",
+                    "order_count": "785",
+                    "order_commission": "3240"
+                },
+                {
+                    "order_time": "2019/05/25",
+                    "order_count": "655",
+                    "order_commission": "2620"
+                },
+                {
+                    "order_time": "2019/05/26",
+                    "order_count": "1887",
+                    "order_commission": "7548"
+                },
+				{
+                    "order_time": "2019/05/27",
+                    "order_count": "2097",
+                    "order_commission": "8322"
+                },
+                {
+                    "order_time": "2019/05/28",
+                    "order_count": "1793",
+                    "order_commission": "6898"
+                },
+                {
+                    "order_time": "2019/05/29",
+                    "order_count": "1219",
+                    "order_commission": "4256"
+                }
+            ],
+            "daily_visitor": [
+                {
+                    "visitor_time": "2019/05/23",
+                    "daily_total_visitor": "49202",
+                    "daily_new_visitor": "22803"
+                },
+                {
+                    "visitor_time": "2019/05/24",
+                    "daily_total_visitor": "74203",
+                    "daily_new_visitor": "34611"
+                },
+                {
+                    "visitor_time": "2019/05/25",
+                    "daily_total_visitor": "64540",
+                    "daily_new_visitor": "30113"
+                },
+                {
+                    "visitor_time": "2019/05/26",
+                    "daily_total_visitor": "66980",
+                    "daily_new_visitor": "31233"
+                },
+				{
+                    "visitor_time": "2019/05/27",
+                    "daily_total_visitor": "21846",
+                    "daily_new_visitor": "10041"
+                },
+                {
+                    "visitor_time": "2019/05/28",
+                    "daily_total_visitor": "20202",
+                    "daily_new_visitor": "9271"
+                },
+                {
+                    "visitor_time": "2019/05/29",
+                    "daily_total_visitor": "28679",
+                    "daily_new_visitor": "13219"
+                }
+            ],
+            "hourly_visitor": [
+                {
+                    "hour": "1",
+                    "hourly_total_visitor": "476",
+                    "hourly_new_visitor": "27"
+                },
+                {
+                    "hour": "2",
+                    "hourly_total_visitor": "126",
+                    "hourly_new_visitor": "41"
+                },
+                {
+                    "hour": "3",
+                    "hourly_total_visitor": "51",
+                    "hourly_new_visitor": "24"
+                },
+                {
+                    "hour": "4",
+                    "hourly_total_visitor": "33",
+                    "hourly_new_visitor": "16"
+                },
+                {
+                    "hour": "5",
+                    "hourly_total_visitor": "12",
+                    "hourly_new_visitor": "6"
+                },
+                {
+                    "hour": "6",
+                    "hourly_total_visitor": "90",
+                    "hourly_new_visitor": "43"
+                },
+                {
+                    "hour": "7",
+                    "hourly_total_visitor": "2991",
+                    "hourly_new_visitor": "1420"
+                },
+                {
+                    "hour": "8",
+                    "hourly_total_visitor": "3802",
+                    "hourly_new_visitor": "1773"
+                },
+                {
+                    "hour": "9",
+                    "hourly_total_visitor": "1503",
+                    "hourly_new_visitor": "698"
+                },
+                {
+                    "hour": "10",
+                    "hourly_total_visitor": "1676",
+                    "hourly_new_visitor": "762"
+                },
+                {
+                    "hour": "11",
+                    "hourly_total_visitor": "2436",
+                    "hourly_new_visitor": "1138"
+                },
+                {
+                    "hour": "12",
+                    "hourly_total_visitor": "1847",
+                    "hourly_new_visitor": "853"
+                },
+                {
+                    "hour": "13",
+                    "hourly_total_visitor": "1368",
+                    "hourly_new_visitor": "624"
+                },
+                {
+                    "hour": "14",
+                    "hourly_total_visitor": "1329",
+                    "hourly_new_visitor": "616"
+                },
+                {
+                    "hour": "15",
+                    "hourly_total_visitor": "1853",
+                    "hourly_new_visitor": "867"
+                },
+                {
+                    "hour": "16",
+                    "hourly_total_visitor": "2671",
+                    "hourly_new_visitor": "1250"
+                },
+                {
+                    "hour": "17",
+                    "hourly_total_visitor": "4410",
+                    "hourly_new_visitor": "2073"
+                },
+                {
+                    "hour": "18",
+                    "hourly_total_visitor": "4415",
+                    "hourly_new_visitor": "2045"
+                },
+                {
+                    "hour": "19",
+                    "hourly_total_visitor": "5363",
+                    "hourly_new_visitor": "2489"
+                },
+                {
+                    "hour": "20",
+                    "hourly_total_visitor": "6267",
+                    "hourly_new_visitor": "2925"
+                },
+                {
+                    "hour": "21",
+                    "hourly_total_visitor": "10901",
+                    "hourly_new_visitor": "4997"
+                },
+                {
+                    "hour": "22",
+                    "hourly_total_visitor": "9255",
+                    "hourly_new_visitor": "4359"
+                },
+                {
+                    "hour": "23",
+                    "hourly_total_visitor": "3396",
+                    "hourly_new_visitor": "1569"
+                },
+                {
+                    "hour": "24",
+                    "hourly_total_visitor": "1297",
+                    "hourly_new_visitor": "601"
+                }
+            ],
+            "visitor_areas": [
+                {
+                    "area_name": "娌冲崡鐪�",
+                    "area_visitor": "6045"
+                },
+                {
+                    "area_name": "娴欐睙鐪�",
+                    "area_visitor": "2593"
+                },
+                {
+                    "area_name": "婀栧崡鐪�",
+                    "area_visitor": "2519"
+                },
+                {
+                    "area_name": "骞夸笢鐪�",
+                    "area_visitor": "2140"
+                },
+                {
+                    "area_name": "璐靛窞鐪�",
+                    "area_visitor": "2126"
+                },
+                {
+                    "area_name": "鍏朵粬鐪�",
+                    "area_visitor": "17174"
+                }
+            ]
+        },
+        "physical_test": {
+            "des": "浣撴祴鐩稿叧鏁版嵁",
+            "physical_name": "2018骞翠綋娴嬫儏鍐�",
+            "total_school": "14",
+            "total_person": "85643",
+            "total_excelent": "818",
+            "total_good": "10653",
+            "total_pass": "63866",
+            "total_nopass": "10306",
+            "school_passrate_ranking": {
+			    "school_c211": "88.9",
+                "school_general": "88.4",
+                "school_vocational": "84.1",
+				"school_c9": "0",
+                "school_c985": "0"
+            },
+            "province_passrate_ranking": [
+			    {
+                    "province_name": "娴欐睙鐪�",
+                    "passrate": "96.6"
+                },
+				{
+                    "province_name": "鍖椾含甯�",
+                    "passrate": "90.7"
+                },
+				{
+                    "province_name": "璐靛窞鐪�",
+                    "passrate": "90.1"
+                },
+				{
+                    "province_name": "娌冲崡鐪�",
+                    "passrate": "88.3"
+                },
+                {
+                    "province_name": "娌冲寳鐪�",
+                    "passrate": "85.9"
+                } 
+            ],
+            "physical_item": [
+			    {
+                    "item_name": "50绫宠窇",
+                    "passrate": "94.9"
+                },
+                {
+                    "item_name": "鑲烘椿閲�",
+                    "passrate": "92.7"
+                },
+                {
+                    "item_name": "鍧愪綅浣撳墠灞�",
+                    "passrate": "90.9"
+                },
+                {
+                    "item_name": "濂崇敓800绫宠窇",
+                    "passrate": "87.5"
+                },
+				{
+                    "item_name": "涓€鍒嗛挓浠板崸璧峰潗",
+                    "passrate": "85"
+                },
+				{
+                    "item_name": "绔嬪畾璺宠繙",
+                    "passrate": "82.4"
+                },
+                {
+                    "item_name": "鐢风敓1000绫宠窇",
+                    "passrate": "75.5"
+                },
+                {
+                    "item_name": "鐢风敓寮曚綋鍚戜笂",
+                    "passrate": "22"
+                }
+            ]
+        },
+        "app_users": {
+            "des": "鐢ㄦ埛娲昏穬鎯呭喌",
+            "dau": [
+                {
+                    "dau_time": "2019/05/23",
+                    "dau_users": "793181"
+                },
+                {
+                    "dau_time": "2019/05/24",
+                    "dau_users": "632750"
+                },
+                {
+                    "dau_time": "2019/05/25",
+                    "dau_users": "474601"
+                },
+                {
+                    "dau_time": "2019/05/26",
+                    "dau_users": "530113"
+                },
+				{
+                    "dau_time": "2019/05/27",
+                    "dau_users": "725525"
+                },
+                {
+                    "dau_time": "2019/05/28",
+                    "dau_users": "722522"
+                },
+                {
+                    "dau_time": "2019/05/29",
+                    "dau_users": "711626"
+                }
+            ],
+            "mau": [
+                {
+                    "mau_time": "2018/05/01",
+                    "mau_users": "1338005"
+                },
+                {
+                    "mau_time": "2018/06/01",
+                    "mau_users": "1089896"
+                },
+                {
+                    "mau_time": "2018/07/01",
+                    "mau_users": "852721"
+                },
+                {
+                    "mau_time": "2018/08/01",
+                    "mau_users": "658674"
+                },
+                {
+                    "mau_time": "2018/09/01",
+                    "mau_users": "1609831"
+                },
+                {
+                    "mau_time": "2018/10/01",
+                    "mau_users": "1958019"
+                },
+                {
+                    "mau_time": "2018/11/01",
+                    "mau_users": "1984644"
+                },
+                {
+                    "mau_time": "2018/12/01",
+                    "mau_users": "1824969"
+                },
+                {
+                    "mau_time": "2019/01/01",
+                    "mau_users": "807936"
+                },
+                {
+                    "mau_time": "2019/02/01",
+                    "mau_users": "1042816"
+                },
+                {
+                    "mau_time": "2019/03/01",
+                    "mau_users": "1993352"
+                },
+                {
+                    "mau_time": "2019/04/01",
+                    "mau_users": "2019207"
+                }
+            ],
+            "yesterday_pulse_count": {
+                "des": "鏄ㄦ棩鍚姩娆℃暟锛�1銆�1-2娆★紝2銆�3-5娆★紝3銆�6-9娆★紝4銆�10-19娆★紝5銆�20-49娆★紝6銆�50娆′互涓婏級",
+                "pulse_count1": "307424",
+                "pulse_count2": "201697",
+                "pulse_count3": "106816",
+                "pulse_count4": "77463",
+                "pulse_count5": "16839",
+                "pulse_count6": "657"
+            },
+            "yesterday_user_duration": {
+                "des": "鏄ㄦ棩浣跨敤鏃堕暱锛�1銆�1-30绉掞紝2銆�31绉�-1鍒嗛挓锛�3銆�1-3鍒嗛挓锛�4銆�3-10鍒嗛挓锛�5銆�10-30鍒嗛挓锛�6銆�30鍒嗛挓浠ヤ笂锛�",
+                "duration1": "48260",
+                "duration2": "25235",
+                "duration3": "64491",
+                "duration4": "117860",
+                "duration5": "223166",
+                "duration6": "68723"
+            }
+        },
+        "platform_signs": {
+            "des": "绛剧害鐢ㄦ埛浠ュ強瀛︽牎淇℃伅",
+            "sign_schools": "574",
+            "sign_up_users": "5561923",
+            "province_sign_info": [
+                {
+                    "province_name": "骞夸笢",
+                    "sign_school_count": "20"
+                },
+                {
+                    "province_name": "鍖椾含",
+                    "sign_school_count": "19"
+                },
+                {
+                    "province_name": "澶╂触",
+                    "sign_school_count": "18"
+                },
+                {
+                    "province_name": "涓婃捣",
+                    "sign_school_count": "17"
+                },
+                {
+                    "province_name": "閲嶅簡",
+                    "sign_school_count": "5"
+                },
+                {
+                    "province_name": "娌冲寳",
+                    "sign_school_count": "45"
+                },
+                {
+                    "province_name": "娌冲崡",
+                    "sign_school_count": "58"
+                },
+                {
+                    "province_name": "浜戝崡",
+                    "sign_school_count": "16"
+                },
+                {
+                    "province_name": "杈藉畞",
+                    "sign_school_count": "30"
+                },
+                {
+                    "province_name": "榛戦緳姹�",
+                    "sign_school_count": "14"
+                },
+                {
+                    "province_name": "婀栧崡",
+                    "sign_school_count": "41"
+                },
+                {
+                    "province_name": "瀹夊窘",
+                    "sign_school_count": "2"
+                },
+                {
+                    "province_name": "灞变笢",
+                    "sign_school_count": "14"
+                },
+                {
+                    "province_name": "鏂扮枂",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "姹熻嫃",
+                    "sign_school_count": "18"
+                },
+                {
+                    "province_name": "娴欐睙",
+                    "sign_school_count": "75"
+                },
+                {
+                    "province_name": "姹熻タ",
+                    "sign_school_count": "12"
+                },
+                {
+                    "province_name": "婀栧寳",
+                    "sign_school_count": "11"
+                },
+                {
+                    "province_name": "骞胯タ",
+                    "sign_school_count": "5"
+                },
+                {
+                    "province_name": "鐢樿們",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "灞辫タ",
+                    "sign_school_count": "39"
+                },
+                {
+                    "province_name": "鍐呰挋鍙�",
+                    "sign_school_count": "8"
+                },
+                {
+                    "province_name": "闄曡タ",
+                    "sign_school_count": "11"
+                },
+                {
+                    "province_name": "鍚夋灄",
+                    "sign_school_count": "16"
+                },
+                {
+                    "province_name": "绂忓缓",
+                    "sign_school_count": "17"
+                },
+                {
+                    "province_name": "璐靛窞",
+                    "sign_school_count": "30"
+                },
+                {
+                    "province_name": "骞夸笢",
+                    "sign_school_count": "37"
+                },
+                {
+                    "province_name": "闈掓捣",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "瑗胯棌",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "鍥涘窛",
+                    "sign_school_count": "13"
+                },
+                {
+                    "province_name": "瀹佸",
+                    "sign_school_count": "3"
+                },
+                {
+                    "province_name": "娴峰崡",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "鍙版咕",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "棣欐腐",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "婢抽棬",
+                    "sign_school_count": "0"
+                }
+            ]
+        },
+        "run_sport": {
+            "des": "鏈鏈熷鐢熻窇姝ョ粺璁℃暟鎹�",
+            "partake_run_schools": "481",
+            "partake_run_male": "1231632",
+            "partake_run_female": "1424705",
+            "average_run_km": [
+                {
+                    "name": "0-50km",
+                    "newSemester": "609248",
+                    "lastSemester": "537073"
+                },
+                {
+                    "name": "50-100km",
+                    "newSemester": "879502",
+                    "lastSemester": "926615"
+                },
+                {
+                    "name": "100-150km",
+                    "newSemester": "288374",
+                    "lastSemester": "291302"
+                },
+                {
+                    "name": "150-200km",
+                    "newSemester": "37330",
+                    "lastSemester": "32080"
+                },
+                {
+                    "name": "200km浠ヤ笂",
+                    "newSemester": "8757",
+                    "lastSemester": "4769"
+                }
+            ],
+            "daily_run_person": [
+                {
+                    "run_date": "2019/4/29",
+                    "run_person": "476529"
+                },
+                {
+                    "run_date": "2019/4/30",
+                    "run_person": "298660"
+                },
+                {
+                    "run_date": "2019/5/1",
+                    "run_person": "164987"
+                },
+                {
+                    "run_date": "2019/5/2",
+                    "run_person": "149686"
+                },
+                {
+                    "run_date": "2019/5/3",
+                    "run_person": "173058"
+                },
+                {
+                    "run_date": "2019/5/4",
+                    "run_person": "292409"
+                },
+                {
+                    "run_date": "2019/5/5",
+                    "run_person": "473341"
+                },
+                {
+                    "run_date": "2019/5/6",
+                    "run_person": "615133"
+                },
+                {
+                    "run_date": "2019/5/7",
+                    "run_person": "628684"
+                },
+                {
+                    "run_date": "2019/5/8",
+                    "run_person": "675054"
+                },
+                {
+                    "run_date": "2019/5/9",
+                    "run_person": "704522"
+                },
+                {
+                    "run_date": "2019/5/10",
+                    "run_person": "547345"
+                },
+                {
+                    "run_date": "2019/5/11",
+                    "run_person": "443101"
+                },
+                {
+                    "run_date": "2019/5/12",
+                    "run_person": "474983"
+                },
+                {
+                    "run_date": "2019/5/13",
+                    "run_person": "624558"
+                },
+                {
+                    "run_date": "2019/5/14",
+                    "run_person": "699016"
+                },
+                {
+                    "run_date": "2019/5/15",
+                    "run_person": "602150"
+                },
+                {
+                    "run_date": "2019/5/16",
+                    "run_person": "627626"
+                },
+                {
+                    "run_date": "2019/5/17",
+                    "run_person": "492216"
+                },
+                {
+                    "run_date": "2019/5/18",
+                    "run_person": "407510"
+                },
+                {
+                    "run_date": "2019/5/19",
+                    "run_person": "430716"
+                },
+                {
+                    "run_date": "2019/5/20",
+                    "run_person": "618161"
+                },
+                {
+                    "run_date": "2019/5/21",
+                    "run_person": "327562"
+                },
+                {
+                    "run_date": "2019/5/22",
+                    "run_person": "364557"
+                },
+                {
+                    "run_date": "2019/5/23",
+                    "run_person": "597589"
+                },
+				{
+                    "run_date": "2019/5/24",
+                    "run_person": "491196"
+                },
+				{
+                    "run_date": "2019/5/25",
+                    "run_person": "361099"
+                },
+				{
+                    "run_date": "2019/5/26",
+                    "run_person": "369191"
+                },
+				{
+                    "run_date": "2019/5/27",
+                    "run_person": "567579"
+                },
+                {
+                    "run_date": "2019/5/28",
+                    "run_person": "581992"
+                },
+                {
+                    "run_date": "2019/5/29",
+                    "run_person": "579417"
+                }
+            ],
+            "single_run": {
+                "des": "鍗曟璺戞骞冲潎閲岀▼鍒嗗竷鎯呭喌锛�1銆�0-1鍗冪背锛�2銆�1-2鍗冪背锛�3銆�2-3鍗冪背锛�4銆�3-4鍗冪背锛�5銆�4-5鍗冪背锛�6銆�5鍗冪背浠ヤ笂锛�",
+                "single_run1": "328640",
+                "single_run2": "547151",
+                "single_run3": "605968",
+                "single_run4": "255771",
+                "single_run5": "59141",
+                "single_run6": "26540"
+            },
+            "weekly_run": {
+                "des": "骞冲潎姣忓懆杩愬姩娆℃暟鍒嗗竷鎯呭喌锛�1銆�0-1娆★紝2銆�1-2娆★紝3銆�2-3娆★紝4銆�3-4娆★紝5銆�4-5娆★紝6銆�5娆′互涓婏級",
+                "weekly_run1": "5234",
+                "weekly_run2": "476534",
+                "weekly_run3": "839258",
+                "weekly_run4": "357272",
+                "weekly_run5": "97897",
+                "weekly_run6": "47016"
+            }
+        }
+    }
+}

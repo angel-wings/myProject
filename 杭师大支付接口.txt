@@ -1,0 +1,30 @@
+1、生成校方订单，获得二维码
+/gkcxpay/order/orderCreate
+入参:
+
+body:订单文字描述信息 比如篮球场四号球馆
+outId: 订单号
+totalFee : 金额 分
+returnUrl ： 订单成功后页面跳转地址（可用于跳转到原业务系统成功提示页面）
+payType  1：微信，2：支付宝
+
+返回如
+{
+	"ret_code": 0,
+	"ret_content": {
+		"order_id": "1560497943983850",
+		"out_trade_no": "01804",
+		"url": "https://qr.alipay.com/bax03535kmmfop6s4rdo606b"
+	},
+	"sign": "0f25a0aff98b33125ada01a93662d47e",
+
+	"param": {
+		"order_id": "1560497943983850",
+		"out_trade_no": "01804",
+		"url": "https://qr.alipay.com/bax03535kmmfop6s4rdo606b"
+	},
+	"url_image": "https://qr.alipay.com/bax03535kmmfop6s4rdo606b"
+}
+
+小程序接入支付功能：https://docs.alipay.com/mini/introduce/pay#%E6%8E%A5%E5%85%A5%E6%8C%87%E5%BC%95
+开发者入驻小程序：https://docs.alipay.com/mini/introduce

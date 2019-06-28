@@ -60,7 +60,7 @@ $(function () {
         var that = this;
         $.ajax({
             type: 'get',
-            url: txturl,               //////////////////////////////////////// 切换url
+            url: myurl,               //////////////////////////////////////// 切换url
             success: function (data) {
                 var prodata = JSON.parse(data)
                 if (prodata.msg == "success") {
@@ -310,31 +310,33 @@ $(function () {
             colors: ['#003E90', '#042888', '#0969EF', '#438FFA', '#62A1FA', '#00CCFF'],
             title: { text: '' },
             colorAxis: {
-                dataClasses: [{
-                    to: 10,
-                    color: '#003E90'
-                }, {
-                    from: 10,
-                    to: 20,
-                    color: '#042888'
-                }, {
-                    from: 20,
-                    to: 30,
-                    color: '#0969EF'
-                }, {
-                    from: 30,
-                    to: 40,
-                    color: '#438FFA'
+                dataClasses: [
+                    {
+                        to: 10,
+                        color: '#003E90'
+                    }, {
+                        from: 10,
+                        to: 20,
+                        color: '#042888'
+                    }, {
+                        from: 20,
+                        to: 30,
+                        color: '#0969EF'
+                    }, {
+                        from: 30,
+                        to: 40,
+                        color: '#438FFA'
 
-                }, {
-                    from: 40,
-                    to: 50,
-                    color: '#62A1FA'
+                    }, {
+                        from: 40,
+                        to: 50,
+                        color: '#62A1FA'
 
-                }, {
-                    from: 50,
-                    color: '#00CCFF'
-                }]
+                    }, {
+                        from: 50,
+                        color: '#00CCFF'
+                    }
+                ]
             },
             series: [{
                 data: mydata,
@@ -386,7 +388,7 @@ $(function () {
             legend: { enabled: false },
             series: [{
                 lineWidth: 1,
-                marker: { enabled: false },
+                marker: { enabled: false, lineWidth: 4, lineColor: null },
                 pointPlacement: 'on',
                 data: datas
             }]

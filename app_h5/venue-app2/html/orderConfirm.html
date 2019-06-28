@@ -300,6 +300,7 @@
                         if (list && list.length) {
                             list.forEach(function (item) {
                                 if (item.name == "微信") {
+                                    alert( "微信" + item.id)
                                     $("section.weixin").attr("id", item.id).css("display", "block");
                                 } else if (item.name == "支付宝") {
                                     $("section.zhifubao").attr("id", item.id).css("display", "block");

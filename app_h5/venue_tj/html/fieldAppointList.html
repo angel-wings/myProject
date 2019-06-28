@@ -1,0 +1,694 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <meta name="format-detection" content="telephone=no">
+    <title>场地预订</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body,
+        html {
+            background: #f6f6f6;
+            margin: 0;
+            width: 100%;
+        }
+        
+        span {
+            display: inline-block;
+        }
+        
+        #dateBox {
+            width: 100%;
+            height: 65px;
+            overflow-x: scroll;
+            background: #ffffff;
+            border-top: 1px solid #ffffff;
+        }
+        
+        #dateBox section {
+            width: calc(100% / 7);
+            display: inline-block;
+            height: 65px;
+            text-align: center;
+            border-right: solid 1px #ddd;
+            font-size: 12px;
+        }
+        
+        .selected {
+            background: #333333;
+            color: #ffffff;
+            background-image: url('../image/triangular.png');
+            background-size: 13px 6px;
+            background-repeat: no-repeat;
+            background-position: bottom center;
+        }
+        
+        span.date {
+            margin-top: 11.5px;
+            font-size: 9px;
+        }
+        
+        span.week {
+            margin-top: 4px;
+            font-size: 9px;
+        }
+        
+        #timeBox {
+            height: 30px;
+            line-height: 30px;
+            width: 300%;
+            background: #fafafa;
+            border-bottom: solid 1px #333333;
+        }
+        
+        #timeBox span {
+            font-size: 9px;
+            color: #333333;
+            width: 50px;
+            background-image: url('../image/timepic.png');
+            background-repeat: no-repeat;
+            background-position: bottom center;
+            background-size: 4.5px;
+            float: left;
+        }
+        
+        #fieldBox {
+            width: 100%;
+            overflow-x: scroll;
+            padding-bottom: 85px;
+        }
+        
+        #fieldBox ul {
+            clear: both;
+            width: 600%;
+        }
+        
+        #fieldBox li {
+            height: 50px;
+            line-height: 50px;
+            box-sizing: border-box;
+            width: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #ff4438;
+            background: #ffffff;
+            border-bottom: solid 1px #333333;
+            border-right: solid 1px #333333;
+            float: left;
+        }
+        
+        #fieldBox li.first {
+            width: 60px !important;
+            color: #333333;
+            pointer-events: none;
+            border-left: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        #fieldBox li.disabled {
+            color: #b2b2b2;
+            background: #cccccc;
+            pointer-events: none;
+        }
+        
+        #fieldBox li.selected {
+            background: #333333;
+            color: #ffffff;
+        }
+        
+        #btnBox {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 80px;
+            background: #ffffff;
+        }
+        
+        #btnBox span.btn {
+            color: #ffffff;
+            font-size: 15px;
+            margin-left: 15px;
+            width: calc(100% - 30px);
+            background: #333333;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 3px;
+            margin-top: 17.5px;
+            text-align: center;
+        }
+        
+        #noInfo {
+            text-align: center;
+            color: #b2b2b2;
+            font-size: 10px;
+            position: absolute;
+            top: 195px;
+            left: 50%;
+            display: none;
+        }
+        
+        #noInfo>span {
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        #noInfo img {
+            width: 25px;
+        }
+        
+        #noInfo>span {
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        .c-float-modePop {
+            margin-top: 86px;
+            height: calc( 100vh - 120px);
+        }
+        
+        .c-float-popWrap .c-float-modePop button.ok {
+            color: #00c18b;
+            pointer-events: auto;
+        }
+        
+        .c-float-popWrap .c-float-modePop button.ok.dis {
+            color: #dddddd;
+            border-bottom-right-radius: 12px;
+        }
+        
+        .c-float-popWrap .c-float-modePop button.cancel {
+            color: #dddddd;
+            border-bottom-left-radius: 12px;
+        }
+        
+        .c-float-popWrap .c-float-modePop .content {
+            overflow: scroll;
+            color: #202020;
+            height: calc( 100% - 120px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dateBox">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            </div>
+        </div>
+    </div>
+
+    <div id="fieldBox">
+        <div id="timeBox">
+        </div>
+    </div>
+    <div id="noInfo">
+        <img src="../image/field.png" alt="">
+        <br>
+        <span>暂无任何场地信息</span>
+    </div>
+
+    <div id="btnBox">
+        <span class="btn">立即预订</span>
+    </div>
+
+    <div class="toast"></div>
+</body>
+<script src="../js/prefixfree.js"></script>
+<script src="../js/fastclick.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/alertPopShow.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/iscroll.js"></script>
+<script src="../js/swiper.min.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+        var fieldId = getUrlParam('fieldId');
+        var venueId = getUrlParam('venueId');
+        var chargeType;
+        var beginAt, endAt;
+
+        function swiper() {
+            var swiper = new Swiper('.swiper-container', {
+                direction: 'horizontal'
+            });
+        }
+
+        //请求场地预订的时间内容；
+        getDate();
+
+        function getDate() {
+            var url = domain + '/wh/api/v1/venue/field/reserve/banner';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                headers: getTokenAndUnid(),
+                data: JSON.stringify({
+                    fieldId: fieldId
+                }),
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                success: function(data) {
+                    if (data.error == 10000) {
+                        document.title = data.data.name;
+                        var days = data.data.bookDays;
+                        chargeType = data.data.chargeType;
+                        var dateArray = [];
+                        var today = new Date();
+                        for (var i = 0; i < days; i++) {
+                            var date = today.getTime() + i * 3600 * 1000 * 24;
+                            var week = calcWeek(new Date(date).format('yyyy/MM/dd'));
+                            dateArray.push({
+                                date: new Date(date).format('MM.dd'),
+                                week: week
+                            })
+                        }
+                        addDate(dateArray);
+
+                        beginAt = data.data.startTime;
+                        endAt = data.data.endTime;
+                        addItem(beginAt, endAt, chargeType);
+                    } else {
+                        toast(data.message, 200);
+                    }
+                },
+                error: function(response) {
+                    toast('请求失败');
+                }
+            })
+
+        }
+
+        //场地预订信息
+        getFieldAppointmentList();
+
+        function getFieldAppointmentList(date) {
+            var url = domain + '/wh/api/v1/venue/field/reserve';
+            var dateTime = date || (new Date().format('yyyy-MM-dd'));
+            var dayType = (new Date(dateTime).getDay()) == 0 ? 7 : new Date(dateTime).getDay();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                headers: getTokenAndUnid(),
+                data: JSON.stringify({
+                    fieldId: fieldId * 1,
+                    dayType: dayType,
+                    date: dateTime,
+                }),
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                success: function(data) {
+                    if (data.error == 10000) {
+                        var list = data.data.sort(by("fieldNo"));
+                        addLi(list, chargeType);
+                    } else {
+                        $('#timeBox').siblings().remove();
+                        toast(data.message, 220);
+                    }
+                },
+                error: function(response) {
+                    toast('请求失败');
+                }
+            })
+        }
+
+        //生成头部日期信息;
+        function addDate(list) {
+            var html = '';
+            if (list.length < 8) {
+                for (var i = 0; i < list.length; i++) {
+                    if (i == 0) {
+                        html += '<div class="swiper-slide"><section class="selected"><span class="date">' + list[0].date + '</span><br><span class="week">' + list[0].week + '</span></section>';
+                    } else {
+                        html += '<section><span class="date">' + list[i].date + '</span><br><span class="week">' + list[i].week + '</span></section>';
+                    }
+                }
+            } else {
+                for (var i = 0; i < list.length; i++) {
+                    if (i == 0) {
+                        html += '<div class="swiper-slide"><section class="selected"><span class="date">' + list[0].date + '</span><br><span class="week">' + list[0].week + '</span></section>';
+                    } else if (i == 6) {
+                        html += '<section><span class="date">' + list[i].date + '</span><br><span class="week">' + list[i].week + '</span></section></div><div class="swiper-slide">';
+                    } else {
+                        html += '<section><span class="date">' + list[i].date + '</span><br><span class="week">' + list[i].week + '</span></section>';
+                    }
+                }
+            }
+            html += '</div>';
+            $('#dateBox .swiper-wrapper').append(html);
+            swiper();
+
+            $('div.swiper-slide section').on('click', function() {
+                $(".swiper-slide section").removeClass('selected');
+                $(this).addClass('selected');
+
+                var date = $(this).children('span.date').text();
+                var year = new Date().getFullYear();
+                date = year + '-' + date.replace('.', '-');
+                getFieldAppointmentList(date);
+
+            })
+        }
+
+        //生成时间段信息；
+        function addItem(start, end, type) {
+            var unitLength = '';
+            if (type == 1) {
+                unitLength = 3600 * 1000; //小时制
+            } else {
+                unitLength = 1800 * 1000; //半小时制
+            }
+            var list = []; //['15:30','16:30']；
+            var today = new Date().format('yyyy/MM/dd');
+            var startTime = new Date(today + ' ' + start).getTime();
+            var endTime = new Date(today + ' ' + end).getTime();
+            var length = endTime - startTime;
+            length = Math.ceil(length / unitLength);
+
+            for (var i = 0; i <= length; i++) {
+                var item = new Date(startTime + i * unitLength).format('hh:mm');
+                list.push(item);
+            }
+
+            var html = '';
+            for (var i = 0; i < list.length; i++) {
+                if (i == 0) {
+                    html += '<span class="first">' + list[i] + '</span>';
+                } else {
+                    html += '<span>' + list[i] + '</span>'
+                }
+            }
+
+            $('#timeBox').width(90 + 50 * length + 'px');
+            $('#fieldBox ul').width(90 + 50 * length + 'px');
+            $('#timeBox').append(html);
+            calcMargin();
+        }
+
+
+        //计算时间标签的位置;
+        function calcMargin() {
+            var width = $('span.first').width();
+            $('span.first').css('margin-left', "34.5px");
+
+            var width_1 = $('#noInfo').width();
+            $('#noInfo').css('margin-left', '-' + (width_1 / 2));
+        }
+
+        //生成表格
+        function addLi(list, type) {
+            var unitLength = '';
+            if (type == 1) {
+                unitLength = 3600 * 1000; //小时制
+            } else {
+                unitLength = 1800 * 1000; //半小时制
+            }
+            var html = '';
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].venueFieldGoods && list[i].venueFieldGoods.length) {
+                    list[i].venueFieldGoods = list[i].venueFieldGoods.sort(by('startHour'));
+                    if (list[i].venueFieldGoods[list[i].venueFieldGoods.length - 1].endHour == "00:00") {
+                        list[i].venueFieldGoods[list[i].venueFieldGoods.length - 1].endHour = "24:00";
+                    }
+                    html += '<ul><li class="first">' + list[i].name + '</li>';
+
+                    list[i].venueFieldGoods = addData(beginAt, endAt, type, list[i].venueFieldGoods);
+                    for (var j = 0; j < list[i].venueFieldGoods.length; j++) {
+                        var length = calcTimeLength(list[i].venueFieldGoods[j].startHour, list[i].venueFieldGoods[j].endHour) / unitLength;
+                        if (list[i].venueFieldGoods[j].canReverse == 0) {
+                            //可以预定
+                            html += '<li data-length="' + length + '" data-id="' + list[i].venueFieldGoods[j].id + '" data-start="' + list[i].venueFieldGoods[j].startHour + '" data-end="' + list[i].venueFieldGoods[j].endHour + '">' + list[i].venueFieldGoods[j].price + '</li>';
+                        } else {
+                            //不可预订
+                            html += '<li class="disabled" data-length="' + length + '" data-id="' + list[i].venueFieldGoods[j].id + '" data-start="' + list[i].venueFieldGoods[j].startHour + '" data-end="' + list[i].venueFieldGoods[j].endHour + '">' + list[i].venueFieldGoods[j].price + '</li>';
+                        }
+
+                    }
+                    html += '</ul>';
+                }
+            }
+            if (html) {
+                $('#noInfo').css('display', 'none');
+            } else {
+                $('#noInfo').css('display', 'block');
+            }
+            $('#timeBox').siblings().remove();
+            $('#timeBox').after(html);
+            $('#fieldBox li[data-length]').each(function(item) {
+                var length = $(this).attr('data-length');
+                $(this).width(length * 50 - 1);
+                $(this).css({
+                    'box-sizing': 'border-box'
+                });
+            })
+        }
+
+        $('#fieldBox').on('click', 'li', function() {
+            var unitLength = '';
+            if (chargeType == 1) {
+                unitLength = 3600 * 1000; //小时制
+            } else {
+                unitLength = 1800 * 1000; //半小时制
+            }
+
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            } else {
+                //做逻辑判断；1.同一时段不可预订两片场地；2.所有场地预订总时长不可超过2小时；（仅预订一片场地忽略此规则）;
+                var selectItemArray = [];
+                var today = new Date().format('yyyy/MM/dd');
+                var startTime = today + ' ' + $(this).attr('data-start');
+                var endTime = today + ' ' + $(this).attr('data-end');
+                var timeLength = $(this).attr('data-length');
+                startTime = new Date(startTime).getTime();
+                endTime = new Date(endTime).getTime();
+                $('#fieldBox li.selected').each(function(item) {
+                    var startHour = today + ' ' + $(this).attr('data-start');
+                    var endHour = today + ' ' + $(this).attr('data-end');
+
+                    selectItemArray.push({
+                        start: new Date(startHour).getTime(),
+                        end: new Date(endHour).getTime(),
+                        timeLength: timeLength
+                    })
+                });
+                for (var i = 0; i < selectItemArray.length; i++) {
+                    if (startTime >= selectItemArray[i].end || endTime <= selectItemArray[i].start) {
+                        //可以预定，
+                    } else {
+                        toast('同一时段不可预订两片场地', 250);
+                        return;
+                    }
+                }
+
+                if (selectItemArray.length > 0) {
+                    var totalTime = 0;
+                    for (var i = 0; i < selectItemArray.length; i++) {
+                        totalTime = totalTime + selectItemArray[i].timeLength * unitLength;
+                    }
+
+                    totalTime = totalTime + $(this).attr('data-length') * unitLength;
+                    if (totalTime > 2 * 3600 * 1000) {
+                        toast('所有场地预订总时长不可超过2小时', 250);
+                        return;
+                    }
+                }
+
+                $(this).addClass('selected');
+            }
+        })
+
+        //立即预定；
+        $('#btnBox .btn').click(function() {
+            var selectItemArray = [];
+
+            $('#fieldBox li.selected').each(function(index, item) {
+                var goodsId = $(this).attr('data-id') * 1;
+                selectItemArray.push(goodsId);
+            });
+
+            if (selectItemArray.length == 0) {
+                toast('您尚未预定任何场地', 200);
+            } else {
+                var contentText = "进入场地活动，需严格遵守场地管理规定，服从场地管理人员的管理。同时，运动参与者已充分认识到或经本声明提示后充分认识到以下免责事项：";
+                contentText += "<br><br>1、	预订成功后，在开场前15分钟凭预订人有效证件到场馆现场确认，并按场馆公示价格支付费用，过期场地不再保留。";
+                contentText += "<br><br>2、	运动参与者如患有不适合体育运动的疾病的（如心脏病、高血压、哮喘等），不得在体育场地运动。因运动参与者自身原因在运动过程中突发疾病引起的一切后果由其自负。";
+                contentText += "<br><br>3、	运动参与者对运动过程中可能遭受的人身伤害风险有充分的预计并愿意使自己置于此种风险中。体育场地对运动过程中遭受的非运动设施造成的人身损害无过错且不承担任何赔偿责任。";
+                contentText += "<br><br>4、	运动参与者在运动过程中如因对抗产生摩擦，发生纠纷，双方需保持理性与克制，如产生暴力冲突并产生人生财产损失，按照相应法律法规承担相应责任，场地管理方无法承担调节或赔偿责任。";
+                contentText += "<br><br>5、	运动参与者自行保管随身携带的物品并承担相应责任，进入室内场馆请更换干净鞋子。";
+                contentText += "<br><br>如有任何使用问题，可联系体育教学部，邮件反馈至tjbooking@163.com。";
+                contentText += "<br><br>本免责声明系运动参与者获许使用场地的前提条件和重要组成部分。";
+                contentText += '<br><br><input type="checkbox" id="cbox" checked="true">本人已认真阅读、充分了解并自愿接受同济大学体育场地上述规定。';
+
+                $("body").on("change", "#cbox", function(e) {
+                    var checked = e.target.checked;
+                    if (checked) {
+                        $("button.ok").removeClass("dis");
+                    } else {
+                        $("button.ok").addClass("dis");
+                    }
+                })
+                popTipShow.confirm('预定场地须知', contentText, ['确 定', '取 消'], function(e) {
+                    var button = $(e.target).attr('class');
+                    var that = this;
+
+                    if (button == 'ok') {
+                        that.hide();
+                        createOrder(selectItemArray);
+                    } else {
+                        that.hide();
+                    }
+                })
+
+            }
+
+        })
+
+        //生成订单
+        function createOrder(selectItemArray) {
+            var url = domain + '/wh/api/v1/order/overbooking';
+            var date = $('div.swiper-slide section.selected').children('span.date').text();
+            var year = new Date().getFullYear();
+            date = year + '-' + date.replace('.', '-');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                headers: getTokenAndUnid(),
+                data: JSON.stringify({
+                    date: date,
+                    fieldId: fieldId * 1,
+                    venueId: venueId * 1,
+                    goodsList: selectItemArray
+                }),
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                success: function(data) {
+                    if (data.error == 10000) {
+                        // 预订成功，判断是否0元场地
+                        if (data.data.zeroPay == 1) { //0元支付
+                            location.href = './orderDetail.html?orderId=' + data.data.orderId;
+                        } else {
+                            location.href = './orderConfirm.html?orderId=' + data.data.orderId;
+                        }
+                    } else {
+                        toast(data.message, 250);
+                    }
+                },
+                error: function(response) {
+                    toast('请求失败');
+                }
+            })
+        }
+
+        //计算两个时间段的差值
+        function calcTimeLength(start, end) {
+            var today = new Date().format('yyyy/MM/dd');
+            var startTime = new Date(today + ' ' + start).getTime();
+            var endTime = new Date(today + ' ' + end).getTime();
+            return (endTime - startTime);
+        }
+
+        //添加空白时间段的数据
+        function addData(start, end, chargeType, list) {
+            var unitLength = '';
+            if (chargeType == 1) {
+                unitLength = 3600 * 1000; //小时制
+            } else {
+                unitLength = 1800 * 1000; //半小时制
+            }
+            var today = new Date().format('yyyy/MM/dd');
+            var startTime = today + ' ' + start;
+            var endTime = today + ' ' + end;
+            startTime = new Date(startTime).getTime();
+            endTime = new Date(endTime).getTime();
+            var timeLength = (endTime - startTime) / unitLength;
+            var newArr = [];
+            list.forEach(function(item, index) {
+
+                for (var j = 0; j < timeLength; j++) {
+
+                    if (item.startHour == (new Date(startTime).format('hh:mm'))) {
+                        newArr.push({
+                            'startHour': item.startHour,
+                            'endHour': item.endHour,
+                            'canReverse': item.canReverse,
+                            'id': item.id,
+                            'price': item.price
+                        });
+                        startTime = new Date(today + ' ' + item.endHour).getTime();
+                        if (index == (list.length - 1)) {
+                            if (endTime == startTime) {
+                                //时间段已经用完
+                                return;
+                            } else {
+                                var length = (endTime - startTime) / unitLength;
+                                for (var k = 0; k < length; k++) {
+                                    newArr.push({
+                                        'startHour': new Date(startTime).format('hh:mm'),
+                                        'endHour': new Date(startTime + unitLength).format('hh:mm'),
+                                        'id': '0',
+                                        'canReverse': 1,
+                                        'price': ''
+                                    });
+
+                                    startTime += unitLength;
+                                }
+
+                            }
+                            return;
+                        } else {
+                            return;
+                        }
+                    } else if (item.startHour > (new Date(startTime).format('hh:mm'))) {
+                        newArr.push({
+                            'startHour': new Date(startTime).format('hh:mm'),
+                            'endHour': new Date(startTime + unitLength).format('hh:mm'),
+                            'id': '0',
+                            'canReverse': 1,
+                            'price': ''
+                        });
+                        startTime += unitLength;
+                    }
+                }
+
+            });
+            return newArr;
+        }
+
+        //数组按照开始时间排序;
+        function by(name) {
+            return function(o, p) {
+                var a, b;
+                if (typeof o === "object" && typeof p === "object" && o && p) {
+                    a = o[name];
+                    b = p[name];
+                    if (a === b) {
+                        return 0;
+                    }
+                    if (typeof a === typeof b) {
+                        return a < b ? -1 : 1;
+                    }
+                    return typeof a < typeof b ? -1 : 1;
+                } else {
+                    throw ("error");
+                }
+            }
+        }
+
+    })
+</script>
+
+</html>

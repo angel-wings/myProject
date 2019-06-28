@@ -1,0 +1,92 @@
+<!-- 场馆列表 -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <meta name="format-detection" content="telephone=no">
+    <title>同济大学</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 12px 10px;
+            background: #e6e6e6;
+            margin: 0;
+            background-image: url('../image/login_bg.png');
+            background-size: 100% 100%;
+            background-color: linear-gradient(-180deg, #262626 0%, rgba(0, 0, 0, 0.00) 80%);
+            position: relative;
+            color: #ffffff;
+            font-family: "PingFangSC-Medium";
+        }
+
+        div.text {
+            text-align: center;
+            margin-top: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text">正在验证身份信息，请耐心等待</div>
+    <div class="toast"></div>
+</body>
+<script src="../js/prefixfree.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/qingjs.js"></script>
+<script>
+    $(function () {
+        XuntongJSBridge.call(
+            "getPersonInfo",
+            {},
+            function (data) {
+                if (data.success) {
+                    var userInfo = {
+                        openId: data.data.openId,
+                        name: data.data.name,
+                        gender: data.data.gender
+                    }
+                    login(userInfo);
+                }
+            }
+        )
+
+        //登录方法
+        function login(userInfo) {
+            var url = indexDomain + "/login";
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: {
+                    openId: userInfo.openId,
+                    gender: userInfo.gender,
+                    name: userInfo.name
+                },
+                success: function (data) {
+                    if (data.error == 10000) {
+                        setTokenAndUnid(data.data.token, data.data.rootUnid);
+                        if (data.data.bindPhone) {
+                            location.href = "./venueList.html";
+                        } else {
+                            location.href = "./phoneValidate.html";
+                        }
+                    } else {
+                        toast(data.message, 200);
+                    }
+                },
+                error: function (response) {
+                    toast('请求失败', 100);
+                }
+            })
+        }
+    })
+</script>
+
+</html>

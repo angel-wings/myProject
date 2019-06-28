@@ -1,9 +1,0 @@
-3.8女神节活动H5数据打点需求：
-事件ID：H5_Statistics
-事件名称：H5_Statistics
-打点内容：
-1、曝光：exposure_5
-2、按钮点击：从上到下依次为click_5_1   click_5_2   click_5_3  click_5_4
-
-
-按钮：http://welfare.club.iydsj.com

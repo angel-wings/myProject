@@ -1,0 +1,239 @@
+这些接口在林强写的新的ERP代码中已经存在
+这些接口不校验token
+
+1、图形验证码
+/erp/api/v20/account/graphCode
+POST
+入参:
+phone
+
+
+出参
+graphCodeUrl 图形验证码URL
+
+2、发送短信验证码
+/erp/api/v20/account/authCode
+POST
+入参:
+phone
+graphCode  图形验证码
+
+出参
+data:true 发送成功
+
+
+3、登录信息验证病生成UID返回
+/erp/api/v20/account/h5Authentication
+POST
+入参:
+phone
+graphCode  图形验证码
+authCode   短信验证码
+
+出参
+phone
+name
+id 用户ID
+
+
+
+4、获取高校的场馆列表
+/erp/api/v20/venue/app/list
+POST
+入参
+rootUnid
+
+出参
+[{
+   id
+   name
+   unid    校区ID
+   unName  校区名称
+   linkName 联系人
+}]
+
+5、获取场馆的详情
+/erp/api/v20/venue/detail
+POST
+入参
+venueId 场馆ID
+
+
+出参
+id
+name
+unid
+unName
+introduction  场馆介绍
+venueFields:[{ 场地列表
+  unid
+  venueId 场馆ID
+  name 场地名称
+}]
+
+
+6、显示高校场地预定导航信息
+/erp/api/v20/venue/field/reserve/banner
+POST
+入参
+fieldId 场地ID
+
+出参
+name
+bookDays
+chargeType (0：半小时,1：一小时)
+startTime  场地开放时间
+endTime   场地结束时间
+
+
+7、场地下单预定数据展示
+/erp/api/v20/venue/field/reserve
+POST
+入参
+date
+dayType 星期几
+fieldId 场地ID
+
+出参
+[{
+
+   unid
+   venueId
+   name 场地分片名称
+   fieldNo  场次号
+   fieldId  场地id
+   venueFieldGoods:[{  预定场馆场地商品信息
+      venueId
+      fieldId
+      sheetId  分片Id
+      startHour 开始时间
+      endHour   结束时间
+      prize     分片价格
+      canReverse  能否预定 0:能预定，-1：不能预订
+   }]
+}]
+
+8、二维码校验入场
+/erp/api/v20/venue/checkverifycode
+POST
+入参
+verifyCode  校验码
+
+出参
+canAccess  能否入场
+tipMsg  入场提示
+orderInfo:[{ 订单详情
+  phone 手机号
+  name  姓名
+  identifyName 身份信息
+  orderCode 订单号
+  date 预约日期
+  venueName 预约场馆
+  fieldNmae 预约场地
+  orderItems:[{  订单子项
+      sheetName
+      startHour
+      endHour
+      price
+  }]
+}]
+
+9、校验场馆入场
+/erp/api/v20/venue/checkin
+POST
+入参
+orderCode  订单号
+phone      手机号
+signature  验签
+
+
+10、取消预订场地订单
+/erp/api/v20/order/cancel
+POST
+入参
+orderId 订单号
+userId 用户ID
+
+
+11、高校场馆场地下单
+/erp/api/v20/order/overbooking
+POST
+入参
+date 订单日期
+fieldId
+phone
+venueId
+goodsList:[{1,2,3}]
+userId
+
+出参
+orderId 订单号
+reserved 是否可预约 true:可预订
+zeroPay 1:0元支付 0:非0元支付
+
+12、用户订单列表
+/erp/api/v20/order/list
+POST
+入参
+state订单状态
+userId
+
+出参
+[{
+  orderId
+  orderCode 订单号
+  userId 用户ID
+  fieldName 场地名
+  venueName 场馆名
+  receivableFee 应收费用
+  payment 支付方式
+
+}]
+
+13、获取场地订单详情
+/erp/api/v20/order/detail
+POST
+入参
+orderId
+
+出参
+userId
+name  用户名称
+orderCode 订单号
+receivableFee 应收费用
+fieldId
+fieldName
+venueId
+date  预定日期
+
+14、使用消费订单信息
+/erp/api/v20/order/consume/info
+POST
+入参
+orderId
+
+出参
+venueName
+fieldName
+verificationCode
+
+
+15、根据学校id来获取支付方式
+/erp/api/v20/order/payment/list
+POST
+入参
+unid
+
+出参
+[{
+  name
+  icon
+}]
+
+16、场地下单支付-确认付款
+/erp/api/v20/order/prepay/info
+POST
+入参
+unid
+orderId
+payment

@@ -1,0 +1,52 @@
+这些接口不校验token
+
+1、图形验证码
+/erp/api/v20/account/graphCode
+POST
+入参:
+phone
+
+
+出参
+graphCodeUrl 图形验证码URL
+
+2、发送短信验证码
+/erp/api/v20/account/authCode
+POST
+入参:
+phone
+graphCode  图形验证码
+
+出参
+data:true 发送成功
+
+
+3、登录信息验证病生成UID返回
+/erp/api/v20/account/h5Authentication
+POST
+入参:
+phone
+graphCode  图形验证码
+authCode   短信验证码
+
+出参
+phone
+name
+id 用户ID
+
+
+4、登录获取token
+/erp/api/v20/account/appAuthentication
+POST
+入参:
+uid
+
+出参
+{
+  type:
+  veneuUser:{
+      uid    用户token
+      phone  手机号
+      userToken  token
+  }
+}

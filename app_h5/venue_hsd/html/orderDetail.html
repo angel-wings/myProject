@@ -1,0 +1,402 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="zhenglei">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        span {
+            display: inline-block;
+        }
+
+        body {
+            background: #e6e6e6;
+            margin: 0;
+            height: auto;
+            /* padding-top: 12px; */
+            width: 100%;
+            padding-bottom: 80px;
+        }
+
+        #timeBox {
+            /* height: 45px; */
+            line-height: 45px;
+            font-size: 13px;
+            color: #333333;
+            background: #ffffff;
+            padding-left: 15px;
+            position: relative;
+            margin-top: 12px;
+            /* margin-bottom: 12px; */
+        }
+
+        #time {
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            font-size: 12px;
+            color: #b2b2b2;
+        }
+
+        .timer {
+            color: #333333;
+            margin-left: 10px;
+        }
+
+        #orderInfo {
+            color: #333333;
+            background: #ffffff;
+            padding-left: 15px;
+            position: relative;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        #orderSellInfo {
+            color: #333333;
+            background: #ffffff;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .venueInfo {
+            height: 45px;
+            line-height: 45px;
+            font-size: 13px;
+            color: #333333;
+            border-bottom: solid 0.5px #e6e6e6;
+        }
+
+        .venueInfo .rightInfo {
+            color: #b2b2b2;
+            font-size: 12px;
+            float: right;
+            margin-right: 15px;
+        }
+
+        .item .rightInfo {
+            color: #ff4438;
+            font-size: 12px;
+            float: right;
+            margin-right: 15px;
+        }
+
+        #sec_1 {
+            width: 115px;
+            float: left;
+            height: 45px;
+            line-height: 45px;
+        }
+
+        #sec_2 {
+            float: left;
+            width: calc(100% - 115px);
+        }
+
+        #total {
+            color: #ff4438;
+        }
+
+        #footer {
+            height: 50px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: #ffffff;
+            width: 100%;
+            border-top: solid 0.5px #cccccc;
+        }
+
+        #btnbox {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            height: 80px;
+            width: 100%;
+            padding-top: 17.5px;
+            background: #ffffff;
+            border-top: 1px solid #cccccc;
+        }
+
+        .btn {
+            width: 345px;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 3px;
+            background: #333333;
+            color: #ffffff;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .item {
+            color: #b2b2b2;
+            font-size: 12px;
+            line-height: 45px;
+            border-bottom: solid 0.5px #e6e6e6;
+        }
+
+        .last_item {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="timeBox">
+
+    </div>
+    <div id="orderInfo">
+        <div class="venueInfo">订单状态
+            <span class="rightInfo" id="venueStatus"></span>
+        </div>
+        <div class="venueInfo">场馆信息
+            <span class="rightInfo" id="venueName"></span>
+        </div>
+        <div class="venueInfo">预约时间
+            <span class="rightInfo" id="appointmentTime"></span>
+        </div>
+        <div class="venueInfo">预约项目
+            <span class="rightInfo" id="sportItem"></span>
+        </div>
+        <div>
+            <section id="sec_1">场地信息</section>
+            <section id="sec_2">
+
+            </section>
+        </div>
+        <div class="venueInfo" style="border-top:solid 0.5px #e6e6e6;clear:both;border-bottom:none;">价格合计
+            <span class="rightInfo" id="total"></span>
+        </div>
+    </div>
+    <div id="orderSellInfo">
+        <div class="venueInfo">订单编号
+            <span class="rightInfo" id="orderId"></span>
+        </div>
+        <div class="venueInfo">下单时间
+            <span class="rightInfo" id="orderTime"></span>
+        </div>
+        <div class="venueInfo" style="border:none">下单手机
+            <span class="rightInfo" id="orderPhone"></span>
+        </div>
+
+    </div>
+    <div id="btnbox">
+        <span class="btn">支付订单</span>
+    </div>
+
+    <div class="toast"></div>
+</body>
+<script type="application/javascript" src="../js/fastclick.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/alertPopShow.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/iscroll.js"></script>
+<script>
+    $(function () {
+        var timer = '10:00';
+        var myTimer;
+        var secs = '';
+        var orderId = getUrlParam('orderId');
+        var uid = getStore("uid") * 1;
+        
+        checkTimeOut();
+        function addItem(list) {
+            var html = '';
+            if (list.length == 1) {
+                html = '<div class="item last_item">' + list[0].sheetName + ' ' + list[0].startHour + '-' + list[0].endHour + '<span class="rightInfo">￥' + list[0].price + '</span></div>';
+            } else {
+                for (var i = 0; i < list.length; i++) {
+                    if (i == list.length - 1) {
+                        html += '<div class="item last_item">' + list[i].sheetName + ' ' + list[i].startHour + '-' + list[i].endHour + '<span class="rightInfo">￥' + list[i].price + '</span></div>';
+                    } else {
+                        html += '<div class="item">' + list[i].sheetName + ' ' + list[i].startHour + '-' + list[i].endHour + '<span class="rightInfo">￥' + list[i].price + '</span></div>';
+                    }
+                }
+            }
+            $('#sec_2').append(html);
+        }
+
+        function getOrderDetail() {
+            var url = domain + '/erp/api/v20/order/detail';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                data: JSON.stringify({
+                    orderId: orderId  //1507363647000
+                }),
+                success: function (data) {
+                    if (data.error == 10000) {
+                        $('#venueName').text(data.data.venueName);
+                        $('#appointmentTime').text(data.data.date + ' ' + calcWeek(data.data.date));
+                        $('#sportItem').text(data.data.sportsItem);
+                        $("#total").text('￥' + data.data.receivableFee);
+                        $('#orderId').text(data.data.orderCode);
+
+                        var createTime = new Date(data.data.createTime).format('yyyy.MM.dd hh:mm');
+                        $('#orderTime').text(createTime);
+                        $('#orderPhone').text(data.data.orderItemDetailList[0].phone);
+                        var venueStatus = data.data.orderStatus;
+                        var payment = data.data.payment == 1 ? '支付宝' : '微信';
+                        if (venueStatus * 1 == 5) {
+                            venueStatus = '待支付';
+                            $('.btn').text('立即支付').click(function () {
+                                buyNow();
+                            });
+                            var timelong = parseInt((new Date().getTime() * 1 - data.data.createTime * 1) / 1000);
+                            // var timelong = 892;
+                            if (timelong >= 60 * 10) {
+                                $('#timeBox').css('display', 'none');
+                                cancelOrder();
+                            } else {
+                                var sec = (60 * 10 - timelong) % 60;
+                                var min = parseInt((60 * 10 - timelong) / 60);
+                                timer = (min > 9 ? min : '0' + min) + ':' + (sec > 9 ? sec : '0' + sec);
+                                $('#timeBox').html('支付时间<div id="time">付款剩余时间<span class="timer">' + timer + '</span></div>');
+                                timeInterval();
+                            }
+                        } else {
+                            $('#orderSellInfo').append('<div class="venueInfo" style="border-top:solid 0.5px #e6e6e6">支付方式' +
+                                '<span class="rightInfo" id="payment">' + payment + '</span></div>');
+                            if (venueStatus == 1) {
+                                venueStatus = '已消费';
+                                $('.btn').text('再次购买').click(function () {
+                                    buyAgain();
+                                });
+                            } else if (venueStatus == 2) {
+                                venueStatus = '待消费';
+                                $('.btn').text('立即使用').click(function () {
+                                    useNow();
+                                });
+                            } else if (venueStatus == 3) {
+                                venueStatus = '消费中';
+                                $('.btn').text('立即使用').click(function () {
+                                    useNow();
+                                });
+                            } else if (venueStatus == 4) {
+                                venueStatus = '已过期';
+                                $('.btn').text('再次购买').click(function () {
+                                    buyAgain();
+                                });
+                            } else if (venueStatus == 6) {
+                                venueStatus = '已取消';
+                                $('.btn').text('再次购买').click(function () {
+                                    buyAgain();
+                                });
+                            }
+                        }
+
+                        $('#venueStatus').text(venueStatus);
+
+                        var list = data.data.orderItemDetailList;
+                        if (list.length > 0) {
+                            addItem(list);
+                        }
+                    }
+                },
+                error: function (data) {
+
+                }
+            })
+        }
+        function timeInterval() {
+            var time = timer;
+            var min = time.split(':')[0] * 1;
+            var sec = time.split(':')[1] * 1;
+            secs = 60 * min + sec;
+            myTimer = setInterval(function () {
+                if (secs == 0) {
+                    clearInterval(myTimer);
+                    $('#timeBox').css('display', 'none');
+                    cancelOrder();
+                } else {
+                    secs = secs - 1;
+                    var min_1 = Math.floor(secs / 60);
+                    var sec_1 = secs - min_1 * 60;
+                    if (min_1 < 10) {
+                        min_1 = '0' + min_1;
+                    }
+                    if (sec_1 < 10) {
+                        sec_1 = '0' + sec_1;
+                    }
+                    $('.timer').text(min_1 + ':' + sec_1);
+                }
+            }, 1000)
+        }
+        function calcWeek(date) {
+            var day = new Date(date).getDay();
+            switch (day) {
+                case 1:
+                    day = '星期一';
+                    break;
+                case 2:
+                    day = '星期二';
+                    break;
+                case 3:
+                    day = '星期三';
+                    break;
+                case 4:
+                    day = '星期四';
+                    break;
+                case 5:
+                    day = '星期五';
+                    break;
+                case 6:
+                    day = '星期六';
+                    break;
+                case 0:
+                    day = '星期日';
+                    break;
+            }
+
+            return day;
+        }
+        function buyAgain() {
+            location.href = './venueList.html';
+        }
+        function buyNow() {
+            location.href = './orderConfirm.html?orderId=' + orderId;
+        }
+        function useNow() {
+            location.href = './orderValidate.html?orderId=' + orderId;
+        }
+
+        function cancelOrder() {
+            var url = domain + '/erp/api/v20/order/cancel';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                data: JSON.stringify({
+                    orderId: orderId,
+                    userId: uid
+                }),
+                success: function (data) {
+                    if (data.error == 10000) {
+                        toast('订单已取消');
+                        $('#venueStatus').text('已取消');
+                        $('.btn').text('再次购买').click(function () {
+                            buyAgain();
+                        });
+                    } else {
+                        toast(data.message, 200);
+                    }
+                },
+                error: function (data) {
+                    //
+                }
+            })
+        }
+        getOrderDetail();
+
+    })
+
+</script>
+
+</html>

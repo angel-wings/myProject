@@ -1,0 +1,221 @@
+<!-- 我的订单 -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="zhenglei">
+    <title>我的订单</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        body {
+            padding-top: 12px;
+            height: auto;
+            background: #cccccc;
+        }
+
+        #myOrder {
+            font-size: 13px;
+        }
+
+        .headerbar {
+            height: 45px;
+            overflow: hidden;
+            zoom: 1;
+            background: #ffffff;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .headerbar span {
+            float: left;
+            width: 33.33%;
+            height: 100%;
+            color: #b2b2b2;
+            line-height: 45px;
+            text-align: center;
+        }
+
+        section {
+            margin-top: 12px;
+            background: #ffffff;
+            padding-left: 15px;
+        }
+
+        .itemHeader {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .usestate {
+            float: right;
+            margin-right: 15px;
+        }
+
+        .colorred {
+            color: #ff4438;
+        }
+
+        .colorg {
+            color: #b2b2b2;
+        }
+
+        .itemFooter {
+            height: 75px;
+        }
+
+        .itemFooter-name {
+            float: left;
+            width: 70%;
+            height: 75px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-box-pack: center;
+        }
+
+        .display-box {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .itemFooter-place {
+            display: block;
+            margin-top: 12px;
+            color: #b2b2b2;
+        }
+
+        .itemFooter-price {
+            float: right;
+            padding-right: 15px;
+            line-height: 75px;
+            color: #ff4438;
+        }
+
+        .itemFooter-title {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #orderContent {
+            padding-bottom: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myOrder">
+        <div class="headerbar">
+            <span>未使用</span>
+            <span>已使用</span>
+            <span style="color:#333333">全部</span>
+        </div>
+        <div id="orderContent">
+
+        </div>
+    </div>
+</body>
+<script type="application/javascript" src="../js/fastclick.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/alertPopShow.js"></script>
+<script src="../js/public.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        var uid = getStore("uid") * 1;
+        var orderList = [];
+
+        checkTimeOut();
+        
+        function addItem(orderList) {
+            var orderListHtml = '';
+            for (var i = 0; i < orderList.length; i++) {
+                orderListHtml += '<section class="orderItem" data-id="' + orderList[i].orderId + '"><div class="itemHeader"><span>订单号 ' + orderList[i].orderCode + '</span>';
+                if (orderList[i].orderStatus == 1) {
+                    orderListHtml += '<span class="usestate colorg">已使用</span></div>';
+                } else if (orderList[i].orderStatus == 2) {
+                    orderListHtml += '<span class="usestate">未使用</span></div>';
+                } else if (orderList[i].orderStatus == 3) {
+                    orderListHtml += '<span class="usestate colorg">使用中</span></div>';
+                } else if (orderList[i].orderStatus == 4) {
+                    orderListHtml += '<span class="usestate colorg">已过期</span></div>';
+                } else if (orderList[i].orderStatus == 5) {
+                    orderListHtml += '<span class="usestate colorred">待支付</span></div>';
+                } else if (orderList[i].orderStatus == 6) {
+                    orderListHtml += '<span class="usestate colorg">已取消</span></div>';
+                }
+                orderListHtml += '<div class="itemFooter"><div class="itemFooter-name"><div class="display-box">';
+                orderListHtml += '<span class="itemFooter-title">' + orderList[i].venueName + '</span>';
+                orderListHtml += '<span class="itemFooter-place">' + orderList[i].fieldName + '</span></div></div>';
+                orderListHtml += '<div class="itemFooter-price"><span>￥' + orderList[i].receivableFee + '</span></div></div></section>'
+            }
+            $('#orderContent').html(orderListHtml);
+            $('.orderItem').click(function () {
+                var id = $(this).attr('data-id');
+                location.href = './orderDetail.html?orderId=' + id;
+            })
+        }
+
+
+        function filterOrder(statu) {
+            var filterList = orderList.filter(function (item) {
+                if (statu > 0) {
+                    return item.orderStatus == statu
+                }
+                return item;
+            })
+            addItem(filterList);
+        }
+
+        function getOrderList() {
+            var url = domain + '/erp/api/v20/order/list';
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                contentType: 'application/json;charset=UTF-8',
+                datatype: "json",
+                data: JSON.stringify({
+                    page: { pageNum: 1, pageSize: 10 },
+                    state: 0,
+                    userId: uid
+                }),
+                success: function (data) {
+                    if (data.error == 10000) {
+                        var cityObj = data.data;
+                        if (cityObj && cityObj.length) {
+                            orderList = cityObj;
+                            addItem(cityObj);
+                        }
+                    } else {
+                        // webToast(data.message, "bottom", 2000);
+                    }
+                },
+                error: function (response) {
+                    // webToast('请求失败', "bottom", 2000);
+                }
+            })
+        }
+
+        getOrderList();
+
+        $('.headerbar span').click(function () {
+            var statu = $(this).text();
+            switch (statu) {
+                case '已使用':
+                    statu = 1;
+                    break;
+                case '未使用':
+                    statu = 2;
+                    break;
+                case '全部':
+                    statu = 0;
+                    break;
+            }
+
+            filterOrder(statu);
+            $(this).css({ 'color': '#333333' }).siblings().css({ 'color': '#b2b2b2' })
+        })
+    })
+
+</script>
+
+</html>

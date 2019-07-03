@@ -358,11 +358,15 @@
         function getOrderDetail() {
             var url = domain + '/erp/api/v20/order/detail';
             var payment = '1';
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/order/detail'
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     payment: payment,
                     orderId: orderId
@@ -468,11 +472,10 @@
                     returnUrl: returnUrl
                 }),
                 success: function (data) {
-                    let jsondata = JSON.parse(data)
+                    var jsondata = JSON.parse(data)
                     if (jsondata.ret_code == 0) {
                         //跳转支付宝支付；
                         location.href = jsondata.ret_content.url;
-                        // location.href = './alipay.html?payurl=' + jsondata.ret_content.url
                     } else {
                         toast(jsondata.ret_content, 200);
                     }

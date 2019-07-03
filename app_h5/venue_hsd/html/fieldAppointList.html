@@ -235,9 +235,13 @@
         getDate();
         function getDate() {
             var url = domain + '/erp/api/v20/venue/field/reserve/banner';
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/venue/field/reserve/banner';
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     fieldId: fieldId
                 }),
@@ -280,15 +284,25 @@
             var url = domain + '/erp/api/v20/venue/field/reserve';
             var dateTime = date || (new Date().format('yyyy-MM-dd'));
             var dayType = (new Date(dateTime).getDay()) == 0 ? 7 : new Date(dateTime).getDay();
+            var params = {
+                fieldId: fieldId * 1,
+                dayType: dayType,
+                date: dateTime,
+                identityId: 0
+            }
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/venue/field/reserve';
+                params = {
+                    fieldId: fieldId * 1,
+                    dayType: dayType,
+                    date: dateTime
+                }
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: JSON.stringify({
-                    fieldId: fieldId * 1,
-                    dayType: dayType,
-                    date: dateTime,
-                    identityId: 0
-                }),
+                headers: getTokenAndUnid(),
+                data: JSON.stringify(params),
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
                 success: function (data) {
@@ -529,23 +543,34 @@
 
         //生成订单
         function createOrder(selectItemArray) {
-            
+
             var url = domain + '/erp/api/v20/order/overbooking';
             var date = $('div.swiper-slide section.selected').children('span.date').text();
             var year = new Date().getFullYear();
             date = year + '-' + date.replace('.', '-');
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: JSON.stringify({
+            var params = {
+                date: date,
+                fieldId: fieldId * 1,
+                venueId: venueId * 1,
+                goodsList: selectItemArray,
+                phone: phone,
+                userId: uid,
+                identityId: 0
+            };
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/order/overbooking';
+                params = {
                     date: date,
                     fieldId: fieldId * 1,
                     venueId: venueId * 1,
-                    goodsList: selectItemArray,
-                    phone: phone,
-                    userId: uid,
-                    identityId: 0
-                }),
+                    goodsList: selectItemArray
+                }
+            }
+            $.ajax({
+                type: 'POST',
+                url: url,
+                headers: getTokenAndUnid(),
+                data: JSON.stringify(params),
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
                 success: function (data) {

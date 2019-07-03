@@ -86,16 +86,20 @@
     $(function () {
         FastClick.attach(document.body);
         var orderId = getUrlParam('orderId');
-        
+
         checkTimeOut();
         getConsumeInfo();
         function getConsumeInfo() {
             var url = domain + '/erp/api/v20/order/consume/info';
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/order/consume/info';
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     orderId: orderId,
                 }),

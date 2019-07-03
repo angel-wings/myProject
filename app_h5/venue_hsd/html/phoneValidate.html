@@ -210,7 +210,11 @@
 <script>
     $(function () {
         FastClick.attach(document.body);
-        var uid = '';
+        var uid = getUrlParam('uid');
+        var token = getUrlParam('token');
+        if (uid && token) {
+            setStore("token", token);
+        }
 
         String.prototype.trim = function () {
             return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
@@ -242,11 +246,16 @@
         // 获取图形验证码
         function getCodeValidate(tell) {
             var url = domain + '/erp/api/v20/account/graphCode';
+            if (token) {
+                url = domain + '/wh/api/v1/account/graphCode'
+            }
+
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     phone: tell
                 }),
@@ -273,12 +282,16 @@
         // 发送图形验证码
         function sendCodeValidate(graphCode, tell) {
             var url = domain + '/erp/api/v20/account/authCode';
+            if (token) {
+                url = domain + '/wh/api/v1/account/authCode'
+            }
             hideBounce();
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     graphCode: graphCode,
                     phone: tell
@@ -318,14 +331,6 @@
                 }
             }, 1000)
         }
-        // ceshi
-        // 
-        // 
-        // 
-        $('#test').click(function () {
-            loginUid(uid)
-        })
-
 
 
         // 登录验证
@@ -338,11 +343,15 @@
         })
         function loginValidate(authObj) {
             var url = domain + '/erp/api/v20/account/h5Authentication';
+            if (token) {
+                url = domain + '/wh/api/v1/account/bind'
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     authCode: authObj.authCode,
                     graphCode: authObj.graphCode,
@@ -356,7 +365,9 @@
                         $('#phoneNumber').val('');
                         removeStore("phone");
                         setStore("phone", data.data.phone);
-                        uid = data.data.id
+                        if (data.data.id) {
+                            uid = data.data.id
+                        }
                         setStore("time", new Date().getTime())
                         setStore("uid", uid);
                         location.href = './venueList.html';
@@ -369,30 +380,7 @@
                 }
             })
         }
-        function loginUid(uid) {
-            var url = domain + '/erp/api/v20/account/appAuthentication';
-            $.ajax({
-                type: 'POST',
-                url: url,
-                contentType: 'application/json;charset=UTF-8',
-                datatype: "json",
-                data: JSON.stringify({
-                    uid: uid
-                }),
-                success: function (data) {
-                    if (data.error == 10000) {
-                        // removeStore("token");
-                        // setStore("token", data.data.veneuUser.userToken);
-                        location.href = './venueList.html';
-                    } else {
-                        toast(data.message, 200);
-                    }
-                },
-                error: function (response) {
-                    toast('请求失败', 100);
-                }
-            })
-        }
+        
         $('#mymask').click(function () {
             hideBounce();
         });

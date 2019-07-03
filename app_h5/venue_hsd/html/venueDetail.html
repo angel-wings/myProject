@@ -151,11 +151,14 @@
         checkTimeOut();
         getVenueDetail();
         function getVenueDetail() {
-            var venueId = getUrlParam('venueId');
             var url = domain + '/erp/api/v20/venue/detail';
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/venue/detail';
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     venueId: venueId * 1
                 }),

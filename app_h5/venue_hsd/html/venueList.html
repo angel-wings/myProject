@@ -237,11 +237,16 @@
     FastClick.attach(document.body);
     var pageSize = 10;
     var unid = getStore("unid") * 1;
-    var myScroll,
-        pullDownEl, pullDownOffset,
-        pullUpEl, pullUpOffset,
-        generatedCount = 0;
-        
+    var uid = getUrlParam('uid');
+    var token = getUrlParam('token');
+    if (uid && token) {
+        setStore("token", token);
+        setStore("uid", uid);
+    }
+
+    var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset, generatedCount = 0;
+
+
     checkTimeOut();
     getVenueList(1);
     function addItem(list) {
@@ -273,28 +278,32 @@
 
     function getVenueList(num) {
         var url = domain + '/erp/api/v20/venue/app/list';
+        var params = {
+            rootUnid: unid,
+            page: { pageNum: num, pageSize: 10 }
+        };
+        if (getStore("token") || getUrlParam('token')) {
+            params = {
+                unid: unid,
+                page: { pageNum: num, pageSize: 10 }
+            };
+            url = domain + '/wh/api/v1/venue/app/list';
+            // setStore("phone", getUrlParam('phone'));
+        }
 
         $.ajax({
             type: 'POST',
             url: url,
-            data: JSON.stringify({
-                rootUnid: unid,
-                page: {
-                    pageNum: num,
-                    pageSize: 10
-                }
-            }),
+            headers: getTokenAndUnid(),
+            data: JSON.stringify(params),
             contentType: 'application/json;charset=UTF-8',
             datatype: "json",
             success: function (data) {
                 if (data.error == 10000) {
                     var list = data.data;
-                    if (list) {
-                        if (list.length > 0) {
-                            addItem(list);
-                        }
+                    if (list && list.length > 0) {
+                        addItem(list);
                     }
-
                 } else {
                     toast(data.message);
                 }
@@ -353,7 +362,7 @@
                 if (pullUpEl.className.match('flip')) {
                     pullUpEl.className = 'loading';
                     pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading...';
-                    pullUpAction();	// Execute custom function (ajax call?)
+                    pullUpAction();
                 }
             }
         });

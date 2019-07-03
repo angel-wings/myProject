@@ -90,10 +90,10 @@
 <script>
     $(function () {
         FastClick.attach(document.body);
-        let uid = getStore('uid');
-        let time = getStore('time');
-        let now = new Date().getTime();
-        if(uid && time && now - time < 72 * 3600000){
+        var uid = getStore('uid');
+        var time = getStore('time');
+        var now = new Date().getTime();
+        if (uid && time && now - time < 72 * 3600000) {
             location.href = './venueList.html'
         }
 
@@ -103,9 +103,10 @@
         $(".btn").click(function () {
             var id = $(this).attr("id");
             if (id == "btn1") {
-                toast("校内人员暂时无法登录", 170);
+                location.href = payUrl + '/loginSuccess';
+                // toast("校内人员暂时无法登录", 170);
             } else if (id == "btn2") {
-                location.href = './phoneValidate.html'
+                location.href = './phoneValidate.html';
             }
         })
     })

@@ -124,7 +124,7 @@
         var orderList = [];
 
         checkTimeOut();
-        
+
         function addItem(orderList) {
             var orderListHtml = '';
             for (var i = 0; i < orderList.length; i++) {
@@ -167,17 +167,25 @@
 
         function getOrderList() {
             var url = domain + '/erp/api/v20/order/list';
-
+            var params = {
+                page: { pageNum: 1, pageSize: 10 },
+                state: 0,
+                userId: uid
+            }
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/order/list';
+                params = {
+                    page: { pageNum: 1, pageSize: 10 },
+                    state: 0,
+                }
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
-                data: JSON.stringify({
-                    page: { pageNum: 1, pageSize: 10 },
-                    state: 0,
-                    userId: uid
-                }),
+                headers: getTokenAndUnid(),
+                data: JSON.stringify(params),
                 success: function (data) {
                     if (data.error == 10000) {
                         var cityObj = data.data;

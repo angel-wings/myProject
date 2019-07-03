@@ -202,7 +202,7 @@
         var secs = '';
         var orderId = getUrlParam('orderId');
         var uid = getStore("uid") * 1;
-        
+
         checkTimeOut();
         function addItem(list) {
             var html = '';
@@ -222,11 +222,15 @@
 
         function getOrderDetail() {
             var url = domain + '/erp/api/v20/order/detail';
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/order/detail';
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
+                headers: getTokenAndUnid(),
                 data: JSON.stringify({
                     orderId: orderId  //1507363647000
                 }),
@@ -242,7 +246,8 @@
                         $('#orderTime').text(createTime);
                         $('#orderPhone').text(data.data.orderItemDetailList[0].phone);
                         var venueStatus = data.data.orderStatus;
-                        var payment = data.data.payment == 1 ? '支付宝' : '微信';
+                        // var payment = data.data.payment == 1 ? '微信' : ;
+                        var payment = '支付宝';
                         if (venueStatus * 1 == 5) {
                             venueStatus = '待支付';
                             $('.btn').text('立即支付').click(function () {
@@ -368,15 +373,23 @@
 
         function cancelOrder() {
             var url = domain + '/erp/api/v20/order/cancel';
+            var params = {
+                orderId: orderId,
+                userId: uid
+            }
+            if (getStore("token")) {
+                url = domain + '/wh/api/v1/order/cancel';
+                params = {
+                    orderId: orderId
+                }
+            }
             $.ajax({
                 type: 'POST',
                 url: url,
                 contentType: 'application/json;charset=UTF-8',
                 datatype: "json",
-                data: JSON.stringify({
-                    orderId: orderId,
-                    userId: uid
-                }),
+                headers: getTokenAndUnid(),
+                data: JSON.stringify(params),
                 success: function (data) {
                     if (data.error == 10000) {
                         toast('订单已取消');

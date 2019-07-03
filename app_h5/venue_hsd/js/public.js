@@ -1,10 +1,7 @@
-// var domain = 'http://192.168.0.20:9600';//光哥
-// var domain = 'http://test.venue.gxapp.iydsj.com';
 
-var reRul = 'http://192.168.0.130:8087/venue_hsd/html/orderDetail.html';   // 支付成功的返回url
 var domain = 'http://venue.gxapp.iydsj.com';
-// var reRul = 'http://h5.gxapp.iydsj.com/venue_hsd/pre/html/orderDetail.html';   // 支付成功的返回url
-var payUrl = 'http://pre.gkcxpay.h5.iydsj.com';                            // 支付域名
+var reRul = 'http://h5.gxapp.iydsj.com/venue_hsd/prod/html/orderDetail.html';   // 支付成功的返回url
+var payUrl = 'http://gkcxpay.h5.iydsj.com';                            // 支付域名
 
 Date.prototype.format = function (format) {
     var date = {
@@ -33,7 +30,11 @@ setStore("unid", 100);
 function checkTimeOut() {
     var uid = getStore('uid');
     var time = getStore('time');
+    var token = getStore('token');
     var now = new Date().getTime();
+    if (token) {
+        return;
+    }
     if (uid && time && now - time < 72 * 3600000) {
         // 正常
     } else {
@@ -118,4 +119,11 @@ function getStore(name) {
 function removeStore(name) {
     if (!name) return;
     window.localStorage.removeItem(name);
+}
+
+function getTokenAndUnid() {
+    return {
+        token: getStore("token"),
+        rootUnid: getStore("unid")
+    }
 }

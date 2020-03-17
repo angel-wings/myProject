@@ -1,0 +1,287 @@
+/* ============================================================
+   样式重置
+   ============================================================ */
+*{box-sizing: border-box;}
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
+img{display:inline-block;overflow:hidden;
+    /* vertical-align:top; */
+}
+button,input[type="button"]{cursor:pointer;border:0 none;}
+textarea{word-wrap:break-word;resize:none;}  /* word-wrap for opera, resize for webkit */
+body{-webkit-user-select:none;-webkit-text-size-adjust:100%!important;font-family:'PingFang','PingFangSC-Regular';font-size: 16px;}
+input[type="number"]{-webkit-user-select:text;}
+a,button,input,img{-webkit-touch-callout:none;}/* 1.ios 长按时不触发系统的菜单 2.禁止长按时下载图片 */
+input,select,textarea{outline:none;}
+/* 去除android4.0以下 a/button/input标签被点击时产生的边框 因为边框引起了不少bug */
+a,button,input,label{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
+@media all and (-webkit-transform-3d){
+    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+    a,button,input,label{-webkit-tap-highlight-color:rgba(130,130,130,.52);outline: none;}
+}
+html,body{height:100%;margin: 0 auto;max-width: 640px;background-color: #ffffff;}
+a{text-decoration:none;}
+.hide{display: none!important;}
+
+.head-box{
+    padding-top: 1.1rem;
+    text-align: center;
+    font-family: 'PingFangSC-Medium';
+    font-size: .4rem;
+    line-height: .4rem;
+    height: 2rem;
+    color: #202020;
+}
+
+.head-box-title{
+    font-weight: bold;
+}
+
+/*  */
+.con-box{
+    position: relative;
+    height: calc(100% - 4.2rem);
+}
+
+.img-box {
+    width: 100%;
+    position: relative;
+    height: calc(100% - 2rem);
+    margin: 0 auto;
+    padding-top: .8rem;
+    text-align: center;
+}
+
+/*  */
+.img-box .img-sty1{
+    width: 4rem;
+}
+.img-box .img-sty2,.img-sty3{
+    width: 5.45rem;
+}
+.img-box .img-sty4,.img-sty5,.img-sty6,.img-sty7{
+    width: 5.2rem;
+}
+.img-sty8{
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: 1.2rem;
+    margin-bottom: .8rem;
+}
+/* page1 */
+.img-text1{
+    font-size: .28rem;
+    color: #707070;
+    line-height: 2.8rem;
+}
+
+.semester-goal{
+    position: absolute;
+    top: 1.8rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: .28rem;
+    color: #b2b2b2;
+}
+
+.goal-text{
+    line-height: .66rem;
+}
+.semester-num{
+    font-family: 'PingFangSC-Medium';
+    font-size: .64rem;
+    line-height: .88rem;
+    color: #15CD85;
+}
+/* page2 */
+.img-text2{
+    font-size: .28rem;
+    color: #707070;
+    line-height: 4rem;
+}
+.text-time{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: .28rem;
+    color: #707070;
+}
+.effective-len{
+    position: absolute;
+    top: 4.5rem;
+    left: 1rem;
+    width: 5.2rem;
+    text-align: center;
+    font-size: .24rem;
+    color: #15CD85;
+}
+
+.page2-tip{
+    position: absolute;
+    top: 4.2rem;
+    left: 2.18rem;
+    width: 2.84rem;
+    height: .04rem;
+    background-color: #15CD85;
+}
+
+.page2-left,.page2-right{
+    position: absolute;
+    top: -0.09rem;
+    width: .04rem;
+    height: .2rem;
+    background-color: #15CD85;
+}
+.page2-left{
+    left: 0;
+}
+.page2-right{
+    right: 0;
+}
+
+/* page3 */
+
+.page3-tip{
+    position: absolute;
+    top: 4.2rem;
+    left: 2.9rem;
+    width: 1.4rem;
+    height: .04rem;
+    background-color: #15CD85;
+}
+
+.img-text4{
+    font-size: .28rem;
+    color: #707070;
+    line-height: 3rem;
+}
+/* page6 */
+
+.chart-box{
+    width: 6.2rem;
+    margin: 0 auto;
+    padding-top: .8rem;
+}
+
+.chart-num{
+    position: relative;
+    float: left;
+    width: .5rem;
+    height: 4rem;
+    font-size: .24rem;
+    color: #202020;
+    text-align: right;
+}
+
+.chart-num p{
+    position: absolute;
+    right: 0;
+}
+
+.img-text-top{
+    font-size: .28rem;
+    color: #15CD85;
+    line-height: .3rem;
+    margin-top: .2rem;
+}
+
+.chart-num1{
+    top: .4rem;
+}
+.chart-num2{
+    top: .8rem;
+}
+.chart-num3{
+    top: 1.4rem;
+}
+.chart-num4{
+    top: 2rem;
+}
+.chart-num5{
+    top: 2.6rem;
+}
+.chart-num6{
+    top: 3.2rem;
+}
+.chart-num7{
+    top: 3.8rem;
+}
+
+/* page7 */
+.chart-item1{
+    top: .55rem;
+}
+.chart-item2{
+    top: .85rem;
+}
+.chart-item3{
+    top: 1.4rem;
+}
+.chart-item4{
+    top: 2.0rem;
+}
+.chart-item5{
+    top: 2.6rem;
+}
+.chart-item6{
+    top: 3.2rem;
+}
+.chart-item7{
+    top: 3.75rem;
+}
+.chart-item8{
+    top: 4.2rem;
+}
+
+.img-text8{
+    font-size: .48rem;
+    line-height: .68rem;
+    font-weight: bold;
+    color: #15CD85;
+}
+
+
+.pages{
+    width: 100%;
+    text-align: center;
+    color: #707070;
+    line-height: 1rem;
+}
+
+/*  */
+.foot-box{
+    width: 5.2rem;
+    height: 2.1rem;
+    margin: 0 auto;
+    padding: .32rem;
+    text-align: center;
+    font-size: .24rem;
+    line-height: .4rem;
+    color: #707070;
+}
+
+.sell-btn {
+    display: inline-block;
+    width: 2.88rem;
+    height: .88rem;
+    line-height: .88rem;
+    color: #ffffff;
+    background: #15CD85;
+    font-size: .28rem;
+    border-radius: 4;
+    border-radius: 4px;
+}
+
+.foot-school {
+    margin-bottom: .2rem;
+}
+
+.school-name{
+    color: #0E0E0E;
+}
+
+.page-num{
+    color: #15CD85;
+}

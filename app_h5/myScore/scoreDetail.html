@@ -1,0 +1,387 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <title>成绩详情</title>
+    <link rel="stylesheet" href="./css/scoreDetail.css">
+    <style></style>
+</head>
+
+<body>
+    <div id="header">
+        <div class="scoreBox">
+            <span class="tot">总得分：</span>
+            <span class="totalScore">90.00</span>
+        </div>
+        <div class="levelBox">
+            <span class="totalLevel">等级： 良好</span>
+        </div>
+        <div class="scoreBox">
+            <span class="testScore">体测得分： 0</span>
+            <span class="extraScore">附加分数： 0</span>
+        </div>
+    </div>
+
+    <div id="content">
+        <section>
+            <span class="title" style="width:25%;">项目</span>
+            <span class="title" style="width:30%;">成绩</span>
+            <span class="title" style="width:25%;">分数</span>
+            <span class="title">等级</span>
+        </section>
+        <section id="BMI">
+            <span class="type">BMI值</span>
+            <span class="value">
+            </span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+            <div id="detail">
+                <div class="height"></div>
+                <div class="weight"></div>
+            </div>
+        </section>
+        <section id="fhl">
+            <span class="type">肺活量</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+        <section id="qianqu">
+            <span class="type">坐位体前屈</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+        <section id="standingLongJump">
+            <span class="type">跳远</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+        <section id="situp">
+            <span class="type">仰卧起坐</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+        <section id="pullup">
+            <span class="type">引体向上</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+        <section id="run50">
+            <span class="type">50米</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+        <section id="run1000">
+            <span class="type">1000米</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+        <section id="run800">
+            <span class="type">800米</span>
+            <span class="value"></span>
+            <span class="point"></span>
+            <span class="level_1"></span>
+        </section>
+
+    </div>
+    <div class="toast"></div>
+</body>
+<script src="./js/public.js"></script>
+<script src="./js/rem.js"></script>
+<script src="./js/fastclick.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        var id = getUrlParam('id');
+        connectWebViewJavascriptBridge(function (bridge) {
+
+            bridge.registerHandler("returnBackHandler", function (data, responseCallback) {
+                var responseData = { "isFirstPage": false };
+                responseCallback(responseData);
+            });
+
+            getScoreDetail();
+        })
+
+        $('#BMI span.value').click(function () {
+            var display = $('#detail').css('display');
+            if (display == 'none') {
+                $('#detail').css('display', 'block');
+                $('#BMI img').attr('src', './images/up.png');
+            } else {
+                $('#detail').css('display', 'none');
+                $('#BMI img').attr('src', './images/down.png');
+            }
+        })
+
+        //获取成绩详情
+        function getScoreDetail() {
+            ajaxSubmit(
+                'POST',
+                '/api/v20/physical/scoredetail',
+                { physicalId: parseInt(id) },
+                function (data) {
+                    if (data.error == 10000) {
+                        var dataObj = data.data;
+                        var noTest = [];
+
+                        var totalScore = dataObj.totalScore;
+                        var extraScore = dataObj.extraScore == -99999 ? 0 : dataObj.extraScore / 100;
+                        var totalLevel = levelFormat(dataObj.totalLevel);
+                        var bmiLevel = levelFormat(dataObj.bmiLevel, "bmi");
+                        var bmiScore = dataObj.bmiScore;
+                        var pullUp = dataObj.pullUp;
+                        var pullUpLevel = levelFormat(dataObj.pullUpLevel);
+                        var pullUpScore = dataObj.pullUpScore;
+                        var run50 = (dataObj.run50 / 1000).toFixed(1);
+                        var run50Level = levelFormat(dataObj.run50Level);
+                        var run50Score = dataObj.run50Score;
+                        var run800 = timeFormat(dataObj.run800);
+                        var run800Level = levelFormat(dataObj.run800Level);
+                        var run800Score = dataObj.run800Score;
+                        var run1000 = timeFormat(dataObj.run1000);
+                        var run1000Level = levelFormat(dataObj.run1000Level);
+                        var run1000Score = dataObj.run1000Score;
+                        var qianqu = dataObj.sitAndReach;
+                        var qianquLevel = levelFormat(dataObj.sitAndReachLevel);
+                        var qianquScore = dataObj.sitAndReachScore;
+                        var situp = dataObj.situp;
+                        var situpLevel = levelFormat(dataObj.situpLevel);
+                        var situpScore = dataObj.situpScore;
+                        var standingLongJump = dataObj.standingLongJump;
+                        var standingLongJumpLevel = levelFormat(dataObj.standingLongJumpLevel);
+                        var standingLongJumpScore = dataObj.standingLongJumpScore;
+                        var vitalCapacity = dataObj.vitalCapacity;
+                        var vitalCapacityScoreLevel = levelFormat(dataObj.vitalCapacityScoreLevel);
+                        var vitalCapacityScore = dataObj.vitalCapacityScore;
+                        var gender = dataObj.gender;
+                        if (gender == 1) {
+                            //男生
+                            $('#run800').css('display', 'none');
+                            $('#situp').css('display', 'none');
+                        } else {
+                            //女生
+                            $('#run1000').css('display', 'none');
+                            $('#pullup').css('display', 'none');
+                        }
+
+                        if (totalScore == -99999) {
+                            //未完成
+                            $('#header').css('backgroundImage', 'url(./images/fail.png)');
+                            $('.noTest').css('display', 'block');
+                            $('img.levelIcon').attr('src', './images/nopass.png');
+                            $('#nofinish').css('display', 'block');
+                            $('span.score').css('color', '#ff4400');
+                            $('span.level').css('color', '#ff4400');
+                            totalLevel = '无';
+                            totalScore = '未完成';
+                            if (gender == 1) {
+                                if (run1000Score == -99999) {
+                                    noTest.push({
+                                        id: 'run1000',
+                                        name: '1000米'
+                                    });
+                                }
+
+                                if (pullUpScore == -99999) {
+                                    noTest.push({
+                                        id: 'pullup',
+                                        name: '引体向上'
+                                    });
+                                }
+
+                            } else {
+                                if (run800Score == -99999) {
+                                    noTest.push({
+                                        id: 'run800',
+                                        name: '800米'
+                                    });
+                                }
+
+                                if (situpScore == -99999) {
+                                    noTest.push({
+                                        id: 'situp',
+                                        name: '仰卧起坐'
+                                    });
+                                }
+                            }
+
+                            if (bmiScore == -99999) {
+                                noTest.push({
+                                    id: 'BMI',
+                                    name: 'BMI值'
+                                });
+                            }
+
+                            if (run50Score == -99999) {
+                                noTest.push({
+                                    id: 'run50',
+                                    name: '50米'
+                                });
+                            }
+
+                            if (qianquScore == -99999) {
+                                noTest.push({
+                                    id: 'qianqu',
+                                    name: '坐位体前屈'
+                                });
+                            }
+
+                            if (standingLongJump == -99999) {
+                                noTest.push({
+                                    id: 'standingLongJump',
+                                    name: '立定跳远'
+                                });
+                            }
+
+                            if (vitalCapacityScore == -99999) {
+                                noTest.push({
+                                    id: 'fhl',
+                                    name: '肺活量'
+                                });
+                            }
+                        } else {
+                            totalScore = (totalScore / 100).toFixed(2);
+                            if (totalLevel == '优秀') {
+                                $('#header').css('backgroundImage', 'url(./images/excellent.png)');
+                            } else if (totalLevel == '良好') {
+                                $('#header').css('backgroundImage', 'url(./images/good.png)');
+                            } else if (totalLevel == '及格') {
+                                $('#header').css('backgroundImage', 'url(./images/pass.png)');
+                            } else if (totalLevel == '不及格') {
+                                $('#header').css('backgroundImage', 'url(./images/nopass.png)');
+                            }
+                        }
+
+                        var bmi = (dataObj.weight / 1000) / Math.pow(dataObj.height / 1000, 2);
+                        bmi = bmi.toFixed(1) + '<img src="./images/down.png" class="icon">';
+
+                        $('#header span.totalScore').text(totalScore);
+                        $('#header span.totalLevel').text("等级： " + totalLevel);
+                        $('#header span.testScore').text("体测得分：" + (totalScore - extraScore).toFixed(2));
+                        $('#header span.extraScore').text("附加分：" + extraScore);
+
+                        $('div.weight').text("体重：" + (dataObj.weight / 1000).toFixed(1) + '千克');
+                        $('div.height').text("身高：" + (dataObj.height / 10).toFixed(1) + '厘米');
+                        $('#BMI span.value').html(bmi);
+                        $('#BMI span.point').text(bmiScore / 100 + '分');
+                        $('#BMI span.level_1').text(bmiLevel);
+                        $('#pullup span.value').text(pullUp + '次');
+                        $('#pullup span.point').text(pullUpScore / 100 + '分');
+                        $('#pullup span.level_1').text(pullUpLevel);
+                        $('#run50 span.value').text(run50 + '秒');
+                        $('#run50 span.point').text(run50Score / 100 + '分');
+                        $('#run50 span.level_1').text(run50Level);
+                        $('#run800 span.value').text(run800);
+                        $('#run800 span.point').text(run800Score / 100 + '分');
+                        $('#run800 span.level_1').text(run800Level);
+                        $('#run1000 span.value').text(run1000);
+                        $('#run1000 span.point').text(run1000Score / 100 + '分');
+                        $('#run1000 span.level_1').text(run1000Level);
+
+                        $('#qianqu span.value').text(qianqu / 10 + '厘米');
+                        $('#qianqu span.point').text(qianquScore / 100 + '分');
+                        $('#qianqu span.level_1').text(qianquLevel);
+
+                        $('#situp span.value').text(situp + '次');
+                        $('#situp span.point').text(situpScore / 100 + '分');
+                        $('#situp span.level_1').text(situpLevel);
+
+                        $('#standingLongJump span.value').text(standingLongJump / 10 + '厘米');
+                        $('#standingLongJump span.point').text(standingLongJumpScore / 100 + '分');
+                        $('#standingLongJump span.level_1').text(standingLongJumpLevel);
+
+                        $('#fhl span.value').text(vitalCapacity + '毫升');
+                        $('#fhl span.point').text(vitalCapacityScore / 100 + '分');
+                        $('#fhl span.level_1').text(vitalCapacityScoreLevel);
+
+                        if (noTest.length) {
+                            noTest.forEach(function (item) {
+                                $("#" + item.id + " .value").text("");
+                                $("#" + item.id + " .point").text("");
+                                $("#" + item.id + " .level_1").text("未测试").css("color", "#b2b2b2");
+                                $('#header span.totalScore').text("未完成");
+                                $(".scoreText").css("display", "none");
+                                $('#header span.totalLevel').text("等级： 无");
+                                $('#header span.testScore').text("体测得分：无分数");
+                                $('#header span.extraScore').text("附加分：0");
+                            })
+                        }
+
+                        $("body").css("display", "block");
+
+                    } else {
+                        toast(data.message, 200);
+                    }
+                },
+                function (data) {
+                    toast('请求失败', 100);
+                }
+            )
+        }
+
+        //转化时间
+        function timeFormat(time) {
+            var int = parseInt(time / 60000);
+            var float = (time / 1000) - 60 * int;
+            var newTime = int + "分" +  Math.ceil(float * 10) / 10 + '秒';
+
+            return newTime;
+        }
+
+        //转换等级
+        function levelFormat(level, type) {
+            var levelText;
+            if (type && type == "bmi") {
+                switch (level) {
+                    case -99999:
+                        levelText = "未完成";
+                        break;
+                    case 1:
+                        levelText = "优秀";
+                        break;
+                    case 2:
+                        levelText = "良好";
+                        break;
+                    case 3:
+                        levelText = "良好";
+                        break;
+                    case 4:
+                        levelText = "及格";
+                        break;
+                }
+            } else {
+                switch (level) {
+                    case -99999:
+                        levelText = "未完成";
+                        break;
+                    case 1:
+                        levelText = "优秀";
+                        break;
+                    case 2:
+                        levelText = "良好";
+                        break;
+                    case 3:
+                        levelText = "及格";
+                        break;
+                    case 4:
+                        levelText = "不及格";
+                        break;
+                }
+            }
+
+            return levelText;
+        }
+    })
+</script>
+
+</html>

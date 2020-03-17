@@ -1,0 +1,99 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="app-mobile-web-app-capable" content="yes">
+    <meta name="author" content="guozhenglei">
+    <meta name="referrer" content="no-referrer">
+    <title>发现</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.1/lib/index.css"> -->
+    <link rel="stylesheet" href="./css/vant.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <script src="https://s1.xmcdn.com/yx/web-jssdk/last/dist_cdn/1.3.0/xmsdk.min.js"></script>
+    <style>
+        .goods-discount {
+            position: absolute;
+            top: 0;
+            left: 0.08rem;
+            font-size: .2rem;
+            line-height: .36rem;
+            padding-left: 0.1rem;
+            padding-right: .16rem;
+            -webkit-text-size-adjust: 100%;
+            color: #ffffff;
+            background-color: #FE7154;
+            border-bottom-right-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+            <div class="main-head" v-show="bannerList && bannerList.length>0">
+                <van-swipe :autoplay="3000" indicator-color="white" @change="onBannerChange">
+                    <van-swipe-item v-for="banner in bannerList" @click="toBannerDetail(banner)">
+                        <img class="my-swipe-img" :src="banner.imgUrl">
+                    </van-swipe-item>
+                </van-swipe>
+            </div>
+            <div class="main-tab">
+                <div class="tab-item" @click="toShopping(1)">
+                    <img src="./images/icon_shopping.png" alt="">
+                    <p>商城</p>
+                </div>
+                <div class="tab-item" @click="toPartJob">
+                    <img src="./images/icon_partjob.png" alt="">
+                    <p>兼职</p>
+                </div>
+                <div class="tab-item" @click="toXmMusic">
+                    <img src="./images/icon_music.png" alt="">
+                    <p>音乐</p>
+                </div>
+                <div class="tab-item" @click="toWelfare">
+                    <img src="./images/icon_welfare.png" alt="">
+                    <p>福利社</p>
+                </div>
+            </div>
+            <div class="shopping-box">
+                <div class="title" @click="toShopping(2)">
+                    <span>大家都在买</span>
+                    <img src="./images/arrow_right.png" alt="">
+                </div>
+                <div class="shopping-content">
+                    <div v-for="goods in goodsList" class="shopping-goods" @click="toShoppingDetail(goods.uri)">
+                        <img :src="goods.logoImg">
+                        <p>{{goods.productName}}</p>
+                        <span class="goods-discount">{{goods.discount}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="music-box" v-show="albumList && albumList.length>0">
+                <div class="title" @click="toXmMusic(2)">
+                    <span>大家都在听</span>
+                    <img src="./images/arrow_right.png" alt="">
+                </div>
+                <div class="music-content">
+                    <div class="music-item" v-for="album in albumList" @click="toAlbumDetail(album)">
+                        <img :src="album.album_img" alt="">
+                        <p class="music-title">{{album.album_title}}</p>
+                        <p class="music-des">{{album.album_intro}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mian-foot">
+                - 你碰到我的底线了哦！-
+            </div>
+        </van-pull-refresh>
+    </div>
+</body>
+<script src="./js/vant.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vant@2.1.3/lib/vant.min.js"></script> -->
+<script src="./js/lanxi.js"></script>
+<script src="./js/public.js"></script>
+<script src="./js/index.js"></script>
+
+</html>

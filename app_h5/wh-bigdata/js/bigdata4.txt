@@ -1,0 +1,731 @@
+﻿{
+    "msg": "success",
+    "time": "2019/10/14",
+    "data": {
+        "welfare": {
+            "des": "福利社相关数据",
+            "welfare_order": "2415",
+            "welfare_commission": "10245",
+            "daily_order": [
+                {
+                    "order_time": "2019/10/7",
+                    "order_count": "5135",
+                    "order_commission": "15405"
+                },
+                {
+                    "order_time": "2019/10/8",
+                    "order_count": "4765",
+                    "order_commission": "14295"
+                },
+                {
+                    "order_time": "2019/10/9",
+                    "order_count": "2155",
+                    "order_commission": "6465"
+                },
+                {
+                    "order_time": "2019/10/10",
+                    "order_count": "1750",
+                    "order_commission": "5250"
+                },
+				{
+                    "order_time": "2019/10/11",
+                    "order_count": "2315",
+                    "order_commission": "6945"
+                },
+                {
+                    "order_time": "2019/10/12",
+                    "order_count": "2090",
+                    "order_commission": "6270"
+                },
+                {
+                    "order_time": "2019/10/13",
+                    "order_count": "2415",
+                    "order_commission": "10245"
+                }
+            ],
+            "daily_visitor": [
+                {
+                    "visitor_time": "2019/10/7",
+                    "daily_total_visitor": "159390",
+                    "daily_new_visitor": "34575"
+                },
+                {
+                    "visitor_time": "2019/10/8",
+                    "daily_total_visitor": "149380",
+                    "daily_new_visitor": "34425"
+                },
+                {
+                    "visitor_time": "2019/10/9",
+                    "daily_total_visitor": "99330",
+                    "daily_new_visitor": "31375"
+                },
+                {
+                    "visitor_time": "2019/10/10",
+                    "daily_total_visitor": "80850",
+                    "daily_new_visitor": "21070"
+                },
+				{
+                    "visitor_time": "2019/10/11",
+                    "daily_total_visitor": "97020",
+                    "daily_new_visitor": "24200"
+                },
+                {
+                    "visitor_time": "2019/10/12",
+                    "daily_total_visitor": "130900",
+                    "daily_new_visitor": "32505"
+                },
+                {
+                    "visitor_time": "2019/10/13",
+                    "daily_total_visitor": "106110",
+                    "daily_new_visitor": "30110"
+                }
+            ],
+            "hourly_visitor": [
+                {
+                    "hour": "1",
+                    "hourly_total_visitor": "1670",
+                    "hourly_new_visitor": "290"
+                },
+                {
+                    "hour": "2",
+                    "hourly_total_visitor": "730",
+                    "hourly_new_visitor": "210"
+                },
+                {
+                    "hour": "3",
+                    "hourly_total_visitor": "360",
+                    "hourly_new_visitor": "140"
+                },
+                {
+                    "hour": "4",
+                    "hourly_total_visitor": "90",
+                    "hourly_new_visitor": "20"
+                },
+                {
+                    "hour": "5",
+                    "hourly_total_visitor": "40",
+                    "hourly_new_visitor": "40"
+                },
+                {
+                    "hour": "6",
+                    "hourly_total_visitor": "220",
+                    "hourly_new_visitor": "110"
+                },
+                {
+                    "hour": "7",
+                    "hourly_total_visitor": "2320",
+                    "hourly_new_visitor": "1380"
+                },
+                {
+                    "hour": "8",
+                    "hourly_total_visitor": "4730",
+                    "hourly_new_visitor": "2730"
+                },
+                {
+                    "hour": "9",
+                    "hourly_total_visitor": "2630",
+                    "hourly_new_visitor": "1440"
+                },
+                {
+                    "hour": "10",
+                    "hourly_total_visitor": "3760",
+                    "hourly_new_visitor": "1740"
+                },
+                {
+                    "hour": "11",
+                    "hourly_total_visitor": "3850",
+                    "hourly_new_visitor": "1990"
+                },
+                {
+                    "hour": "12",
+                    "hourly_total_visitor": "3860",
+                    "hourly_new_visitor": "2280"
+                },
+                {
+                    "hour": "13",
+                    "hourly_total_visitor": "3130",
+                    "hourly_new_visitor": "1480"
+                },
+                {
+                    "hour": "14",
+                    "hourly_total_visitor": "2590",
+                    "hourly_new_visitor": "1500"
+                },
+                {
+                    "hour": "15",
+                    "hourly_total_visitor": "3310",
+                    "hourly_new_visitor": "1730"
+                },
+                {
+                    "hour": "16",
+                    "hourly_total_visitor": "4760",
+                    "hourly_new_visitor": "2850"
+                },
+                {
+                    "hour": "17",
+                    "hourly_total_visitor": "4770",
+                    "hourly_new_visitor": "2890"
+                },
+                {
+                    "hour": "18",
+                    "hourly_total_visitor": "5800",
+                    "hourly_new_visitor": "3530"
+                },
+                {
+                    "hour": "19",
+                    "hourly_total_visitor": "8160",
+                    "hourly_new_visitor": "4740"
+                },
+                {
+                    "hour": "20",
+                    "hourly_total_visitor": "10750",
+                    "hourly_new_visitor": "6770"
+                },
+                {
+                    "hour": "21",
+                    "hourly_total_visitor": "14910",
+                    "hourly_new_visitor": "9540"
+                },
+                {
+                    "hour": "22",
+                    "hourly_total_visitor": "13780",
+                    "hourly_new_visitor": "8390"
+                },
+                {
+                    "hour": "23",
+                    "hourly_total_visitor": "6010",
+                    "hourly_new_visitor": "3290"
+                },
+                {
+                    "hour": "24",
+                    "hourly_total_visitor": "3860",
+                    "hourly_new_visitor": "1120"
+                }
+            ],
+            "visitor_areas": [
+                {
+                    "area_name": "河南省",
+                    "area_visitor": "6045"
+                },
+                {
+                    "area_name": "浙江省",
+                    "area_visitor": "2593"
+                },
+                {
+                    "area_name": "湖南省",
+                    "area_visitor": "2519"
+                },
+                {
+                    "area_name": "贵州省",
+                    "area_visitor": "2140"
+                },
+                {
+                    "area_name": "广东省",
+                    "area_visitor": "2126"
+                },
+                {
+                    "area_name": "其他省",
+                    "area_visitor": "17174"
+                }
+            ]
+        },
+        "physical_test": {
+            "des": "体测相关数据",
+            "physical_name": "2018年体测情况",
+            "total_school": "68",
+            "total_person": "428215",
+            "total_excelent": "4090",
+            "total_good": "53265",
+            "total_pass": "319330",
+            "total_nopass": "51530",
+            "school_passrate_ranking": {
+			    "school_c211": "88.9",
+                "school_general": "88.4",
+                "school_vocational": "84.1",
+				"school_c9": "0",
+                "school_c985": "0"
+            },
+            "province_passrate_ranking": [
+			    {
+                    "province_name": "浙江省",
+                    "passrate": "96.6"
+                },
+				{
+                    "province_name": "北京市",
+                    "passrate": "90.7"
+                },
+				{
+                    "province_name": "贵州省",
+                    "passrate": "90.1"
+                },
+				{
+                    "province_name": "河南省",
+                    "passrate": "88.3"
+                },
+                {
+                    "province_name": "河北省",
+                    "passrate": "85.9"
+                } 
+            ],
+            "physical_item": [
+			    {
+                    "item_name": "50米跑",
+                    "passrate": "94.9"
+                },
+                {
+                    "item_name": "肺活量",
+                    "passrate": "92.7"
+                },
+                {
+                    "item_name": "坐位体前屈",
+                    "passrate": "90.9"
+                },
+                {
+                    "item_name": "女生800米跑",
+                    "passrate": "87.5"
+                },
+				{
+                    "item_name": "一分钟仰卧起坐",
+                    "passrate": "85"
+                },
+				{
+                    "item_name": "立定跳远",
+                    "passrate": "82.4"
+                },
+                {
+                    "item_name": "男生1000米跑",
+                    "passrate": "75.5"
+                },
+                {
+                    "item_name": "男生引体向上",
+                    "passrate": "22"
+                }
+            ]
+        },
+        "app_users": {
+            "des": "用户活跃情况",
+            "dau": [
+                {
+                    "dau_time": "2019/10/7",
+                    "dau_users": "528535"
+                },
+                {
+                    "dau_time": "2019/10/8",
+                    "dau_users": "977609"
+                },
+                {
+                    "dau_time": "2019/10/9",
+                    "dau_users": "949398"
+                },
+                {
+                    "dau_time": "2019/10/10",
+                    "dau_users": "1073759"
+                },
+				{
+                    "dau_time": "2019/10/11",
+                    "dau_users": "1017382"
+                },
+                {
+                    "dau_time": "2019/10/12",
+                    "dau_users": "889370"
+                },
+                {
+                    "dau_time": "2019/10/13",
+                    "dau_users": "826862"
+                }
+            ],
+            "mau": [
+                {
+                    "mau_time": "2018/10/1",
+                    "mau_users": "1958019"
+                },
+                {
+                    "mau_time": "2018/11/1",
+                    "mau_users": "1984644"
+                },
+                {
+                    "mau_time": "2018/12/1",
+                    "mau_users": "1824969"
+                },
+                {
+                    "mau_time": "2019/1/1",
+                    "mau_users": "807936"
+                },
+                {
+                    "mau_time": "2019/2/1",
+                    "mau_users": "1042816"
+                },
+                {
+                    "mau_time": "2019/3/1",
+                    "mau_users": "1993352"
+                },
+                {
+                    "mau_time": "2019/4/1",
+                    "mau_users": "1969207"
+                },
+                {
+                    "mau_time": "2019/5/1",
+                    "mau_users": "1905899"
+                },
+				{
+                    "mau_time": "2019/6/1",
+                    "mau_users": "1488367"
+                },
+				{
+                    "mau_time": "2019/7/1",
+                    "mau_users": "1852721"
+                },
+				{
+                    "mau_time": "2019/8/1",
+                    "mau_users": "1681284"
+                },
+                {
+                    "mau_time": "2019/9/1",
+                    "mau_users": "1921588"
+                }
+            ],
+            "yesterday_pulse_count": {
+                "des": "昨日启动次数（1、1-2次，2、3-5次，3、6-9次，4、10-19次，5、20-49次，6、50次以上）",
+                "pulse_count1": "307424",
+                "pulse_count2": "201697",
+                "pulse_count3": "106816",
+                "pulse_count4": "77463",
+                "pulse_count5": "16839",
+                "pulse_count6": "657"
+            },
+            "yesterday_user_duration": {
+                "des": "昨日使用时长（1、1-30秒，2、31秒-1分钟，3、1-3分钟，4、3-10分钟，5、10-30分钟，6、30分钟以上）",
+                "duration1": "48260",
+                "duration2": "25235",
+                "duration3": "64491",
+                "duration4": "117860",
+                "duration5": "223166",
+                "duration6": "68723"
+            }
+        },
+        "platform_signs": {
+            "des": "签约用户以及学校信息",
+            "sign_schools": "574",
+            "sign_up_users": "5561923",
+            "province_sign_info": [
+                {
+                    "province_name": "广东",
+                    "sign_school_count": "20"
+                },
+                {
+                    "province_name": "北京",
+                    "sign_school_count": "19"
+                },
+                {
+                    "province_name": "天津",
+                    "sign_school_count": "18"
+                },
+                {
+                    "province_name": "上海",
+                    "sign_school_count": "17"
+                },
+                {
+                    "province_name": "重庆",
+                    "sign_school_count": "5"
+                },
+                {
+                    "province_name": "河北",
+                    "sign_school_count": "45"
+                },
+                {
+                    "province_name": "河南",
+                    "sign_school_count": "58"
+                },
+                {
+                    "province_name": "云南",
+                    "sign_school_count": "16"
+                },
+                {
+                    "province_name": "辽宁",
+                    "sign_school_count": "30"
+                },
+                {
+                    "province_name": "黑龙江",
+                    "sign_school_count": "14"
+                },
+                {
+                    "province_name": "湖南",
+                    "sign_school_count": "41"
+                },
+                {
+                    "province_name": "安徽",
+                    "sign_school_count": "2"
+                },
+                {
+                    "province_name": "山东",
+                    "sign_school_count": "14"
+                },
+                {
+                    "province_name": "新疆",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "江苏",
+                    "sign_school_count": "18"
+                },
+                {
+                    "province_name": "浙江",
+                    "sign_school_count": "75"
+                },
+                {
+                    "province_name": "江西",
+                    "sign_school_count": "12"
+                },
+                {
+                    "province_name": "湖北",
+                    "sign_school_count": "11"
+                },
+                {
+                    "province_name": "广西",
+                    "sign_school_count": "5"
+                },
+                {
+                    "province_name": "甘肃",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "山西",
+                    "sign_school_count": "39"
+                },
+                {
+                    "province_name": "内蒙古",
+                    "sign_school_count": "8"
+                },
+                {
+                    "province_name": "陕西",
+                    "sign_school_count": "11"
+                },
+                {
+                    "province_name": "吉林",
+                    "sign_school_count": "16"
+                },
+                {
+                    "province_name": "福建",
+                    "sign_school_count": "17"
+                },
+                {
+                    "province_name": "贵州",
+                    "sign_school_count": "30"
+                },
+                {
+                    "province_name": "广东",
+                    "sign_school_count": "37"
+                },
+                {
+                    "province_name": "青海",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "西藏",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "四川",
+                    "sign_school_count": "13"
+                },
+                {
+                    "province_name": "宁夏",
+                    "sign_school_count": "3"
+                },
+                {
+                    "province_name": "海南",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "台湾",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "香港",
+                    "sign_school_count": "0"
+                },
+                {
+                    "province_name": "澳门",
+                    "sign_school_count": "0"
+                }
+            ]
+        },
+        "run_sport": {
+            "des": "本学期学生跑步统计数据",
+            "partake_run_schools": "481",
+            "partake_run_male": "1231632",
+            "partake_run_female": "1424705",
+            "average_run_km": [
+                {
+                    "name": "0-50km",
+                    "newSemester": "490162",
+                    "lastSemester": "537073"
+                },
+                {
+                    "name": "50-100km",
+                    "newSemester": "914226",
+                    "lastSemester": "926615"
+                },
+                {
+                    "name": "100-150km",
+                    "newSemester": "368431",
+                    "lastSemester": "291302"
+                },
+                {
+                    "name": "150-200km",
+                    "newSemester": "55058",
+                    "lastSemester": "32080"
+                },
+                {
+                    "name": "200km以上",
+                    "newSemester": "12006",
+                    "lastSemester": "4769"
+                }
+            ],
+            "daily_run_person": [
+                {
+                    "run_date": "2019/9/13",
+                    "run_person": "327589"
+                },
+				{
+                    "run_date": "2019/9/14",
+                    "run_person": "491196"
+                },
+				{
+                    "run_date": "2019/9/15",
+                    "run_person": "461099"
+                },
+				{
+                    "run_date": "2019/9/16",
+                    "run_person": "469191"
+                },
+				{
+                    "run_date": "2019/9/17",
+                    "run_person": "473300"
+                },
+                {
+                    "run_date": "2019/9/18",
+                    "run_person": "457227"
+                },
+                {
+                    "run_date": "2019/9/19",
+                    "run_person": "441784"
+                },
+				{
+                    "run_date": "2019/9/20",
+                    "run_person": "498879"
+                },
+				{
+                    "run_date": "2019/9/21",
+                    "run_person": "598660"
+                },
+				{
+                    "run_date": "2019/9/22",
+                    "run_person": "574987"
+                },
+				{
+                    "run_date": "2019/9/23",
+                    "run_person": "549686"
+                },
+				{
+                    "run_date": "2019/9/24",
+                    "run_person": "553058"
+                },
+				{
+                    "run_date": "2019/9/25",
+                    "run_person": "592409"
+                },
+                {
+                    "run_date": "2019/9/26",
+                    "run_person": "673341"
+                },
+				{
+                    "run_date": "2019/9/27",
+                    "run_person": "655133"
+                },
+				{
+                    "run_date": "2019/9/28",
+                    "run_person": "748684"
+                },
+                {
+                    "run_date": "2019/9/29",
+                    "run_person": "725054"
+                },
+                {
+                    "run_date": "2019/9/30",
+                    "run_person": "844522"
+                },
+                {
+                    "run_date": "2019/10/1",
+                    "run_person": "177345"
+                },
+				{
+                    "run_date": "2019/10/2",
+                    "run_person": "223101"
+                },
+				{
+                    "run_date": "2019/10/3",
+                    "run_person": "294983"
+                },
+				{
+                    "run_date": "2019/10/4",
+                    "run_person": "274558"
+                },
+				{
+                    "run_date": "2019/10/5",
+                    "run_person": "379016"
+                },
+				{
+                    "run_date": "2019/10/6",
+                    "run_person": "422150"
+                },
+                {
+                    "run_date": "2019/10/7",
+                    "run_person": "557626"
+                },
+				{
+                    "run_date": "2019/10/8",
+                    "run_person": "892216"
+                },
+				{
+                    "run_date": "2019/10/9",
+                    "run_person": "1307510"
+                },
+				{
+                    "run_date": "2019/10/10",
+                    "run_person": "1330716"
+                },
+                {
+                    "run_date": "2019/10/11",
+                    "run_person": "1318161"
+                },
+                {
+                    "run_date": "2019/10/12",
+                    "run_person": "1297562"
+                },
+                {
+                    "run_date": "2019/10/13",
+                    "run_person": "1283456"
+                }
+            ],
+            "single_run": {
+                "des": "单次跑步平均里程分布情况（1、0-1千米，2、1-2千米，3、2-3千米，4、3-4千米，5、4-5千米，6、5千米以上）",
+                "single_run1": "328640",
+                "single_run2": "547151",
+                "single_run3": "605968",
+                "single_run4": "255771",
+                "single_run5": "59141",
+                "single_run6": "26540"
+            },
+            "weekly_run": {
+                "des": "平均每周运动次数分布情况（1、0-1次，2、1-2次，3、2-3次，4、3-4次，5、4-5次，6、5次以上）",
+                "weekly_run1": "5234",
+                "weekly_run2": "476534",
+                "weekly_run3": "839258",
+                "weekly_run4": "357272",
+                "weekly_run5": "97897",
+                "weekly_run6": "47016"
+            }
+        }
+    }
+}

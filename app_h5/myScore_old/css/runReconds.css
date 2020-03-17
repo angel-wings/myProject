@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    background: #f6f6f6;
+    font-family: arial,'PingFang',sans-serif;
+    overflow: scroll;
+    height: auto;
+    border-top: 1px solid #DDDDDD;
+}
+
+#wrapper{
+    height: 100%;
+    overflow: scroll;
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+}
+
+#content{
+    background: #fff;
+    padding-left: 1rem;
+    width: 100vw;
+    margin-bottom: 1rem; 
+}
+
+section {
+    height: 2.8125rem;
+    line-height: 2.8125rem;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border-bottom: solid 1px #ddd;
+    color: #333333;
+    font-size: .875rem;
+}
+
+section:last-child{
+    border-bottom: solid 0px #ddd;
+}
+
+span.time {
+    margin-left: .3125rem;
+}
+
+span.distance {
+    float: right;
+    margin-right: 1rem;
+}
+
+div#noInfo {
+    text-align: center;
+    padding-top: 6.5rem;
+    display: none;
+}
+
+img.runIcon {
+    height: 3.75rem;
+}
+
+span.tips {
+    display: inline-block;
+    font-size: .75rem;
+    color: #707070;
+    margin-top: 1.125rem;
+}
+
+.toast {
+    background: rgba(0, 0, 20, .8);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 7.5rem;
+    height: 2.5rem;
+    font-size: .875rem;
+    margin-left: -3.75rem;
+    text-align: center;
+    line-height: 2.5rem;
+    border-radius: 1.25rem;
+    display: none;
+}
+
+/* ************ */
+
+#pullDown,
+#pullUp {
+    background-color: #f6f6f6;
+    height: 1px;
+    line-height: 1px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #888;
+    width: 100%;
+}
+
+#pullDown .pullDownIcon,
+#pullUp .pullUpIcon {
+    display: block;
+    float: left;
+    width: 40px;
+    height: 1px;
+    background: url('./images/pull-icon@2x.png') 0 0 no-repeat;
+    -webkit-background-size: 40px 80px;
+    background-size: 40px 80px;
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 250ms;
+}
+
+#pullDown .pullDownIcon {
+    -webkit-transform: rotate(0deg) translateZ(0);
+}
+
+#pullUp .pullUpIcon {
+    -webkit-transform: rotate(-180deg) translateZ(0);
+}
+
+#pullDown.flip .pullDownIcon {
+    -webkit-transform: rotate(-180deg) translateZ(0);
+}
+
+#pullUp.flip .pullUpIcon {
+    -webkit-transform: rotate(0deg) translateZ(0);
+}
+
+#pullDown.loading .pullDownIcon,
+#pullUp.loading .pullUpIcon {
+    background-position: 0 100%;
+    -webkit-transform: rotate(0deg) translateZ(0);
+    -webkit-transition-duration: 0ms;
+
+    -webkit-animation-name: loading;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes loading {
+    from {
+        -webkit-transform: rotate(0deg) translateZ(0);
+    }
+    to {
+        -webkit-transform: rotate(360deg) translateZ(0);
+    }
+}

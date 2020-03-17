@@ -1,0 +1,16 @@
+body{ margin: 0; padding: 0; list-style: none;background: #e6e6e6;}
+ul,li,p{ margin: 0; padding: 0; list-style: none;}
+.curve{ font-size: .7rem;background: white;}
+.notice{ background: #e6e6e6; color: #b2b2b2;  height: 30px; line-height: 30px; padding-left: 15px;font-size: 10px;}
+.highcharts-credits{ display: none;}
+#bupin{ width: 94%; margin: 0 auto; margin-top: 15px;  height: 243px; clear: both; overflow: hidden;}
+#bupin .nobupin{ clear: both; overflow: hidden; height: auto;}
+#peisu{ width: 94%; margin: 0 auto; margin-top: 15px; height: 243px; clear: both; overflow: hidden; }
+.curve .notice-bottom1{ margin-top: 5px; margin-bottom: 15px; text-align: center; font-size: 10px; color: #b2b2b2;}
+.curve .notice-bottom{ margin-top: 15px; text-align: center; font-size: 10px; color: #b2b2b2;}
+
+/*��ʾ��*/
+.toast{ background: rgba(0,0,20,.8); color: white;
+    position: absolute; left: 50%; top: 50%; width: 120px; height: 40px; font-size: 14px; margin-left: -60px;
+    text-align: center; line-height: 40px; border-radius: 20px; display: none;
+}

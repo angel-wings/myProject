@@ -1,0 +1,277 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>体质健康数据</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div id="main">
+        <div class="user-type">
+            {{name}}
+        </div>
+        <div class="tab-bar" v-show="tabList && tabList.length>0">
+            <div class="tab-bar-box">
+                <span v-for="(item,index) in tabList" :style="'width:'+ 100/3 +'%;'"
+                    :class="selectedChild == index ?'tab-actived':''" @click="selectedMyChild(index)">{{item}}</span>
+            </div>
+        </div>
+
+        <div v-show="tabList && tabList.length>0">
+            <!-- 概览 -->
+            <div class="overview" v-show="selectedChild == 0">
+                <div class="overview-head">
+                    <!-- 体测成绩总览的 -->
+                    <div class="overview-head-title">
+                        <span>完成体测人数：</span>
+                        <span>{{finishCount}}</span>
+                    </div>
+                    <div class="overview-head-statis">
+                        <div class="oh-statis-left">
+                            <div id="overview-ts"></div>
+                        </div>
+                        <div class="oh-statis-right">
+                            <div v-for="item in rangeTotal" class="oh-legend-item">
+                                <span class="statis-bg" :style="'background-color:'+ item.color+';'"></span>
+                                <span class="rank-class">{{item.name}}</span>
+                                <span class="fr">{{item.rate}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overview-nofinish">
+                        <div>
+                            <span>部分测完人数：</span><span>{{finishPartCount}}</span>
+                        </div>
+                        <div>
+                            <span>未参与体测人数：</span><span>{{notJoinCount}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="overview-rank" v-show="teacherRole<2">
+                    <!-- 排行 -->
+                    <div class="overview-rank-title">排行榜</div>
+                    <div class="overview-rank-common">
+                        <div class="rank-title">优秀率TOP3班级</div>
+                        <div v-for="(item,index) in excellentTop3" :key="index" class="rank-item">
+                            <div class="rank-item-text">
+                                <img :src="'./images/rank_'+ (index+1) +'.png'">
+                                <span>{{item.school}}</span>
+                                <span class="rank-class">{{item.className}}</span>
+                            </div>
+                            <div class="rank-item-press">
+                                <div :style="'width:'+ item.score/100*5.2 +'rem;'" class="rank-col"></div>
+                                <span>{{item.score}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overview-rank-common">
+                        <div class="rank-nopass-title">不及格率TOP3班级</div>
+                        <div v-for="(item,index) in noPassTop3" :key="index" class="rank-item">
+                            <div class="rank-item-text">
+                                <span class="rank-index">{{index+1}}</span>
+                                <span>{{item.school}}</span>
+                                <span class="rank-class">{{item.className}}</span>
+                            </div>
+                            <div class="rank-item-press">
+                                <div :style="'width:'+ item.score/100*5.2 +'rem;'" class="rank-col rc-red"></div>
+                                <span>{{item.score}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overview-rank-common">
+                        <div class="rank-nopass-title">不及格率TOP3项目</div>
+                        <div v-for="(item,index) in noPassTestTypeTop3" :key="index" class="rank-item">
+                            <div class="rank-item-text">
+                                <span class="rank-index">{{index+1}}</span>
+                                <span>{{item.name}}</span>
+                            </div>
+                            <div class="rank-item-press">
+                                <div :style="'width:'+ item.score/100*5.2 +'rem;'" class="rank-col rc-red"></div>
+                                <span>{{item.score}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overview-gender" v-show="teacherRole>1">
+                    <!-- 体测成绩性别统计-------男 -->
+                    <div class="overview-head">
+                        <div class="overview-head-title">
+                            <span>完成体测男生：</span>
+                            <span>{{maleFinish}}</span>
+                        </div>
+                        <div class="overview-male-statis">
+                            <div class="oh-statis-left">
+                                <div id="overview-male-ts"></div>
+                            </div>
+                            <div class="oh-statis-right">
+                                <div v-for="item in rangeMaleTotal" class="oh-legend-item">
+                                    <span class="statis-bg" :style="'background-color:'+ item.color+';'"></span>
+                                    <span class="rank-class">{{item.name}}</span>
+                                    <span class="fr">{{item.rate}}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 女 -->
+                    <div class="overview-head">
+                        <div class="overview-head-title">
+                            <span>完成体测女生：</span>
+                            <span>{{femaleFinish}}</span>
+                        </div>
+                        <div class="overview-female-statis">
+                            <div class="oh-statis-left">
+                                <div id="overview-female-ts"></div>
+                            </div>
+                            <div class="oh-statis-right">
+                                <div v-for="item in rangeFemaleTotal" class="oh-legend-item">
+                                    <span class="statis-bg" :style="'background-color:'+ item.color+';'"></span>
+                                    <span class="rank-class">{{item.name}}</span>
+                                    <span class="fr">{{item.rate}}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中间 -->
+            <div class="middle-main" v-show="selectedChild == 1">
+                <!-- 柱形图 -->
+                <div class="middle-histogram" v-show="teacherRole!=3">
+                    <div v-for="(item,index) in secondList" :key="index"
+                        @click="toMiddleTabDetail(item.code,item.schoolCode)" class="his-common">
+                        <div class="his-title">
+                            <span>{{item.name}}</span>
+                            <div v-if="index == 0" class="his-legden">
+                                <span class="his-legden-item bg-nopass"></span>
+                                <span>不及格</span>
+                                <span class="his-legden-item bg-pass"></span>
+                                <span>及格</span>
+                                <span class="his-legden-item bg-good"></span>
+                                <span>良好</span>
+                                <span class="his-legden-item bg-excellent"></span>
+                                <span>优秀</span>
+                            </div>
+                        </div>
+                        <div class="histogram">
+                            <div class="histogram-col">
+                                <div :style="'width:'+ item.noPassRate +'%;'" class="h-col-item bg-nopass"></div>
+                                <div :style="'width:'+ item.passRate +'%;'" class="h-col-item bg-pass"></div>
+                                <div :style="'width:'+ item.goodRate +'%;'" class="h-col-item bg-good"></div>
+                                <div :style="'width:'+ item.excellentRate +'%;'" class="h-col-item bg-excellent"></div>
+                            </div>
+                            <div class="histogram-text">
+                                <span :style="'width:'+ item.noPassRate +'%;'"
+                                    class="h-text-item">{{item.noPassRate}}%</span>
+                                <span :style="'width:'+ item.passRate +'%;'"
+                                    class="h-text-item">{{item.passRate}}%</span>
+                                <span :style="'width:'+ item.goodRate +'%;'"
+                                    class="h-text-item">{{item.goodRate}}%</span>
+                                <span :style="'width:'+ item.excellentRate +'%;'"
+                                    class="h-text-item">{{item.excellentRate}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 表格 -->
+                <div class="middle-table" v-show="teacherRole==3">
+                    <div class="cl-name">{{className}}</div>
+                    <div class="stu-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="stu-name">姓名</td>
+                                    <td>性别</td>
+                                    <td>标准分</td>
+                                    <td>附加分</td>
+                                    <td class="stu-total">体测总分</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="(stu,index) in scoreList" :key="index">
+                                    <tr @click="getStudentTestScore(stu.studentCode)">
+                                        <td class="stu-name" rowspan="2"><span class="stu-index">{{stu.index}}</span>
+                                            {{stu.name}}</td>
+                                        <td>{{stu.gender}}</td>
+                                        <td>{{stu.score}}</td>
+                                        <td>{{stu.extraPoint}}</td>
+                                        <td class="stu-total">{{stu.totalScore}}</td>
+                                    </tr>
+                                    <tr @click="getStudentTestScore(stu.studentCode)">
+                                        <td colspan="4">
+                                            体测成绩：
+                                            <span :class="stu.level == '不及格'?'color-red':'color-blue'">{{stu.level}}
+                                            </span>
+                                            <span
+                                                :class="stu.totalScoreStatus=='已完成'?'bg-green':'bg-red'">{{stu.totalScoreStatus}}</span>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 项目 -->
+            <div class="phy-test" v-show="selectedChild == 2">
+                <div class="overview-head" v-for="phy in testNames" v-show="phy.rangeData && phy.rangeData.length>0">
+                    <div class="overview-head-title">
+                        <span>{{phy.name}}</span>
+                    </div>
+                    <div class="overview-male-statis">
+                        <div class="oh-statis-left">
+                            <div :id="phy.id" class="phy-test-item"></div>
+                        </div>
+                        <div class="oh-statis-right">
+                            <div v-for="item in phy.rangeData" class="oh-legend-item">
+                                <span class="statis-bg" :style="'background-color:'+ item.color+';'"></span>
+                                <span class="rank-class">{{item.name}}</span>
+                                <span class="fr">{{item.rate}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nophysical" v-if="isNoData">
+            <p>暂无体质健康数据</p>
+        </div>
+
+        <div class="no-data" v-show="!tabList || tabList.length==0">
+            <div v-if="isNoBinding" class="no-bind">
+                <div class="school-list">
+                    <p class="school-title">体质健康数据查看暂适用学校范围：</p>
+                    <p v-for="(school,index) in applySchools" :key="index">{{school}}</p>
+                </div>
+                <div class="school-list">
+                        <p class="school-title">体质健康数据查看暂适用角色范围：</p>
+                        <p>体质健康 区级领导</p>
+                        <p>校级 校领导</p>
+                        <p>教师级 班主任</p>
+                        <p>教师级 体育老师</p>
+                </div>
+            </div>
+            <div v-else class="err-box">
+                <p>体质健康数据加载中</p>
+                <img src="./images/refresh.png" @click="refreshPage">
+                <p class="refresh">刷新</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/rem.js"></script>
+<script src="./js/index.js"></script>
+
+</html>

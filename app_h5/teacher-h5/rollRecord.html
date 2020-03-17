@@ -147,7 +147,8 @@
 
     </div>
     <div class="no-record">
-        <img src="http://swapp-images.oss-cn-hangzhou.aliyuncs.com/aticle-img/20180619/bc2a938375c4376e8bde4a9fe8fca2f9.png">
+        <img
+            src="http://swapp-images.oss-cn-hangzhou.aliyuncs.com/aticle-img/20180619/bc2a938375c4376e8bde4a9fe8fca2f9.png">
         <span class="no-record-des">暂无点名记录</span>
     </div>
 </body>
@@ -219,10 +220,21 @@
                             html += '<span class="rr-right-blue">出勤</span></div>';
                             break;
                         case 2:
-                            html += '<span class="rr-right-red">缺勤</span></div>';
+                            html += '<span class="rr-right-red">旷课</span></div>';  // 旷课 迟到 早退
                             break;
                         case 3:
-                            html += '<span class="rr-right-yellow">请假</span></div>';
+                            html += '<span class="rr-right-yellow">事假</span></div>';  //事假 病假
+                            break;
+                        case 4:
+                            html += '<span class="rr-right-yellow">病假</span></div>';
+                            break;
+                        case 5:
+                            html += '<span class="rr-right-red">早退</span></div>';  // 旷课 迟到 早退
+                            break;
+                        case 6:
+                            html += '<span class="rr-right-red">迟到</span></div>';  //事假 病假
+                            break;
+                        default: html += '</div>';
                             break;
                     }
                 };

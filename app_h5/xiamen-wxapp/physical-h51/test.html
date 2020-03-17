@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <title></title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="code"></div>
+</body>
+<script>
+    $(function () {
+        var domain = 'https://tz.xmtaedu.cn';
+        var openId = 'testopenid';
+        var APPID = 'wwdd53954cb5a96a26';
+        var phoneNumber = '15202207653';
+        // var openId = 'okGyFuPySB8FPO5pvG0jVaYNTUA0';
+        // getCode();
+        // $('#code').text('asdasdasd');
+        getScoreDetail();
+
+        // sessionStorage.setItem("lastname", "Smith");
+
+        function getCode() {
+            // 非静默授权，第一次有弹框
+            var code = this.getUrlParam("code"); // 截取路径中的code，如果没有就去微信授权，如果已经获取到了就直接传code给后台获取phoneNumber
+            var local = window.location.href;
+            if (code == null || code == "") {
+                window.location.href =
+                    "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
+                    APPID +
+                    "&redirect_uri=" +
+                    encodeURIComponent(local) +
+                    "&response_type=code&scope=snsapi_privateinfo&agentid=1000018&state=STATE#wechat_redirect";
+            } else {
+                // 获取phoneNumber
+                this.getphoneNumberByOwnInterface(code);
+            }
+        };
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+
+            if (r != null) return unescape(r[2]);
+
+            return null;
+        }
+
+        function getphoneNumberByOwnInterface(code) {
+
+            $.ajax({
+                url: domain + '/getPhoneNumber',
+                type: 'POST',
+                datatype: "json",
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({ code: code }),
+                success: function (res) {
+                    var suc = res.status;
+
+                },
+                error: function (res) {
+                    console.log('发生错误:' + res.errorMsg);
+                }
+            })
+        };
+
+
+        function getScoreDetail() {
+            var url = domain + "/getScore";
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                datatype: "json",
+                data: JSON.stringify({ phoneNumber: phoneNumber }),
+                contentType: 'application/json;charset=UTF-8',
+                success: function (data) {
+
+                },
+                error: function (data) {
+                    console.log('接口请求失败');
+                }
+            })
+        };
+    })
+</script>
+
+</html>

@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    background: #f6f6f6;
+    padding: .75rem .9375rem;
+    font-family: arial,'PingFang',sans-serif;
+    border-top: 1px solid #DDDDDD;
+}
+
+section {
+    height: 2.8125rem;
+    line-height: 2.8125rem;
+    background: #ffffff;
+    font-size: .875rem;
+    color: #202020;
+    position: relative;
+    border-radius: .5rem;
+    margin-bottom: .5rem;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.10), 0 0 8px 0 rgba(0,0,0,0.08);
+}
+
+span.testName {
+    position: absolute;
+    /* top: .9375rem; */
+    left: 1rem;
+    width: 11.25rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;/*禁止自动换行*/
+    overflow: hidden;
+}
+
+div.target {
+    position: absolute;
+    /* top: .9375rem; */
+    right: 1rem;
+}
+
+span.targets{
+    color: #b2b2b2;
+}
+
+div#noInfo {
+    text-align: center;
+    padding-top: 6.5rem;
+    display: none;
+}
+
+img.runIcon {
+    height: 3.75rem;
+}
+
+span.tips {
+    display: inline-block;
+    font-size: .75rem;
+    color: #707070;
+    margin-top: 1.125rem;
+}
+
+.toast {
+    background: rgba(0, 0, 20, .8);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 7.5rem;
+    height: 2.5rem;
+    font-size: .875rem;
+    margin-left: -3.75rem;
+    text-align: center;
+    line-height: 2.5rem;
+    border-radius: 1.25rem;
+    display: none;
+}

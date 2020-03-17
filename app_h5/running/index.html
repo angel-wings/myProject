@@ -1,0 +1,270 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <title>运动小知识</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #e6e6e6;
+            font-family: "PingFangSC-Regular";
+            font-size: .875rem;
+            padding-bottom: 2.5rem;
+            display: none;
+        }
+
+        .green {
+            color: #33C4C2;
+        }
+
+        p {
+            text-indent: 1.75rem;
+            margin: 0;
+        }
+
+        div.header {
+            width: 100%;
+            background: #ffffff;
+        }
+
+        div.tips {
+            height: 2.65625rem;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            background: #FFC73E;
+            position: relative;
+            text-align: center;
+        }
+
+        span.text-header {
+            width: 100%;
+            text-align: center;
+        }
+
+        img.light {
+            width: 1.25rem;
+            position: absolute;
+            left: .875rem;
+            top: .625rem;
+        }
+
+        .semInfo {
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        span.line-left {
+            position: absolute;
+            left: 1rem;
+            top: .5625rem;
+            border-bottom: solid 1px #33C4C2;
+            width: 7.125rem;
+        }
+
+        span.line-right {
+            position: absolute;
+            right: 1rem;
+            top: .5625rem;
+            border-bottom: solid 1px #33C4C2;
+            width: 7.125rem;
+        }
+
+        .semInfo .title {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .infos {
+            margin-top: 1.1875rem;
+            padding-bottom: 1.25rem;
+            color: #202020;
+        }
+
+        div.nosem {
+            color: #b2b2b2;
+            text-align: center;
+            padding: 3rem 0;
+            display: none;
+        }
+
+        div.main {
+            margin-top: .75rem;
+            background: #ffffff;
+            color: #202020;
+        }
+
+        div.question {
+            padding: 1rem;
+        }
+
+        .main .title {
+            color: #33C4C2;
+            margin-bottom: .625rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="header">
+            <div class="tips">
+                <img src="./light.png" class="light">
+                <span class="text-header">跑步中可以点击“一键修复”，确保设备功能正常</span>
+            </div>
+            <div class="semInfo">
+                <span class="line-left"></span>
+                <span class="line-right"></span>
+                <div class="title green">学期提示</div>
+                <div class="infos">
+                    <div>学期起止：
+                        <span class="info-1">****.**.**—****.**.**</span>
+                    </div>
+                    <div>学期目标：
+                        <span class="info-2">**公里</span>
+                    </div>
+                    <div>
+                        <span class="goal-limit">每日成绩上限：</span>
+                        <span class="info-3">**公里</span>
+                        <span class="info-4">（单次最低要求：**公里）</span>
+                    </div>
+                    <div>配速：
+                        <span class="info-5">*—*分钟/公里</span>
+                    </div>
+                    <div class="step">步频：
+                        <span class="info-7">*—*步/分钟</span>
+                    </div>
+                    <div>跑步有效时间：
+                        <span class="info-6">**.**—**.**</span>
+                    </div>
+                </div>
+                <div class="nosem">暂无学期目标</div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="question">
+                <div class="title que-1">关于“学期目标、每日上限、最低要求”</div>
+                <p class="que-2">同学们，学期目标是大家在该学期需要跑步达到的总里程数。</p>
+                <p class="que-3"> 为了帮同学们养成经常跑步锻炼的好习惯，每日上限是每天计入跑步成绩的里程上限，避免运动过度。</p>
+                <p> 跑步最低要求是每天完成跑步的最低里程数，单次跑步达不到最低要求，跑步里程将不计入跑步成绩。</p>
+            </div>
+            <div class="question">
+                <div class="title">什么是配速？</div>
+                <p>配速是完成跑步每公里所需要的时间，在运动世界校园App中，跑步页面显示的配速是当前时间的实时配速，跑步结束详情页面显示的是本次跑步的配速，配速是运动世界校园App评判成绩是否有效的标准之一。</p>
+                <p>系统默认配速：2-10 分钟/公里，请以学校实际要求为准。</p>
+            </div>
+            <div class="question">
+                <div class="title">什么是步频？</div>
+                <p>步频即脚步的频率，如果学校有步频校对要求，请以学校实际要求为准，正常跑步都能达标的。</p>
+            </div>
+            <div class="question">
+                <div class="title">什么是点位？</div>
+                <p>点位是 随机点位和约定终点 跑步模式下需要经过或到达的地方，地图上通过颜色和标记显示点位信息。</p>
+                <br>
+                <p style="text-indent:0;">1.普通点位：除了 必经点位 和 终点点位外的点位（蓝色）完成跑步至少需要经过2个普通点位；
+                    <br>2.必经点位：“随机点位”跑步模式，必须要经过必经点位（黄色）才能完成跑步；
+                    <br>3.终点点位：“约定终点”跑步模式，必须要到达终点点位（红色）才能完成跑步；</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./jquery.min.js"></script>
+<script src="./prefixfree.min.js"></script>
+<script src="./rem.js"></script>
+<script>
+    $(function () {
+        //兼容IOS
+        connectWebViewJavascriptBridge(function (bridge) {
+            bridge.callHandler(
+                'semesterTipInfo',
+                null,
+                function (responseData) {
+                    if (responseData) {
+                        alert(responseData)
+                        var infoObj = JSON.parse(responseData);
+
+                        if (infoObj.hasSemester) {
+                            var runValidTime = infoObj.runValidTime.join(" ") || "全天";
+                            $("span.info-1").text(infoObj.time);
+                            // 目标为公里数或者次数
+                            var goalHtml = '', gradeLimit = '';
+                            if (infoObj.semesterGoal && infoObj.semesterCountGoal) {
+                                goalHtml = infoObj.semesterGoal + '，' + infoObj.semesterCountGoal;
+                            } else if (infoObj.semesterGoal) {
+                                goalHtml = infoObj.semesterGoal;
+                                gradeLimit = infoObj.gradeLimit;
+                            } else if (infoObj.semesterCountGoal) {
+                                goalHtml = infoObj.semesterCountGoal;
+                                gradeLimit = infoObj.countLimit;
+
+                                $(".goal-limit").text('每周成绩上限');
+                                $(".que-1").text('关于“学期目标、每周上限、最低要求”');
+                                $(".que-2").text('同学们，学期目标是大家在该学期需要跑步达到的总次数。');
+                                $(".que-3").text('为了帮同学们养成经常跑步锻炼的好习惯，每周上限是每周计入成绩的次数上限，避免运动过度。');
+                            }
+                            $("span.info-2").text(goalHtml);
+                            $("span.info-3").text(gradeLimit);
+                            $("span.info-4").text("（单次最低要求：" + infoObj.distanceLimit + "）");
+                            $("span.info-5").text(infoObj.speedLimit);
+                            $("span.info-6").text(runValidTime);
+                            if (infoObj.stepLimit) {
+                                $("span.info-7").text(infoObj.stepLimit);
+                            } else {
+                                $('.step').css('display', 'none');
+                            }
+
+                        } else {
+                            $("div.infos").css("display", "none");
+                            $("div.nosem").css("display", "block");
+                        }
+
+                        $("body").css("display", "block");
+                    }
+                })
+        });
+        /**
+         * js与native交互的方法
+         */
+        function connectWebViewJavascriptBridge(callback) {
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                if (isAndroid) {
+                    document.addEventListener(
+                        'WebViewJavascriptBridgeReady'
+                        , function () {
+
+                            callback(WebViewJavascriptBridge)
+                        },
+                        false
+                    );
+                } else if (isiOS) {
+                    if (window.WVJBCallbacks) {
+                        return window.WVJBCallbacks.push(callback);
+                    }
+                    window.WVJBCallbacks = [callback];
+                    var WVJBIframe = document.createElement('iframe');
+                    WVJBIframe.style.display = 'none';
+                    WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+                    document.documentElement.appendChild(WVJBIframe);
+                    setTimeout(function () {
+                        document.documentElement.removeChild(WVJBIframe)
+                    }, 0)
+                }
+            }
+        }
+
+    })
+</script>
+
+</html>

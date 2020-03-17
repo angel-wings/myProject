@@ -402,10 +402,16 @@
                         if (list.length > 0) {
                             addItem(list);
                         }
+                    } else if (data.error == -10010) {
+                        removeStore('token');
+                        toast(data.message);
+                        location.href = './index.html';
+                    } else {
+                        toast(data.message);
                     }
                 },
                 error: function (data) {
-
+                    toast('请求失败');
                 }
             })
         }

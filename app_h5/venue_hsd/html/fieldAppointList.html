@@ -267,8 +267,12 @@
                         beginAt = data.data.startTime;
                         endAt = data.data.endTime;
                         addItem(beginAt, endAt, chargeType);
+                    } else if (data.error == -10010) {
+                        removeStore('token');
+                        toast(data.message);
+                        location.href = './index.html';
                     } else {
-                        toast(data.message, 200);
+                        toast(data.message);
                     }
                 },
                 error: function (response) {
@@ -308,9 +312,14 @@
                 success: function (data) {
                     if (data.error == 10000) {
                         addLi(data.data, chargeType);
+                    } else if (data.error == -10010) {
+                        removeStore('token');
+                        $('#timeBox').siblings().remove();
+                        toast(data.message);
+                        location.href = './index.html';
                     } else {
                         $('#timeBox').siblings().remove();
-                        toast(data.message, 220);
+                        toast(data.message);
                     }
                 },
                 error: function (response) {
@@ -581,8 +590,12 @@
                         } else {
                             location.href = './orderConfirm.html?orderId=' + data.data.orderId;
                         }
+                    } else if (data.error == -10010) {
+                        removeStore('token');
+                        toast(data.message);
+                        location.href = './index.html';
                     } else {
-                        toast(data.message, 250);
+                        toast(data.message);
                     }
                 },
                 error: function (response) {

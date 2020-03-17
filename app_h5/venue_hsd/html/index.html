@@ -92,21 +92,25 @@
         FastClick.attach(document.body);
         var uid = getStore('uid');
         var time = getStore('time');
-        var now = new Date().getTime();
-        if (uid && time && now - time < 72 * 3600000) {
-            location.href = './venueList.html'
-        }
-
         var width = $(".btn").width();
+
         $(".btn").height(width * 3 / 14);
         $(".btn").css("line-height", width * 3 / 14 + "px");
         $(".btn").click(function () {
             var id = $(this).attr("id");
             if (id == "btn1") {
+                removeStore('time');
                 location.href = payUrl + '/loginSuccess';
                 // toast("校内人员暂时无法登录", 170);
             } else if (id == "btn2") {
-                location.href = './phoneValidate.html';
+                // 校外登录删除token信息
+                removeStore('token');
+                var now = new Date().getTime();
+                if (uid && time && now - time < 72 * 3600000) {
+                    location.href = './venueList.html';
+                } else {
+                    location.href = './phoneValidate.html';
+                }
             }
         })
     })

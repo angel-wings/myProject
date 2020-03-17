@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -38,57 +39,122 @@
         #qrcode3,
         #qrcode4,
         #qrcode5 {
-            width: 256px;
-            height: 320px;
+            width: 300px;
+            height: 300px;
             text-align: center;
             position: relative;
             background: #fff;
-            margin: 30px;
+            margin: 30px 8px;
+            border: 1px solid #333333;
+            border-radius: 5px;
             display: inline-block;
+        }
+
+        .stu-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 256px;
+            border-right: 1px solid #333333;
+        }
+
+        .stu-test {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 256px;
+            padding: 20px 10px 0;
+            text-align: left;
+        }
+
+        #stuinfo0,
+        #stuinfo1,
+        #stuinfo2,
+        #stuinfo3,
+        #stuinfo4,
+        #stuinfo5 {
+            position: absolute;
+            bottom: 20px;
+            left: 25px;
+            /* width: 100px;
+            height: 100px;
+            background-color: aqua; */
         }
 
         .name {
             position: absolute;
-            width: 90px;
-            height: 40px;
-            line-height: 40px;
             background: #fff;
             font-weight: bold;
             color: #000;
-            font-size: 20px;
+            font-size: 18px;
             text-align: center;
-            left: 83px;
-            top: 108px;
+            left: 20px;
+            top: 20px;
         }
 
         .school {
-            color: #000;
             font-size: 14px;
             text-align: center;
             position: absolute;
             left: 0;
-            bottom: 30px;
-            width: 256px;
-            height: 30px;
-            line-height: 30px;
+            bottom: 0;
+            width: 299px;
+            height: 43px;
+            line-height: 43px;
             font-weight: bold;
+            border-top: 1px solid #333333;
         }
 
         .className {
-            color: #000;
             font-size: 14px;
             text-align: center;
             position: absolute;
-            left: 0;
-            bottom: 5px;
-            width: 256px;
+            left: 10px;
+            top: 65px;
             height: 30px;
             line-height: 30px;
-            font-weight: bold;
+        }
+
+        .stu-code {
+            position: absolute;
+            left: 10px;
+            top: 100px;
+            font-size: 12px;
+        }
+
+        .gender {
+            position: absolute;
+            top: 46px;
+            right: 30px;
+        }
+
+        /* 测试项2目 */
+        .test-title {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .test-item {
+            height: 28px;
+            line-height: 28px;
+            font-size: 14px;
+        }
+
+        .check-box {
+            float: right;
+            height: 20px;
+            width: 20px;
+            margin-top: 4px;
+            border-radius: 3px;
+            border: 1px solid #333333;
         }
 
         input {
             cursor: pointer;
+            width: 220px;
             height: 36px;
             line-height: 36px;
             border-radius: 4px;
@@ -111,52 +177,110 @@
 
 <body>
     <div class="inputBox">
+        <span>学校ID：</span>
         <input type="text" name="schoolId" placeholder="请输入学校id"><br>
+        <span>班级ID：</span>
         <input type="text" name="classId" placeholder="请输入班级id" style="margin-top:15px;margin-bottom: 15px;"><br>
         <span class="btn">搜索并生成二维码</span>
     </div>
     <div id="box">
         <div id="qrcode0">
-            <div class="name"></div>
+            <div class="stu-info">
+                <div id="stuinfo0"></div>
+                <div class="name"></div>
+                <div class="className"></div>
+                <div class="stu-code"></div>
+                <div class="gender"></div>
+            </div>
+            <div class="stu-test">
+                <div class="test-title">测试项目</div>
+                <div class="test-item-box"></div>
+            </div>
             <div class="school"></div>
-            <div class="className"></div>
         </div>
         <div id="qrcode1">
-            <div class="name"></div>
+            <div class="stu-info">
+                <div id="stuinfo1"></div>
+                <div class="name"></div>
+                <div class="className"></div>
+                <div class="stu-code"></div>
+                <div class="gender"></div>
+            </div>
+            <div class="stu-test">
+                <div class="test-title">测试项目</div>
+                <div class="test-item-box"></div>
+            </div>
             <div class="school"></div>
-            <div class="className"></div>
         </div>
         <div id="qrcode2">
-            <div class="name"></div>
+            <div class="stu-info">
+                <div id="stuinfo2"></div>
+                <div class="name"></div>
+                <div class="className"></div>
+                <div class="stu-code"></div>
+                <div class="gender"></div>
+            </div>
+            <div class="stu-test">
+                <div class="test-title">测试项目</div>
+                <div class="test-item-box"></div>
+            </div>
             <div class="school"></div>
-            <div class="className"></div>
         </div>
         <div id="qrcode3">
-            <div class="name"></div>
+            <div class="stu-info">
+                <div id="stuinfo3"></div>
+                <div class="name"></div>
+                <div class="className"></div>
+                <div class="stu-code"></div>
+                <div class="gender"></div>
+            </div>
+            <div class="stu-test">
+                <div class="test-title">测试项目</div>
+                <div class="test-item-box"></div>
+            </div>
             <div class="school"></div>
-            <div class="className"></div>
         </div>
         <div id="qrcode4">
-            <div class="name"></div>
+            <div class="stu-info">
+                <div id="stuinfo4"></div>
+                <div class="name"></div>
+                <div class="className"></div>
+                <div class="stu-code"></div>
+                <div class="gender"></div>
+            </div>
+            <div class="stu-test">
+                <div class="test-title">测试项目</div>
+                <div class="test-item-box"></div>
+            </div>
             <div class="school"></div>
-            <div class="className"></div>
         </div>
         <div id="qrcode5">
-            <div class="name"></div>
+            <div class="stu-info">
+                <div id="stuinfo5"></div>
+                <div class="name"></div>
+                <div class="className"></div>
+                <div class="stu-code"></div>
+                <div class="gender"></div>
+            </div>
+            <div class="stu-test">
+                <div class="test-title">测试项目</div>
+                <div class="test-item-box"></div>
+            </div>
             <div class="school"></div>
-            <div class="className"></div>
         </div>
     </div>
 
 </body>
-<script src="./jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.min.js"></script>
 <script src="./qrcode.js"></script>
 <script src="./html2canvas.js"></script>
 <script>
     $(function () {
-        let stu = [];
-        // let domain = "http://127.0.0.1:18076";
-        let domain = "http://admin.jlp.iydsj.com/nd";
+        var stu = [];
+        var domain = "http://192.168.0.130:18076";
+        // var domain = "http://admin.jlp.iydsj.com/nd";
+        // var domain = "http://test.admin.jlp.iydsj.com/nd";
+
         function getAllStu(schoolId, classId) {
             if (!classId) classId = "";
             $.ajax({
@@ -166,9 +290,9 @@
                     if (data.error == 10000) {
                         if (data.data.length) {
                             stu = data.data;
-                            let newArr = [];
-                            let arr = [];
-                            stu.forEach((item, index) => {
+                            var newArr = [];
+                            var arr = [];
+                            stu.forEach(function (item, index) {
                                 if (index % 6 == 0 && index != 0) {
                                     newArr.push(arr);
                                     arr = [item];
@@ -185,15 +309,13 @@
                         }
                     }
                 },
-                error: function (data) {
-
-                }
+                error: function (data) { }
             })
         }
 
         $("span.btn").click(function () {
-            let schoolId = $("input[name='schoolId']").val();
-            let classId = $("input[name='classId']").val();
+            var schoolId = $("input[name='schoolId']").val();
+            var classId = $("input[name='classId']").val();
             if (!schoolId) return;
 
             getAllStu(schoolId, classId);
@@ -201,28 +323,57 @@
 
         async function getQrcode(stu) {
             if (!stu.length) return;
-            for (let item of stu) {
-                let name = item[0].schoolName + " " + item[0].className;
-                item.forEach((option, index) => {
+            for (var item of stu) {
+                var name = item[0].schoolName + " " + item[0].className;
+                item.forEach(function (option, index) {
                     $(".name").eq(index).text(option.name);
-                    $(".school").eq(index).text(option.schoolName + " " + option.className);
-                    $(".className").eq(index).text(option.code);
-                    getCode(option.code, "qrcode" + index);
+                    $(".school").eq(index).text(option.schoolName);
+                    $(".className").eq(index).text(option.className);
+                    $(".stu-code").eq(index).text(option.code);
+                    $(".gender").eq(index).text(option.gender == 1 ? "男" : "女");
+                    var myhtml = '';
+                    setPhysicalTest(option.grade, option.gender).forEach(function (ele) {
+                        myhtml += '<div class="test-item"><span>' + ele + '</span><div class="check-box"></div></div>'
+                    })
+                    $('.test-item-box').eq(index).html(myhtml);
+                    getCode(option.code, "stuinfo" + index);
                 })
                 await toImg("box", name);
                 $(".name").text("");
                 $(".school").text("");
                 $(".className").text("");
+                $(".stu-code").text("");
+                $(".gender").text("");
+                $('.test-item-box').html("");
             }
 
+        };
+
+        function setPhysicalTest(grade, gender) {
+            var testArr = ['身高体重', '肺活量', '坐位体前屈'];
+            var reTestItem = [];
+            if (grade < 3) {  // 
+                reTestItem = testArr.concat(['1分钟跳绳', '50米跑']);
+            } else if (grade < 5) {
+                reTestItem = testArr.concat(['1分钟仰卧起坐', '1分钟跳绳', '50米跑']);
+            } else if (grade < 7) {
+                reTestItem = testArr.concat(['1分钟仰卧起坐', '1分钟跳绳', '50米跑', '50*8往返跑']);
+            } else {
+                if (gender == 1) {
+                    reTestItem = testArr.concat(['引体向上', '立定跳远', '50米跑', '1000米跑']);
+                } else {
+                    reTestItem = testArr.concat(['仰卧起坐', '立定跳远', '50米跑', '800米跑']);
+                }
+            }
+            return reTestItem;
         }
 
         function getCode(url, id) {
             // 设置参数方式
             var qrcode = new QRCode(id, {
                 text: url,
-                width: 256,
-                height: 256,
+                width: 100,
+                height: 100,
                 colorDark: '#000000',
                 colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.H
@@ -231,24 +382,23 @@
         }
 
         function toImg(id, name) {
-            return new Promise(resolve => {
+            return new Promise(function (resolve) {
                 html2canvas(document.getElementById(id), {
                     onrendered: function (canvas) {
                         $("canvas").remove();
                         $("img").remove();
-                        download(canvas.toDataURL("image/png"), name).then(() => {
+                        download(canvas.toDataURL("image/png"), name).then(function () {
                             resolve();
                         })
                     },
                     width: $("#" + id).width(),
                     height: $("#" + id).height()
                 });
-
             })
         }
 
         function download(src, name) {
-            return new Promise(resolve => {
+            return new Promise(function (resolve) {
                 var $a = document.createElement('a');
                 $a.setAttribute("href", src);
                 $a.setAttribute("download", name);
@@ -257,7 +407,6 @@
                 $a.dispatchEvent(evObj);
                 resolve();
             })
-
         }
     })
 </script>

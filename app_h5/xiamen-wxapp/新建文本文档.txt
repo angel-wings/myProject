@@ -1,0 +1,94 @@
+// 获取accessToken
+            getAccessToken: function (code) {
+                var that = this;
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=' + that.APPID + '&corpsecret=' + that.secret111,
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (data) {
+                        alert('第一次获取access_token成功: ' + JSON.stringify(data))
+                        if (data.access_token) {
+                            that.access_token = data.access_token;
+                            alert('已获取access_token: ' + data.access_token)
+                            that.getOpenId(code);
+                        } else {
+                            console.log('获取接口失败');
+                        }
+                    },
+                    error: function (jqXHR) {
+                        alert('第一次获取token请求失败' + JSON.stringify(jqXHR));
+                        that.getAccessTokenByOwer();
+                        console.log('发生错误:' + jqXHR.status);
+                    }
+                });
+            },
+            // 自己接口获取accessToken
+            getAccessTokenByOwer: function () {
+                var that = this;
+                $.ajax({
+                    type: 'GET',
+                    url: domain + '/accessToken',
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (res) {
+                        alert(JSON.stringify(res))
+                        alert(res.status);
+
+                        var suc = res.status;
+                        if (suc === 'success' && res.data.accessToken) {
+                            that.access_token = res.data.accessToken;
+                            alert(res.data.accessToken);
+                            that.getOpenId(code);
+                        } else {
+                            console.log('token获取失败')
+                        }
+                    },
+                    error: function (res) {
+                        console.log('发生错误:' + res.errorMsg);
+                    }
+                })
+            },
+            // 根据code获取openid
+            getOpenId: function (code) {
+                var that = this;
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=' + that.access_token + '&code=' + code,
+                    dataType: 'json',
+                    success: function (data) {
+                        alert('获取openid陈宫: ' + JSON.stringify(data));
+                        if (data.success) {
+                            var openId;
+                            //如果是企业成员授权，返回userId,转为openId,
+                            //如果是非企业成员授权，返回openId
+                            if (data.UserId) {
+                                var userId = data.UserId;
+                                //userId装换为openId
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'https://qyapi.weixin.qq.com/cgi-bin/user/convert_to_openid?access_token=' + that.access_token,
+                                    dataType: 'json',
+                                    data: { userid: userId },
+                                    success: function (res) {
+                                        if (res.success) {
+                                            openId = res.openid;
+                                            that.getScoreDetail();
+                                            alert('已获取openid: ' + res.openid);
+                                        }
+                                    }
+                                });
+                            } else {
+                                openId = data.OpenId;
+                                that.getScoreDetail();
+                                alert('已获取openid: ' + data.OpenId);
+                            }
+                        } else {
+                            console.log('获取接口失败');
+                        }
+                    },
+                    error: function (jqXHR) {
+                        alert('获取openid失败： ' + JSON.stringify(jqXHR))
+                        console.log('发生错误:' + jqXHR.status);
+                    }
+                });
+            },

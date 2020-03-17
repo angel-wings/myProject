@@ -1,6 +1,7 @@
 //public.js  获取公共参数
 
-var domain = 'http://test.gxapp.iydsj.com'; 
+var domain = 'http://pre.discovery.gxapp.iydsj.com';  // 187
+// var domain = 'https://discovery.gxapp.iydsj.com';  // 线上
 
 
 /**

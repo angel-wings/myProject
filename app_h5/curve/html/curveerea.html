@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>详细图表</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background: #e6e6e6;
+        }
+
+        ul,
+        li,
+        p {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .curve {
+            font-size: .7rem;
+            background: white;
+            padding: 15px 0;
+        }
+
+        .notice {
+            background: #e6e6e6;
+            color: #b2b2b2;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 15px;
+            font-size: 10px;
+        }
+
+        .highcharts-credits {
+            display: none;
+        }
+
+        #bupin {
+            width: 94%;
+            margin: 0 auto;
+            /* margin-top: 15px; */
+            height: 243px;
+            clear: both;
+            overflow: hidden;
+        }
+
+        #bupin .nobupin {
+            clear: both;
+            overflow: hidden;
+            height: auto;
+        }
+
+        #peisu {
+            width: 94%;
+            margin: 0 auto;
+            height: 243px;
+            clear: both;
+            margin-top: 15px;
+            overflow: hidden;
+            background: #e6e6e6;
+        }
+
+        .curve .notice-bottom1 {
+            margin-top: 5px;
+            margin-bottom: 0;
+            font-size: 10px;
+            margin-left: 36px;
+            color: #b2b2b2;
+        }
+
+        .curve .notice-bottom {
+            margin-top: 5px;
+            font-size: 10px;
+            margin-left: 36px;
+            color: #b2b2b2;
+        }
+
+        .dataResource {
+            font-family: "PingFangSC-Regular";
+            font-size: 12px;
+            color: #707070;
+            line-height: 28px;
+            height: 28px;
+            padding-left: 16px;
+            display: none;
+        }
+
+        .imgBox {
+            height: 60px;
+            line-height: 60px;
+            box-sizing: border-box;
+            border-top: solid 0.5px #ddd;
+            padding-left: 16px;
+            position: relative;
+            display: none;
+        }
+
+        img.icon {
+            width: 44px;
+            margin-top: 7px;
+        }
+
+        span.iostext {
+            font-family: "PingFangSC-Regular";
+            font-size: 16px;
+            color: #000000;
+            position: absolute;
+            left: 72px;
+            top: 0;
+        }
+
+        div.text1 {
+            font-family: "PingFangSC-Regular";
+            font-size: 10px;
+            color: #707070;
+            padding-left: 16px;
+            display: none;
+        }
+
+        .toast {
+            background: rgba(0, 0, 20, .8);
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 120px;
+            height: 40px;
+            font-size: 14px;
+            margin-left: -60px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="notice">
+        由于部分手机硬件的限制，数据仅供参考
+    </div>
+    <div class="curve">
+        <div id="bupin" style="height:243px; width: 94%;background:#e6e6e6;">
+            <img class="nobupin" src="" />
+        </div>
+        <div class="peisu" id="peisu">
+            <img class="nopeisu" src="" />
+        </div>
+
+        <!-- <div class="dataResource">
+            数据来源
+        </div>
+        <div class="imgBox">
+            <img src="../css/icon.png" alt="" class="icon"><span class="iostext">苹果健康</span>
+        </div>
+        <div class="text1">
+            注：步数来源于苹果健康，用于计算步频（步数/时间）
+        </div> -->
+
+        <div class="notice-bottom">
+            步频/配速超过图标上限部分曲线纵轴上限
+        </div>
+        <div class="notice-bottom1">
+            步频/配速为0的部分曲线取纵轴为0
+        </div>
+    </div>
+
+    <div class="nonepeisubox">
+    </div>
+    <div class="" style="height: 20px; background: #e6e6e6; width: 100%;">
+    </div>
+
+    <div class="toast">
+    </div>
+
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="../js/highcharts.js"></script>
+    <script>
+
+        $(function () {
+            // var u = navigator.userAgent;
+            // var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            // if (isiOS) {
+            //     $(".dataResource").css("display","block");
+            //     $(".imgBox").css("display","block");
+            //     $(".text1").css("display","block");
+            // }
+
+            connectWebViewJavascriptBridge(function (bridge) {
+                setTimeout(function () {
+                    var array = ["BaseHost", "rrid", "uid", "token", "appVersion", "DeviceId", "CustomDeviceId", "osType"];
+                    window.WebViewJavascriptBridge.callHandler(
+                        'userInfo'
+                        , array
+                        , function (responseData) {
+                            var respon = JSON.parse(responseData);
+                            curveDetail(respon);
+                        })
+                }, 500)
+            })
+        })
+
+
+        function toast(message) {
+            $('.toast').text(message);
+            $('.toast').css('display', 'block');
+            $('.toast').fadeOut(2000);
+        }
+
+        //格式化方法
+        function format(time) {
+            var min = Math.floor(time);
+            var sec = Math.floor((time - min) * 60);
+            time = min + " ' " + sec + ' " ';
+            return time;
+        }
+
+        function curveDetail(msg) {
+
+            var host = msg.BaseHost;
+            var rrid = msg.rrid;
+            var uid = msg.uid;
+            // var rrid = 300000462;
+            var token = msg.token;
+            var appVersion = msg.appVersion;
+            var DeviceId = msg.DeviceId;
+            var CustomDeviceId = msg.CustomDeviceId;
+            var osType = msg.osType;
+
+            $.ajax({
+                url: host + '/api/v8/runnings/stepDiagram',
+                data: JSON.stringify({
+                    rrid: rrid
+                }),
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    uid: uid,
+                    token: token,
+                    appVersion: appVersion,
+                    DeviceId: DeviceId,
+                    CustomDeviceId: CustomDeviceId,
+                    osType: osType
+                },
+                success: function (data) {
+                    if (data.error == 10000) {
+                        bupinData = data.data.stepsPerTenSec;
+                        if (bupinData.length == 0) {
+                            var bupinavgDiff = [];
+                            for (var i = 0; i <= 30; i++) {
+                                bupinavgDiff.push('0');
+                            }
+                            var tickInterval = 1;
+                            var step = 6
+                            //画图
+                            $('#bupin').highcharts({
+                                chart: {
+                                    type: 'area',
+                                    //backgroundColor: '#494e52',//设置背景
+                                    backgroundColor: '#343b41',//设置背景
+                                    borderRadius: 8//圆角
+                                },
+                                title: {
+                                    text: '步频曲线详情图',
+                                    align: 'left',
+                                    style: {
+                                        color: '#ffffff',
+                                        opacity: '0.7',
+                                        fontSize: '10px'
+                                    }
+                                },
+                                subtitle: {
+                                    text: '平均步频:' + data.data.avgStepFreq.toFixed(2) + '<br>单位:步/分钟',
+                                    align: 'right',
+                                    y: 5,
+                                    style: {
+                                        color: '#ffffff',
+                                        opacity: '0.2',
+                                        fontSize: '7px'
+                                    }
+                                },
+                                xAxis: {
+                                    allowDecimals: false,
+                                    tickInterval: tickInterval,//小刻度，根据跑步时长来取值，5分钟以内是1,10分钟以内2
+                                    tickLength: 5,
+                                    labels: {
+                                        step: step,//2分钟之内需要显示12个点，除以2
+                                        formatter: function () {
+                                            return this.value / step;//this.value是2分钟内需要12个点,X轴需要显示2
+                                        },
+                                        style: {
+                                            color: '#81868a',
+                                            fontSize: '7px'
+                                        }
+                                    },
+                                    lineColor: '#52575b',//基线颜色
+                                    tickColor: '#4f5458',
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: ''
+                                    },
+                                    gridLineColor: '#868a8d',
+                                    gridLineWidth: '0',
+                                    gridLineDashStyle: 'dash',
+                                    min: 0,
+                                    max: 250,
+                                    tickPositions: [0, 50, 100, 150, 200, 250],//设置纵坐标的标尺
+                                    labels: {
+                                        style: {
+                                            color: '#ffffff',//纵坐标刻度文字的颜色
+                                            opacity: '0.7',
+                                            fontSize: '7px'
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    pointFormat: '{point.y}',
+                                    style: {
+                                        display: 'none'
+                                    }
+
+                                },
+                                plotOptions: {
+                                    area: {
+                                        pointStart: 0,
+                                        pointInterval: 1,
+                                        marker: {
+                                            enabled: false,
+                                            symbol: 'circle',
+                                            radius: 2,
+                                            states: {
+                                                hover: {
+                                                    enabled: true
+                                                }
+                                            }
+                                        }
+                                    },
+                                    series: {
+                                        states: {
+                                            click: {
+                                                enabled: false
+                                            }
+                                        }
+                                    }
+                                },
+                                series: [{
+                                    events: {
+                                        click: function (e) {
+                                            e.preventDefault();
+                                        }
+                                    },
+                                    name: '',
+                                    data: bupinavgDiff,
+                                    lineColor: '#00c18b',//设置线的颜色
+                                    fillColor: "#5f6467"
+                                }],
+                                legend: {
+                                    enabled: false//让下面的series name 不显示
+                                }
+                            });
+                            var bupin = $('#bupin');
+                            bupin.find('.highcharts-container ').append('<div class="nobupin1"></div>');
+                            bupin.find('.highcharts-container ').css({ width: '100%' });
+                            var nobupin1 = $('.nobupin1')
+                            nobupin1.text('该跑步记录由于硬件限制，无法记录步频');
+                            nobupin1.css({ 'z-index': '10000', 'opacity': '1', 'position': 'absolute', 'top': '50%', left: '50%', 'transform': 'translate(-50%, -50%)', 'color': '#a0a0a0', 'font-size': '10px', 'width': '300px', 'text-align': 'center' })
+                        }
+                        else if (bupinData.length > 0) {
+                            var bupinavgDiff = [0];
+                            var bupinlength = bupinData.length;
+                            var totalTime = data.data.totalTime / 60;//总时长通过后台获取
+                            var tickInterval;
+                            var step;
+                            if (totalTime <= 5) {
+                                tickInterval = 1;
+                                step = 6;
+                            } else if (totalTime <= 10) {
+                                tickInterval = 2;
+                                step = 6;
+                            } else if (totalTime <= 25) {
+                                tickInterval = 5;
+                                step = 6;
+                            } else if (totalTime <= 50) {
+                                tickInterval = 10;
+                                step = 6;
+                            } else if (totalTime <= 100) {
+                                tickInterval = 20;
+                                step = 1;
+                            } else {
+                                tickInterval = 50;
+                                step = 1;
+                            }
+                            //////////////////////////、 代码优化部分
+                            var selectedBupinavg = [];
+                            for (var i = 0; i < bupinData.length; i++) {
+                                selectedBupinavg.push({
+                                    stepsNum: bupinData[i].stepsNum,
+                                    state: bupinData[i].state
+                                });
+                            }
+                            // 步频最长长度是30*x，小于30*x个的时候需要补齐数据
+                            if (bupinlength <= 30 * tickInterval) {
+                                for (var i = 0; i < 30 * tickInterval - bupinlength; i++) {
+                                    //不足30*x个点，补0凑齐30*x个点
+                                    selectedBupinavg.push({
+                                        stepsNum: 0,
+                                        state: 0
+                                    });
+                                }
+                            }
+                            if (bupinlength > 30 * tickInterval) {
+                                selectedBupinavg = selectedBupinavg.slice(0, 30 * tickInterval + 1); // 超出30*x个点，只取30*x+1个点
+                            }
+                            if (totalTime > 50) {
+                                var bupinavgDiff1 = [];
+                                for (var i = 0; i <= bupinavgDiff.length; i++) {
+                                    if (i % 6 == 0) {
+                                        bupinavgDiff1.push(selectedBupinavg[i]); //每隔5个数取一个数,组成一个新数组
+                                    }
+                                }
+                                selectedBupinavg = bupinavgDiff1; //bupinavgDiff1赋值给bupinavgDiff
+                            }
+                            //////////////////////////、 代码优化部分ending  ///////////////////////
+                            var isState = selectedBupinavg[0].state == 0 ? true : false, zones = [];
+                            //转换步频
+                            for (var i = 0; i < selectedBupinavg.length; i++) {
+                                var preState = selectedBupinavg[i].state == 0 ? true : false;
+
+                                if (selectedBupinavg[i].stepsNum * 6 > 250) {
+                                    bupinavgDiff.push(250);
+                                } else {
+                                    bupinavgDiff.push(selectedBupinavg[i].stepsNum * 6);
+                                }
+                                if (isState != preState) {
+                                    zones.push({
+                                        value: i,
+                                        color: preState ? '#FF0000' : '#00C18B'
+                                    })
+                                    isState = preState
+                                }
+                            }
+                            if (zones.length > 0) {
+                                zones.push({
+                                    value: selectedBupinavg.length,
+                                    color: '#00C18B'
+                                })
+                            }
+                            //画图
+                            $(function () {
+                                $('#bupin').highcharts({
+                                    chart: {
+                                        type: 'area',
+                                        backgroundColor: '#343b41',//设置背景
+                                        borderRadius: 8,//圆角
+                                    },
+                                    title: {
+                                        text: '步频曲线详情图',
+                                        align: 'left',
+                                        style: {
+                                            color: '#ffffff',
+                                            opacity: '0.7',
+                                            fontSize: '10px'
+                                        }
+                                    },
+                                    subtitle: {
+                                        text: '平均步频:' + data.data.avgStepFreq.toFixed(2) + '<br>单位:步/分钟',
+                                        align: 'right',
+                                        y: 5,
+                                        style: {
+                                            color: '#ffffff',
+                                            opacity: '0.2',
+                                            fontSize: '7px'
+                                        }
+                                    },
+                                    xAxis: {
+                                        allowDecimals: false,
+                                        tickColor: '#4f5458',
+                                        tickInterval: tickInterval,//小刻度，根据跑步时长来取值，5分钟以内是1,10分钟以内2
+                                        tickLength: 5,
+                                        labels: {
+                                            step: step,//2分钟之内需要显示12个点，除以2
+                                            formatter: function () {
+                                                return this.value / step; //this.value是2分钟内需要12个点,X轴需要显示2
+                                            },
+                                            style: {
+                                                color: '#81868a',
+                                                fontSize: '7px'
+                                            }
+                                        },
+                                        lineColor: '#52575b',//基线颜色
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: ''
+                                        },
+                                        tickPixelInterval: 25,//y坐标轴刻度之间的间隔距离
+                                        gridLineColor: '#83888b',
+                                        gridLineWidth: '1',
+                                        gridLineDashStyle: 'dash',
+                                        min: 0,
+                                        max: 250,
+                                        tickPositions: [0, 50, 100, 150, 200, 250],//设置纵坐标的标尺
+                                        labels: {
+                                            style: {
+                                                color: '#ffffff',//纵坐标刻度文字的颜色
+                                                opacity: '0.7',
+                                                fontSize: '7px'
+                                            }
+                                        }
+
+                                    },
+                                    tooltip: {
+                                        formatter: function () {
+                                            return this.y;
+                                        },
+                                        style: {
+                                            display: ''
+                                        }
+
+                                    },
+                                    plotOptions: {
+                                        area: {
+                                            pointStart: 0,
+                                            pointInterval: 1,
+                                            fillColor: 'rgba(255,255,255,0.2)',
+                                            marker: {
+                                                enabled: false,
+                                                symbol: 'circle',
+                                                radius: 2,
+                                                states: {
+                                                    hover: {
+                                                        enabled: true
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        series: {
+                                            states: {
+                                                click: {
+                                                    enabled: false
+                                                }
+                                            }
+                                        }
+                                    },
+                                    series: [{
+                                        events: {
+                                            click: function (e) {
+                                                e.preventDefault();
+                                            }
+                                        },
+                                        name: '',
+                                        data: bupinavgDiff,
+                                        lineColor: '#00c18b',
+                                        zoneAxis: 'x',
+                                        zones: zones
+                                    }],
+                                    legend: {
+                                        enabled: false
+                                    }
+                                });
+                            });
+                        }
+                    }
+                    else {
+                        toast('请求失败');
+                    }
+                    //步频曲线结束
+                },
+                error: function (data) {
+                    toast('请求失败');
+                }
+            });
+            //配速曲线开始
+            $.ajax({
+                url: host + '/api/v8/runnings/speedDiagram',
+                data: JSON.stringify({
+                    rrid: rrid
+                }),
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    uid: uid,
+                    token: token,
+                    appVersion: appVersion,
+                    DeviceId: DeviceId,
+                    CustomDeviceId: CustomDeviceId,
+                    osType: osType
+                },
+                success: function (data) {
+                    if (data.error == 10000) {
+                        peisuData = data.data.speedPerTenSec;
+                        if (peisuData.length > 0) {
+                            var peisuavgDiff = [0];//配速的avgDiff必须是一个数字
+                            var peisulength = peisuData.length;
+                            var totalTime = data.data.totalTime / 60;
+                            var tickInterval;
+                            var step;
+                            if (totalTime <= 5) {
+                                tickInterval = 1;
+                                step = 6;
+                            } else if (totalTime <= 10) {
+                                tickInterval = 2;
+                                step = 6;
+                            } else if (totalTime <= 25) {
+                                tickInterval = 5;
+                                step = 6;
+                            } else if (totalTime <= 50) {
+                                tickInterval = 10;
+                                step = 6;
+                            } else if (totalTime <= 100) {
+                                tickInterval = 20;
+                                step = 1;
+                            } else {
+                                tickInterval = 50;
+                                step = 1;
+                            }
+                            ////////////////////////////////////////////
+                            var selectedPeisuavg = [];
+
+                            for (var i = 0; i < peisuData.length; i++) {
+                                selectedPeisuavg.push({
+                                    distance: peisuData[i].distance,
+                                    state: peisuData[i].state
+                                });
+                            }
+                            if (peisulength <= 30 * tickInterval) {
+                                for (var i = 0; i < 30 * tickInterval - peisulength; i++) {
+                                    selectedPeisuavg.push({
+                                        distance: 0,
+                                        state: 0
+                                    }); //不足60个点，补0凑齐60个点
+                                }
+                            }
+                            if (peisulength > 30 * tickInterval) {
+                                selectedPeisuavg = selectedPeisuavg.slice(0, 30 * tickInterval + 1); //超出30个点，只取30个点
+                            }
+
+                            if (totalTime > 50) {
+                                var peisuavgDiff1 = [];
+                                for (var i = 0; i <= selectedPeisuavg.length; i++) {
+                                    if (i % 6 == 0) {
+                                        peisuavgDiff1.push(selectedPeisuavg[i]); //每隔2个数取一个数,组成一个新数组
+                                    }
+                                }
+                                selectedPeisuavg = peisuavgDiff1; //peisuavgDiff1赋值给peisuavgDiff
+                            }
+                            var isState = selectedPeisuavg[0].state == 0 ? true : false, zones = [];
+                            //配速换算
+                            for (var i = 0; i < selectedPeisuavg.length; i++) {
+                                if (selectedPeisuavg[i].distance == 0) {
+                                    peisuavgDiff.push(0)
+                                } else {
+                                    if (1 / 6 * (1000 / selectedPeisuavg[i].distance) > 12) {
+                                        peisuavgDiff.push(12);
+                                    } else {
+                                        peisuavgDiff.push(1 / 6 * (1000 / selectedPeisuavg[i].distance));
+                                    }
+                                }
+
+                                var preState = selectedPeisuavg[i].state == 0 ? true : false;
+                                if (isState != preState) {
+                                    zones.push({
+                                        value: i,
+                                        color: preState ? '#FF0000' : '#00C18B'
+                                    })
+                                    isState = preState
+                                }
+                            }
+                            if (zones.length > 0) {
+                                zones.push({
+                                    value: selectedPeisuavg.length,
+                                    color: '#00C18B'
+                                })
+                            }
+
+                            $(function () {
+                                $('#peisu').highcharts({
+                                    chart: {
+                                        type: 'area',
+                                        backgroundColor: '#343b41',//设置背景
+                                        borderRadius: 8//圆角
+                                    },
+                                    title: {
+                                        text: '配速曲线详情图',
+                                        align: 'left',
+                                        style: {
+                                            color: '#ffffff',
+                                            opacity: '0.7',
+                                            fontSize: '10px'
+                                        }
+                                    },
+                                    subtitle: {
+                                        text: '平均配速:' + format(data.data.avgSpeed) + '<br>单位:分钟/公里',
+                                        align: 'right',
+                                        y: 5,
+                                        style: {
+                                            color: '#ffffff',
+                                            opacity: '0.2',
+                                            fontSize: '7px'
+                                        }
+                                    },
+                                    xAxis: {
+                                        allowDecimals: false,
+                                        tickInterval: tickInterval,//小刻度，根据跑步时长来取值，5分钟以内是1,10分钟以内2
+                                        tickLength: 5,
+                                        labels: {
+                                            step: step,//2分钟之内需要显示12个点，除以2
+                                            formatter: function () {
+                                                return this.value / step;//this.value是2分钟内需要12个点,X轴需要显示2
+                                            },
+                                            style: {
+                                                color: '#81868a',
+                                                fontSize: '7px'
+                                            }
+                                        },
+                                        lineColor: '#52575b',//基线颜色
+                                        tickColor: '#4f5458',
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: ''
+                                        },
+                                        tickPixelInterval: 25,
+                                        gridLineColor: '#868a8d',
+                                        gridLineWidth: '1',
+                                        gridLineDashStyle: 'dash',
+                                        min: 0,
+                                        max: 300,
+                                        tickPositions: [0, 2, 4, 6, 8, 10, 12],//设置纵坐标的标尺
+                                        labels: {
+                                            style: {
+                                                color: '#ffffff',//纵坐标刻度文字的颜色
+                                                opacity: '0.7',
+                                                fontSize: '7px'
+                                            }
+                                        }
+
+                                    },
+                                    tooltip: {
+                                        formatter: function () {
+                                            var peisuY = this.y;
+                                            var zhengshu = parseInt(peisuY);
+                                            var xiaoshu = peisuY - zhengshu;
+                                            peisuY = zhengshu + "'" + parseInt(xiaoshu * 60) + '"';
+                                            return peisuY;
+                                        },
+                                        style: {
+                                            display: ''
+                                        }
+                                    },
+                                    plotOptions: {
+                                        area: {
+                                            pointStart: 0,
+                                            pointInterval: 1,
+                                            fillColor: 'rgba(255,255,255,0.2)',
+                                            marker: {
+                                                enabled: false,
+                                                symbol: 'circle',
+                                                radius: 2,
+                                                states: {
+                                                    hover: {
+                                                        enabled: true
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        series: {
+                                            states: {
+                                                click: {
+                                                    enabled: false
+                                                }
+                                            }
+                                        }
+                                    },
+                                    series: [{
+                                        events: {
+                                            click: function (e) {
+                                                e.preventDefault();
+                                            }
+                                        },
+                                        name: '',
+                                        data: peisuavgDiff,
+                                        lineColor: '#00c18b',
+                                        zoneAxis: 'x',
+                                        zones: zones
+                                    }],
+                                    legend: {
+                                        enabled: false//让下面的series name 不显示
+                                    }
+                                });
+                            });
+                        } else if (peisuData.length == 0) {
+                            var peisuavgDiff = [];
+                            var tickInterval = 1;
+                            var step = 6;
+                            for (var i = 0; i <= 30; i++) {
+                                peisuavgDiff.push('0');
+                            }
+                            $('#peisu').highcharts({
+                                chart: {
+                                    type: 'area',
+                                    backgroundColor: '#343b41',//设置背景
+                                    borderRadius: 8//圆角
+                                },
+                                title: {
+                                    text: '配速曲线详情图',
+                                    align: 'left',
+                                    style: {
+                                        color: '#ffffff',
+                                        opacity: '0.7',
+                                        fontSize: '10px'
+                                    }
+                                },
+                                subtitle: {
+                                    text: '平均配速:' + format(data.data.avgSpeed) + '<br>单位:分钟/公里',
+                                    align: 'right',
+                                    y: 5,
+                                    style: {
+                                        color: '#ffffff',
+                                        opacity: '0.2',
+                                        fontSize: '7px'
+                                    }
+                                },
+                                xAxis: {
+                                    allowDecimals: false,
+                                    tickInterval: tickInterval,//小刻度，根据跑步时长来取值，5分钟以内是1,10分钟以内2
+                                    tickLength: 5,
+                                    labels: {
+                                        step: step,//2分钟之内需要显示12个点，除以2
+                                        formatter: function () {
+                                            return this.value / step;//this.value是2分钟内需要12个点,X轴需要显示2
+                                        },
+                                        style: {
+                                            color: '#81868a',
+                                            fontSize: '7px'
+                                        }
+                                    },
+                                    lineColor: '#52575b',//基线颜色
+                                    tickColor: '#4f5458',
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: ''
+                                    },
+                                    gridLineColor: '#868a8d',
+                                    gridLineWidth: '0',
+                                    gridLineDashStyle: 'dash',
+                                    min: 0,
+                                    max: 300,
+                                    tickPositions: [0, 2, 4, 6, 8, 10, 12],//设置纵坐标的标尺
+                                    labels: {
+                                        style: {
+                                            color: '#ffffff',//纵坐标刻度文字的颜色
+                                            opacity: '0.7',
+                                            fontSize: '7px'
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    pointFormat: '{point.y}',
+                                    style: {
+                                        display: 'none'
+                                    }
+                                },
+                                plotOptions: {
+                                    area: {
+                                        pointStart: 0,
+                                        pointInterval: 1,
+                                        marker: {
+                                            enabled: false,
+                                            symbol: 'circle',
+                                            radius: 2,
+                                            states: {
+                                                hover: {
+                                                    enabled: true
+                                                }
+                                            }
+                                        }
+                                    },
+                                    series: {
+                                        states: {
+                                            click: {
+                                                enabled: false
+                                            }
+                                        }
+                                    }
+                                },
+                                series: [{
+                                    events: {
+                                        click: function (e) {
+                                            e.preventDefault();
+                                        }
+                                    },
+                                    name: '',
+                                    data: peisuavgDiff,
+                                    lineColor: '#00c18b',//设置线的颜色
+                                    fillColor: "#5f6467"
+                                }],
+                                legend: {
+                                    enabled: false//让下面的series name 不显示
+                                }
+                            });
+                            //没有数据的时候，在上面盖一层div,填充文字
+                            var peisu = $('#peisu');
+                            peisu.find('.highcharts-container ').append('<div class="nopeisu1"></div>');
+                            peisu.find('.highcharts-container ').css({ width: '100%' });
+                            var nopeisu1 = $('.nopeisu1');
+                            nopeisu1.text('该跑步记录由于硬件限制，无法记录配速');
+                            nopeisu1.css({ 'z-index': '10000', 'opacity': '1', 'position': 'absolute', 'top': '50%', left: '50%', 'transform': 'translate(-50%, -50%)', 'color': '#a0a0a0', 'font-size': '10px', 'width': '300px', 'text-align': 'center' });
+                        }
+                    }
+                    else {
+                        toast('请求失败');
+                    }
+                },
+                error: function (data) {
+                    toast('请求失败');
+                }
+            });
+        };
+
+        /**
+ * js与native交互的方法
+*/
+        function connectWebViewJavascriptBridge(callback) {
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                if (isAndroid) {
+                    document.addEventListener(
+                        'WebViewJavascriptBridgeReady'
+                        , function () {
+                            callback(WebViewJavascriptBridge)
+                        },
+                        false
+                    );
+                } else if (isiOS) {
+                    if (window.WVJBCallbacks) {
+                        return window.WVJBCallbacks.push(callback);
+                    }
+                    window.WVJBCallbacks = [callback];
+                    var WVJBIframe = document.createElement('iframe');
+                    WVJBIframe.style.display = 'none';
+                    WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+                    document.documentElement.appendChild(WVJBIframe);
+                    setTimeout(function () {
+                        document.documentElement.removeChild(WVJBIframe)
+                    }, 0)
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

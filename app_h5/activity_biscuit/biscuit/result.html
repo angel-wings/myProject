@@ -1,0 +1,106 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>报名成功</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        .result-head {
+            padding-top: 1.4rem;
+            text-align: center;
+            font-size: .48rem;
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: rgba(255, 208, 24, 1);
+        }
+
+        .result-head img {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-bottom: .32rem;
+        }
+
+        .result-info {
+            padding: .72rem;
+            font-size: .32rem;
+            font-family: PingFang SC;
+            font-weight: 500;
+            color: rgba(43, 43, 43, 1);
+            line-height: .72rem;
+        }
+
+        .result-title {
+            font-size: .36rem;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result-head">
+        <img src="./images/result.png" alt="">
+        <p>您已成功报名</p>
+    </div>
+    <div class="result-info">
+        <p class="result-title">报名详情</p>
+        <p class="my-project"></p>
+        <p class="my-school"></p>
+        <p class="my-name"></p>
+        <p class="my-phone"></p>
+    </div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/public.js"></script>
+<script>
+    $(function () {
+        var uid = getUrlParam('uid');
+        var phone = getUrlParam('phone');
+        var url = '';
+        var params = null;
+        if (uid && uid > 0) {
+            url = domain + "/h5/activity/biscuit/getJoinInfo";
+            params = { uid: uid }
+        } else {
+            url = domain + "/h5/activity/biscuit/getJoinInfoByPhone";
+            params = { phone: phone }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify(params),
+            success: function (data) {
+                if (data.error == 10000) {
+                    if (data.data && JSON.stringify(data.data) !== '{}') {
+                        setRunInfo(data.data);
+                    }
+                }
+            },
+            error: function (data) { }
+        })
+
+        function setRunInfo(query) {
+            if (query) {
+                $('.my-project').text('项目：' + (query.teamType > 0 ? '3+2团队跑' : '个人跑'));
+                $('.my-name').text((query.teamType > 0 ? '团长姓名：' : '姓名：') + query.captainName);
+                $('.my-school').text('学校：' + query.schoolName);
+                $('.my-phone').text((query.teamType > 0 ? '团长电话：' : '电话：') + query.captainPhone);
+                if (query.teamType > 0) {
+                    var members = JSON.parse(query.members).members;
+                    var html = '<p>组合形式：' + (query.teamType == 1 ? '3男2女' : '3女2男') + '</p>'
+                    $('.result-info').append(html);
+                    for (var i = 0; i < members.length; i++) {
+                        $('.result-info').append('<p>队员' + (i + 1) + '：' + members[i].name + '</p>');
+                        $('.result-info').append('<p>手机号：' + members[i].phone + '</p>');
+                    }
+                }
+            }
+        }
+
+    })
+</script>
+
+</html>

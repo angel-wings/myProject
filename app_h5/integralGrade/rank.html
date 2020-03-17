@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="author" content="guozhenglei">
     <title>等级详情</title>
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/rank.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/fastclick.js"></script>
-    <script src="./js/public.js"></script>
-    <script src="./js/prefixfree.js"></script>
+    <link rel="stylesheet" href="https://h5.gxapp.iydsj.com/gxapp/point/prod/css/common.css">
+    <link rel="stylesheet" href="https://h5.gxapp.iydsj.com/gxapp/point/prod/css/rank.css">
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/jquery.min.js"></script>
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/fastclick.js"></script>
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/public.js"></script>
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/prefixfree.js"></script>
     <style></style>
 </head>
 
 <body>
     <div class="isloading">
         <div class="loadimg">
-            <img src="./images/loading.gif">
+            <img src="https://h5.gxapp.iydsj.com/gxapp/point/prod/images/loading.gif">
             <div>加载中...</div>
         </div>
     </div>
     <div class="main">
         <div class="header">
-            <img src="./images/photo.png" class="header-img">
+            <img src="https://h5.gxapp.iydsj.com/gxapp/point/prod/images/photo.png" class="header-img">
             <span class="rule">规则</span>
             <span class="level"></span>
             <div class="percent">
@@ -43,7 +43,7 @@
         <div class="mask"></div>
         <div class="bom-con">
             <div class="bom-head">跑步等级说明
-                <img class="bom-ing" src="./images/close.png">
+                <img class="bom-ing" src="https://h5.gxapp.iydsj.com/gxapp/point/prod/images/close.png">
             </div>
             <div class="bom-body">
                 <div class="bom-bodytext">
@@ -120,14 +120,14 @@
 
             for (var i = 0; i < levelList.length; i++) {
                 if (i <= nowlevel) {
-                    html += '<div class="conitem"><span class="level-index"><img src="./images/level' + levelList[i].level + '-1.png"></span>';
+                    html += '<div class="conitem"><span class="level-index"><img src="https://h5.gxapp.iydsj.com/gxapp/point/prod/images/level' + levelList[i].level + '-1.png"></span>';
                     if (i < nowlevel) {
                         html += '<div class="level-text"><span class="level-title">' + levelList[i].name + '</span>';
                     } else {
                         html += '<div class="level-text conimg"><span class="level-title">' + levelList[i].name + '</span>';
                     }
                 } else {
-                    html += '<div class="conitem"><span class="level-index"><img src="./images/level' + levelList[i].level + '-3.png"></span>';
+                    html += '<div class="conitem"><span class="level-index"><img src="https://h5.gxapp.iydsj.com/gxapp/point/prod/images/level' + levelList[i].level + '-3.png"></span>';
                     html += '<div class="level-text"><span class="level-title" style="color: #707070;">' + levelList[i].name + '</span>';
                 }
                 html += '<small class="level-des">' + levelList[i].des + '</small></div></div>';

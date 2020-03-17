@@ -1,129 +1,129 @@
 ﻿{
     "msg": "success",
-    "time": "2019/6/25",
+    "time": "2019/10/30",
     "data": {
         "welfare": {
             "des": "福利社相关数据",
-            "welfare_order": "2415",
-            "welfare_commission": "10245",
+            "welfare_order": "-.-",
+            "welfare_commission": "-.-",
             "daily_order": [
                 {
-                    "order_time": "2019/6/18",
-                    "order_count": "5135",
-                    "order_commission": "15405"
+                    "order_time": "2019/11/05",
+                    "order_count": "2415",
+                    "order_commission": "10245"
                 },
                 {
-                    "order_time": "2019/6/19",
-                    "order_count": "4765",
-                    "order_commission": "14295"
-                },
-                {
-                    "order_time": "2019/6/20",
-                    "order_count": "2155",
-                    "order_commission": "6465"
-                },
-                {
-                    "order_time": "2019/6/21",
-                    "order_count": "1750",
-                    "order_commission": "5250"
-                },
-				{
-                    "order_time": "2019/6/22",
-                    "order_count": "2315",
-                    "order_commission": "6945"
-                },
-                {
-                    "order_time": "2019/6/23",
+                    "order_time": "2019/11/06",
                     "order_count": "2090",
                     "order_commission": "6270"
                 },
                 {
-                    "order_time": "2019/6/24",
-                    "order_count": "2415",
-                    "order_commission": "7245"
+                    "order_time": "2019/11/07",
+                    "order_count": "2315",
+                    "order_commission": "6945"
+                },
+                {
+                    "order_time": "2019/11/08",
+                    "order_count": "1750",
+                    "order_commission": "5250"
+                },
+				{
+                    "order_time": "2019/11/09",
+                    "order_count": "2155",
+                    "order_commission": "6465"
+                },
+                {
+                    "order_time": "2019/11/10",
+                    "order_count": "4765",
+                    "order_commission": "14295"
+                },
+                {
+                    "order_time": "2019/11/11",
+                    "order_count": "5135",
+                    "order_commission": "15405"
                 }
             ],
             "daily_visitor": [
-                {
-                    "visitor_time": "2019/6/18",
-                    "daily_total_visitor": "159390",
-                    "daily_new_visitor": "34575"
+{
+                    "visitor_time": "2019/11/05",
+                    "daily_total_visitor": "21445",
+                    "daily_new_visitor": "15257"
                 },
                 {
-                    "visitor_time": "2019/6/19",
-                    "daily_total_visitor": "149380",
-                    "daily_new_visitor": "34425"
+                    "visitor_time": "2019/11/06",
+                    "daily_total_visitor": "50174",
+                    "daily_new_visitor": "39678"
                 },
                 {
-                    "visitor_time": "2019/6/20",
-                    "daily_total_visitor": "99330",
-                    "daily_new_visitor": "31375"
+                    "visitor_time": "2019/11/07",
+                    "daily_total_visitor": "89742",
+                    "daily_new_visitor": "78084"
                 },
                 {
-                    "visitor_time": "2019/6/21",
-                    "daily_total_visitor": "80850",
-                    "daily_new_visitor": "21070"
+                    "visitor_time": "2019/11/08",
+                    "daily_total_visitor": "99756",
+                    "daily_new_visitor": "82372"
                 },
 				{
-                    "visitor_time": "2019/6/22",
-                    "daily_total_visitor": "97020",
-                    "daily_new_visitor": "24200"
+                    "visitor_time": "2019/11/09",
+                    "daily_total_visitor": "52822",
+                    "daily_new_visitor": "38437"
                 },
                 {
-                    "visitor_time": "2019/6/23",
-                    "daily_total_visitor": "130900",
-                    "daily_new_visitor": "32505"
+                    "visitor_time": "2019/11/10",
+                    "daily_total_visitor": "47900",
+                    "daily_new_visitor": "34812"
                 },
                 {
-                    "visitor_time": "2019/6/24",
-                    "daily_total_visitor": "106110",
-                    "daily_new_visitor": "30110"
+                    "visitor_time": "2019/11/11",
+                    "daily_total_visitor": "71290",
+                    "daily_new_visitor": "38487"
                 }
             ],
             "hourly_visitor": [
                 {
                     "hour": "1",
-                    "hourly_total_visitor": "1670",
+                    "hourly_total_visitor": "1762",
                     "hourly_new_visitor": "290"
                 },
                 {
                     "hour": "2",
-                    "hourly_total_visitor": "730",
+                    "hourly_total_visitor": "770",
                     "hourly_new_visitor": "210"
                 },
                 {
                     "hour": "3",
-                    "hourly_total_visitor": "360",
+                    "hourly_total_visitor": "371",
                     "hourly_new_visitor": "140"
                 },
                 {
                     "hour": "4",
-                    "hourly_total_visitor": "90",
+                    "hourly_total_visitor": "97",
                     "hourly_new_visitor": "20"
                 },
                 {
                     "hour": "5",
-                    "hourly_total_visitor": "40",
+                    "hourly_total_visitor": "44",
                     "hourly_new_visitor": "40"
                 },
                 {
                     "hour": "6",
-                    "hourly_total_visitor": "220",
+                    "hourly_total_visitor": "238",
                     "hourly_new_visitor": "110"
                 },
                 {
                     "hour": "7",
-                    "hourly_total_visitor": "2320",
+                    "hourly_total_visitor": "2722",
                     "hourly_new_visitor": "1380"
                 },
                 {
                     "hour": "8",
-                    "hourly_total_visitor": "4730",
+                    "hourly_total_visitor": "2435",
                     "hourly_new_visitor": "2730"
                 },
                 {
                     "hour": "9",
-                    "hourly_total_visitor": "2630",
+                    "hourly_total_visitor": "3096",
                     "hourly_new_visitor": "1440"
                 },
                 {
@@ -133,73 +133,73 @@
                 },
                 {
                     "hour": "11",
-                    "hourly_total_visitor": "3850",
+                    "hourly_total_visitor": "2250",
                     "hourly_new_visitor": "1990"
                 },
                 {
                     "hour": "12",
-                    "hourly_total_visitor": "3860",
+                    "hourly_total_visitor": "2363",
                     "hourly_new_visitor": "2280"
                 },
                 {
                     "hour": "13",
-                    "hourly_total_visitor": "3130",
+                    "hourly_total_visitor": "1587",
                     "hourly_new_visitor": "1480"
                 },
                 {
                     "hour": "14",
-                    "hourly_total_visitor": "2590",
+                    "hourly_total_visitor": "1032",
                     "hourly_new_visitor": "1500"
                 },
                 {
                     "hour": "15",
-                    "hourly_total_visitor": "3310",
+                    "hourly_total_visitor": "1761",
                     "hourly_new_visitor": "1730"
                 },
                 {
                     "hour": "16",
-                    "hourly_total_visitor": "4760",
+                    "hourly_total_visitor": "2215",
                     "hourly_new_visitor": "2850"
                 },
                 {
                     "hour": "17",
-                    "hourly_total_visitor": "4770",
+                    "hourly_total_visitor": "2354",
                     "hourly_new_visitor": "2890"
                 },
                 {
                     "hour": "18",
-                    "hourly_total_visitor": "5800",
+                    "hourly_total_visitor": "3117",
                     "hourly_new_visitor": "3530"
                 },
                 {
                     "hour": "19",
-                    "hourly_total_visitor": "8160",
-                    "hourly_new_visitor": "4740"
+                    "hourly_total_visitor": "4947",
+                    "hourly_new_visitor": "2740"
                 },
                 {
                     "hour": "20",
-                    "hourly_total_visitor": "10750",
-                    "hourly_new_visitor": "6770"
+                    "hourly_total_visitor": "6639",
+                    "hourly_new_visitor": "3770"
                 },
                 {
                     "hour": "21",
-                    "hourly_total_visitor": "14910",
-                    "hourly_new_visitor": "9540"
+                    "hourly_total_visitor": "8251",
+                    "hourly_new_visitor": "4540"
                 },
                 {
                     "hour": "22",
-                    "hourly_total_visitor": "13780",
-                    "hourly_new_visitor": "8390"
+                    "hourly_total_visitor": "15521",
+                    "hourly_new_visitor": "4390"
                 },
                 {
                     "hour": "23",
-                    "hourly_total_visitor": "6010",
+                    "hourly_total_visitor": "6409",
                     "hourly_new_visitor": "3290"
                 },
                 {
                     "hour": "24",
-                    "hourly_total_visitor": "3860",
-                    "hourly_new_visitor": "1120"
+                    "hourly_total_visitor": "4025",
+                    "hourly_new_visitor": "10816"
                 }
             ],
             "visitor_areas": [
@@ -232,8 +232,8 @@
         "physical_test": {
             "des": "体测相关数据",
             "physical_name": "2018年体测情况",
-            "total_school": "68",
-            "total_person": "428215",
+            "total_school": "36",
+            "total_person": "856430",
             "total_excelent": "4090",
             "total_good": "53265",
             "total_pass": "319330",
@@ -306,82 +306,82 @@
             "des": "用户活跃情况",
             "dau": [
                 {
-                    "dau_time": "2019/6/18",
-                    "dau_users": "1027228"
+                    "dau_time": "2019/11/05",
+                    "dau_users": "1294960"
                 },
                 {
-                    "dau_time": "2019/6/19",
-                    "dau_users": "809679"
+                    "dau_time": "2019/11/06",
+                    "dau_users": "1263419"
                 },
                 {
-                    "dau_time": "2019/6/20",
-                    "dau_users": "824204"
-                },
-                {
-                    "dau_time": "2019/6/21",
-                    "dau_users": "703208"
+                    "dau_time": "2019/11/07",
+                    "dau_users": "1224231"
                 },
 				{
-                    "dau_time": "2019/6/22",
-                    "dau_users": "702787"
+                    "dau_time": "2019/11/08",
+                    "dau_users": "1046802"
                 },
                 {
-                    "dau_time": "2019/6/23",
-                    "dau_users": "827618"
+                    "dau_time": "2019/11/09",
+                    "dau_users": "794523"
                 },
                 {
-                    "dau_time": "2019/6/24",
-                    "dau_users": "1101852"
+                    "dau_time": "2019/11/10",
+                    "dau_users": "950431"
+                },
+				{
+                    "dau_time": "2019/11/11",
+                    "dau_users": "1314152"
                 }
             ],
             "mau": [
                 {
-                    "mau_time": "2018/6/1",
-                    "mau_users": "1089896"
-                },
-                {
-                    "mau_time": "2018/7/1",
-                    "mau_users": "852721"
-                },
-                {
-                    "mau_time": "2018/8/1",
-                    "mau_users": "658674"
-                },
-                {
-                    "mau_time": "2018/9/1",
-                    "mau_users": "1609831"
-                },
-                {
-                    "mau_time": "2018/10/1",
+                    "mau_time": "2018/11/1",
                     "mau_users": "1958019"
                 },
                 {
-                    "mau_time": "2018/11/1",
+                    "mau_time": "2018/12/1",
                     "mau_users": "1984644"
                 },
                 {
-                    "mau_time": "2018/12/1",
+                    "mau_time": "2019/1/1",
                     "mau_users": "1824969"
                 },
                 {
-                    "mau_time": "2019/1/1",
+                    "mau_time": "2019/2/1",
                     "mau_users": "807936"
                 },
                 {
-                    "mau_time": "2019/2/1",
+                    "mau_time": "2019/3/1",
                     "mau_users": "1042816"
                 },
                 {
-                    "mau_time": "2019/3/1",
+                    "mau_time": "2019/4/1",
                     "mau_users": "1993352"
                 },
                 {
-                    "mau_time": "2019/4/1",
+                    "mau_time": "2019/5/1",
                     "mau_users": "1969207"
                 },
                 {
-                    "mau_time": "2019/5/1",
+                    "mau_time": "2019/6/1",
                     "mau_users": "1905899"
+                },
+				{
+                    "mau_time": "2019/7/1",
+                    "mau_users": "1488367"
+                },
+				{
+                    "mau_time": "2019/8/1",
+                    "mau_users": "1852721"
+                },
+				{
+                    "mau_time": "2019/9/1",
+                    "mau_users": "1681284"
+                },
+                {
+                    "mau_time": "2019/10/1",
+                    "mau_users": "1921588"
                 }
             ],
             "yesterday_pulse_count": {
@@ -405,8 +405,8 @@
         },
         "platform_signs": {
             "des": "签约用户以及学校信息",
-            "sign_schools": "574",
-            "sign_up_users": "5561923",
+            "sign_schools": "628",
+            "sign_up_users": "7094192",
             "province_sign_info": [
                 {
                     "province_name": "广东",
@@ -553,8 +553,8 @@
         "run_sport": {
             "des": "本学期学生跑步统计数据",
             "partake_run_schools": "481",
-            "partake_run_male": "1231632",
-            "partake_run_female": "1424705",
+            "partake_run_male": "1058000",
+            "partake_run_female": "1143000",
             "average_run_km": [
                 {
                     "name": "0-50km",
@@ -584,128 +584,128 @@
             ],
             "daily_run_person": [
                 {
-                    "run_date": "2019/5/25",
-                    "run_person": "298660"
+                    "run_date": "2019/10/12",
+                    "run_person": "455526"
                 },
                 {
-                    "run_date": "2019/5/26",
-                    "run_person": "164987"
+                    "run_date": "2019/10/13",
+                    "run_person": "265454"
                 },
                 {
-                    "run_date": "2019/5/27",
-                    "run_person": "149686"
-                },
-                {
-                    "run_date": "2019/5/28",
-                    "run_person": "173058"
-                },
-                {
-                    "run_date": "2019/5/29",
-                    "run_person": "292409"
-                },
-                {
-                    "run_date": "2019/5/30",
-                    "run_person": "473341"
-                },
-                {
-                    "run_date": "2019/5/31",
-                    "run_person": "615133"
-                },
-                {
-                    "run_date": "2019/6/1",
-                    "run_person": "628684"
-                },
-                {
-                    "run_date": "2019/6/2",
-                    "run_person": "675054"
-                },
-                {
-                    "run_date": "2019/6/3",
-                    "run_person": "704522"
-                },
-                {
-                    "run_date": "2019/6/4",
-                    "run_person": "547345"
-                },
-                {
-                    "run_date": "2019/6/5",
-                    "run_person": "443101"
-                },
-                {
-                    "run_date": "2019/6/6",
-                    "run_person": "474983"
-                },
-                {
-                    "run_date": "2019/6/7",
-                    "run_person": "624558"
-                },
-                {
-                    "run_date": "2019/6/8",
-                    "run_person": "699016"
-                },
-                {
-                    "run_date": "2019/6/9",
-                    "run_person": "602150"
-                },
-                {
-                    "run_date": "2019/6/10",
-                    "run_person": "627626"
-                },
-                {
-                    "run_date": "2019/6/11",
-                    "run_person": "492216"
-                },
-                {
-                    "run_date": "2019/6/12",
-                    "run_person": "407510"
-                },
-                {
-                    "run_date": "2019/6/13",
-                    "run_person": "430716"
-                },
-                {
-                    "run_date": "2019/6/14",
-                    "run_person": "618161"
-                },
-                {
-                    "run_date": "2019/6/15",
-                    "run_person": "327562"
-                },
-                {
-                    "run_date": "2019/6/16",
-                    "run_person": "364557"
-                },
-                {
-                    "run_date": "2019/6/17",
-                    "run_person": "597589"
+                    "run_date": "2019/10/14",
+                    "run_person": "128664"
                 },
 				{
-                    "run_date": "2019/6/18",
-                    "run_person": "491196"
+                    "run_date": "2019/10/15",
+                    "run_person": "124219"
                 },
 				{
-                    "run_date": "2019/6/19",
-                    "run_person": "361099"
+                    "run_date": "2019/10/16",
+                    "run_person": "112898"
                 },
 				{
-                    "run_date": "2019/6/20",
-                    "run_person": "369191"
+                    "run_date": "2019/10/17",
+                    "run_person": "101927"
                 },
 				{
-                    "run_date": "2019/6/21",
-                    "run_person": "273300"
+                    "run_date": "2019/10/18",
+                    "run_person": "123087"
+                },
+				{
+                    "run_date": "2019/10/19",
+                    "run_person": "151239"
                 },
                 {
-                    "run_date": "2019/6/22",
-                    "run_person": "297227"
-                },
-                {
-                    "run_date": "2019/6/23",
-                    "run_person": "341784"
+                    "run_date": "2019/10/20",
+                    "run_person": "357422"
                 },
 				{
-                    "run_date": "2019/6/24",
-                    "run_person": "458879"
+                    "run_date": "2019/10/21",
+                    "run_person": "749268"
+                },
+				{
+                    "run_date": "2019/10/22",
+                    "run_person": "676285"
+                },
+				{
+                    "run_date": "2019/10/23",
+                    "run_person": "846530"
+                },
+                {
+                    "run_date": "2019/10/24",
+                    "run_person": "831092"
+                },
+                {
+                    "run_date": "2019/10/25",
+                    "run_person": "695778"
+                },
+                {
+                    "run_date": "2019/10/26",
+                    "run_person": "646249"
+                },
+				{
+                    "run_date": "2019/10/27",
+                    "run_person": "860789"
+                },
+				{
+                    "run_date": "2019/10/28",
+                    "run_person": "928979"
+                },
+				{
+                    "run_date": "2019/10/29",
+                    "run_person": "796458"
+                },
+				{
+                    "run_date": "2019/10/30",
+                    "run_person": "937965"
+                },
+				{
+                    "run_date": "2019/10/31",
+                    "run_person": "812760"
+                },
+                {
+                    "run_date": "2019/11/01",
+                    "run_person": "638462"
+                },
+                {
+                    "run_date": "2019/11/02",
+                    "run_person": "778771"
+                },
+				{
+                    "run_date": "2019/11/03",
+                    "run_person": "1064414"
+                },
+				{
+                    "run_date": "2019/11/04",
+                    "run_person": "986833"
+                },
+				{
+                    "run_date": "2019/11/05",
+                    "run_person": "1052478"
+                },
+				{
+                    "run_date": "2019/11/06",
+                    "run_person": "957754"
+                },
+				{
+                    "run_date": "2019/11/07",
+                    "run_person": "677709"
+                },
+				{
+                    "run_date": "2019/11/08",
+                    "run_person": "537284"
+                },
+                {
+                    "run_date": "2019/11/09",
+                    "run_person": "682507"
+                },
+				{
+                    "run_date": "2019/11/10",
+                    "run_person": "1015224"
+                },
+				{
+                    "run_date": "2019/11/11",
+                    "run_person": "1112887"
                 }
             ],
             "single_run": {

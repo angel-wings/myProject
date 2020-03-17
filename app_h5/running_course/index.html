@@ -1,0 +1,191 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>跑步教程</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        p {
+            margin: 0;
+            padding: 0 .24rem;
+            font-size: .24rem;
+            line-height: .34rem;
+            color: #707070;
+        }
+
+        img {
+            border: 0;
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        .run-course-tab {
+            height: .88rem;
+            margin-bottom: .16rem;
+            background-color: #ffffff;
+            border-top: .01rem solid #e9e9e9;
+            line-height: .88rem;
+            font-size: .30rem;
+            text-align: center;
+        }
+
+        .run-course-tab span {
+            display: inline-block;
+            color: #B2B2B2;
+            line-height: .88rem;
+        }
+
+        .run-course-tab .tab-active {
+            color: #202020;
+        }
+
+        .run-course-tab .fr {
+            position: relative;
+            float: right;
+            width: 50%;
+        }
+
+        .run-course-tab .fl {
+            position: relative;
+            float: left;
+            width: 50%;
+        }
+
+        .tabline {
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 0.18rem);
+            width: .36rem;
+            height: .04rem;
+            background-color: #15CD85;
+        }
+
+        /*  */
+
+        .run-course-item {
+            margin-bottom: .16rem;
+            background-color: #ffffff;
+        }
+
+        .run-course-item img {
+            width: 100%;
+        }
+
+        .run-course-item .img-box {
+            overflow: hidden;
+        }
+
+        .run-course-item .img-box img {
+            width: 50%;
+            float: left;
+        }
+
+        .course-title {
+            font-size: .28rem;
+            line-height: .72rem;
+            font-weight: bold;
+            color: #202020;
+        }
+
+        .course-text {
+            margin-bottom: .12rem;
+        }
+
+        .course-content {
+            padding-bottom: .32rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main" class="run-course">
+        <div class="run-course-tab">
+            <div class="fl" @click="changeTabActive(1)">
+                <span :class="tabActive == 1 ?'tab-active':''">跑前</span>
+                <div :class="tabActive == 1 ?'tabline':''"></div>
+            </div>
+            <div class="fr" @click="changeTabActive(2)">
+                <span :class="tabActive == 2 ?'tab-active':''">跑后</span>
+                <div :class="tabActive == 2 ?'tabline':''"></div>
+            </div>
+        </div>
+        <div v-show="tabActive == 1">
+            <div class="run-course-item">
+                <img v-show="sex>-1" :src="'./images/'+ (sex == 1?'':'fe') +'male_1.jpg'">
+                <p class="course-title">一、手臂拉伸</p>
+                <p class="course-content">右手伸直，左手扣住右手，保持10-20秒，然后交换方向。</p>
+            </div>
+            <div class="run-course-item">
+                <img v-show="sex>-1" :src="'./images/'+ (sex == 1?'':'fe') +'male_2.jpg'">
+                <p class="course-title">二、大腿拉伸</p>
+                <p class="course-content">左腿蹲下，右腿伸直，下压保持10-20秒，然后交换方向。</p>
+            </div>
+            <div class="run-course-item">
+                <div class="img-box" v-show="sex>-1">
+                    <img :src="'./images/'+ (sex == 1?'':'fe') +'male_3-1.jpg'">
+                    <img :src="'./images/'+ (sex == 1?'':'fe') +'male_3-2.jpg'">
+                </div>
+                <p class="course-title">三、深蹲</p>
+                <p class="course-text">扎好马步，然后让身体缓慢的下降，手可以放在头背后交叉，重复大约10次左右。</p>
+                <p class="course-content">注意：膝盖不能超过脚尖的位置。</p>
+            </div>
+            <div class="run-course-item">
+                <img v-show="sex>-1" :src="'./images/'+ (sex == 1?'':'fe') +'male_4.jpg'">
+                <p class="course-title">四、高抬腿</p>
+                <p class="course-text">上半身挺直，保持直线状态，然后两个腿交替着，较快速度的抬高至水平。</p>
+                <p class="course-content">注意：速度可以稍微快一点，和呼吸节奏相一致。</p>
+            </div>
+        </div>
+        <div v-show="tabActive == 2">
+            <div class="run-course-item">
+                <div class="img-box" v-show="sex>-1">
+                    <img :src="'./images/'+ (sex == 1?'':'fe') +'male_5-1.jpg'">
+                    <img :src="'./images/'+ (sex == 1?'':'fe') +'male_5-2.jpg'">
+                </div>
+                <p class="course-title">一、跑后拉伸</p>
+                <p class="course-content">双腿保持伸直，尽量用手指触碰鞋面，保持10-20秒。</p>
+            </div>
+            <div class="run-course-item">
+                <img v-show="sex>-1" :src="'./images/'+ (sex == 1?'':'fe') +'male_6.jpg'">
+                <p class="course-title">二、小腿拉伸</p>
+                <p class="course-content">保持站立，保持身体平衡一手抓住一只脚向后抬起，使脚尽可能举高。</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/index.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#main",
+        data: {
+            tabActive: 1,   //  1 跑前，2跑后
+            sex: -1,         // 1 男， 0 女
+        },
+        mounted: function () {
+            var that = this;
+            // 与客户端交互
+            connectWebViewJavascriptBridge(function (bridge) {
+                getUserInfo(function (arr) {
+                    that.sex = arr.sex;  // 1 男 0 女
+                }, ['sex']);
+            });
+        },
+        methods: {
+            changeTabActive: function (type) {
+                this.tabActive = type;
+            }
+        }
+    })
+</script>
+
+</html>

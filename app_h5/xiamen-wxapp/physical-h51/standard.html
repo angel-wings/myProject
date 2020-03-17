@@ -1,0 +1,346 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>评分标准</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .stand-tab {
+            display: inline-block;
+            width: 2.31rem;
+            background-color: #f6f6f6;
+        }
+
+        .stand-tab div {
+            height: .88rem;
+            padding: .2rem 0;
+            font-size: .28rem;
+        }
+
+        .stand-tab div span {
+            line-height: .48rem;
+            padding-left: .2rem;
+        }
+
+        .acticed-tab {
+            background-color: #ffffff;
+
+        }
+
+        .acticed-tab span {
+            display: inline-block;
+            border-left: .1rem #15CD85 solid;
+        }
+
+        /* 评分表 */
+        .stand-det {
+            float: right;
+            width: 4.9rem;
+            margin-bottom: .32rem;
+        }
+
+        .stand-title {
+            font-family: 'PingFangSC-Medium';
+            line-height: .88rem;
+            font-size: .26rem;
+            color: #15CD85;
+        }
+
+        table tr td {
+            width: 1.45rem;
+            font-size: .26rem;
+            line-height: .88rem;
+            border: 1px solid #dddddd;
+            text-align: center;
+        }
+
+        .t-score {
+            width: 1.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="stand-box">
+            <div class="stand-tab">
+                <div v-for="item in myTechnical" :class="tabActive == item.key?'acticed-tab':''"
+                    @click="selectedMyChild(item.key)">
+                    <span>{{item.value}}</span>
+                </div>
+            </div>
+            <div class="stand-det">
+                <div class="stand-title">
+                    {{unitKey}}{{unitValue}}
+                </div>
+                <table>
+                    <tr class="t-head">
+                        <td class="t-name">等级</td>
+                        <td>得分</td>
+                        <td class="t-score">{{gradeName}}</td>
+                    </tr>
+                    <tr v-for="item in standerd">
+                        <td class="t-name">{{item.level}}</td>
+                        <td>{{item.score}}</td>
+                        <td class="t-score">{{item.benchmark}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/rem.js"></script>
+<script src="./js/standard.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+        var standData = {
+            boyBMI: boyBMI,
+            girlBMI: girlBMI,
+            boyVitalCapacity: boyVitalCapacity,
+            girlVitalCapacity: girlVitalCapacity,
+            boyRun50: boyRun50,
+            girlRun50: girlRun50,
+            boySitAndReach: boySitAndReach,
+            girlSitAndReach: girlSitAndReach,
+            boySkip: boySkip,
+            girlSkip: girlSkip,
+            boyStandingLongJump: boyStandingLongJump,
+            girlStandingLongJump: girlStandingLongJump,
+            boySitupChinup: boySitupChinup,
+            girlSitupChinup: girlSitupChinup,
+            boyEnduranceRun: boyEnduranceRun,
+            girlEnduranceRun: girlEnduranceRun
+        };
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                tabActive: '',
+                grade: 1,
+                gradeName: '',
+                gender: 1,
+                unitKey: '',
+                unitValue: '',
+                gradeFormat: ['', '一年级', '二年级', '三年级', '四年级', '五年级', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'],
+                technical: [
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 1,
+                        value: 'BMI指数',
+                        key: 'boyBMI',
+                        name: '（单位：千克/米＾2）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 0,
+                        value: 'BMI指数',
+                        key: 'girlBMI',
+                        name: '（单位：千克/米＾2）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 1,
+                        value: '肺活量',
+                        key: 'boyVitalCapacity',
+                        name: '（单位：毫升）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 0,
+                        value: '肺活量',
+                        key: 'girlVitalCapacity',
+                        name: '（单位：毫升）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 1,
+                        value: '50米跑',
+                        key: 'boyRun50',
+                        name: '（单位：秒）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 0,
+                        value: '50米跑',
+                        key: 'girlRun50',
+                        name: '（单位：秒）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 1,
+                        value: '坐位体前屈',
+                        key: 'boySitAndReach',
+                        name: '（单位：厘米）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 0,
+                        value: '坐位体前屈',
+                        key: 'girlSitAndReach',
+                        name: '（单位：厘米）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6],
+                        gender: 1,
+                        value: '1分钟跳绳',
+                        key: 'boySkip',
+                        name: '（单位：次）'
+                    },
+                    {
+                        grades: [1, 2, 3, 4, 5, 6],
+                        gender: 0,
+                        value: '1分钟跳绳',
+                        key: 'girlSkip',
+                        name: '（单位：次）'
+                    },
+                    {
+                        grades: [7, 8, 9, 10, 11, 12],
+                        gender: 1,
+                        value: '立定跳远',
+                        key: 'boyStandingLongJump',
+                        name: '（单位：厘米）'
+                    },
+                    {
+                        grades: [],
+                        gender: 0,
+                        value: '立定跳远',
+                        key: 'girlStandingLongJump',
+                        name: '（单位：厘米）'
+                    },
+                    {
+                        grades: [7, 8, 9, 10, 11, 12],
+                        gender: 1,
+                        value: '引体向上',
+                        key: 'boySitupChinup',
+                        name: '（单位：次）'
+                    },
+                    {
+                        grades: [3, 4, 5, 6],
+                        gender: 1,
+                        value: '1分钟仰卧起坐',
+                        key: 'girlSitupChinup',
+                        name: '（单位：次）'
+                    },
+                    {
+                        grades: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        gender: 0,
+                        value: '1分钟仰卧起坐',
+                        key: 'girlSitupChinup',
+                        name: '（单位：次）'
+                    },
+                    {
+                        grades: [5, 6],
+                        gender: 1,
+                        value: '50*8往返跑',
+                        key: 'boyEnduranceRun',
+                        name: '（单位：分·秒）'
+                    },
+                    {
+                        grades: [5, 6],
+                        gender: 0,
+                        value: '50*8往返跑',
+                        key: 'girlEnduranceRun',
+                        name: '（单位：分·秒）'
+                    },
+                    {
+                        grades: [7, 8, 9, 10, 11, 12],
+                        gender: 1,
+                        value: '1000米跑',
+                        key: 'boyEnduranceRun',
+                        name: '（单位：分·秒）'
+                    },
+                    {
+                        grades: [7, 8, 9, 10, 11, 12],
+                        gender: 0,
+                        value: '800米跑',
+                        key: 'girlEnduranceRun',
+                        name: '（单位：分·秒）'
+                    },
+                ],
+                myTechnical: [],
+                standerd: [],
+            },
+            mounted: function () {
+                var grade = this.getUrlParam("grade");
+                var gender = this.getUrlParam("gender") || 1;
+                var preArr = [];
+
+                if (!grade || grade > 12) {
+                    grade = 1;
+                }
+
+                for (var i = 0; i < this.technical.length; i++) {
+                    if (this.technical[i].grades.includes(grade * 1) && this.technical[i].gender == gender) {
+                        preArr.push({
+                            value: this.technical[i].value,
+                            key: this.technical[i].key,
+                            name: this.technical[i].name
+                        })
+                    }
+                }
+
+                this.gradeName = this.gradeFormat[grade];
+                this.grade = grade;
+                this.gender = gender;
+                this.myTechnical = preArr;
+                this.unitKey = this.gradeFormat[grade] + (gender == 1 ? '男生' : '女生') + '标准';
+                this.tabActive = preArr[0].key;
+                this.unitValue = preArr[0].name;
+                this.standerd = this.formatStandards(this.tabActive);
+            },
+            methods: {
+                // 切换学生
+                selectedMyChild: function (key) {
+                    this.tabActive = key;
+
+                    for (var i = 0; i < this.myTechnical.length; i++) {
+                        if (this.myTechnical[i].key == key) {
+                            this.unitValue = this.myTechnical[i].name;
+                        }
+                    }
+
+                    this.standerd = this.formatStandards(this.tabActive);
+                },
+                
+                getUrlParam: function (name) {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                    var r = window.location.search.substr(1).match(reg);
+
+                    if (r != null) return unescape(r[2]);
+
+                    return null;
+                },
+
+                formatStandards(slider) {
+                    var arrda = [];
+                    var num = 'g' + this.grade;
+
+                    standData[slider].forEach(function (ele) {
+                        arrda.push({
+                            level: ele.level,
+                            score: ele.score,
+                            benchmark: ele[num]
+                        })
+                    })
+
+                    return arrda;
+                },
+            }
+        })
+
+    })
+</script>
+
+</html>

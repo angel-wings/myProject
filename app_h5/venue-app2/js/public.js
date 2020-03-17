@@ -1,6 +1,6 @@
 // var domain = 'http://test.venue.gxapp.iydsj.com';
-var domain = 'http://venue.gxapp.iydsj.com';
-// var domain = 'https://pre.venue.gxapp.iydsj.com';
+// var domain = 'http://venue.gxapp.iydsj.com';
+var domain = 'http://pre.venue.gxapp.iydsj.com';
 
 Date.prototype.format = function (format) {
     var date = {

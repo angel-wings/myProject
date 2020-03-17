@@ -1,0 +1,260 @@
+* {
+    box-sizing: border-box;
+}
+
+#main {
+    position: relative;
+    background-color: #f6f6f6;
+}
+/* 账户 */
+.user-type{
+    padding-left: .32rem;
+    line-height: .62rem;
+    background-color: #f6f6f6;
+    font-size: .24rem;
+    color: #707070;
+}
+
+/* tab */
+.tab-bar {
+    height: .88rem;
+    padding: .16rem .32rem;
+    margin-bottom: .16rem;
+    line-height: .88rem;
+    font-size: 0;
+    background-color: #FFFFFF;
+}
+
+.tab-bar-box{
+    border: 1px solid #44ABFF;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tab-bar span {
+    display: inline-block;
+    height: .56rem;
+    line-height: .56rem;
+    font-family: 'PingFangSC-Regular';
+    font-size: .28rem;
+    text-align: center;
+    color: #44ABFF;
+    border-right: 1px solid #44ABFF;
+    background-color: #ffffff;
+}
+
+.tab-bar span:nth-child(3){
+    border: none;
+}
+
+.tab-bar .tab-actived {
+    color: #ffffff;
+    background-color: #44ABFF;
+}
+
+.cl-name {
+    padding-left: .48rem;
+    font-size: .24rem;
+    font-weight: bold;
+    color: #202020;
+}
+
+/* 总览 */
+.overview-head {
+    padding-left: .32rem;
+    padding-right: .32rem;
+    margin-bottom: .16rem;
+    font-size: .24rem;
+    background-color: #ffffff;
+}
+
+.overview-head-title {
+    line-height: .88rem;
+    font-size: .28rem;
+    color: #202020;
+    font-weight: bold;
+    border-bottom: 1px solid #dddddd;
+}
+
+.overview-head-statis {
+    font-size: 0;
+}
+
+.oh-statis-left {
+    display: inline-block;
+    width: 50%;
+    font-size: .24rem;
+}
+
+.oh-statis-right {
+    float: right;
+    width: 40%;
+    padding-top: .36rem;
+    font-size: .24rem;
+    /* padding: .2rem 0; */
+}
+
+#overview-ts,
+#overview-male-ts,
+#overview-female-ts {
+    width: 3.2rem;
+    height: 3.2rem;
+}
+.phy-test-item {
+    width: 3.2rem;
+    height: 3.2rem;
+}
+
+.oh-legend-item {
+    padding: .15rem 0;
+}
+
+.statis-bg {
+    display: inline-block;
+    width: .24rem;
+    height: .24rem;
+    border-radius: .02rem;
+}
+
+.overview-nofinish {
+    padding-bottom: .2rem;
+    line-height: .6rem;
+    color: #707070;
+}
+
+/* 性别统计 */
+.overview-male-statis,
+.overview-female-statis {
+    font-size: 0;
+}
+
+/* 排行 */
+.overview-rank {
+    padding-left: .32rem;
+    padding-right: .32rem;
+    font-size: .24rem;
+    color: #202020;
+    background-color: #ffffff;
+}
+
+.overview-rank-title {
+    padding-top: .32rem;
+    font-family: 'PingFangSC-Medium';
+    line-height: .44rem;
+    font-size: .28rem;
+    font-weight: bold;
+    color: #202020;
+}
+
+.overview-rank-common {
+    padding: .24rem 0;
+    border-bottom: 1px solid #dddddd;
+}
+
+.overview-rank-common:last-child {
+    border: none;
+}
+
+.rank-title {
+    color: #6E9BF5;
+}
+
+.rank-nopass-title {
+    color: #F47A99;
+}
+
+.rank-item {
+    padding: .12rem 0;
+}
+
+.rank-item-text {
+    line-height: .4rem;
+}
+
+.rank-item-text img {
+    width: .32rem;
+    height: .32rem;
+    vertical-align: bottom;
+    margin-right: .1rem;
+}
+
+.rank-index {
+    display: inline-block;
+    width: .32rem;
+    color: #0398FF;
+    text-align: center;
+}
+
+.rank-class {
+    color: #707070;
+    padding-left: .2rem;
+}
+
+.rank-item-press {
+    padding-left: .42rem;
+}
+
+.rank-col {
+    display: inline-block;
+    height: .16rem;
+    width: 5.2rem;
+    background: #6E9BF5;
+    border-radius: .08rem;
+    border-radius: .08rem;
+}
+
+.rank-item-press .rc-red {
+    background-color: #F47A99;
+}
+
+/* 中间 */
+.middle-histogram{
+    background-color: #ffffff;
+}
+
+/* 无数据 */
+
+.no-data {
+    padding-top: .2rem;
+    font-size: .32rem;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.err-box{
+    padding-top: 2.4rem;
+}
+
+.no-data img{
+    width: .8rem;
+    height: .8rem;
+    margin: .2rem 0 .1rem;
+}
+
+.no-data .refresh{
+    color: #707070;
+    font-size: .26rem;
+}
+
+
+
+.school-list{
+    margin-bottom: .4rem;
+    padding: .1rem .56rem;
+    background: #F9F9F9;
+    font-size: .26rem;
+    color: #707070;
+    line-height: .5rem;
+    text-align: left;
+}
+ 
+.school-title{
+    color: #202020;
+    font-weight: bold;
+}
+
+.nophysical{
+    line-height: 5rem;
+    text-align: center;
+    font-size: .32rem;
+}

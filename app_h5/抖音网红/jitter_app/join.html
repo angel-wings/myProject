@@ -1,0 +1,259 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>抖音网红召集令</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <style>
+        .join-box {
+            height: 100%;
+            background-image: url('./images/bg.png');
+            background-size: 100% 100%;
+            font-family: 'PingFang''SC';
+        }
+
+        .join-form {
+            padding-top: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .input-item {
+            box-sizing: border-box;
+            width: 6.86rem;
+            margin: 0 auto .4rem;
+            height: .88rem;
+            line-height: .88rem;
+            font-size: .3rem;
+            padding: 0 .24rem;
+            background-color: #ffffff;
+        }
+
+        .input-radio-box {
+            box-sizing: border-box;
+            width: 6.86rem;
+            margin: 0 auto;
+            height: .88rem;
+        }
+
+        .input-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .join-form label {
+            float: left;
+        }
+
+        .join-form input {
+            float: left;
+            width: calc(100% - 1.5rem);
+            line-height: .88rem;
+            font-size: .3rem;
+        }
+
+        /* 重置表单样式 */
+        input {
+            background: none;
+            outline: none;
+            border: 0px;
+        }
+
+        input:focus {
+            border: 0px;
+            background: #fff;
+            outline: none;
+        }
+
+        input::-webkit-input-placeholder {
+            color: #e1e1e1;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .input-radio {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 5.26rem;
+            height: .88rem;
+            line-height: .88rem;
+            font-size: .3rem;
+            padding: 0 .24rem;
+            background-color: #ffffff;
+        }
+
+        .radio-btn {
+            float: left;
+            width: .7rem;
+            margin-left: .1rem;
+            text-align: center;
+            line-height: .88rem;
+            font-size: .3rem;
+            background-color: #ffffff;
+        }
+
+        .radio-active {
+            color: #ff0000;
+        }
+
+        .btn-box {
+            width: 3.1rem;
+            height: .82rem;
+            margin: 0 auto;
+        }
+
+        .btn-box img {
+            width: 3.1rem;
+            height: .82rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="join-box">
+            <div class="join-form">
+                <div class="input-item">
+                    <label for="jitter-name">姓名：</label>
+                    <input id="jitter-name" v-model="name" type="text" placeholder="请输入您的姓名">
+                </div>
+                <div class="input-item">
+                    <label for="jitter-wechart">微信号：</label>
+                    <input id="jitter-wechart" v-model="wechatCode" type="text" placeholder="请输入您的微信号">
+                </div>
+                <div class="input-item">
+                    <label for="jitter-phone">手机号码：</label>
+                    <input id="jitter-phone" v-model="phone" type="number" placeholder="请输入正确11位手机号">
+                </div>
+                <div class="input-item">
+                    <label for="jitter-id">抖音ID：</label>
+                    <input id="jitter-id" v-model="jitterId" type="text" placeholder="请输入正确抖音ID">
+                </div>
+                <div class="input-item">
+                    <label for="jitter-fans">粉丝数：</label>
+                    <input id="jitter-fans" v-model="fansNumber" type="number" placeholder="请输入粉丝数量">
+                </div>
+                <div class="input-radio-box">
+                    <div class="input-radio fl">
+                        <label>是否已经加入mcn机构</label>
+                    </div>
+                    <div :class="joinMcn==1?'radio-active radio-btn':'radio-btn'" @click="changeMcnValue(1)">是</div>
+                    <div :class="joinMcn==0?'radio-active radio-btn':'radio-btn'" @click="changeMcnValue(0)">否</div>
+                </div>
+            </div>
+            <div class="btn-box" @click="jitterJoinSubmit">
+                <img src="./images/btn_submit.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="toast"></div>
+</body>
+<script src="./js/public.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        var uid = getUrlParam('uid');
+        var token = getUrlParam('token');
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                uid: uid,
+                token: token,
+                name: "",
+                phone: '',
+                joinMcn: '1',
+                wechatCode: '',
+                jitterId: '',
+                fansNumber: '',
+
+            },
+            methods: {
+                changeMcnValue: function (type) {
+                    this.joinMcn = type;
+                },
+                // 提交按钮
+                jitterJoinSubmit: function () {
+                    var integerVolid = /^\+?[1-9][0-9]*$/;　　// 正整数
+                    var phoneVolid = /^1[23456789]\d{9}$/;   // 手机号
+                    // 验证表单数据
+                    if (!this.name.trim()) {
+                        toast('请输入姓名');
+                        return;
+                    }
+                    if (!this.wechatCode.trim()) {
+                        toast('请输入微信号');
+                        return;
+                    }
+                    if (!phoneVolid.test(this.phone)) {
+                        toast('请输入正确的手机号', 200);
+                        return;
+                    }
+                    if (!this.jitterId.trim()) {
+                        toast('请输入抖音ID');
+                        return;
+                    }
+                    if (!integerVolid.test(this.fansNumber)) {
+                        toast('请输入正确的粉丝数');
+                        return;
+                    }
+
+                    // 发送ajax请求
+                    this.ajaxSubmit();
+
+                },
+                // 发送ajax请求
+                ajaxSubmit: function () {
+                    var that = this;
+                    var query = {
+                        uid: that.uid,
+                        name: that.name.trim(),
+                        phone: that.phone.trim(),
+                        joinMcn: that.joinMcn * 1,
+                        wechatCode: that.wechatCode.trim(),
+                        jitterId: that.jitterId.trim(),
+                        fansNumber: that.fansNumber * 1
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: domain + "/h5/activity/jitter/join",
+                        contentType: 'application/json;charset=UTF-8',
+                        headers: {
+                            uid: that.uid,
+                            token: that.token,
+                        },
+                        data: JSON.stringify(query),
+                        success: function (data) {
+                            if (data.error == 10000) {
+                                toast('报名成功');
+                                window.location.href = './index.html';
+                            } else if (data.error == 10001) {
+                                toast('您已成功报名，请勿重复操作', 300);
+                            } else {
+                                toast('报名失败');
+                            }
+                        },
+                        error: function (data) {
+                            toast('服务器开小差');
+                        }
+                    })
+                },
+
+            }
+        })
+    })
+</script>
+
+</html>

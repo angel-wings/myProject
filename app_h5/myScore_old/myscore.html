@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <title>我的成绩</title>
+    <style>
+        body {
+            margin: 0;
+            background: #f6f6f6;
+            padding-top: .75rem;
+            font-family: 'PingFang';
+            border-top: 1px solid #DDDDDD;
+        }
+
+        div#content {
+            background: #ffffff;
+        }
+
+        section {
+            height: 2.8125rem;
+            background: #ffffff;
+            line-height: 2.8125rem;
+            margin-left: 1rem;
+            font-size: .875rem;
+            color: #202020;
+            position: relative;
+            box-sizing: border-box;
+            /* border-bottom: solid 1px #dddddd; */
+        }
+
+        #test {
+            border-bottom: 0;
+        }
+
+        img {
+            position: absolute;
+            top: .9375rem;
+            right: 1.21875rem;
+            height: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <section id="run">
+            跑步成绩
+            <img src="./images/arrow_right.png" alt="">
+        </section>
+        <!-- <section id="test">
+            体测成绩
+            <img src="./images/arrow_right.png" alt="">
+        </section> -->
+    </div>
+</body>
+<script src="./js/public.js"></script>
+<script src="./js/rem.js"></script>
+<script src="./js/fastclick.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script>
+    $(function () {
+        connectWebViewJavascriptBridge(function (bridge) {
+            bridge.registerHandler("returnBackHandler", function (data, responseCallback) {
+                var responseData = { "isFirstPage": true };
+                responseCallback(responseData);
+            });
+        })
+
+        FastClick.attach(document.body);
+        $('section').click(function () {
+            var id = $(this).attr('id');
+            if (id == 'run') {
+                location.href = './runscore.html';
+            } else if (id == 'test') {
+                location.href = './testscore.html';
+            }
+        })
+    })
+</script>
+
+</html>

@@ -112,8 +112,8 @@ $(function () {
                     ////////////////////////////////////// 体测数据
                     var physical_test = prodata.data.physical_test;
                     $('.physical-title').text(physical_test.physical_name);
-                    $('.physical-schools').text(physical_test.total_school * 2);
-                    $('.physical-person').text(physical_test.total_person * 2);
+                    $('.physical-schools').text(physical_test.total_school);
+                    $('.physical-person').text(physical_test.total_person);
                     $('.physical-passrate').text((1 - physical_test.total_nopass / physical_test.total_person).toFixed(3) * 100);
                     var piedata = [
                         { name: '优秀', y: physical_test.total_excelent / physical_test.total_person * 100 },
@@ -490,7 +490,7 @@ $(function () {
     function drawRunAreaChart(ele, names, datas) {
 
         Highcharts.chart(ele, {
-            chart: { type: 'areaspline', width: 520, height: 200, backgroundColor: 'none' },
+            chart: { type: 'areaspline', width: 526, marginRight: 20, height: 200, backgroundColor: 'none' },
             title: { text: '' },
             credits: { enabled: false },
             xAxis: { categories: names, labels: { step: 3, style: { "color": "#fff", "fontSize": "12px" } } },
@@ -881,8 +881,10 @@ $(function () {
             if (index < 7) {  // 只取7条数据
                 orderHtml += '<div class="score-item"><div class="score-date"> ' + new Date(item.order_time).format('MM月dd日') + ' </div>'
                 orderHtml += '<div class="score-tip"><div class="score-progress"><div class="score-protip-box">'
-                orderHtml += '<div class="score-protip" style="width:' + item.order_count * 100 / maxOrders + '%;"></div>'
-                orderHtml += '</div><span>' + item.order_count + '</span></div></div></div>'
+                // orderHtml += '<div class="score-protip" style="width:' + item.order_count * 100 / maxOrders + '%;"></div>'
+                // orderHtml += '</div><span>' + item.order_count + '</span></div></div></div>'
+                orderHtml += '<div class="score-protip" style="width:' + 0 + '%;"></div>'
+                orderHtml += '</div><span>-.-</span></div></div></div>'
             }
         })
         $(ele).html(orderHtml);

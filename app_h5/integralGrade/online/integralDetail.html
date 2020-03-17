@@ -1,0 +1,147 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>积分明细</title>
+    <link rel="stylesheet" href="https://h5.gxapp.iydsj.com/gxapp/point/prod/css/common.css">
+    <link rel="stylesheet" href="https://h5.gxapp.iydsj.com/gxapp/point/prod/css/integralDetail.css">
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/jquery.min.js"></script>
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/dropload.js"></script>
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/fastclick.js"></script>
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/public.js"></script>
+    <script src="https://h5.gxapp.iydsj.com/gxapp/point/prod/js/prefixfree.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="isloading">
+        <div class="loadimg">
+            <img src="http://h5.gxapp.iydsj.com/gxapp/point/prod/images/loading.gif">
+            <div>加载中...</div>
+        </div>
+    </div>
+    <div class="inteMain">
+        <ul class="content main">
+            <!-- 明细 -->
+
+        </ul>
+    </div>
+
+    <div class="toast"></div>
+</body>
+<script>
+
+    $(function () {
+        FastClick.attach(document.body);
+        var pageSize = 15;
+        var page = 1;
+
+        connectWebViewJavascriptBridge(function (bridge) {
+            bridge.registerHandler("returnBackHandler", function (data, responseCallback) {
+                var responseData = { "isFirstPage": true };
+                responseCallback(responseData);
+            });
+            getIntegralDetail();
+        })
+
+        function getIntegralDetail() {
+
+            ajaxSubmit(
+                'GET',
+                '/api/v23/h5/userinfo/point/record/list?pageIndex=1&pageSize=' + pageSize,
+                '',
+                function (data) {
+                    var html = "";
+                    $('.isloading').css({ display: "none" });
+                    if (data.error == 10000) {
+                        //请求成功
+                        var pointList = data.data;
+                        if (pointList && pointList.length > 0) {
+                            for (var i = 0; i < pointList.length; i++) {
+                                var fuhao = '+';
+                                html += '<li class="conitem"><div class="conitem-text"><span class="conitem-title">' + pointList[i].pointDesc + '</span>';
+                                html += '<small class="conitem-des">' + pointList[i].pointDate + '</small></div>';
+                                if (pointList[i].point < 0) {
+                                    fuhao = '';
+                                }
+                                html += '<span class="conitem-index" style="color:#33C4C2">' + fuhao + pointList[i].point + '</span></li>';
+                            }
+
+                            $('.content').html(html);
+                            $('.main').css({ display: "block" });
+                            if (pointList.length == pageSize) {
+                                getDroploadPages();
+                            }
+                        } else {
+                            html = '<li class="noneLi">暂无积分明细数据~</li>'
+                            $('.content').html(html);
+                            $('.main').css({ display: "block" });
+                        }
+                    } else {
+                        toast(data.message);
+                    }
+                }, function (data) {
+                    $('.isloading').css({ display: "none" });
+                    toast('服务器开小差');
+                })
+        }
+
+        // 获取积分明细
+        function getDroploadPages() {
+            $('.inteMain').dropload({
+                scrollArea: window,
+                loadDownFn: function (me) {
+                    page++;
+                    var result = '';
+                    if (page < 2) {
+                        // me.resetload();// 重置
+                        return;
+                    }
+                    ajaxSubmit(
+                        'GET',
+                        '/api/v23/h5/userinfo/point/record/list?pageSize=' + pageSize + '&pageIndex=' + page,
+                        '',
+                        function (data) {
+                            if (data.error == 10000) {
+                                //请求成功
+                                var pointList = data.data;
+                                if (pointList && pointList.length > 0) {
+                                    for (var i = 0; i < pointList.length; i++) {
+                                        var fuhao = '+';
+                                        result += '<li class="conitem"><div class="conitem-text"><span class="conitem-title">' + pointList[i].pointDesc + '</span>';
+                                        result += '<small class="conitem-des">' + pointList[i].pointDate + '</small></div>';
+                                        if (pointList[i].point < 0) {
+                                            fuhao = '';
+                                        }
+                                        result += '<span class="conitem-index" style="color:#33C4C2">' + fuhao + pointList[i].point + '</span></li>';
+                                    }
+                                    $('.content').append(result);
+                                    me.resetload();
+                                } else {
+                                    me.lock(); // 锁定
+                                    me.noData();// 无数据
+                                    me.resetload();// 重置
+                                }
+                            } else {
+                                me.noData();// 无数据
+                                me.resetload();
+                                toast(data.message);
+                            }
+                        },
+                        function (data) {
+                            me.noData();// 无数据
+                            me.resetload();
+                            toast('服务器开小差');
+                        }
+                    )
+                }
+            });
+        }
+    })
+
+</script>
+
+</html>

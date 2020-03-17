@@ -1,0 +1,5 @@
+企业号开发者中心：https://qydev.weixin.qq.com/wiki/index.php?title=%E4%B8%BB%E5%8A%A8%E8%B0%83%E7%94%A8
+
+vue项目实例：https://blog.csdn.net/qq_40028729/article/details/90773880
+
+微信企业号获取openId：https://blog.csdn.net/a545132569/article/details/89512913

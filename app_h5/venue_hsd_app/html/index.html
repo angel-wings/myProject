@@ -1,0 +1,142 @@
+<!-- 场馆列表 -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="beibei">
+    <meta name="format-detection" content="telephone=no">
+    <title>杭州师范大学</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <script type="application/javascript" src="../js/fastclick.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/alertPopShow.js"></script>
+    <script src="../js/public.js"></script>
+    <script src="../js/iscroll.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 12px 10px;
+            background: #e6e6e6;
+            margin: 0;
+            background-image: url('../image/login_bg.png');
+            background-size: 100% 100%;
+            background-color: linear-gradient(-180deg, #262626 0%, rgba(0, 0, 0, 0.00) 80%);
+            position: relative;
+            color: #ffffff;
+            font-family: "PingFangSC-Medium";
+        }
+
+        img.logo {
+            width: 110px;
+            position: absolute;
+            left: 30px;
+            top: 24px;
+        }
+
+        div.login-box {
+            width: 100%;
+            position: absolute;
+            top: 109px;
+            left: 0;
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 17px;
+            margin-bottom: 45px;
+        }
+
+        section.btn {
+            text-align: center;
+            height: 60px;
+            line-height: 60px;
+            width: 74.6%;
+            margin-left: 12.2%;
+            margin-bottom: 20px;
+            font-size: 14px;
+            box-shadow: 0 10px 7px 0 rgba(0, 0, 0, 0.30);
+            border-radius: 60px;
+            overflow: hidden;
+        }
+
+        #btn1 {
+            background-image: url('../image/campus_inner.png');
+            background-size: 100% 100%;
+        }
+
+        #btn2 {
+            background-image: url('../image/campus_outer.png');
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <img src="../image/logo.png" class="logo"> -->
+    <div class="login-box">
+        <div class="login-title">校园场馆预约</div>
+        <div class="btn-box">
+            <!-- <section class="btn" id="btn1">校内人员登录</section> -->
+            <section class="btn" id="btn2">校外人员登录</section>
+        </div>
+    </div>
+    <div class="toast"></div>
+</body>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        var uid = getStore('uid');
+        // 免登陆测试
+        // if (!uid || uid == 'null') {
+        //     if (getUrlParam('uid')) {
+        //         uid = getUrlParam('uid');
+        //         setStore("time", new Date().getTime())
+        //         setStore("uid", uid);
+        //     }
+        // }
+
+        var time = getStore('time');
+        var token = getStore('token');
+        var width = $(".btn").width();
+
+
+
+        var now = new Date().getTime();
+        // 验证是否已经登录
+        if (uid && token) {
+            // token存在则为校内登录
+            location.href = './venueList.html';
+        } else if (uid && time && now - time < 24 * 7 * 3600000) {
+            // time存在，且时长不超过7天，则校外登录
+            setStore("time", new Date().getTime())
+            location.href = './venueList.html';
+        }
+
+
+        $(".btn").height(width * 3 / 14);
+        $(".btn").css("line-height", width * 3 / 14 + "px");
+        $(".btn").click(function () {
+            var id = $(this).attr("id");
+            if (id == "btn1") {
+                removeStore('time');
+                location.href = payUrl + '/loginSuccess';
+                // toast("校内人员暂时无法登录", 170);
+            } else if (id == "btn2") {
+                // 校外登录删除token信息
+                removeStore('token');
+                // if (uid && time && now - time < 72 * 3600000) {
+                //     location.href = './venueList.html';
+                // } else {
+                location.href = './phoneValidate.html';
+                // }
+            }
+        })
+    })
+</script>
+
+</html>

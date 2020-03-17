@@ -1,0 +1,65 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>跑步规则</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <script type="application/javascript" src="./js/jquery.min.js"></script>
+    <script type="application/javascript" src="./js/fastclick.js"></script>
+    <script type="application/javascript" src="./js/swipe.js"></script>
+    <style>
+        /* 轮播 */
+        .swipe {
+            overflow: hidden;
+            visibility: hidden;
+            position: relative;
+        }
+
+        .swipe-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .swipe-wrap>.img-box {
+            float: left;
+            width: 100%;
+            position: relative;
+            height: calc(100% - 1rem);
+            margin: 0 auto;
+            padding-top: .4rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head-box">
+        <div class="head-box-title">跑步目标</div>
+        <div class="img-text-top"></div>
+    </div>
+    <div class="con-box">
+        <div id='slider' class='swipe'>
+            <div class='swipe-wrap'>
+                <!-- <div class='img-box'>
+                    <img class="img-sty8" src="./images/rules_8.png">
+                    <div class="text8-box">
+                        <p class="img-text8">04:01:00-14:01:00</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="pages"><span class="page-num">1</span> / <span class="page-total">6</span></div>
+    </div>
+    <div class="foot-box">
+        <div class="foot-school">
+            计分规则由 <span class="school-name">大学</span> 制定
+        </div>
+        <div>
+            <span class="sell-btn">向学校提意见</span>
+        </div>
+    </div>
+
+</body>
+<script src="./js/index.js"></script>
+
+</html>

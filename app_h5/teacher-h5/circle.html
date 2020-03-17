@@ -32,9 +32,10 @@
     </div>
 
     <div class="run">
-        <div>健康跑步
+        <div>
+            <span class="run-title">健康跑步</span>
             <span class="title com-semes"> 2018第一学期</span>
-            <span class="title title-des">数据统计截止到前一天</span>
+            <!-- <span class="title title-des">数据统计截止到前一天</span> -->
         </div>
         <div class="con-box">
             <div class="run-content"></div>
@@ -50,7 +51,7 @@
         </div>
     </div>
     <div class="common-foot run-record">
-        <span>跑步记录</span>
+        <span class="run-record-btn">跑步记录</span>
         <img src="./images/path.png" alt=">">
     </div>
 
@@ -98,13 +99,28 @@
                 </div>
                 <div class="common-martop">
                     <span class="circle-dot yellow"></span>
-                    请假：
-                    <span class="info leave-times"></span>
+                    事假：
+                    <span class="info vacate-times"></span>
+                </div>
+                <div class="common-martop">
+                    <span class="circle-dot yellow"></span>
+                    病假：
+                    <span class="info sickLeave-times"></span>
+                </div>
+                <div class="common-martop">
+                    <span class="circle-dot red"></span>
+                    <span>旷课：</span>
+                    <span class="info absenteeism-times"></span>
+                </div>
+                <div class="common-martop">
+                    <span class="circle-dot red"></span>
+                    迟到：
+                    <span class="info late-times"></span>
                 </div>
                 <div>
                     <span class="circle-dot red"></span>
-                    缺勤：
-                    <span class="info absence-times"></span>
+                    早退：
+                    <span class="info early-times"></span>
                 </div>
             </div>
         </div>
@@ -309,25 +325,40 @@
         //     window.location.href = testUrl + '?uid=' + uid;
         // });
 
+        // 跑步
         function setRunHtml(runObj) {
-            // 跑步
-            var goalLen = 0, validLen = 0;
-            goalLen = (runObj.semesterGoal / 1000).toFixed(2);
-            validLen = (runObj.validLength / 1000).toFixed(2);
-            runData.titleSunText = validLen + '公里';
+            var goalLen = 0, validLen = 0, unit = '公里', zjUrl = 'zjwh://runHistory';
+            // 学期目标是次数
+            if (runObj.goalMethod && runObj.goalMethod == 2) {  // 次数
+                unit = '次';
+                goalLen = runObj.semesterGoalCount;
+                validLen = runObj.validCount;
+            } else if (runObj.goalMethod && runObj.goalMethod == 3) { // 室内锻炼
+                unit = '次';
+                goalLen = runObj.semesterGoalCount;
+                validLen = runObj.validCount;
+                zjUrl = 'zjwh://indoorExerciseRecord';
+                $('.run-title').text('室内锻炼');
+                $('.run-record-btn').text('室内锻炼记录');
+            } else {
+                goalLen = (runObj.semesterGoal / 1000).toFixed(2);
+                validLen = (Math.floor(runObj.validLength / 10) / 100).toFixed(2);
+            }
+
+            runData.titleSunText = validLen + unit;
             runData.goalData = [validLen * 100, (goalLen - validLen) * 100];
 
             $('.run').css('display', 'block');
             drewCircle(runData);
-            $('.term-goal').text(goalLen + '公里');
+            $('.term-goal').text(goalLen + unit);
             $('.finish-days').text(runObj.validDays + '天');
             $('.run-record').css('display', 'block').click(function () {
-                window.location.href = 'zjwh://runHistory?uid=' + uid + '&sid=' + sid;
+                window.location.href = zjUrl + '?uid=' + uid + '&sid=' + sid;
             })
         }
 
+        // 考勤
         function setAttenHtml(attenObj) {
-            // 考勤
             $('.attendance').css('display', 'block');
             $('.atten-img span').text(attenObj.totalTimes + '次');
             $('.valid-atten').text(attenObj.volidTimes + '次');
@@ -342,8 +373,9 @@
             }
         }
 
+        // 体测
         function setTestHtml(testObj) {
-            // 体测
+
             var level = '';
             var imgurl = '';
 
@@ -382,18 +414,27 @@
             });
         }
 
+        // 点名
         function setRollHtml(rollObj) {
-            // 点名
             $('.roll-call').css('display', 'block');
+            
             rollCallData.titleSunText = rollObj.attendanceNum + '次';
-            rollCallData.goalData = [rollObj.attendanceNum * 1, rollObj.leaveNum * 1, rollObj.absenceNum * 1];
+            rollCallData.goalData = [
+                rollObj.attendanceNum * 1,
+                rollObj.vacateNum * 1 + rollObj.sickLeaveNum * 1,
+                rollObj.absenteeismNum * 1 + rollObj.lateNum * 1 + rollObj.earlyNum * 1
+            ];
             if (rollObj.attendanceNum == 0 && rollObj.leaveNum == 0 && rollObj.absenceNum == 0) {
                 rollCallData.goalData = [0, 0, 0, 1]
             }
+
             drewCircle(rollCallData);
             $('.normal-times').text(rollObj.attendanceNum + '次');
-            $('.leave-times').text(rollObj.leaveNum + '次');
-            $('.absence-times').text(rollObj.absenceNum + '次');
+            $('.vacate-times').text(rollObj.vacateNum + '次');
+            $('.sickLeave-times').text(rollObj.sickLeaveNum + '次');
+            $('.absenteeism-times').text(rollObj.absenteeismNum + '次');
+            $('.late-times').text(rollObj.lateNum + '次');
+            $('.early-times').text(rollObj.earlyNum + '次');
         }
     })
 </script>

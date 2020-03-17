@@ -1,0 +1,21 @@
+CREATE TABLE `activity_jitter_join_record` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`uid` INT(11) NOT NULL,
+	`join_time` DATETIME NOT NULL,
+	`name` TEXT NOT NULL,
+	`phone` BIGINT(11) NOT NULL,
+	`join_mcn` INT(11) NOT NULL DEFAULT '0',
+	`wechat_code` VARCHAR(255) NOT NULL,
+	`jitter_id` VARCHAR(255) NOT NULL,
+	`fans_number` INT(11) NOT NULL,
+	`is_deleted` TINYINT(4) NULL DEFAULT '0',
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `uid` (`uid`)
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=4
+;
+
+ªÒ»°IPµÿ÷∑
+let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;

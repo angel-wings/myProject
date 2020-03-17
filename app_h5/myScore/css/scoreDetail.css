@@ -1,0 +1,148 @@
+body {
+    margin: 0;
+    background: #f6f6f6;
+    font-family: arial,'PingFang',sans-serif;
+    display: none;
+    border-top: 1px solid #DDDDDD;
+}
+
+#header{
+    height: 12.5rem;
+    width: 100%;
+    color: #fff;
+    background-size: 100%;
+}
+
+.scoreBox,
+.levelBox{
+    font-size: .875rem;    
+}
+
+.totalScore{
+    position: absolute;
+    left: 4.625rem;
+    top: 1.25rem;
+    font-size: 2.25rem;
+}
+
+.tot{
+    position: absolute;
+    left: 1rem;
+    top: 2.25rem;
+}
+
+.scoreText{
+    position: absolute;
+    left: 6.7rem;
+    top: 1.875rem;
+}
+
+.totalLevel{
+    position: absolute;
+    left: 1rem;
+    top: 4.25rem;
+}
+
+.testScore{
+    position: absolute;
+    left: 1rem;
+    top: 5.75rem;
+}
+
+.extraScore{
+    position: absolute;
+    left: 9.15625rem;
+    top: 5.75rem;
+}
+
+.title{
+    color: #b2b2b2;
+    font-size: .875rem;
+    display: inline-block;
+}
+
+div#content {
+    position: absolute;
+    left: .75rem;
+    top: 8rem;
+    width: 21.9375rem;
+    background: #fff;
+    height: 23.125rem;
+    border-radius: .5rem;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.10), 0 0 8px 0 rgba(0,0,0,0.08);
+}
+
+section {
+    height: 2.8125rem;
+    line-height: 2.8125rem;
+    padding: 0 1rem;
+    z-index: 100;
+    box-sizing: border-box;
+    color: #202020;   
+    font-size: .875rem;     
+}
+
+span.type {
+    width: 25%;
+    display: inline-block;
+    z-index: 10;
+}
+
+span.value {
+    width: 30%;
+    display: inline-block;
+    z-index: 10;
+}
+
+span.point {
+    display: inline-block;
+    width: 25%;
+    z-index: 10;
+}
+
+img.icon {
+    width: .5rem;
+    margin-left: .3125rem;
+}
+
+div#detail {
+    box-sizing: border-box;
+    width: 8.25rem;
+    height: 5.5rem;
+    position: absolute;
+    left: 25%;
+    top: 5rem;
+    background: #ffffff;
+    z-index: 1000;
+    font-size: .875rem;
+    color: #333333;
+    border-radius: .25rem;
+    display: none;
+    background-image: url(../images/det.png);
+    background-size: 100% 100%;
+}
+
+div#detail>div {
+    display: inline-block;
+    width: 100%;
+    height: 2.75rem;
+    line-height: 2.75rem;
+    z-index: 1000;
+    padding-left: .75rem;
+}
+
+.toast {
+    background: rgba(0, 0, 20, .8);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 7.5rem;
+    height: 2.5rem;
+    font-size: .875rem;
+    margin-left: -3.75rem;
+    text-align: center;
+    line-height: 2.5rem;
+    border-radius: 1.25rem;
+    display: none;
+}

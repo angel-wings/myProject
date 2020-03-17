@@ -1,0 +1,128 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>体测成绩</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div id="main">
+        <div class="tab-bar" v-if="allChildrenTest && allChildrenTest.length>1">
+            <span v-for="(item,index) in allChildrenTest" :style="'width:'+ 100/allChildrenTest.length +'%;'"
+                :class="selectedChild == index ?'tab-actived':''" @click="selectedMyChild(index)">{{item.name}}</span>
+        </div>
+        <div class="my-app" v-show="allChildrenTest && allChildrenTest.length>0">
+            <div class="head-info">
+                <div class="head-name">
+                    <span>{{studentName}}</span>
+                    <span class="h-gender">{{gender==1?'男':'女'}}</span>
+                </div>
+                <div class="head-code">学籍号：{{studentCode}}</div>
+                <div class="head-vision">
+                    <span>视力：{{leftVision}}（左眼），</span><span>{{rightVision}}（右眼）</span>
+                </div>
+                <div class="head-health" v-if="!isAllNoTest">
+                    <span>身高：{{height}}</span><span>体重：{{weight}}</span>
+                </div>
+            </div>
+            <div class="main-content" v-show="!isAllNoTest">
+                <div class="test-score">
+                    <div class="every-box">
+                        <table>
+                            <tr class="t-head">
+                                <td class="t-name">项目</td>
+                                <td>成绩</td>
+                                <td class="t-score">分数</td>
+                                <td class="t-avscore">年级平均分</td>
+                            </tr>
+                            <tr v-for="item in physicalTest" v-if="item.type>0">
+                                <td class="t-name">{{item.name}} <span class="bmi-s"
+                                        v-if="item.type==1">(体重/身高*2)</span>
+                                </td>
+                                <td>{{item.value}}</td>
+                                <td class="t-score">
+                                    {{(item.score || item.score == '0') ? item.score + '分' : item.score}}
+                                </td>
+                                <td class="t-avscore">
+                                    {{item.averageScore ? item.averageScore + '分' : item.averageScore}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="total-box" v-for="item in physicalTest" v-if="item.type==0">
+                        <div class="total-score">
+                            <div>标准分：{{item.score>0?item.score + '分':''}}</div>
+                            <div>附加分：{{item.score>0?item.extraScore + '分':''}}</div>
+                            <div>体测总分：{{item.score>0?(item.score*1 + item.extraScore*1)+'分':''}}</div>
+                        </div>
+                        <div class="total-level" v-if="level>0 && level < 5">
+                            <img :src="'./images/level_'+ level +'.png'">
+                        </div>
+                        <div class="stand-detail" @click="toStandardDetail">
+                            <span>评分标准？</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-rank" v-show="classRank && classRank > 0">
+                    <canvas id="rank-rate" height="180">
+                        <p>抱歉，您的浏览器不支持canvas</p>
+                    </canvas>
+                    <span class="rank-grade">打败了全年级</span>
+                    <img src="./images/line.png" class="line-img">
+                    <span class="rank-class">班级排名：{{classRank}}/{{classTotalPeople}}</span>
+                    <div class="rank-text" v-if="!isNoFinish">
+                        <div class="test-level">{{levelList[level]}}</div>
+                        {{lowerHtml}}
+                    </div>
+                </div>
+
+                <div class="suggest">
+                    <div class="suggest-title">改善建议：</div>
+                    <div class="suggest-box">
+                        <p v-for="item in suggestTest"><img src="./images/tip.png" alt="">{{item.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content" v-show="isAllNoTest">
+                <div class="test-score no-text">
+                    该学生暂无体测成绩信息
+                </div>
+            </div>
+        </div>
+        <div class="no-data" v-show="!allChildrenTest || allChildrenTest.length==0">
+            <div v-if="isNoBinding" class="no-bind">
+                <div class="school-list">
+                    <p class="err-text">还未绑定学生，请先绑定学生！</p>
+                    <p class="school-title">体测报告查看暂适用学校范围：</p>
+                    <p v-for="(school,index) in applySchools" :key="index">{{school}}</p>
+                </div>
+                <div class="study-btn">
+                    <span class="btn-vido" @click="toCourseVideo">查看绑定教程</span>
+                </div>
+                <div class="bind-qcode">
+                    <img src="./images/bind.png">
+                </div>
+            </div>
+            <div v-else class="err-box">
+                <p>{{contentText}}</p>
+                <img src="./images/refresh.png" @click="refreshPage">
+                <p class="refresh">刷新</p>
+            </div>
+
+        </div>
+        <div class="toast"></div>
+    </div>
+</body>
+<script src="./js/rem.js"></script>
+<script src="./js/index.js"></script>
+
+</html>

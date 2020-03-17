@@ -278,4 +278,13 @@ module.exports = (app) => {
 
         getSignInfo();
     })
+
+    app.post('/api/v1/authorization', (req, res) => {
+        console.info(req.body)
+        return res.json({
+            data: true,
+            message: "成功",
+            error: 10000
+        })
+    })
 }

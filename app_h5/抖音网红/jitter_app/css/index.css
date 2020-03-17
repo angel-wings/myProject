@@ -1,0 +1,27 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+fieldset, img { border:0; }
+table { border-collapse:collapse; border-spacing:0; }
+.toast {
+    background: rgba(0, 0, 20, .8);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5rem;
+    height: .88rem;
+    font-size: .26rem;
+    margin-left: -2.5rem;
+    text-align: center;
+    line-height: .88rem;
+    border-radius: .44rem;
+    display: none;
+}
+.fr{
+    float: right;
+}
+.fl{
+    float: left;
+}

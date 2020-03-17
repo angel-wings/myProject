@@ -1,0 +1,13 @@
+
+##企业微信corpid
+corpid = wwdd53954cb5a96a26
+
+##系统应用secret
+corpsecret = 1VRnb9iJ9xLPk57A0WIPCUiQzA7cHq92g4DlemY-Puo
+
+AgentId
+1000018
+
+Secret
+R-dNHWubf3VhpAepmjjG3cRWdng0a-Er1yDV9sUDCio
+具体请参照腾讯开发文档，谢谢

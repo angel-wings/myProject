@@ -1,0 +1,163 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+fieldset, img { border:0; }
+table { border-collapse:collapse; border-spacing:0; }
+.toast {
+    background: rgba(0, 0, 20, .8);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 5rem;
+    height: .88rem;
+    font-size: .26rem;
+    margin-left: -2.5rem;
+    text-align: center;
+    line-height: .88rem;
+    border-radius: .44rem;
+    display: none;
+}
+.fr{
+    float: right;
+}
+.fl{
+    float: left;
+}
+/* 自定义百分比柱形图 */
+.his-common {
+    width: 6.86rem;
+    margin: 0 auto .2rem;
+    border-bottom: 1px solid #dddddd;
+}
+
+.his-title {
+    height: .88rem;
+    padding: 0 .32rem;
+    line-height: .88rem;
+    font-family: 'PingFangSC-Medium';
+    font-size: .28rem;
+    color: #202020;
+}
+.his-title > span{
+    font-weight: bold;
+}
+
+.his-legden {
+    float: right;
+    font-size: .2rem;
+    color: #b2b2b2;
+}
+
+.his-legden-item {
+    display: inline-block;
+    width: .12rem;
+    height: .12rem;
+    margin-left: 5px;
+    border-radius: 50%;
+}
+
+.histogram {
+    height: 1.28rem;
+    padding: .2rem .48rem;
+    text-align: center;
+}
+
+.histogram-col {
+    font-size: 0;
+}
+
+.h-col-item {
+    display: inline-block;
+    height: .48rem;
+    font-size: .24rem;
+}
+
+.bg-nopass {
+    background-color: #F47A99;
+}
+
+.bg-pass {
+    background-color: #B9ACFC;
+}
+
+.bg-good {
+    background-color: #86C88E;
+}
+
+.bg-excellent {
+    background-color: #6E9BF5;
+}
+
+.histogram-text {
+    position: relative;
+    height: .4rem;
+    line-height: .4rem;
+    font-family: 'PingFangSC-Regular';
+    font-size: 0;
+    color: #202020;
+}
+
+.h-text-item {
+    display: inline-block;
+    font-size: .24rem;
+}
+
+/* 学生成绩表 */
+
+.stu-table {
+    padding: .16rem .32rem;
+    background-color: #ffffff;
+}
+
+.stu-table table td {
+    width: 1.15rem;
+    font-size: .24rem;
+    line-height: .64rem;
+    border: 1px solid #F2F2F2;
+    text-align: center;
+}
+
+.stu-table .stu-name {
+    width: 1.95rem;
+}
+
+.stu-index {
+    color: #666666;
+    padding-right: 3px;
+}
+
+.stu-table .stu-total {
+    width: 1.4rem;
+}
+
+.stu-table thead {
+    background-color: #F7F7F8;
+}
+
+.color-red {
+    color: #F77976;
+    padding: 0 .2rem;
+}
+
+.color-blue {
+    color: #44ABFF;
+    padding: 0 .2rem;
+}
+
+.bg-green {
+    background-color: #86C88E;
+    font-size: .2rem;
+    color: #ffffff;
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+.bg-red {
+    background-color: #F77976;
+    font-size: .2rem;
+    color: #ffffff;
+    padding: 1px 5px;
+    border-radius: 3px;
+}

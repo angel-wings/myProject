@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>跳转小程序</button>
+</body>
+<script>
+    document.getElementsByTagName('button')[0].onclick = function(){
+        console.log('dianji ')
+        window.location.href = "alipays://platformapi/startapp?appId=2018090761294700&page=page/vm/pages/index/index&query=type=0";
+        // window.location.href = "alipays://platformapi/startapp?appId=2019071165830242&page=pages/component/login/login&query=type=0";
+    }
+    // H5跳转小程序：https://www.cnblogs.com/xyyt/p/11376063.html
+</script>
+
+</html>

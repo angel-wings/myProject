@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: 'https://m.mall.iydsj.com/apis/selectProductInfo',
+                type: 'POST',
+                datatype: 'json',
+                data: {
+                    appId: "vASH8G3u",
+                    pageIndex: 1,
+                    pageSize: 20,
+                    // sign: "5d6a7b16bb04f79321b70667277710df",
+                    sortType: 0,
+                    timestamp: 1582534030000,
+                },
+                success: res => {
+                    console.log(res)
+                },
+                errror: err => {
+                    console.error(err)
+                }
+            })
+            return;
+            let params = {
+                appId: "vASH8G3u",
+                pageIndex: 1,
+                pageSize: 20,
+                sign: "5d6a7b16bb04f79321b70667277710df",
+                sortType: 0,
+                timestamp: 1582534030000,
+            };
+
+            $.ajax({
+                url: 'https://m.mall.iydsj.com/apis/selectProductInfo',
+                type: 'POST',
+                datatype: "json",
+                // contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+                data: params,
+                success: function (res) {
+
+                },
+                error: function (res) {
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="guozhenglei">
+    <title>体质健康数据</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js"></script>
+    <style>
+        #main {
+            background-color: #f6f6f6;
+            padding-top: .2rem;
+        }
+
+        .histogram-list {
+            background-color: #ffffff;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div class="histogram-list" v-show="type == 1">
+            <div v-for="(item,index) in histogramList" :key="index" class="his-common">
+                <div class="his-title">
+                    <span>{{item.name}}</span>
+                    <div v-if="index == 0" class="his-legden">
+                        <span class="his-legden-item bg-nopass"></span>
+                        <span>不及格</span>
+                        <span class="his-legden-item bg-pass"></span>
+                        <span>及格</span>
+                        <span class="his-legden-item bg-good"></span>
+                        <span>良好</span>
+                        <span class="his-legden-item bg-excellent"></span>
+                        <span>优秀</span>
+                    </div>
+                </div>
+                <div class="histogram">
+                    <div class="histogram-col">
+                        <div :style="'width:'+ item.noPassRate +'%;'" class="h-col-item bg-nopass"></div>
+                        <div :style="'width:'+ item.passRate +'%;'" class="h-col-item bg-pass"></div>
+                        <div :style="'width:'+ item.goodRate +'%;'" class="h-col-item bg-good"></div>
+                        <div :style="'width:'+ item.excellentRate +'%;'" class="h-col-item bg-excellent"></div>
+                    </div>
+                    <div class="histogram-text">
+                        <span :style="'width:'+ item.noPassRate +'%;'" class="h-text-item">{{item.noPassRate}}%</span>
+                        <span :style="'width:'+ item.passRate +'%;'" class="h-text-item">{{item.passRate}}%</span>
+                        <span :style="'width:'+ item.goodRate +'%;'" class="h-text-item">{{item.goodRate}}%</span>
+                        <span :style="'width:'+ item.excellentRate +'%;'"
+                            class="h-text-item">{{item.excellentRate}}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="student-list" v-show="type == 2">
+            <!-- <div class="cl-name">{{className}}</div> -->
+            <div class="stu-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="stu-name">姓名</td>
+                            <td>性别</td>
+                            <td>标准分</td>
+                            <td>附加分</td>
+                            <td class="stu-total">体测总分</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="(stu,index) in studentScoreList" :key="index">
+                            <tr @click="getStudentTestScore(stu.studentCode)">
+                                <td class="stu-name" rowspan="2"><span class="stu-index">{{stu.index}}</span>
+                                    {{stu.name}}</td>
+                                <td>{{stu.gender}}</td>
+                                <td>{{stu.score}}</td>
+                                <td>{{stu.extraPoint}}</td>
+                                <td class="stu-total">{{stu.totalScore}}</td>
+                            </tr>
+                            <tr @click="getStudentTestScore(stu.studentCode)">
+                                <td colspan="4">
+                                    体测成绩：
+                                    <span :class="stu.level == '不及格'?'color-red':'color-blue'">{{stu.level}} </span>
+                                    <span
+                                        :class="stu.totalScoreStatus=='已完成'?'bg-green':'bg-red'">{{stu.totalScoreStatus}}</span>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/rem.js"></script>
+<script src="./js/jquery.histogram.js"></script>
+<script src="./js/gradeclass.js"></script>
+
+</html>
